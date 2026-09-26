@@ -80,7 +80,7 @@ def test_breakdown_sums_to_score(catalog):
 
 
 def test_honey_ranking_story(catalog):
-    ranked = rank_markets("honey", catalog)
+    ranked = rank_markets("honey", catalog, sort_by="friction")
     order = [r.country_code for r in ranked]
     # UK (paperwork only, short Atlantic lane) and Japan (already our #2 market, 0% under CPTPP) lead.
     assert set(order[:2]) == {"GB", "JP"}
@@ -109,13 +109,13 @@ def test_saas_ranking_story(catalog):
 
 def test_blocked_stays_last_under_any_weights(catalog):
     for w in [Weights(tariff=1, compliance=0, customs=0, tax=0), Weights(tariff=0, compliance=1, customs=0, tax=0)]:
-        assert rank_markets("honey", catalog, w)[-1].country_code == "MX"
+        assert rank_markets("honey", catalog, w, sort_by="friction")[-1].country_code == "MX"
 
 
 def test_us_honey_last_open_market_whenever_tariffs_count(catalog):
     # Robustness claim in docs/SCORING.md: with any meaningful tariff weight, US stays behind the FTA markets.
     for t in [0.2, 0.35, 0.6]:
-        order = [r.country_code for r in rank_markets("honey", catalog, Weights(tariff=t, compliance=0.3, logistics=0.15, risk=0.1, tax=0.1))]
+        order = [r.country_code for r in rank_markets("honey", catalog, Weights(tariff=t, compliance=0.3, logistics=0.15, risk=0.1, tax=0.1), sort_by="friction")]
         assert order.index("US") > order.index("DE")
 
 

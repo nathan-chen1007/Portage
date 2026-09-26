@@ -31,10 +31,11 @@ def test_analyze_honey_offline(client):
     body = r.json()
     assert body["mode"] == "offline" and body["category"]["id"] == "honey"
     codes = [m["country_code"] for m in body["markets"]]
-    assert set(codes[:2]) == {"GB", "JP"} and codes[-1] == "MX"
+    assert codes[0] == "JP" and codes[-1] == "MX" and body["opportunity_available"] is True
     top = body["markets"][0]
     assert set(top["components"]) == {"tariff", "compliance", "logistics", "risk", "tax"}
     assert top["country_facts"]["currency"] and "lead_time" in top["factors"]
+    assert top["overall"] > 0 and top["opportunity"] > 0 and top["opportunity_facts"]["canada_share"] > 0.1
     assert body["markets"][-1]["status"] == "blocked" and body["markets"][-1]["score"] is None
 
 
@@ -47,6 +48,9 @@ def test_rank_with_weights_and_errors(client):
     r = client.post("/api/rank", json={"category": "b2b_saas", "weights": {"tariff": 0, "compliance": 1, "logistics": 0, "risk": 0, "tax": 0}})
     assert r.status_code == 200 and r.json()[-1]["country_code"] == "CN"
     assert client.post("/api/rank", json={"category": "nope"}).status_code == 422
+    fr = client.post("/api/rank", json={"category": "honey", "sort_by": "friction"}).json()
+    assert fr[0]["country_code"] == "GB"
+    assert client.post("/api/rank", json={"category": "honey", "prize_weight": 2}).status_code == 422
     zero = {"tariff": 0, "compliance": 0, "logistics": 0, "risk": 0, "tax": 0}
     assert client.post("/api/rank", json={"category": "honey", "weights": zero}).status_code == 422
 

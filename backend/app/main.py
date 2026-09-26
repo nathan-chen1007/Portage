@@ -78,10 +78,11 @@ def categories() -> list[Category]:
 
 @app.post("/api/rank", response_model=list[ScoredMarket])
 def rank(req: RankRequest) -> list[ScoredMarket]:
-    """Every market for a category, easiest first, blocked markets last. Optional custom weights."""
+    """Every market for a category, best first (sort_by: overall | friction | opportunity), blocked last.
+    Optional friction weights and prize_weight (0 = quick wins, 1 = biggest prize)."""
     _category(req.category)
     try:
-        return rank_markets(req.category, catalog, req.weights)
+        return rank_markets(req.category, catalog, req.weights, req.sort_by, req.prize_weight)
     except ValueError as e:  # e.g. all-zero weights
         raise HTTPException(422, str(e))
 
@@ -101,7 +102,8 @@ def analyze(req: AnalyzeRequest) -> AnalyzeResponse:
         profile, mode = llm.fallback_profile(req.description, cats), "offline"
     cat = catalog.categories.get(profile.category)
     markets = rank_markets(cat.id, catalog) if cat else []
-    return AnalyzeResponse(profile=profile, category=cat, markets=markets, mode=mode)
+    return AnalyzeResponse(profile=profile, category=cat, markets=markets, mode=mode,
+                           opportunity_available=bool(cat and cat.id in catalog.trade))
 
 
 @app.post("/api/documents", response_model=list[DocumentDraft])

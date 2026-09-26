@@ -18,7 +18,18 @@ import json
 from dataclasses import dataclass, field
 from pathlib import Path
 
-from app.models import Category, CountryFacts, MarketEntry, Middleman, Requirement, ScoredMarket, Weights
+from app.engine.opportunity import DEFAULT_PRIZE_WEIGHT, overall_score, score_opportunity
+from app.models import (
+    Category,
+    CategoryTrade,
+    CountryFacts,
+    MarketEntry,
+    Middleman,
+    Requirement,
+    ScoredMarket,
+    SortBy,
+    Weights,
+)
 
 # 50% is the highest tariff a trading partner currently applies to a Canadian product that it
 # still lets in (US Section 338, Aug 2026). At that level most trade stops, so it counts as maximum
@@ -62,6 +73,7 @@ class Catalog:
     markets: list[MarketEntry] = field(default_factory=list)
     middlemen: list[Middleman] = field(default_factory=list)
     countries: dict[str, CountryFacts] = field(default_factory=dict)
+    trade: dict[str, CategoryTrade] = field(default_factory=dict)
 
     def market(self, category: str, country_code: str) -> MarketEntry | None:
         return next((m for m in self.markets if m.category == category and m.country_code == country_code), None)
@@ -83,6 +95,10 @@ def load_catalog(data_dir: str | Path) -> Catalog:
     markets = _load_list(data_dir / "markets.json", MarketEntry)
     middlemen = _load_list(data_dir / "middlemen.json", Middleman)
     countries = {c.country_code: c for c in _load_list(data_dir / "countries.json", CountryFacts)}
+    trade = {t.category: t for t in _load_list(data_dir / "opportunity.json", CategoryTrade)}
+    for t in trade.values():
+        if t.category not in categories:
+            raise ValueError(f"opportunity.json: unknown category '{t.category}'")
 
     seen: set[tuple[str, str]] = set()
     for m in markets:
@@ -106,7 +122,7 @@ def load_catalog(data_dir: str | Path) -> Catalog:
         if mm.category != "*" and mm.category not in categories:
             raise ValueError(f"middlemen.json: unknown category '{mm.category}' ({mm.id})")
 
-    return Catalog(categories=categories, markets=markets, middlemen=middlemen, countries=countries)
+    return Catalog(categories=categories, markets=markets, middlemen=middlemen, countries=countries, trade=trade)
 
 
 # ---------- the four normalizers ----------
@@ -233,12 +249,38 @@ def middlemen_for(catalog: Catalog, category: str, country_code: str) -> list[Mi
     return specific + category_wide + general
 
 
-def rank_markets(category: str, catalog: Catalog, weights: Weights | None = None) -> list[ScoredMarket]:
-    """Every market for the category: open ones easiest (lowest score) first, then blocked ones.
-    Ties are broken by country name so the order is stable."""
-    scored = [score_market(m, weights, catalog.countries.get(m.country_code))
-              for m in catalog.markets if m.category == category]
-    scored.sort(key=lambda s: (s.status == "blocked", s.score if s.score is not None else 0.0, s.country))
+def rank_markets(category: str, catalog: Catalog, weights: Weights | None = None,
+                 sort_by: SortBy = "overall", prize_weight: float = DEFAULT_PRIZE_WEIGHT) -> list[ScoredMarket]:
+    """Every market for the category, best first under `sort_by`, blocked markets last.
+
+    overall: highest recommendation first. friction: lowest friction first. opportunity: highest
+    opportunity first (falls back to friction order when the category has no trade data).
+    Ties are broken by country name so the order is stable.
+    """
+    trade = catalog.trade.get(category)
+    by_code = {m.country_code: m for m in trade.markets} if trade else {}
+    scored = []
+    for m in catalog.markets:
+        if m.category != category:
+            continue
+        s = score_market(m, weights, catalog.countries.get(m.country_code))
+        if s.status == "open":
+            mt = by_code.get(m.country_code)
+            if trade and mt:
+                s.opportunity, s.opportunity_components, s.opportunity_facts = score_opportunity(trade, mt, m)
+            s.overall = overall_score(s.opportunity, s.score, prize_weight)
+        scored.append(s)
+
+    def key(s: ScoredMarket):
+        if s.status == "blocked":
+            return (1, 0.0, s.country)
+        if sort_by == "friction" or (sort_by == "opportunity" and s.opportunity is None):
+            return (0, s.score, s.country)
+        if sort_by == "opportunity":
+            return (0, -s.opportunity, s.country)
+        return (0, -s.overall, s.country)
+
+    scored.sort(key=key)
     for i, s in enumerate(scored, start=1):
         s.rank = i
         s.middlemen = middlemen_for(catalog, category, s.country_code)
