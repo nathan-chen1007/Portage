@@ -5,9 +5,10 @@ Mirrored in TypeScript by docs/contract/api.ts (copy to frontend/lib/api.ts). Ch
 
 from typing import Literal
 
-from pydantic import BaseModel, Field, field_validator, model_validator
+from pydantic import AliasChoices, BaseModel, Field, field_validator, model_validator
 
-Component = Literal["tariff", "compliance", "customs", "tax"]
+Component = Literal["tariff", "compliance", "logistics", "risk", "tax"]
+Basis = Literal["official", "estimate"]
 MarketStatus = Literal["open", "blocked"]
 
 
@@ -34,6 +35,8 @@ class Requirement(BaseModel):
     tier: int = Field(ge=1, le=3)
     detail: str
     source: str
+    lead_time_weeks: float = Field(0, ge=0, le=104, description="Weeks this step adds before the FIRST shipment can leave (0 = done per shipment, no wait)")
+    lead_time_basis: Basis = Field("estimate", description="'official' = a stated deadline or service standard in the source; 'estimate' = our judgment, flagged in the UI")
 
 
 class MarketEntry(BaseModel):
@@ -53,6 +56,10 @@ class MarketEntry(BaseModel):
     lpi_customs_score: float | None = Field(None, ge=1, le=5, description="World Bank LPI customs efficiency, 1 (worst) to 5 (best); null for services")
     tax_burden: float = Field(0.0, ge=0, le=1, description="0 = no tax registration for the Canadian seller, 0.5 = above thresholds, 1 = from the first sale")
     tax_note: str = ""
+    sea_distance_nm: float | None = Field(None, ge=0, description="Sea distance from the best Canadian gateway port, nautical miles (0 = land border); null for services")
+    weekly_sailings: float | None = Field(None, ge=0, description="Container departures per week on that lane (land border ~ daily trucking = 7); null for services")
+    shipping_route: str = Field("", description="Human-readable lane, e.g. 'Vancouver → Yokohama, ~11 days, direct'")
+    shipping_source: str | None = None
     notes: list[str] = Field(default_factory=list)
     sources: list[str] = Field(min_length=1)
     as_of: str
@@ -70,6 +77,19 @@ class MarketEntry(BaseModel):
         if self.status == "blocked" and not self.status_note:
             raise ValueError(f"{self.country}: a blocked market needs a status_note")
         return self
+
+
+class CountryFacts(BaseModel):
+    """Country-level risk facts (data/countries.json), shared by every category."""
+
+    country_code: str = Field(min_length=2, max_length=2)
+    currency: str
+    fx_volatility: float = Field(ge=0, le=1, description="Annualized volatility of the currency against CAD (fraction, 0.06 = 6%)")
+    fx_note: str = ""
+    fx_source: str
+    country_risk: int = Field(ge=0, le=7, description="OECD country risk category, 0 (lowest: high-income OECD / euro area) to 7")
+    country_risk_source: str
+    as_of: str
 
 
 class Middleman(BaseModel):
@@ -92,15 +112,17 @@ class Weights(BaseModel):
     """How much each blocker counts toward the friction score. Normalized, so they needn't sum to 1.
 
     Rationale (see docs/SCORING.md):
-    tariff 0.40      a direct, unrecoverable cost on every unit sold
-    compliance 0.35  up-front cost and months of lead time before the first sale
-    customs 0.15     delay and uncertainty per shipment, not a hard blocker
-    tax 0.10         mostly an administrative burden; VAT is usually recoverable
+    tariff 0.35      a direct, unrecoverable cost on every unit sold
+    compliance 0.30  paperwork and approvals, plus the weeks you wait before the first sale
+    logistics 0.15   distance, how often ships sail, and how smoothly customs clears
+    risk 0.10        currency swings against CAD and the risk of not getting paid
+    tax 0.10         having to register for and collect tax yourself
     """
 
-    tariff: float = Field(0.40, ge=0)
-    compliance: float = Field(0.35, ge=0)
-    customs: float = Field(0.15, ge=0)
+    tariff: float = Field(0.35, ge=0)
+    compliance: float = Field(0.30, ge=0)
+    logistics: float = Field(0.15, ge=0, validation_alias=AliasChoices("logistics", "customs"))
+    risk: float = Field(0.10, ge=0)
     tax: float = Field(0.10, ge=0)
 
 
@@ -112,9 +134,13 @@ class ScoredMarket(BaseModel):
     score: float | None = Field(description="Friction 0-100, lower = easier. null when the market is blocked")
     rank: int = Field(description="1 = easiest. Blocked markets come after every open market")
     components: dict[Component, float] = Field(description="Each blocker normalized to 0-1, before weighting. Empty if blocked")
+    factors: dict[str, float] = Field(default_factory=dict, description="The sub-scores (0-1) behind each component, for the 'why this score' view. Empty if blocked")
     breakdown: dict[Component, float] = Field(description="Each blocker's weighted points (sums to score). Empty if blocked")
     top_blocker: Component | None = Field(description="The component contributing most, or null if the score is ~0 or blocked")
+    lead_time_weeks: float = Field(0, description="Weeks before the first legal shipment (longest single step; steps run in parallel)")
+    lead_time_estimated: bool = Field(False, description="True if that longest step is our estimate rather than an official figure")
     entry: MarketEntry
+    country_facts: CountryFacts | None = Field(None, description="Currency and payment-risk facts for this country")
     middlemen: list[Middleman] = Field(default_factory=list)
 
 

@@ -1,0 +1,82 @@
+[
+  {
+    "country_code": "GB",
+    "currency": "GBP",
+    "fx_volatility": 0.0339,
+    "fx_note": "Annualized volatility of monthly CAD/GBP rates, Sep 2023 – Aug 2026 (Bank of Canada).",
+    "fx_source": "https://www.bankofcanada.ca/valet/observations/FXMGBPCAD/csv?start_date=2023-09-01&end_date=2026-08-31",
+    "country_risk": 0,
+    "country_risk_source": "https://www.oecd.org/en/topics/country-risk-classification.html",
+    "as_of": "2026-09-26"
+  },
+  {
+    "country_code": "JP",
+    "currency": "JPY",
+    "fx_volatility": 0.0627,
+    "fx_note": "Annualized volatility of monthly CAD/JPY rates, Sep 2023 – Aug 2026 (Bank of Canada).",
+    "fx_source": "https://www.bankofcanada.ca/valet/observations/FXMJPYCAD/csv?start_date=2023-09-01&end_date=2026-08-31",
+    "country_risk": 0,
+    "country_risk_source": "https://www.oecd.org/en/topics/country-risk-classification.html",
+    "as_of": "2026-09-26"
+  },
+  {
+    "country_code": "AU",
+    "currency": "AUD",
+    "fx_volatility": 0.0385,
+    "fx_note": "Annualized volatility of monthly CAD/AUD rates, Sep 2023 – Aug 2026 (Bank of Canada).",
+    "fx_source": "https://www.bankofcanada.ca/valet/observations/FXMAUDCAD/csv?start_date=2023-09-01&end_date=2026-08-31",
+    "country_risk": 0,
+    "country_risk_source": "https://www.oecd.org/en/topics/country-risk-classification.html",
+    "as_of": "2026-09-26"
+  },
+  {
+    "country_code": "DE",
+    "currency": "EUR",
+    "fx_volatility": 0.0368,
+    "fx_note": "Annualized volatility of monthly CAD/EUR rates, Sep 2023 – Aug 2026 (Bank of Canada).",
+    "fx_source": "https://www.bankofcanada.ca/valet/observations/FXMEURCAD/csv?start_date=2023-09-01&end_date=2026-08-31",
+    "country_risk": 0,
+    "country_risk_source": "https://www.oecd.org/en/topics/country-risk-classification.html",
+    "as_of": "2026-09-26"
+  },
+  {
+    "country_code": "CN",
+    "currency": "CNY",
+    "fx_volatility": 0.0341,
+    "fx_note": "Annualized volatility of monthly CAD/CNY rates, Sep 2023 – Aug 2026 (Bank of Canada).",
+    "fx_source": "https://www.bankofcanada.ca/valet/observations/FXMCNYCAD/csv?start_date=2023-09-01&end_date=2026-08-31",
+    "country_risk": 2,
+    "country_risk_source": "https://www.exportkreditgarantien.de/en/solutions/costs/country-risk-categories.html",
+    "as_of": "2026-09-26"
+  },
+  {
+    "country_code": "KR",
+    "currency": "KRW",
+    "fx_volatility": 0.0556,
+    "fx_note": "Annualized volatility of monthly CAD/KRW rates, Sep 2023 – Aug 2026 (Bank of Canada).",
+    "fx_source": "https://www.bankofcanada.ca/valet/observations/FXMKRWCAD/csv?start_date=2023-09-01&end_date=2026-08-31",
+    "country_risk": 0,
+    "country_risk_source": "https://www.oecd.org/en/topics/country-risk-classification.html",
+    "as_of": "2026-09-26"
+  },
+  {
+    "country_code": "US",
+    "currency": "USD",
+    "fx_volatility": 0.0385,
+    "fx_note": "Annualized volatility of monthly CAD/USD rates, Sep 2023 – Aug 2026 (Bank of Canada).",
+    "fx_source": "https://www.bankofcanada.ca/valet/observations/FXMUSDCAD/csv?start_date=2023-09-01&end_date=2026-08-31",
+    "country_risk": 0,
+    "country_risk_source": "https://www.oecd.org/en/topics/country-risk-classification.html",
+    "as_of": "2026-09-26"
+  },
+  {
+    "country_code": "MX",
+    "currency": "MXN",
+    "fx_volatility": 0.0817,
+    "fx_note": "Annualized volatility of monthly CAD/MXN rates, Sep 2023 – Aug 2026 (Bank of Canada).",
+    "fx_source": "https://www.bankofcanada.ca/valet/observations/FXMMXNCAD/csv?start_date=2023-09-01&end_date=2026-08-31",
+    "country_risk": 3,
+    "country_risk_source": "https://www.exportkreditgarantien.de/en/solutions/costs/country-risk-categories.html",
+    "as_of": "2026-09-26"
+  }
+]
