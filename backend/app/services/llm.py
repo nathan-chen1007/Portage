@@ -20,7 +20,7 @@ from app.models import BusinessProfile, Category, MarketEntry, Middleman, Outrea
 
 LANGUAGE_NAMES = {
     "en": "English", "de": "German", "ja": "Japanese", "ko": "Korean",
-    "es": "Spanish", "zh": "Simplified Chinese", "fr": "French",
+    "es": "Spanish", "zh": "Simplified Chinese", "fr": "French", "nl": "Dutch", "it": "Italian",
 }
 
 # Offline fallback: how to name the product when the founder didn't.

@@ -58,8 +58,8 @@ def test_lead_time_is_the_longest_step_not_the_sum():
 
 def test_catalog_loads_and_every_row_is_sourced(catalog):
     assert set(catalog.categories) == {"honey", "icewine", "b2b_saas"}
-    assert len(catalog.markets) == 24
-    assert set(catalog.countries) == {"GB", "JP", "AU", "DE", "CN", "KR", "US", "MX"}
+    assert len(catalog.markets) == 30
+    assert set(catalog.countries) == {"GB", "JP", "AU", "DE", "FR", "NL", "IT", "CN", "KR", "US", "MX"}
     for c in catalog.countries.values():
         assert c.fx_source.startswith("https://") and c.country_risk_source.startswith("https://")
     for m in catalog.markets:

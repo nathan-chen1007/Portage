@@ -21,8 +21,8 @@ def test_icewine_rows_are_sourced_and_badged(catalog):
     cat = catalog.categories["icewine"]
     assert cat.kind == "goods" and cat.hs_code == "2204.21"
     rows = {m.country_code: m for m in catalog.markets if m.category == "icewine"}
-    assert set(rows) == {"GB", "JP", "AU", "DE", "CN", "KR", "US", "MX"}
-    for cc in ("JP", "GB", "DE", "KR"):
+    assert set(rows) == {"GB", "JP", "AU", "DE", "FR", "NL", "IT", "CN", "KR", "US", "MX"}
+    for cc in ("JP", "GB", "DE", "FR", "NL", "IT", "KR"):
         assert rows[cc].compliance_confidence == "verified" and rows[cc].compliance_requirements
         assert all(r.source.startswith("https://") for r in rows[cc].compliance_requirements)
         assert rows[cc].tariff_rate == 0.0 and rows[cc].trade_agreement
@@ -37,7 +37,7 @@ def test_icewine_rows_are_sourced_and_badged(catalog):
 
 def test_us_is_blocked_by_the_import_ban(catalog):
     us = next(m for m in rank_markets("icewine", catalog) if m.country_code == "US")
-    assert us.status == "blocked" and us.score is None and us.rank == 8
+    assert us.status == "blocked" and us.score is None and us.rank == 11
     assert "September 29, 2026" in us.status_note and "Proclamation 11061" in us.status_note
     assert "federalregister.gov" in us.entry.sources[0]
 
@@ -45,7 +45,7 @@ def test_us_is_blocked_by_the_import_ban(catalog):
 def test_icewine_ranking_uses_every_open_market(catalog):
     ranked = rank_markets("icewine", catalog)
     open_ = [m for m in ranked if m.status == "open"]
-    assert len(open_) == 7 and all(m.opportunity is not None and m.overall is not None for m in open_)
+    assert len(open_) == 10 and all(m.opportunity is not None and m.overall is not None for m in open_)
     by = {m.country_code: m for m in ranked}
     # GB and JP report no import weights: price is unavailable (None), not zero.
     assert by["GB"].opportunity_components["price"] is None and by["JP"].opportunity_components["price"] is None

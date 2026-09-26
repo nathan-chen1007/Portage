@@ -6389,6 +6389,549 @@
    },
    {
     "breakdown": {
+     "compliance": 23.54,
+     "logistics": 6.42,
+     "risk": 2.21,
+     "tariff": 0.0,
+     "tax": 0.0
+    },
+    "components": {
+     "compliance": 0.785,
+     "logistics": 0.428,
+     "risk": 0.221,
+     "tariff": 0.0,
+     "tax": 0.0
+    },
+    "country": "Netherlands (EU)",
+    "country_code": "NL",
+    "country_facts": {
+     "as_of": "<TODAY>",
+     "country_code": "NL",
+     "country_risk": 0,
+     "country_risk_source": "https://www.oecd.org/en/topics/country-risk-classification.html",
+     "currency": "EUR",
+     "fx_note": "Annualized volatility of monthly CAD/EUR rates, Sep 2023 – Aug 2026 (Bank of Canada).",
+     "fx_source": "https://www.bankofcanada.ca/valet/observations/FXMEURCAD/csv?start_date=2023-09-01&end_date=2026-08-31",
+     "fx_volatility": 0.0368
+    },
+    "entry": {
+     "as_of": "<TODAY>",
+     "category": "honey",
+     "compliance_confidence": "verified",
+     "compliance_requirements": [
+      {
+       "confidence": "verified",
+       "detail": "The packing establishment must hold a Safe Food for Canadians licence and be on the EU's approved list for honey; request listing through the local CFIA office. Lists are updated in batches (the US FDA transmits its updates quarterly), so allow about 3 months.",
+       "lead_time_basis": "estimate",
+       "lead_time_weeks": 12.0,
+       "name": "EU honey establishment listing (DG SANTE)",
+       "source": "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+       "tier": 2
+      },
+      {
+       "confidence": "verified",
+       "detail": "A CFIA inspector or veterinarian issues the model HON certificate in the EU's TRACES system for every consignment, before it leaves Canada.",
+       "lead_time_basis": "estimate",
+       "lead_time_weeks": 1.0,
+       "name": "EU 'HON' export certificate via TRACES",
+       "source": "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+       "tier": 2
+      },
+      {
+       "confidence": "verified",
+       "detail": "Composition limits (moisture, HMF, sugars) and labelling rules, plus EU residue limits.",
+       "lead_time_basis": "estimate",
+       "lead_time_weeks": 2.0,
+       "name": "Honey Directive 2001/110/EC composition and labelling",
+       "source": "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+       "tier": 1
+      },
+      {
+       "confidence": "verified",
+       "detail": "From July 20, 2026, primary packaging may not contain bisphenol A (Regulation 2024/3190).",
+       "lead_time_basis": "estimate",
+       "lead_time_weeks": 2.0,
+       "name": "BPA-free food-contact packaging",
+       "source": "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+       "tier": 1
+      },
+      {
+       "confidence": "verified",
+       "detail": "Self-declared origin statement on the invoice to claim 0% duty.",
+       "lead_time_basis": "official",
+       "lead_time_weeks": 0.0,
+       "name": "CETA origin declaration",
+       "source": "https://www.cbsa-asfc.gc.ca/publications/dm-md/d11/d11-4-14-eng.html",
+       "tier": 1
+      },
+      {
+       "confidence": "verified",
+       "detail": "Mandatory food information must be given in Dutch (Dutch government business portal; Warenwetbesluit informatie levensmiddelen). EU law lets member states require their language (Reg. 1169/2011, Art. 15).",
+       "lead_time_basis": "estimate",
+       "lead_time_weeks": 2.0,
+       "name": "Dutch-language labelling",
+       "source": "https://ondernemersplein.overheid.nl/wetten-en-regels/regels-voor-etiketten-van-levensmiddelen/",
+       "tier": 1
+      }
+     ],
+     "country": "Netherlands (EU)",
+     "country_code": "NL",
+     "language": "nl",
+     "lpi_customs_score": 3.9,
+     "mfn_rate": 0.173,
+     "notes": [
+      "Compliance: EU rules, same as Germany (EU import rules are harmonised), plus Dutch-language labelling."
+     ],
+     "sea_distance_nm": 3314.0,
+     "shipping_route": "Halifax → Rotterdam, ~12 days, direct sailings about weekly",
+     "shipping_source": "https://www.fluentcargo.com/routes/halifax-ca/rotterdam-nl",
+     "sources": [
+      "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+      "https://wits.worldbank.org/tariff/trains/en/country/EUN/partner/CAN/product/040900",
+      "https://ondernemersplein.overheid.nl/wetten-en-regels/regels-voor-etiketten-van-levensmiddelen/",
+      "https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/zakelijk/btw/tarieven_en_vrijstellingen/goederen_9_btw/voedingsmiddelen/",
+      "https://www.fluentcargo.com/routes/halifax-ca/rotterdam-nl",
+      "https://api.worldbank.org/v2/country/FRA;NLD;ITA;DEU/indicator/LP.LPI.CUST.XQ?format=json&date=2018:2024"
+     ],
+     "status": "open",
+     "status_note": "",
+     "tariff_note": "Duty-free under CETA. Without it, the EU tariff on natural honey is 17.3%.",
+     "tariff_rate": 0.0,
+     "tax_burden": 0.0,
+     "tax_note": "Import VAT at the Dutch 9% food rate is paid and recovered by the Dutch importer (Belastingdienst).",
+     "trade_agreement": "CETA",
+     "weekly_sailings": 0.9
+    },
+    "factors": {
+     "country_risk": 0.0,
+     "customs": 0.275,
+     "distance": 0.331,
+     "fx": 0.368,
+     "lead_time": 0.462,
+     "sailings": 0.775,
+     "tiers": 1.0
+    },
+    "lead_time_estimated": true,
+    "lead_time_weeks": 12.0,
+    "middlemen": [
+     {
+      "category": "honey",
+      "contact": "Contact via the council website",
+      "country_code": "*",
+      "description": "National body for Canada's beekeepers; publishes an exporters catalogue and tracks tariff and market-access changes for honey.",
+      "id": "chc",
+      "name": "Canadian Honey Council",
+      "source": "https://honeycouncil.ca/tariffs/",
+      "type": "Canadian industry association",
+      "website": "https://honeycouncil.ca/"
+     },
+     {
+      "category": "*",
+      "contact": "Find a trade commissioner for the target market",
+      "country_code": "*",
+      "description": "Government of Canada trade commissioners in every one of these markets help Canadian businesses find vetted local partners, at no charge.",
+      "id": "tcs",
+      "name": "Canadian Trade Commissioner Service",
+      "source": "https://www.tradecommissioner.gc.ca/en/about-us/contact-us/find-trade-commissioner.html",
+      "type": "government (free)",
+      "website": "https://www.tradecommissioner.gc.ca/en/about-us/contact-us/find-trade-commissioner.html"
+     }
+    ],
+    "opportunity": 54.58,
+    "opportunity_components": {
+     "demand": 0.655,
+     "foothold": 0.0,
+     "growth": 1.0,
+     "price": 0.666
+    },
+    "opportunity_facts": {
+     "canada_share": 0.0,
+     "canada_unit_value_usd_kg": 4.04,
+     "growth_rate": 0.1205,
+     "growth_years": "2019–2024",
+     "import_value_usd": 92323735.0,
+     "import_volume_kg": 22846446.0,
+     "net_unit_value_usd_kg": 4.04,
+     "note": "",
+     "sources": [
+      "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=528&period=2024&cmdCode=040900&flowCode=M&partnerCode=0,124",
+      "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=528&period=2019&cmdCode=040900&flowCode=M&partnerCode=0",
+      "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=124&period=2024&cmdCode=0409&flowCode=X&partnerCode=0"
+     ],
+     "unit_value_usd_kg": 4.04,
+     "year": 2024
+    },
+    "overall": 67.83,
+    "rank": 5,
+    "score": 32.17,
+    "status": "open",
+    "status_note": "",
+    "top_blocker": "compliance"
+   },
+   {
+    "breakdown": {
+     "compliance": 23.54,
+     "logistics": 6.55,
+     "risk": 2.21,
+     "tariff": 0.0,
+     "tax": 0.0
+    },
+    "components": {
+     "compliance": 0.785,
+     "logistics": 0.437,
+     "risk": 0.221,
+     "tariff": 0.0,
+     "tax": 0.0
+    },
+    "country": "France (EU)",
+    "country_code": "FR",
+    "country_facts": {
+     "as_of": "<TODAY>",
+     "country_code": "FR",
+     "country_risk": 0,
+     "country_risk_source": "https://www.oecd.org/en/topics/country-risk-classification.html",
+     "currency": "EUR",
+     "fx_note": "Annualized volatility of monthly CAD/EUR rates, Sep 2023 – Aug 2026 (Bank of Canada).",
+     "fx_source": "https://www.bankofcanada.ca/valet/observations/FXMEURCAD/csv?start_date=2023-09-01&end_date=2026-08-31",
+     "fx_volatility": 0.0368
+    },
+    "entry": {
+     "as_of": "<TODAY>",
+     "category": "honey",
+     "compliance_confidence": "verified",
+     "compliance_requirements": [
+      {
+       "confidence": "verified",
+       "detail": "The packing establishment must hold a Safe Food for Canadians licence and be on the EU's approved list for honey; request listing through the local CFIA office. Lists are updated in batches (the US FDA transmits its updates quarterly), so allow about 3 months.",
+       "lead_time_basis": "estimate",
+       "lead_time_weeks": 12.0,
+       "name": "EU honey establishment listing (DG SANTE)",
+       "source": "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+       "tier": 2
+      },
+      {
+       "confidence": "verified",
+       "detail": "A CFIA inspector or veterinarian issues the model HON certificate in the EU's TRACES system for every consignment, before it leaves Canada.",
+       "lead_time_basis": "estimate",
+       "lead_time_weeks": 1.0,
+       "name": "EU 'HON' export certificate via TRACES",
+       "source": "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+       "tier": 2
+      },
+      {
+       "confidence": "verified",
+       "detail": "Composition limits (moisture, HMF, sugars) and labelling rules, plus EU residue limits.",
+       "lead_time_basis": "estimate",
+       "lead_time_weeks": 2.0,
+       "name": "Honey Directive 2001/110/EC composition and labelling",
+       "source": "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+       "tier": 1
+      },
+      {
+       "confidence": "verified",
+       "detail": "From July 20, 2026, primary packaging may not contain bisphenol A (Regulation 2024/3190).",
+       "lead_time_basis": "estimate",
+       "lead_time_weeks": 2.0,
+       "name": "BPA-free food-contact packaging",
+       "source": "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+       "tier": 1
+      },
+      {
+       "confidence": "verified",
+       "detail": "Self-declared origin statement on the invoice to claim 0% duty.",
+       "lead_time_basis": "official",
+       "lead_time_weeks": 0.0,
+       "name": "CETA origin declaration",
+       "source": "https://www.cbsa-asfc.gc.ca/publications/dm-md/d11/d11-4-14-eng.html",
+       "tier": 1
+      },
+      {
+       "confidence": "verified",
+       "detail": "Mandatory label information must be at least in French (Loi n° 94-665 'Toubon', Art. 2; DGCCRF food-labelling rules). EU law lets member states require their language (Reg. 1169/2011, Art. 15).",
+       "lead_time_basis": "estimate",
+       "lead_time_weeks": 2.0,
+       "name": "French-language labelling",
+       "source": "https://www.economie.gouv.fr/dgccrf/les-fiches-pratiques/etiquetage-des-denrees-alimentaires-les-regles-connaitre",
+       "tier": 1
+      }
+     ],
+     "country": "France (EU)",
+     "country_code": "FR",
+     "language": "fr",
+     "lpi_customs_score": 3.7,
+     "mfn_rate": 0.173,
+     "notes": [
+      "Compliance: EU rules, same as Germany (EU import rules are harmonised), plus French-language labelling."
+     ],
+     "sea_distance_nm": 3984.0,
+     "shipping_route": "Montreal → Le Havre, ~16 days, direct sailings 1-2×/week",
+     "shipping_source": "https://www.fluentcargo.com/routes/montreal-ca/le-havre-fr",
+     "sources": [
+      "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+      "https://wits.worldbank.org/tariff/trains/en/country/EUN/partner/CAN/product/040900",
+      "https://www.economie.gouv.fr/dgccrf/les-fiches-pratiques/etiquetage-des-denrees-alimentaires-les-regles-connaitre",
+      "https://www.economie.gouv.fr/particuliers/impots-et-fiscalite/gerer-mes-autres-impots-et-taxes/tva-quels-sont-les-taux-de-votre-quotidien",
+      "https://www.fluentcargo.com/routes/montreal-ca/le-havre-fr",
+      "https://api.worldbank.org/v2/country/FRA;NLD;ITA;DEU/indicator/LP.LPI.CUST.XQ?format=json&date=2018:2024"
+     ],
+     "status": "open",
+     "status_note": "",
+     "tariff_note": "Duty-free under CETA. Without it, the EU tariff on natural honey is 17.3%.",
+     "tariff_rate": 0.0,
+     "tax_burden": 0.0,
+     "tax_note": "Import VAT at France's 5.5% food rate is paid and recovered by the French importer (economie.gouv.fr).",
+     "trade_agreement": "CETA",
+     "weekly_sailings": 1.5
+    },
+    "factors": {
+     "country_risk": 0.0,
+     "customs": 0.325,
+     "distance": 0.398,
+     "fx": 0.368,
+     "lead_time": 0.462,
+     "sailings": 0.625,
+     "tiers": 1.0
+    },
+    "lead_time_estimated": true,
+    "lead_time_weeks": 12.0,
+    "middlemen": [
+     {
+      "category": "honey",
+      "contact": "Contact via the council website",
+      "country_code": "*",
+      "description": "National body for Canada's beekeepers; publishes an exporters catalogue and tracks tariff and market-access changes for honey.",
+      "id": "chc",
+      "name": "Canadian Honey Council",
+      "source": "https://honeycouncil.ca/tariffs/",
+      "type": "Canadian industry association",
+      "website": "https://honeycouncil.ca/"
+     },
+     {
+      "category": "*",
+      "contact": "Find a trade commissioner for the target market",
+      "country_code": "*",
+      "description": "Government of Canada trade commissioners in every one of these markets help Canadian businesses find vetted local partners, at no charge.",
+      "id": "tcs",
+      "name": "Canadian Trade Commissioner Service",
+      "source": "https://www.tradecommissioner.gc.ca/en/about-us/contact-us/find-trade-commissioner.html",
+      "type": "government (free)",
+      "website": "https://www.tradecommissioner.gc.ca/en/about-us/contact-us/find-trade-commissioner.html"
+     }
+    ],
+    "opportunity": 40.36,
+    "opportunity_components": {
+     "demand": 0.681,
+     "foothold": 0.0,
+     "growth": 0.429,
+     "price": null
+    },
+    "opportunity_facts": {
+     "canada_share": 0.0,
+     "canada_unit_value_usd_kg": 4.04,
+     "growth_rate": -0.0142,
+     "growth_years": "2019–2024",
+     "import_value_usd": 110418996.0,
+     "import_volume_kg": 0.0,
+     "net_unit_value_usd_kg": 0.0,
+     "note": "No 2024 import weights reported: price data unavailable.",
+     "sources": [
+      "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=251&period=2024&cmdCode=040900&flowCode=M&partnerCode=0,124",
+      "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=251&period=2019&cmdCode=040900&flowCode=M&partnerCode=0",
+      "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=124&period=2024&cmdCode=0409&flowCode=X&partnerCode=0"
+     ],
+     "unit_value_usd_kg": 0.0,
+     "year": 2024
+    },
+    "overall": 67.7,
+    "rank": 6,
+    "score": 32.3,
+    "status": "open",
+    "status_note": "",
+    "top_blocker": "compliance"
+   },
+   {
+    "breakdown": {
+     "compliance": 23.54,
+     "logistics": 8.14,
+     "risk": 2.21,
+     "tariff": 0.0,
+     "tax": 0.0
+    },
+    "components": {
+     "compliance": 0.785,
+     "logistics": 0.543,
+     "risk": 0.221,
+     "tariff": 0.0,
+     "tax": 0.0
+    },
+    "country": "Italy (EU)",
+    "country_code": "IT",
+    "country_facts": {
+     "as_of": "<TODAY>",
+     "country_code": "IT",
+     "country_risk": 0,
+     "country_risk_source": "https://www.oecd.org/en/topics/country-risk-classification.html",
+     "currency": "EUR",
+     "fx_note": "Annualized volatility of monthly CAD/EUR rates, Sep 2023 – Aug 2026 (Bank of Canada).",
+     "fx_source": "https://www.bankofcanada.ca/valet/observations/FXMEURCAD/csv?start_date=2023-09-01&end_date=2026-08-31",
+     "fx_volatility": 0.0368
+    },
+    "entry": {
+     "as_of": "<TODAY>",
+     "category": "honey",
+     "compliance_confidence": "verified",
+     "compliance_requirements": [
+      {
+       "confidence": "verified",
+       "detail": "The packing establishment must hold a Safe Food for Canadians licence and be on the EU's approved list for honey; request listing through the local CFIA office. Lists are updated in batches (the US FDA transmits its updates quarterly), so allow about 3 months.",
+       "lead_time_basis": "estimate",
+       "lead_time_weeks": 12.0,
+       "name": "EU honey establishment listing (DG SANTE)",
+       "source": "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+       "tier": 2
+      },
+      {
+       "confidence": "verified",
+       "detail": "A CFIA inspector or veterinarian issues the model HON certificate in the EU's TRACES system for every consignment, before it leaves Canada.",
+       "lead_time_basis": "estimate",
+       "lead_time_weeks": 1.0,
+       "name": "EU 'HON' export certificate via TRACES",
+       "source": "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+       "tier": 2
+      },
+      {
+       "confidence": "verified",
+       "detail": "Composition limits (moisture, HMF, sugars) and labelling rules, plus EU residue limits.",
+       "lead_time_basis": "estimate",
+       "lead_time_weeks": 2.0,
+       "name": "Honey Directive 2001/110/EC composition and labelling",
+       "source": "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+       "tier": 1
+      },
+      {
+       "confidence": "verified",
+       "detail": "From July 20, 2026, primary packaging may not contain bisphenol A (Regulation 2024/3190).",
+       "lead_time_basis": "estimate",
+       "lead_time_weeks": 2.0,
+       "name": "BPA-free food-contact packaging",
+       "source": "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+       "tier": 1
+      },
+      {
+       "confidence": "verified",
+       "detail": "Self-declared origin statement on the invoice to claim 0% duty.",
+       "lead_time_basis": "official",
+       "lead_time_weeks": 0.0,
+       "name": "CETA origin declaration",
+       "source": "https://www.cbsa-asfc.gc.ca/publications/dm-md/d11/d11-4-14-eng.html",
+       "tier": 1
+      },
+      {
+       "confidence": "verified",
+       "detail": "Mandatory food information must be in Italian; food sold without it is a sanctioned offence (D.Lgs. 231/2017). EU law lets member states require their language (Reg. 1169/2011, Art. 15).",
+       "lead_time_basis": "estimate",
+       "lead_time_weeks": 2.0,
+       "name": "Italian-language labelling",
+       "source": "https://www.gazzettaufficiale.it/eli/id/2018/02/08/18G00023/sg",
+       "tier": 1
+      }
+     ],
+     "country": "Italy (EU)",
+     "country_code": "IT",
+     "language": "it",
+     "lpi_customs_score": 3.4,
+     "mfn_rate": 0.173,
+     "notes": [
+      "Compliance: EU rules, same as Germany (EU import rules are harmonised), plus Italian-language labelling."
+     ],
+     "sea_distance_nm": 4793.0,
+     "shipping_route": "Montreal → Genoa, ~20 days, direct sailings every 1-2 weeks",
+     "shipping_source": "https://www.fluentcargo.com/routes/montreal-ca/genoa-it",
+     "sources": [
+      "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+      "https://wits.worldbank.org/tariff/trains/en/country/EUN/partner/CAN/product/040900",
+      "https://www.gazzettaufficiale.it/eli/id/2018/02/08/18G00023/sg",
+      "https://www.agenziaentrate.gov.it/",
+      "https://www.fluentcargo.com/routes/montreal-ca/genoa-it",
+      "https://api.worldbank.org/v2/country/FRA;NLD;ITA;DEU/indicator/LP.LPI.CUST.XQ?format=json&date=2018:2024"
+     ],
+     "status": "open",
+     "status_note": "",
+     "tariff_note": "Duty-free under CETA. Without it, the EU tariff on natural honey is 17.3%.",
+     "tariff_rate": 0.0,
+     "tax_burden": 0.0,
+     "tax_note": "Import VAT at Italy's reduced food rate is paid and recovered by the Italian importer (rate not verified here: confirm with the Agenzia delle Entrate).",
+     "trade_agreement": "CETA",
+     "weekly_sailings": 0.75
+    },
+    "factors": {
+     "country_risk": 0.0,
+     "customs": 0.4,
+     "distance": 0.479,
+     "fx": 0.368,
+     "lead_time": 0.462,
+     "sailings": 0.812,
+     "tiers": 1.0
+    },
+    "lead_time_estimated": true,
+    "lead_time_weeks": 12.0,
+    "middlemen": [
+     {
+      "category": "honey",
+      "contact": "Contact via the council website",
+      "country_code": "*",
+      "description": "National body for Canada's beekeepers; publishes an exporters catalogue and tracks tariff and market-access changes for honey.",
+      "id": "chc",
+      "name": "Canadian Honey Council",
+      "source": "https://honeycouncil.ca/tariffs/",
+      "type": "Canadian industry association",
+      "website": "https://honeycouncil.ca/"
+     },
+     {
+      "category": "*",
+      "contact": "Find a trade commissioner for the target market",
+      "country_code": "*",
+      "description": "Government of Canada trade commissioners in every one of these markets help Canadian businesses find vetted local partners, at no charge.",
+      "id": "tcs",
+      "name": "Canadian Trade Commissioner Service",
+      "source": "https://www.tradecommissioner.gc.ca/en/about-us/contact-us/find-trade-commissioner.html",
+      "type": "government (free)",
+      "website": "https://www.tradecommissioner.gc.ca/en/about-us/contact-us/find-trade-commissioner.html"
+     }
+    ],
+    "opportunity": 40.3,
+    "opportunity_components": {
+     "demand": 0.616,
+     "foothold": 0.0,
+     "growth": 0.377,
+     "price": 0.523
+    },
+    "opportunity_facts": {
+     "canada_share": 0.0,
+     "canada_unit_value_usd_kg": 4.04,
+     "growth_rate": -0.0246,
+     "growth_years": "2019–2024",
+     "import_value_usd": 70494815.0,
+     "import_volume_kg": 22207910.0,
+     "net_unit_value_usd_kg": 3.17,
+     "note": "",
+     "sources": [
+      "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=380&period=2024&cmdCode=040900&flowCode=M&partnerCode=0,124",
+      "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=380&period=2019&cmdCode=040900&flowCode=M&partnerCode=0",
+      "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=124&period=2024&cmdCode=0409&flowCode=X&partnerCode=0"
+     ],
+     "unit_value_usd_kg": 3.17,
+     "year": 2024
+    },
+    "overall": 66.11,
+    "rank": 7,
+    "score": 33.89,
+    "status": "open",
+    "status_note": "",
+    "top_blocker": "compliance"
+   },
+   {
+    "breakdown": {
      "compliance": 18.63,
      "logistics": 6.54,
      "risk": 3.19,
@@ -6531,7 +7074,7 @@
      "year": 2024
     },
     "overall": 61.14,
-    "rank": 5,
+    "rank": 8,
     "score": 38.86,
     "status": "open",
     "status_note": "",
@@ -6693,7 +7236,7 @@
      "year": 2024
     },
     "overall": 49.3,
-    "rank": 6,
+    "rank": 9,
     "score": 50.7,
     "status": "open",
     "status_note": "",
@@ -6855,7 +7398,7 @@
      "year": 2024
     },
     "overall": 42.64,
-    "rank": 7,
+    "rank": 10,
     "score": 57.36,
     "status": "open",
     "status_note": "",
@@ -6934,7 +7477,7 @@
     "opportunity_components": {},
     "opportunity_facts": null,
     "overall": null,
-    "rank": 8,
+    "rank": 11,
     "score": null,
     "status": "blocked",
     "status_note": "Canada does not meet Mexico's requirements for exporting honey and apiculture products for human consumption. No CFIA certificate is currently available (CFIA).",
@@ -7651,6 +8194,549 @@
    },
    {
     "breakdown": {
+     "compliance": 23.54,
+     "logistics": 6.42,
+     "risk": 2.21,
+     "tariff": 0.0,
+     "tax": 0.0
+    },
+    "components": {
+     "compliance": 0.785,
+     "logistics": 0.428,
+     "risk": 0.221,
+     "tariff": 0.0,
+     "tax": 0.0
+    },
+    "country": "Netherlands (EU)",
+    "country_code": "NL",
+    "country_facts": {
+     "as_of": "<TODAY>",
+     "country_code": "NL",
+     "country_risk": 0,
+     "country_risk_source": "https://www.oecd.org/en/topics/country-risk-classification.html",
+     "currency": "EUR",
+     "fx_note": "Annualized volatility of monthly CAD/EUR rates, Sep 2023 – Aug 2026 (Bank of Canada).",
+     "fx_source": "https://www.bankofcanada.ca/valet/observations/FXMEURCAD/csv?start_date=2023-09-01&end_date=2026-08-31",
+     "fx_volatility": 0.0368
+    },
+    "entry": {
+     "as_of": "<TODAY>",
+     "category": "honey",
+     "compliance_confidence": "verified",
+     "compliance_requirements": [
+      {
+       "confidence": "verified",
+       "detail": "The packing establishment must hold a Safe Food for Canadians licence and be on the EU's approved list for honey; request listing through the local CFIA office. Lists are updated in batches (the US FDA transmits its updates quarterly), so allow about 3 months.",
+       "lead_time_basis": "estimate",
+       "lead_time_weeks": 12.0,
+       "name": "EU honey establishment listing (DG SANTE)",
+       "source": "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+       "tier": 2
+      },
+      {
+       "confidence": "verified",
+       "detail": "A CFIA inspector or veterinarian issues the model HON certificate in the EU's TRACES system for every consignment, before it leaves Canada.",
+       "lead_time_basis": "estimate",
+       "lead_time_weeks": 1.0,
+       "name": "EU 'HON' export certificate via TRACES",
+       "source": "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+       "tier": 2
+      },
+      {
+       "confidence": "verified",
+       "detail": "Composition limits (moisture, HMF, sugars) and labelling rules, plus EU residue limits.",
+       "lead_time_basis": "estimate",
+       "lead_time_weeks": 2.0,
+       "name": "Honey Directive 2001/110/EC composition and labelling",
+       "source": "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+       "tier": 1
+      },
+      {
+       "confidence": "verified",
+       "detail": "From July 20, 2026, primary packaging may not contain bisphenol A (Regulation 2024/3190).",
+       "lead_time_basis": "estimate",
+       "lead_time_weeks": 2.0,
+       "name": "BPA-free food-contact packaging",
+       "source": "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+       "tier": 1
+      },
+      {
+       "confidence": "verified",
+       "detail": "Self-declared origin statement on the invoice to claim 0% duty.",
+       "lead_time_basis": "official",
+       "lead_time_weeks": 0.0,
+       "name": "CETA origin declaration",
+       "source": "https://www.cbsa-asfc.gc.ca/publications/dm-md/d11/d11-4-14-eng.html",
+       "tier": 1
+      },
+      {
+       "confidence": "verified",
+       "detail": "Mandatory food information must be given in Dutch (Dutch government business portal; Warenwetbesluit informatie levensmiddelen). EU law lets member states require their language (Reg. 1169/2011, Art. 15).",
+       "lead_time_basis": "estimate",
+       "lead_time_weeks": 2.0,
+       "name": "Dutch-language labelling",
+       "source": "https://ondernemersplein.overheid.nl/wetten-en-regels/regels-voor-etiketten-van-levensmiddelen/",
+       "tier": 1
+      }
+     ],
+     "country": "Netherlands (EU)",
+     "country_code": "NL",
+     "language": "nl",
+     "lpi_customs_score": 3.9,
+     "mfn_rate": 0.173,
+     "notes": [
+      "Compliance: EU rules, same as Germany (EU import rules are harmonised), plus Dutch-language labelling."
+     ],
+     "sea_distance_nm": 3314.0,
+     "shipping_route": "Halifax → Rotterdam, ~12 days, direct sailings about weekly",
+     "shipping_source": "https://www.fluentcargo.com/routes/halifax-ca/rotterdam-nl",
+     "sources": [
+      "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+      "https://wits.worldbank.org/tariff/trains/en/country/EUN/partner/CAN/product/040900",
+      "https://ondernemersplein.overheid.nl/wetten-en-regels/regels-voor-etiketten-van-levensmiddelen/",
+      "https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/zakelijk/btw/tarieven_en_vrijstellingen/goederen_9_btw/voedingsmiddelen/",
+      "https://www.fluentcargo.com/routes/halifax-ca/rotterdam-nl",
+      "https://api.worldbank.org/v2/country/FRA;NLD;ITA;DEU/indicator/LP.LPI.CUST.XQ?format=json&date=2018:2024"
+     ],
+     "status": "open",
+     "status_note": "",
+     "tariff_note": "Duty-free under CETA. Without it, the EU tariff on natural honey is 17.3%.",
+     "tariff_rate": 0.0,
+     "tax_burden": 0.0,
+     "tax_note": "Import VAT at the Dutch 9% food rate is paid and recovered by the Dutch importer (Belastingdienst).",
+     "trade_agreement": "CETA",
+     "weekly_sailings": 0.9
+    },
+    "factors": {
+     "country_risk": 0.0,
+     "customs": 0.275,
+     "distance": 0.331,
+     "fx": 0.368,
+     "lead_time": 0.462,
+     "sailings": 0.775,
+     "tiers": 1.0
+    },
+    "lead_time_estimated": true,
+    "lead_time_weeks": 12.0,
+    "middlemen": [
+     {
+      "category": "honey",
+      "contact": "Contact via the council website",
+      "country_code": "*",
+      "description": "National body for Canada's beekeepers; publishes an exporters catalogue and tracks tariff and market-access changes for honey.",
+      "id": "chc",
+      "name": "Canadian Honey Council",
+      "source": "https://honeycouncil.ca/tariffs/",
+      "type": "Canadian industry association",
+      "website": "https://honeycouncil.ca/"
+     },
+     {
+      "category": "*",
+      "contact": "Find a trade commissioner for the target market",
+      "country_code": "*",
+      "description": "Government of Canada trade commissioners in every one of these markets help Canadian businesses find vetted local partners, at no charge.",
+      "id": "tcs",
+      "name": "Canadian Trade Commissioner Service",
+      "source": "https://www.tradecommissioner.gc.ca/en/about-us/contact-us/find-trade-commissioner.html",
+      "type": "government (free)",
+      "website": "https://www.tradecommissioner.gc.ca/en/about-us/contact-us/find-trade-commissioner.html"
+     }
+    ],
+    "opportunity": 54.58,
+    "opportunity_components": {
+     "demand": 0.655,
+     "foothold": 0.0,
+     "growth": 1.0,
+     "price": 0.666
+    },
+    "opportunity_facts": {
+     "canada_share": 0.0,
+     "canada_unit_value_usd_kg": 4.04,
+     "growth_rate": 0.1205,
+     "growth_years": "2019–2024",
+     "import_value_usd": 92323735.0,
+     "import_volume_kg": 22846446.0,
+     "net_unit_value_usd_kg": 4.04,
+     "note": "",
+     "sources": [
+      "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=528&period=2024&cmdCode=040900&flowCode=M&partnerCode=0,124",
+      "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=528&period=2019&cmdCode=040900&flowCode=M&partnerCode=0",
+      "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=124&period=2024&cmdCode=0409&flowCode=X&partnerCode=0"
+     ],
+     "unit_value_usd_kg": 4.04,
+     "year": 2024
+    },
+    "overall": 60.85,
+    "rank": 5,
+    "score": 32.17,
+    "status": "open",
+    "status_note": "",
+    "top_blocker": "compliance"
+   },
+   {
+    "breakdown": {
+     "compliance": 23.54,
+     "logistics": 6.55,
+     "risk": 2.21,
+     "tariff": 0.0,
+     "tax": 0.0
+    },
+    "components": {
+     "compliance": 0.785,
+     "logistics": 0.437,
+     "risk": 0.221,
+     "tariff": 0.0,
+     "tax": 0.0
+    },
+    "country": "France (EU)",
+    "country_code": "FR",
+    "country_facts": {
+     "as_of": "<TODAY>",
+     "country_code": "FR",
+     "country_risk": 0,
+     "country_risk_source": "https://www.oecd.org/en/topics/country-risk-classification.html",
+     "currency": "EUR",
+     "fx_note": "Annualized volatility of monthly CAD/EUR rates, Sep 2023 – Aug 2026 (Bank of Canada).",
+     "fx_source": "https://www.bankofcanada.ca/valet/observations/FXMEURCAD/csv?start_date=2023-09-01&end_date=2026-08-31",
+     "fx_volatility": 0.0368
+    },
+    "entry": {
+     "as_of": "<TODAY>",
+     "category": "honey",
+     "compliance_confidence": "verified",
+     "compliance_requirements": [
+      {
+       "confidence": "verified",
+       "detail": "The packing establishment must hold a Safe Food for Canadians licence and be on the EU's approved list for honey; request listing through the local CFIA office. Lists are updated in batches (the US FDA transmits its updates quarterly), so allow about 3 months.",
+       "lead_time_basis": "estimate",
+       "lead_time_weeks": 12.0,
+       "name": "EU honey establishment listing (DG SANTE)",
+       "source": "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+       "tier": 2
+      },
+      {
+       "confidence": "verified",
+       "detail": "A CFIA inspector or veterinarian issues the model HON certificate in the EU's TRACES system for every consignment, before it leaves Canada.",
+       "lead_time_basis": "estimate",
+       "lead_time_weeks": 1.0,
+       "name": "EU 'HON' export certificate via TRACES",
+       "source": "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+       "tier": 2
+      },
+      {
+       "confidence": "verified",
+       "detail": "Composition limits (moisture, HMF, sugars) and labelling rules, plus EU residue limits.",
+       "lead_time_basis": "estimate",
+       "lead_time_weeks": 2.0,
+       "name": "Honey Directive 2001/110/EC composition and labelling",
+       "source": "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+       "tier": 1
+      },
+      {
+       "confidence": "verified",
+       "detail": "From July 20, 2026, primary packaging may not contain bisphenol A (Regulation 2024/3190).",
+       "lead_time_basis": "estimate",
+       "lead_time_weeks": 2.0,
+       "name": "BPA-free food-contact packaging",
+       "source": "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+       "tier": 1
+      },
+      {
+       "confidence": "verified",
+       "detail": "Self-declared origin statement on the invoice to claim 0% duty.",
+       "lead_time_basis": "official",
+       "lead_time_weeks": 0.0,
+       "name": "CETA origin declaration",
+       "source": "https://www.cbsa-asfc.gc.ca/publications/dm-md/d11/d11-4-14-eng.html",
+       "tier": 1
+      },
+      {
+       "confidence": "verified",
+       "detail": "Mandatory label information must be at least in French (Loi n° 94-665 'Toubon', Art. 2; DGCCRF food-labelling rules). EU law lets member states require their language (Reg. 1169/2011, Art. 15).",
+       "lead_time_basis": "estimate",
+       "lead_time_weeks": 2.0,
+       "name": "French-language labelling",
+       "source": "https://www.economie.gouv.fr/dgccrf/les-fiches-pratiques/etiquetage-des-denrees-alimentaires-les-regles-connaitre",
+       "tier": 1
+      }
+     ],
+     "country": "France (EU)",
+     "country_code": "FR",
+     "language": "fr",
+     "lpi_customs_score": 3.7,
+     "mfn_rate": 0.173,
+     "notes": [
+      "Compliance: EU rules, same as Germany (EU import rules are harmonised), plus French-language labelling."
+     ],
+     "sea_distance_nm": 3984.0,
+     "shipping_route": "Montreal → Le Havre, ~16 days, direct sailings 1-2×/week",
+     "shipping_source": "https://www.fluentcargo.com/routes/montreal-ca/le-havre-fr",
+     "sources": [
+      "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+      "https://wits.worldbank.org/tariff/trains/en/country/EUN/partner/CAN/product/040900",
+      "https://www.economie.gouv.fr/dgccrf/les-fiches-pratiques/etiquetage-des-denrees-alimentaires-les-regles-connaitre",
+      "https://www.economie.gouv.fr/particuliers/impots-et-fiscalite/gerer-mes-autres-impots-et-taxes/tva-quels-sont-les-taux-de-votre-quotidien",
+      "https://www.fluentcargo.com/routes/montreal-ca/le-havre-fr",
+      "https://api.worldbank.org/v2/country/FRA;NLD;ITA;DEU/indicator/LP.LPI.CUST.XQ?format=json&date=2018:2024"
+     ],
+     "status": "open",
+     "status_note": "",
+     "tariff_note": "Duty-free under CETA. Without it, the EU tariff on natural honey is 17.3%.",
+     "tariff_rate": 0.0,
+     "tax_burden": 0.0,
+     "tax_note": "Import VAT at France's 5.5% food rate is paid and recovered by the French importer (economie.gouv.fr).",
+     "trade_agreement": "CETA",
+     "weekly_sailings": 1.5
+    },
+    "factors": {
+     "country_risk": 0.0,
+     "customs": 0.325,
+     "distance": 0.398,
+     "fx": 0.368,
+     "lead_time": 0.462,
+     "sailings": 0.625,
+     "tiers": 1.0
+    },
+    "lead_time_estimated": true,
+    "lead_time_weeks": 12.0,
+    "middlemen": [
+     {
+      "category": "honey",
+      "contact": "Contact via the council website",
+      "country_code": "*",
+      "description": "National body for Canada's beekeepers; publishes an exporters catalogue and tracks tariff and market-access changes for honey.",
+      "id": "chc",
+      "name": "Canadian Honey Council",
+      "source": "https://honeycouncil.ca/tariffs/",
+      "type": "Canadian industry association",
+      "website": "https://honeycouncil.ca/"
+     },
+     {
+      "category": "*",
+      "contact": "Find a trade commissioner for the target market",
+      "country_code": "*",
+      "description": "Government of Canada trade commissioners in every one of these markets help Canadian businesses find vetted local partners, at no charge.",
+      "id": "tcs",
+      "name": "Canadian Trade Commissioner Service",
+      "source": "https://www.tradecommissioner.gc.ca/en/about-us/contact-us/find-trade-commissioner.html",
+      "type": "government (free)",
+      "website": "https://www.tradecommissioner.gc.ca/en/about-us/contact-us/find-trade-commissioner.html"
+     }
+    ],
+    "opportunity": 40.36,
+    "opportunity_components": {
+     "demand": 0.681,
+     "foothold": 0.0,
+     "growth": 0.429,
+     "price": null
+    },
+    "opportunity_facts": {
+     "canada_share": 0.0,
+     "canada_unit_value_usd_kg": 4.04,
+     "growth_rate": -0.0142,
+     "growth_years": "2019–2024",
+     "import_value_usd": 110418996.0,
+     "import_volume_kg": 0.0,
+     "net_unit_value_usd_kg": 0.0,
+     "note": "No 2024 import weights reported: price data unavailable.",
+     "sources": [
+      "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=251&period=2024&cmdCode=040900&flowCode=M&partnerCode=0,124",
+      "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=251&period=2019&cmdCode=040900&flowCode=M&partnerCode=0",
+      "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=124&period=2024&cmdCode=0409&flowCode=X&partnerCode=0"
+     ],
+     "unit_value_usd_kg": 0.0,
+     "year": 2024
+    },
+    "overall": 52.27,
+    "rank": 6,
+    "score": 32.3,
+    "status": "open",
+    "status_note": "",
+    "top_blocker": "compliance"
+   },
+   {
+    "breakdown": {
+     "compliance": 23.54,
+     "logistics": 8.14,
+     "risk": 2.21,
+     "tariff": 0.0,
+     "tax": 0.0
+    },
+    "components": {
+     "compliance": 0.785,
+     "logistics": 0.543,
+     "risk": 0.221,
+     "tariff": 0.0,
+     "tax": 0.0
+    },
+    "country": "Italy (EU)",
+    "country_code": "IT",
+    "country_facts": {
+     "as_of": "<TODAY>",
+     "country_code": "IT",
+     "country_risk": 0,
+     "country_risk_source": "https://www.oecd.org/en/topics/country-risk-classification.html",
+     "currency": "EUR",
+     "fx_note": "Annualized volatility of monthly CAD/EUR rates, Sep 2023 – Aug 2026 (Bank of Canada).",
+     "fx_source": "https://www.bankofcanada.ca/valet/observations/FXMEURCAD/csv?start_date=2023-09-01&end_date=2026-08-31",
+     "fx_volatility": 0.0368
+    },
+    "entry": {
+     "as_of": "<TODAY>",
+     "category": "honey",
+     "compliance_confidence": "verified",
+     "compliance_requirements": [
+      {
+       "confidence": "verified",
+       "detail": "The packing establishment must hold a Safe Food for Canadians licence and be on the EU's approved list for honey; request listing through the local CFIA office. Lists are updated in batches (the US FDA transmits its updates quarterly), so allow about 3 months.",
+       "lead_time_basis": "estimate",
+       "lead_time_weeks": 12.0,
+       "name": "EU honey establishment listing (DG SANTE)",
+       "source": "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+       "tier": 2
+      },
+      {
+       "confidence": "verified",
+       "detail": "A CFIA inspector or veterinarian issues the model HON certificate in the EU's TRACES system for every consignment, before it leaves Canada.",
+       "lead_time_basis": "estimate",
+       "lead_time_weeks": 1.0,
+       "name": "EU 'HON' export certificate via TRACES",
+       "source": "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+       "tier": 2
+      },
+      {
+       "confidence": "verified",
+       "detail": "Composition limits (moisture, HMF, sugars) and labelling rules, plus EU residue limits.",
+       "lead_time_basis": "estimate",
+       "lead_time_weeks": 2.0,
+       "name": "Honey Directive 2001/110/EC composition and labelling",
+       "source": "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+       "tier": 1
+      },
+      {
+       "confidence": "verified",
+       "detail": "From July 20, 2026, primary packaging may not contain bisphenol A (Regulation 2024/3190).",
+       "lead_time_basis": "estimate",
+       "lead_time_weeks": 2.0,
+       "name": "BPA-free food-contact packaging",
+       "source": "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+       "tier": 1
+      },
+      {
+       "confidence": "verified",
+       "detail": "Self-declared origin statement on the invoice to claim 0% duty.",
+       "lead_time_basis": "official",
+       "lead_time_weeks": 0.0,
+       "name": "CETA origin declaration",
+       "source": "https://www.cbsa-asfc.gc.ca/publications/dm-md/d11/d11-4-14-eng.html",
+       "tier": 1
+      },
+      {
+       "confidence": "verified",
+       "detail": "Mandatory food information must be in Italian; food sold without it is a sanctioned offence (D.Lgs. 231/2017). EU law lets member states require their language (Reg. 1169/2011, Art. 15).",
+       "lead_time_basis": "estimate",
+       "lead_time_weeks": 2.0,
+       "name": "Italian-language labelling",
+       "source": "https://www.gazzettaufficiale.it/eli/id/2018/02/08/18G00023/sg",
+       "tier": 1
+      }
+     ],
+     "country": "Italy (EU)",
+     "country_code": "IT",
+     "language": "it",
+     "lpi_customs_score": 3.4,
+     "mfn_rate": 0.173,
+     "notes": [
+      "Compliance: EU rules, same as Germany (EU import rules are harmonised), plus Italian-language labelling."
+     ],
+     "sea_distance_nm": 4793.0,
+     "shipping_route": "Montreal → Genoa, ~20 days, direct sailings every 1-2 weeks",
+     "shipping_source": "https://www.fluentcargo.com/routes/montreal-ca/genoa-it",
+     "sources": [
+      "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+      "https://wits.worldbank.org/tariff/trains/en/country/EUN/partner/CAN/product/040900",
+      "https://www.gazzettaufficiale.it/eli/id/2018/02/08/18G00023/sg",
+      "https://www.agenziaentrate.gov.it/",
+      "https://www.fluentcargo.com/routes/montreal-ca/genoa-it",
+      "https://api.worldbank.org/v2/country/FRA;NLD;ITA;DEU/indicator/LP.LPI.CUST.XQ?format=json&date=2018:2024"
+     ],
+     "status": "open",
+     "status_note": "",
+     "tariff_note": "Duty-free under CETA. Without it, the EU tariff on natural honey is 17.3%.",
+     "tariff_rate": 0.0,
+     "tax_burden": 0.0,
+     "tax_note": "Import VAT at Italy's reduced food rate is paid and recovered by the Italian importer (rate not verified here: confirm with the Agenzia delle Entrate).",
+     "trade_agreement": "CETA",
+     "weekly_sailings": 0.75
+    },
+    "factors": {
+     "country_risk": 0.0,
+     "customs": 0.4,
+     "distance": 0.479,
+     "fx": 0.368,
+     "lead_time": 0.462,
+     "sailings": 0.812,
+     "tiers": 1.0
+    },
+    "lead_time_estimated": true,
+    "lead_time_weeks": 12.0,
+    "middlemen": [
+     {
+      "category": "honey",
+      "contact": "Contact via the council website",
+      "country_code": "*",
+      "description": "National body for Canada's beekeepers; publishes an exporters catalogue and tracks tariff and market-access changes for honey.",
+      "id": "chc",
+      "name": "Canadian Honey Council",
+      "source": "https://honeycouncil.ca/tariffs/",
+      "type": "Canadian industry association",
+      "website": "https://honeycouncil.ca/"
+     },
+     {
+      "category": "*",
+      "contact": "Find a trade commissioner for the target market",
+      "country_code": "*",
+      "description": "Government of Canada trade commissioners in every one of these markets help Canadian businesses find vetted local partners, at no charge.",
+      "id": "tcs",
+      "name": "Canadian Trade Commissioner Service",
+      "source": "https://www.tradecommissioner.gc.ca/en/about-us/contact-us/find-trade-commissioner.html",
+      "type": "government (free)",
+      "website": "https://www.tradecommissioner.gc.ca/en/about-us/contact-us/find-trade-commissioner.html"
+     }
+    ],
+    "opportunity": 40.3,
+    "opportunity_components": {
+     "demand": 0.616,
+     "foothold": 0.0,
+     "growth": 0.377,
+     "price": 0.523
+    },
+    "opportunity_facts": {
+     "canada_share": 0.0,
+     "canada_unit_value_usd_kg": 4.04,
+     "growth_rate": -0.0246,
+     "growth_years": "2019–2024",
+     "import_value_usd": 70494815.0,
+     "import_volume_kg": 22207910.0,
+     "net_unit_value_usd_kg": 3.17,
+     "note": "",
+     "sources": [
+      "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=380&period=2024&cmdCode=040900&flowCode=M&partnerCode=0,124",
+      "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=380&period=2019&cmdCode=040900&flowCode=M&partnerCode=0",
+      "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=124&period=2024&cmdCode=0409&flowCode=X&partnerCode=0"
+     ],
+     "unit_value_usd_kg": 3.17,
+     "year": 2024
+    },
+    "overall": 51.62,
+    "rank": 7,
+    "score": 33.89,
+    "status": "open",
+    "status_note": "",
+    "top_blocker": "compliance"
+   },
+   {
+    "breakdown": {
      "compliance": 18.63,
      "logistics": 6.54,
      "risk": 3.19,
@@ -7793,7 +8879,7 @@
      "year": 2024
     },
     "overall": 52.74,
-    "rank": 5,
+    "rank": 8,
     "score": 38.86,
     "status": "open",
     "status_note": "",
@@ -7955,7 +9041,7 @@
      "year": 2024
     },
     "overall": 56.33,
-    "rank": 6,
+    "rank": 9,
     "score": 50.7,
     "status": "open",
     "status_note": "",
@@ -8117,7 +9203,7 @@
      "year": 2024
     },
     "overall": 47.83,
-    "rank": 7,
+    "rank": 10,
     "score": 57.36,
     "status": "open",
     "status_note": "",
@@ -8196,7 +9282,7 @@
     "opportunity_components": {},
     "opportunity_facts": null,
     "overall": null,
-    "rank": 8,
+    "rank": 11,
     "score": null,
     "status": "blocked",
     "status_note": "Canada does not meet Mexico's requirements for exporting honey and apiculture products for human consumption. No CFIA certificate is currently available (CFIA).",
@@ -8554,6 +9640,187 @@
    },
    {
     "breakdown": {
+     "compliance": 23.54,
+     "logistics": 6.42,
+     "risk": 2.21,
+     "tariff": 0.0,
+     "tax": 0.0
+    },
+    "components": {
+     "compliance": 0.785,
+     "logistics": 0.428,
+     "risk": 0.221,
+     "tariff": 0.0,
+     "tax": 0.0
+    },
+    "country": "Netherlands (EU)",
+    "country_code": "NL",
+    "country_facts": {
+     "as_of": "<TODAY>",
+     "country_code": "NL",
+     "country_risk": 0,
+     "country_risk_source": "https://www.oecd.org/en/topics/country-risk-classification.html",
+     "currency": "EUR",
+     "fx_note": "Annualized volatility of monthly CAD/EUR rates, Sep 2023 – Aug 2026 (Bank of Canada).",
+     "fx_source": "https://www.bankofcanada.ca/valet/observations/FXMEURCAD/csv?start_date=2023-09-01&end_date=2026-08-31",
+     "fx_volatility": 0.0368
+    },
+    "entry": {
+     "as_of": "<TODAY>",
+     "category": "honey",
+     "compliance_confidence": "verified",
+     "compliance_requirements": [
+      {
+       "confidence": "verified",
+       "detail": "The packing establishment must hold a Safe Food for Canadians licence and be on the EU's approved list for honey; request listing through the local CFIA office. Lists are updated in batches (the US FDA transmits its updates quarterly), so allow about 3 months.",
+       "lead_time_basis": "estimate",
+       "lead_time_weeks": 12.0,
+       "name": "EU honey establishment listing (DG SANTE)",
+       "source": "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+       "tier": 2
+      },
+      {
+       "confidence": "verified",
+       "detail": "A CFIA inspector or veterinarian issues the model HON certificate in the EU's TRACES system for every consignment, before it leaves Canada.",
+       "lead_time_basis": "estimate",
+       "lead_time_weeks": 1.0,
+       "name": "EU 'HON' export certificate via TRACES",
+       "source": "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+       "tier": 2
+      },
+      {
+       "confidence": "verified",
+       "detail": "Composition limits (moisture, HMF, sugars) and labelling rules, plus EU residue limits.",
+       "lead_time_basis": "estimate",
+       "lead_time_weeks": 2.0,
+       "name": "Honey Directive 2001/110/EC composition and labelling",
+       "source": "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+       "tier": 1
+      },
+      {
+       "confidence": "verified",
+       "detail": "From July 20, 2026, primary packaging may not contain bisphenol A (Regulation 2024/3190).",
+       "lead_time_basis": "estimate",
+       "lead_time_weeks": 2.0,
+       "name": "BPA-free food-contact packaging",
+       "source": "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+       "tier": 1
+      },
+      {
+       "confidence": "verified",
+       "detail": "Self-declared origin statement on the invoice to claim 0% duty.",
+       "lead_time_basis": "official",
+       "lead_time_weeks": 0.0,
+       "name": "CETA origin declaration",
+       "source": "https://www.cbsa-asfc.gc.ca/publications/dm-md/d11/d11-4-14-eng.html",
+       "tier": 1
+      },
+      {
+       "confidence": "verified",
+       "detail": "Mandatory food information must be given in Dutch (Dutch government business portal; Warenwetbesluit informatie levensmiddelen). EU law lets member states require their language (Reg. 1169/2011, Art. 15).",
+       "lead_time_basis": "estimate",
+       "lead_time_weeks": 2.0,
+       "name": "Dutch-language labelling",
+       "source": "https://ondernemersplein.overheid.nl/wetten-en-regels/regels-voor-etiketten-van-levensmiddelen/",
+       "tier": 1
+      }
+     ],
+     "country": "Netherlands (EU)",
+     "country_code": "NL",
+     "language": "nl",
+     "lpi_customs_score": 3.9,
+     "mfn_rate": 0.173,
+     "notes": [
+      "Compliance: EU rules, same as Germany (EU import rules are harmonised), plus Dutch-language labelling."
+     ],
+     "sea_distance_nm": 3314.0,
+     "shipping_route": "Halifax → Rotterdam, ~12 days, direct sailings about weekly",
+     "shipping_source": "https://www.fluentcargo.com/routes/halifax-ca/rotterdam-nl",
+     "sources": [
+      "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+      "https://wits.worldbank.org/tariff/trains/en/country/EUN/partner/CAN/product/040900",
+      "https://ondernemersplein.overheid.nl/wetten-en-regels/regels-voor-etiketten-van-levensmiddelen/",
+      "https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/zakelijk/btw/tarieven_en_vrijstellingen/goederen_9_btw/voedingsmiddelen/",
+      "https://www.fluentcargo.com/routes/halifax-ca/rotterdam-nl",
+      "https://api.worldbank.org/v2/country/FRA;NLD;ITA;DEU/indicator/LP.LPI.CUST.XQ?format=json&date=2018:2024"
+     ],
+     "status": "open",
+     "status_note": "",
+     "tariff_note": "Duty-free under CETA. Without it, the EU tariff on natural honey is 17.3%.",
+     "tariff_rate": 0.0,
+     "tax_burden": 0.0,
+     "tax_note": "Import VAT at the Dutch 9% food rate is paid and recovered by the Dutch importer (Belastingdienst).",
+     "trade_agreement": "CETA",
+     "weekly_sailings": 0.9
+    },
+    "factors": {
+     "country_risk": 0.0,
+     "customs": 0.275,
+     "distance": 0.331,
+     "fx": 0.368,
+     "lead_time": 0.462,
+     "sailings": 0.775,
+     "tiers": 1.0
+    },
+    "lead_time_estimated": true,
+    "lead_time_weeks": 12.0,
+    "middlemen": [
+     {
+      "category": "honey",
+      "contact": "Contact via the council website",
+      "country_code": "*",
+      "description": "National body for Canada's beekeepers; publishes an exporters catalogue and tracks tariff and market-access changes for honey.",
+      "id": "chc",
+      "name": "Canadian Honey Council",
+      "source": "https://honeycouncil.ca/tariffs/",
+      "type": "Canadian industry association",
+      "website": "https://honeycouncil.ca/"
+     },
+     {
+      "category": "*",
+      "contact": "Find a trade commissioner for the target market",
+      "country_code": "*",
+      "description": "Government of Canada trade commissioners in every one of these markets help Canadian businesses find vetted local partners, at no charge.",
+      "id": "tcs",
+      "name": "Canadian Trade Commissioner Service",
+      "source": "https://www.tradecommissioner.gc.ca/en/about-us/contact-us/find-trade-commissioner.html",
+      "type": "government (free)",
+      "website": "https://www.tradecommissioner.gc.ca/en/about-us/contact-us/find-trade-commissioner.html"
+     }
+    ],
+    "opportunity": 54.58,
+    "opportunity_components": {
+     "demand": 0.655,
+     "foothold": 0.0,
+     "growth": 1.0,
+     "price": 0.666
+    },
+    "opportunity_facts": {
+     "canada_share": 0.0,
+     "canada_unit_value_usd_kg": 4.04,
+     "growth_rate": 0.1205,
+     "growth_years": "2019–2024",
+     "import_value_usd": 92323735.0,
+     "import_volume_kg": 22846446.0,
+     "net_unit_value_usd_kg": 4.04,
+     "note": "",
+     "sources": [
+      "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=528&period=2024&cmdCode=040900&flowCode=M&partnerCode=0,124",
+      "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=528&period=2019&cmdCode=040900&flowCode=M&partnerCode=0",
+      "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=124&period=2024&cmdCode=0409&flowCode=X&partnerCode=0"
+     ],
+     "unit_value_usd_kg": 4.04,
+     "year": 2024
+    },
+    "overall": 60.85,
+    "rank": 3,
+    "score": 32.17,
+    "status": "open",
+    "status_note": "",
+    "top_blocker": "compliance"
+   },
+   {
+    "breakdown": {
      "compliance": 14.42,
      "logistics": 4.6,
      "risk": 3.34,
@@ -8708,7 +9975,7 @@
      "year": 2024
     },
     "overall": 47.83,
-    "rank": 3,
+    "rank": 4,
     "score": 57.36,
     "status": "open",
     "status_note": "",
@@ -8901,7 +10168,7 @@
      "year": 2024
     },
     "overall": 57.66,
-    "rank": 4,
+    "rank": 5,
     "score": 30.2,
     "status": "open",
     "status_note": "",
@@ -9051,7 +10318,7 @@
      "year": 2024
     },
     "overall": 52.74,
-    "rank": 5,
+    "rank": 6,
     "score": 38.86,
     "status": "open",
     "status_note": "",
@@ -9226,8 +10493,370 @@
      "year": 2024
     },
     "overall": 59.38,
-    "rank": 6,
+    "rank": 7,
     "score": 15.74,
+    "status": "open",
+    "status_note": "",
+    "top_blocker": "compliance"
+   },
+   {
+    "breakdown": {
+     "compliance": 23.54,
+     "logistics": 6.55,
+     "risk": 2.21,
+     "tariff": 0.0,
+     "tax": 0.0
+    },
+    "components": {
+     "compliance": 0.785,
+     "logistics": 0.437,
+     "risk": 0.221,
+     "tariff": 0.0,
+     "tax": 0.0
+    },
+    "country": "France (EU)",
+    "country_code": "FR",
+    "country_facts": {
+     "as_of": "<TODAY>",
+     "country_code": "FR",
+     "country_risk": 0,
+     "country_risk_source": "https://www.oecd.org/en/topics/country-risk-classification.html",
+     "currency": "EUR",
+     "fx_note": "Annualized volatility of monthly CAD/EUR rates, Sep 2023 – Aug 2026 (Bank of Canada).",
+     "fx_source": "https://www.bankofcanada.ca/valet/observations/FXMEURCAD/csv?start_date=2023-09-01&end_date=2026-08-31",
+     "fx_volatility": 0.0368
+    },
+    "entry": {
+     "as_of": "<TODAY>",
+     "category": "honey",
+     "compliance_confidence": "verified",
+     "compliance_requirements": [
+      {
+       "confidence": "verified",
+       "detail": "The packing establishment must hold a Safe Food for Canadians licence and be on the EU's approved list for honey; request listing through the local CFIA office. Lists are updated in batches (the US FDA transmits its updates quarterly), so allow about 3 months.",
+       "lead_time_basis": "estimate",
+       "lead_time_weeks": 12.0,
+       "name": "EU honey establishment listing (DG SANTE)",
+       "source": "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+       "tier": 2
+      },
+      {
+       "confidence": "verified",
+       "detail": "A CFIA inspector or veterinarian issues the model HON certificate in the EU's TRACES system for every consignment, before it leaves Canada.",
+       "lead_time_basis": "estimate",
+       "lead_time_weeks": 1.0,
+       "name": "EU 'HON' export certificate via TRACES",
+       "source": "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+       "tier": 2
+      },
+      {
+       "confidence": "verified",
+       "detail": "Composition limits (moisture, HMF, sugars) and labelling rules, plus EU residue limits.",
+       "lead_time_basis": "estimate",
+       "lead_time_weeks": 2.0,
+       "name": "Honey Directive 2001/110/EC composition and labelling",
+       "source": "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+       "tier": 1
+      },
+      {
+       "confidence": "verified",
+       "detail": "From July 20, 2026, primary packaging may not contain bisphenol A (Regulation 2024/3190).",
+       "lead_time_basis": "estimate",
+       "lead_time_weeks": 2.0,
+       "name": "BPA-free food-contact packaging",
+       "source": "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+       "tier": 1
+      },
+      {
+       "confidence": "verified",
+       "detail": "Self-declared origin statement on the invoice to claim 0% duty.",
+       "lead_time_basis": "official",
+       "lead_time_weeks": 0.0,
+       "name": "CETA origin declaration",
+       "source": "https://www.cbsa-asfc.gc.ca/publications/dm-md/d11/d11-4-14-eng.html",
+       "tier": 1
+      },
+      {
+       "confidence": "verified",
+       "detail": "Mandatory label information must be at least in French (Loi n° 94-665 'Toubon', Art. 2; DGCCRF food-labelling rules). EU law lets member states require their language (Reg. 1169/2011, Art. 15).",
+       "lead_time_basis": "estimate",
+       "lead_time_weeks": 2.0,
+       "name": "French-language labelling",
+       "source": "https://www.economie.gouv.fr/dgccrf/les-fiches-pratiques/etiquetage-des-denrees-alimentaires-les-regles-connaitre",
+       "tier": 1
+      }
+     ],
+     "country": "France (EU)",
+     "country_code": "FR",
+     "language": "fr",
+     "lpi_customs_score": 3.7,
+     "mfn_rate": 0.173,
+     "notes": [
+      "Compliance: EU rules, same as Germany (EU import rules are harmonised), plus French-language labelling."
+     ],
+     "sea_distance_nm": 3984.0,
+     "shipping_route": "Montreal → Le Havre, ~16 days, direct sailings 1-2×/week",
+     "shipping_source": "https://www.fluentcargo.com/routes/montreal-ca/le-havre-fr",
+     "sources": [
+      "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+      "https://wits.worldbank.org/tariff/trains/en/country/EUN/partner/CAN/product/040900",
+      "https://www.economie.gouv.fr/dgccrf/les-fiches-pratiques/etiquetage-des-denrees-alimentaires-les-regles-connaitre",
+      "https://www.economie.gouv.fr/particuliers/impots-et-fiscalite/gerer-mes-autres-impots-et-taxes/tva-quels-sont-les-taux-de-votre-quotidien",
+      "https://www.fluentcargo.com/routes/montreal-ca/le-havre-fr",
+      "https://api.worldbank.org/v2/country/FRA;NLD;ITA;DEU/indicator/LP.LPI.CUST.XQ?format=json&date=2018:2024"
+     ],
+     "status": "open",
+     "status_note": "",
+     "tariff_note": "Duty-free under CETA. Without it, the EU tariff on natural honey is 17.3%.",
+     "tariff_rate": 0.0,
+     "tax_burden": 0.0,
+     "tax_note": "Import VAT at France's 5.5% food rate is paid and recovered by the French importer (economie.gouv.fr).",
+     "trade_agreement": "CETA",
+     "weekly_sailings": 1.5
+    },
+    "factors": {
+     "country_risk": 0.0,
+     "customs": 0.325,
+     "distance": 0.398,
+     "fx": 0.368,
+     "lead_time": 0.462,
+     "sailings": 0.625,
+     "tiers": 1.0
+    },
+    "lead_time_estimated": true,
+    "lead_time_weeks": 12.0,
+    "middlemen": [
+     {
+      "category": "honey",
+      "contact": "Contact via the council website",
+      "country_code": "*",
+      "description": "National body for Canada's beekeepers; publishes an exporters catalogue and tracks tariff and market-access changes for honey.",
+      "id": "chc",
+      "name": "Canadian Honey Council",
+      "source": "https://honeycouncil.ca/tariffs/",
+      "type": "Canadian industry association",
+      "website": "https://honeycouncil.ca/"
+     },
+     {
+      "category": "*",
+      "contact": "Find a trade commissioner for the target market",
+      "country_code": "*",
+      "description": "Government of Canada trade commissioners in every one of these markets help Canadian businesses find vetted local partners, at no charge.",
+      "id": "tcs",
+      "name": "Canadian Trade Commissioner Service",
+      "source": "https://www.tradecommissioner.gc.ca/en/about-us/contact-us/find-trade-commissioner.html",
+      "type": "government (free)",
+      "website": "https://www.tradecommissioner.gc.ca/en/about-us/contact-us/find-trade-commissioner.html"
+     }
+    ],
+    "opportunity": 40.36,
+    "opportunity_components": {
+     "demand": 0.681,
+     "foothold": 0.0,
+     "growth": 0.429,
+     "price": null
+    },
+    "opportunity_facts": {
+     "canada_share": 0.0,
+     "canada_unit_value_usd_kg": 4.04,
+     "growth_rate": -0.0142,
+     "growth_years": "2019–2024",
+     "import_value_usd": 110418996.0,
+     "import_volume_kg": 0.0,
+     "net_unit_value_usd_kg": 0.0,
+     "note": "No 2024 import weights reported: price data unavailable.",
+     "sources": [
+      "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=251&period=2024&cmdCode=040900&flowCode=M&partnerCode=0,124",
+      "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=251&period=2019&cmdCode=040900&flowCode=M&partnerCode=0",
+      "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=124&period=2024&cmdCode=0409&flowCode=X&partnerCode=0"
+     ],
+     "unit_value_usd_kg": 0.0,
+     "year": 2024
+    },
+    "overall": 52.27,
+    "rank": 8,
+    "score": 32.3,
+    "status": "open",
+    "status_note": "",
+    "top_blocker": "compliance"
+   },
+   {
+    "breakdown": {
+     "compliance": 23.54,
+     "logistics": 8.14,
+     "risk": 2.21,
+     "tariff": 0.0,
+     "tax": 0.0
+    },
+    "components": {
+     "compliance": 0.785,
+     "logistics": 0.543,
+     "risk": 0.221,
+     "tariff": 0.0,
+     "tax": 0.0
+    },
+    "country": "Italy (EU)",
+    "country_code": "IT",
+    "country_facts": {
+     "as_of": "<TODAY>",
+     "country_code": "IT",
+     "country_risk": 0,
+     "country_risk_source": "https://www.oecd.org/en/topics/country-risk-classification.html",
+     "currency": "EUR",
+     "fx_note": "Annualized volatility of monthly CAD/EUR rates, Sep 2023 – Aug 2026 (Bank of Canada).",
+     "fx_source": "https://www.bankofcanada.ca/valet/observations/FXMEURCAD/csv?start_date=2023-09-01&end_date=2026-08-31",
+     "fx_volatility": 0.0368
+    },
+    "entry": {
+     "as_of": "<TODAY>",
+     "category": "honey",
+     "compliance_confidence": "verified",
+     "compliance_requirements": [
+      {
+       "confidence": "verified",
+       "detail": "The packing establishment must hold a Safe Food for Canadians licence and be on the EU's approved list for honey; request listing through the local CFIA office. Lists are updated in batches (the US FDA transmits its updates quarterly), so allow about 3 months.",
+       "lead_time_basis": "estimate",
+       "lead_time_weeks": 12.0,
+       "name": "EU honey establishment listing (DG SANTE)",
+       "source": "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+       "tier": 2
+      },
+      {
+       "confidence": "verified",
+       "detail": "A CFIA inspector or veterinarian issues the model HON certificate in the EU's TRACES system for every consignment, before it leaves Canada.",
+       "lead_time_basis": "estimate",
+       "lead_time_weeks": 1.0,
+       "name": "EU 'HON' export certificate via TRACES",
+       "source": "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+       "tier": 2
+      },
+      {
+       "confidence": "verified",
+       "detail": "Composition limits (moisture, HMF, sugars) and labelling rules, plus EU residue limits.",
+       "lead_time_basis": "estimate",
+       "lead_time_weeks": 2.0,
+       "name": "Honey Directive 2001/110/EC composition and labelling",
+       "source": "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+       "tier": 1
+      },
+      {
+       "confidence": "verified",
+       "detail": "From July 20, 2026, primary packaging may not contain bisphenol A (Regulation 2024/3190).",
+       "lead_time_basis": "estimate",
+       "lead_time_weeks": 2.0,
+       "name": "BPA-free food-contact packaging",
+       "source": "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+       "tier": 1
+      },
+      {
+       "confidence": "verified",
+       "detail": "Self-declared origin statement on the invoice to claim 0% duty.",
+       "lead_time_basis": "official",
+       "lead_time_weeks": 0.0,
+       "name": "CETA origin declaration",
+       "source": "https://www.cbsa-asfc.gc.ca/publications/dm-md/d11/d11-4-14-eng.html",
+       "tier": 1
+      },
+      {
+       "confidence": "verified",
+       "detail": "Mandatory food information must be in Italian; food sold without it is a sanctioned offence (D.Lgs. 231/2017). EU law lets member states require their language (Reg. 1169/2011, Art. 15).",
+       "lead_time_basis": "estimate",
+       "lead_time_weeks": 2.0,
+       "name": "Italian-language labelling",
+       "source": "https://www.gazzettaufficiale.it/eli/id/2018/02/08/18G00023/sg",
+       "tier": 1
+      }
+     ],
+     "country": "Italy (EU)",
+     "country_code": "IT",
+     "language": "it",
+     "lpi_customs_score": 3.4,
+     "mfn_rate": 0.173,
+     "notes": [
+      "Compliance: EU rules, same as Germany (EU import rules are harmonised), plus Italian-language labelling."
+     ],
+     "sea_distance_nm": 4793.0,
+     "shipping_route": "Montreal → Genoa, ~20 days, direct sailings every 1-2 weeks",
+     "shipping_source": "https://www.fluentcargo.com/routes/montreal-ca/genoa-it",
+     "sources": [
+      "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+      "https://wits.worldbank.org/tariff/trains/en/country/EUN/partner/CAN/product/040900",
+      "https://www.gazzettaufficiale.it/eli/id/2018/02/08/18G00023/sg",
+      "https://www.agenziaentrate.gov.it/",
+      "https://www.fluentcargo.com/routes/montreal-ca/genoa-it",
+      "https://api.worldbank.org/v2/country/FRA;NLD;ITA;DEU/indicator/LP.LPI.CUST.XQ?format=json&date=2018:2024"
+     ],
+     "status": "open",
+     "status_note": "",
+     "tariff_note": "Duty-free under CETA. Without it, the EU tariff on natural honey is 17.3%.",
+     "tariff_rate": 0.0,
+     "tax_burden": 0.0,
+     "tax_note": "Import VAT at Italy's reduced food rate is paid and recovered by the Italian importer (rate not verified here: confirm with the Agenzia delle Entrate).",
+     "trade_agreement": "CETA",
+     "weekly_sailings": 0.75
+    },
+    "factors": {
+     "country_risk": 0.0,
+     "customs": 0.4,
+     "distance": 0.479,
+     "fx": 0.368,
+     "lead_time": 0.462,
+     "sailings": 0.812,
+     "tiers": 1.0
+    },
+    "lead_time_estimated": true,
+    "lead_time_weeks": 12.0,
+    "middlemen": [
+     {
+      "category": "honey",
+      "contact": "Contact via the council website",
+      "country_code": "*",
+      "description": "National body for Canada's beekeepers; publishes an exporters catalogue and tracks tariff and market-access changes for honey.",
+      "id": "chc",
+      "name": "Canadian Honey Council",
+      "source": "https://honeycouncil.ca/tariffs/",
+      "type": "Canadian industry association",
+      "website": "https://honeycouncil.ca/"
+     },
+     {
+      "category": "*",
+      "contact": "Find a trade commissioner for the target market",
+      "country_code": "*",
+      "description": "Government of Canada trade commissioners in every one of these markets help Canadian businesses find vetted local partners, at no charge.",
+      "id": "tcs",
+      "name": "Canadian Trade Commissioner Service",
+      "source": "https://www.tradecommissioner.gc.ca/en/about-us/contact-us/find-trade-commissioner.html",
+      "type": "government (free)",
+      "website": "https://www.tradecommissioner.gc.ca/en/about-us/contact-us/find-trade-commissioner.html"
+     }
+    ],
+    "opportunity": 40.3,
+    "opportunity_components": {
+     "demand": 0.616,
+     "foothold": 0.0,
+     "growth": 0.377,
+     "price": 0.523
+    },
+    "opportunity_facts": {
+     "canada_share": 0.0,
+     "canada_unit_value_usd_kg": 4.04,
+     "growth_rate": -0.0246,
+     "growth_years": "2019–2024",
+     "import_value_usd": 70494815.0,
+     "import_volume_kg": 22207910.0,
+     "net_unit_value_usd_kg": 3.17,
+     "note": "",
+     "sources": [
+      "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=380&period=2024&cmdCode=040900&flowCode=M&partnerCode=0,124",
+      "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=380&period=2019&cmdCode=040900&flowCode=M&partnerCode=0",
+      "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=124&period=2024&cmdCode=0409&flowCode=X&partnerCode=0"
+     ],
+     "unit_value_usd_kg": 3.17,
+     "year": 2024
+    },
+    "overall": 51.62,
+    "rank": 9,
+    "score": 33.89,
     "status": "open",
     "status_note": "",
     "top_blocker": "compliance"
@@ -9379,7 +11008,7 @@
      "year": 2024
     },
     "overall": 55.84,
-    "rank": 7,
+    "rank": 10,
     "score": 21.75,
     "status": "open",
     "status_note": "",
@@ -9458,7 +11087,7 @@
     "opportunity_components": {},
     "opportunity_facts": null,
     "overall": null,
-    "rank": 8,
+    "rank": 11,
     "score": null,
     "status": "blocked",
     "status_note": "Canada does not meet Mexico's requirements for exporting honey and apiculture products for human consumption. No CFIA certificate is currently available (CFIA).",
@@ -9661,6 +11290,187 @@
      "tax": 0.0
     },
     "components": {
+     "compliance": 0.785,
+     "logistics": 0.428,
+     "risk": 0.221,
+     "tariff": 0.0,
+     "tax": 0.0
+    },
+    "country": "Netherlands (EU)",
+    "country_code": "NL",
+    "country_facts": {
+     "as_of": "<TODAY>",
+     "country_code": "NL",
+     "country_risk": 0,
+     "country_risk_source": "https://www.oecd.org/en/topics/country-risk-classification.html",
+     "currency": "EUR",
+     "fx_note": "Annualized volatility of monthly CAD/EUR rates, Sep 2023 – Aug 2026 (Bank of Canada).",
+     "fx_source": "https://www.bankofcanada.ca/valet/observations/FXMEURCAD/csv?start_date=2023-09-01&end_date=2026-08-31",
+     "fx_volatility": 0.0368
+    },
+    "entry": {
+     "as_of": "<TODAY>",
+     "category": "honey",
+     "compliance_confidence": "verified",
+     "compliance_requirements": [
+      {
+       "confidence": "verified",
+       "detail": "The packing establishment must hold a Safe Food for Canadians licence and be on the EU's approved list for honey; request listing through the local CFIA office. Lists are updated in batches (the US FDA transmits its updates quarterly), so allow about 3 months.",
+       "lead_time_basis": "estimate",
+       "lead_time_weeks": 12.0,
+       "name": "EU honey establishment listing (DG SANTE)",
+       "source": "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+       "tier": 2
+      },
+      {
+       "confidence": "verified",
+       "detail": "A CFIA inspector or veterinarian issues the model HON certificate in the EU's TRACES system for every consignment, before it leaves Canada.",
+       "lead_time_basis": "estimate",
+       "lead_time_weeks": 1.0,
+       "name": "EU 'HON' export certificate via TRACES",
+       "source": "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+       "tier": 2
+      },
+      {
+       "confidence": "verified",
+       "detail": "Composition limits (moisture, HMF, sugars) and labelling rules, plus EU residue limits.",
+       "lead_time_basis": "estimate",
+       "lead_time_weeks": 2.0,
+       "name": "Honey Directive 2001/110/EC composition and labelling",
+       "source": "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+       "tier": 1
+      },
+      {
+       "confidence": "verified",
+       "detail": "From July 20, 2026, primary packaging may not contain bisphenol A (Regulation 2024/3190).",
+       "lead_time_basis": "estimate",
+       "lead_time_weeks": 2.0,
+       "name": "BPA-free food-contact packaging",
+       "source": "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+       "tier": 1
+      },
+      {
+       "confidence": "verified",
+       "detail": "Self-declared origin statement on the invoice to claim 0% duty.",
+       "lead_time_basis": "official",
+       "lead_time_weeks": 0.0,
+       "name": "CETA origin declaration",
+       "source": "https://www.cbsa-asfc.gc.ca/publications/dm-md/d11/d11-4-14-eng.html",
+       "tier": 1
+      },
+      {
+       "confidence": "verified",
+       "detail": "Mandatory food information must be given in Dutch (Dutch government business portal; Warenwetbesluit informatie levensmiddelen). EU law lets member states require their language (Reg. 1169/2011, Art. 15).",
+       "lead_time_basis": "estimate",
+       "lead_time_weeks": 2.0,
+       "name": "Dutch-language labelling",
+       "source": "https://ondernemersplein.overheid.nl/wetten-en-regels/regels-voor-etiketten-van-levensmiddelen/",
+       "tier": 1
+      }
+     ],
+     "country": "Netherlands (EU)",
+     "country_code": "NL",
+     "language": "nl",
+     "lpi_customs_score": 3.9,
+     "mfn_rate": 0.173,
+     "notes": [
+      "Compliance: EU rules, same as Germany (EU import rules are harmonised), plus Dutch-language labelling."
+     ],
+     "sea_distance_nm": 3314.0,
+     "shipping_route": "Halifax → Rotterdam, ~12 days, direct sailings about weekly",
+     "shipping_source": "https://www.fluentcargo.com/routes/halifax-ca/rotterdam-nl",
+     "sources": [
+      "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+      "https://wits.worldbank.org/tariff/trains/en/country/EUN/partner/CAN/product/040900",
+      "https://ondernemersplein.overheid.nl/wetten-en-regels/regels-voor-etiketten-van-levensmiddelen/",
+      "https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/zakelijk/btw/tarieven_en_vrijstellingen/goederen_9_btw/voedingsmiddelen/",
+      "https://www.fluentcargo.com/routes/halifax-ca/rotterdam-nl",
+      "https://api.worldbank.org/v2/country/FRA;NLD;ITA;DEU/indicator/LP.LPI.CUST.XQ?format=json&date=2018:2024"
+     ],
+     "status": "open",
+     "status_note": "",
+     "tariff_note": "Duty-free under CETA. Without it, the EU tariff on natural honey is 17.3%.",
+     "tariff_rate": 0.0,
+     "tax_burden": 0.0,
+     "tax_note": "Import VAT at the Dutch 9% food rate is paid and recovered by the Dutch importer (Belastingdienst).",
+     "trade_agreement": "CETA",
+     "weekly_sailings": 0.9
+    },
+    "factors": {
+     "country_risk": 0.0,
+     "customs": 0.275,
+     "distance": 0.331,
+     "fx": 0.368,
+     "lead_time": 0.462,
+     "sailings": 0.775,
+     "tiers": 1.0
+    },
+    "lead_time_estimated": true,
+    "lead_time_weeks": 12.0,
+    "middlemen": [
+     {
+      "category": "honey",
+      "contact": "Contact via the council website",
+      "country_code": "*",
+      "description": "National body for Canada's beekeepers; publishes an exporters catalogue and tracks tariff and market-access changes for honey.",
+      "id": "chc",
+      "name": "Canadian Honey Council",
+      "source": "https://honeycouncil.ca/tariffs/",
+      "type": "Canadian industry association",
+      "website": "https://honeycouncil.ca/"
+     },
+     {
+      "category": "*",
+      "contact": "Find a trade commissioner for the target market",
+      "country_code": "*",
+      "description": "Government of Canada trade commissioners in every one of these markets help Canadian businesses find vetted local partners, at no charge.",
+      "id": "tcs",
+      "name": "Canadian Trade Commissioner Service",
+      "source": "https://www.tradecommissioner.gc.ca/en/about-us/contact-us/find-trade-commissioner.html",
+      "type": "government (free)",
+      "website": "https://www.tradecommissioner.gc.ca/en/about-us/contact-us/find-trade-commissioner.html"
+     }
+    ],
+    "opportunity": 54.58,
+    "opportunity_components": {
+     "demand": 0.655,
+     "foothold": 0.0,
+     "growth": 1.0,
+     "price": 0.666
+    },
+    "opportunity_facts": {
+     "canada_share": 0.0,
+     "canada_unit_value_usd_kg": 4.04,
+     "growth_rate": 0.1205,
+     "growth_years": "2019–2024",
+     "import_value_usd": 92323735.0,
+     "import_volume_kg": 22846446.0,
+     "net_unit_value_usd_kg": 4.04,
+     "note": "",
+     "sources": [
+      "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=528&period=2024&cmdCode=040900&flowCode=M&partnerCode=0,124",
+      "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=528&period=2019&cmdCode=040900&flowCode=M&partnerCode=0",
+      "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=124&period=2024&cmdCode=0409&flowCode=X&partnerCode=0"
+     ],
+     "unit_value_usd_kg": 4.04,
+     "year": 2024
+    },
+    "overall": 73.88,
+    "rank": 2,
+    "score": 0.0,
+    "status": "open",
+    "status_note": "",
+    "top_blocker": null
+   },
+   {
+    "breakdown": {
+     "compliance": 0.0,
+     "logistics": 0.0,
+     "risk": 0.0,
+     "tariff": 0.0,
+     "tax": 0.0
+    },
+    "components": {
      "compliance": 0.71,
      "logistics": 0.447,
      "risk": 0.221,
@@ -9839,7 +11649,7 @@
      "year": 2024
     },
     "overall": 69.01,
-    "rank": 2,
+    "rank": 3,
     "score": 0.0,
     "status": "open",
     "status_note": "",
@@ -10014,7 +11824,369 @@
      "year": 2024
     },
     "overall": 64.69,
-    "rank": 3,
+    "rank": 4,
+    "score": 0.0,
+    "status": "open",
+    "status_note": "",
+    "top_blocker": null
+   },
+   {
+    "breakdown": {
+     "compliance": 0.0,
+     "logistics": 0.0,
+     "risk": 0.0,
+     "tariff": 0.0,
+     "tax": 0.0
+    },
+    "components": {
+     "compliance": 0.785,
+     "logistics": 0.437,
+     "risk": 0.221,
+     "tariff": 0.0,
+     "tax": 0.0
+    },
+    "country": "France (EU)",
+    "country_code": "FR",
+    "country_facts": {
+     "as_of": "<TODAY>",
+     "country_code": "FR",
+     "country_risk": 0,
+     "country_risk_source": "https://www.oecd.org/en/topics/country-risk-classification.html",
+     "currency": "EUR",
+     "fx_note": "Annualized volatility of monthly CAD/EUR rates, Sep 2023 – Aug 2026 (Bank of Canada).",
+     "fx_source": "https://www.bankofcanada.ca/valet/observations/FXMEURCAD/csv?start_date=2023-09-01&end_date=2026-08-31",
+     "fx_volatility": 0.0368
+    },
+    "entry": {
+     "as_of": "<TODAY>",
+     "category": "honey",
+     "compliance_confidence": "verified",
+     "compliance_requirements": [
+      {
+       "confidence": "verified",
+       "detail": "The packing establishment must hold a Safe Food for Canadians licence and be on the EU's approved list for honey; request listing through the local CFIA office. Lists are updated in batches (the US FDA transmits its updates quarterly), so allow about 3 months.",
+       "lead_time_basis": "estimate",
+       "lead_time_weeks": 12.0,
+       "name": "EU honey establishment listing (DG SANTE)",
+       "source": "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+       "tier": 2
+      },
+      {
+       "confidence": "verified",
+       "detail": "A CFIA inspector or veterinarian issues the model HON certificate in the EU's TRACES system for every consignment, before it leaves Canada.",
+       "lead_time_basis": "estimate",
+       "lead_time_weeks": 1.0,
+       "name": "EU 'HON' export certificate via TRACES",
+       "source": "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+       "tier": 2
+      },
+      {
+       "confidence": "verified",
+       "detail": "Composition limits (moisture, HMF, sugars) and labelling rules, plus EU residue limits.",
+       "lead_time_basis": "estimate",
+       "lead_time_weeks": 2.0,
+       "name": "Honey Directive 2001/110/EC composition and labelling",
+       "source": "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+       "tier": 1
+      },
+      {
+       "confidence": "verified",
+       "detail": "From July 20, 2026, primary packaging may not contain bisphenol A (Regulation 2024/3190).",
+       "lead_time_basis": "estimate",
+       "lead_time_weeks": 2.0,
+       "name": "BPA-free food-contact packaging",
+       "source": "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+       "tier": 1
+      },
+      {
+       "confidence": "verified",
+       "detail": "Self-declared origin statement on the invoice to claim 0% duty.",
+       "lead_time_basis": "official",
+       "lead_time_weeks": 0.0,
+       "name": "CETA origin declaration",
+       "source": "https://www.cbsa-asfc.gc.ca/publications/dm-md/d11/d11-4-14-eng.html",
+       "tier": 1
+      },
+      {
+       "confidence": "verified",
+       "detail": "Mandatory label information must be at least in French (Loi n° 94-665 'Toubon', Art. 2; DGCCRF food-labelling rules). EU law lets member states require their language (Reg. 1169/2011, Art. 15).",
+       "lead_time_basis": "estimate",
+       "lead_time_weeks": 2.0,
+       "name": "French-language labelling",
+       "source": "https://www.economie.gouv.fr/dgccrf/les-fiches-pratiques/etiquetage-des-denrees-alimentaires-les-regles-connaitre",
+       "tier": 1
+      }
+     ],
+     "country": "France (EU)",
+     "country_code": "FR",
+     "language": "fr",
+     "lpi_customs_score": 3.7,
+     "mfn_rate": 0.173,
+     "notes": [
+      "Compliance: EU rules, same as Germany (EU import rules are harmonised), plus French-language labelling."
+     ],
+     "sea_distance_nm": 3984.0,
+     "shipping_route": "Montreal → Le Havre, ~16 days, direct sailings 1-2×/week",
+     "shipping_source": "https://www.fluentcargo.com/routes/montreal-ca/le-havre-fr",
+     "sources": [
+      "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+      "https://wits.worldbank.org/tariff/trains/en/country/EUN/partner/CAN/product/040900",
+      "https://www.economie.gouv.fr/dgccrf/les-fiches-pratiques/etiquetage-des-denrees-alimentaires-les-regles-connaitre",
+      "https://www.economie.gouv.fr/particuliers/impots-et-fiscalite/gerer-mes-autres-impots-et-taxes/tva-quels-sont-les-taux-de-votre-quotidien",
+      "https://www.fluentcargo.com/routes/montreal-ca/le-havre-fr",
+      "https://api.worldbank.org/v2/country/FRA;NLD;ITA;DEU/indicator/LP.LPI.CUST.XQ?format=json&date=2018:2024"
+     ],
+     "status": "open",
+     "status_note": "",
+     "tariff_note": "Duty-free under CETA. Without it, the EU tariff on natural honey is 17.3%.",
+     "tariff_rate": 0.0,
+     "tax_burden": 0.0,
+     "tax_note": "Import VAT at France's 5.5% food rate is paid and recovered by the French importer (economie.gouv.fr).",
+     "trade_agreement": "CETA",
+     "weekly_sailings": 1.5
+    },
+    "factors": {
+     "country_risk": 0.0,
+     "customs": 0.325,
+     "distance": 0.398,
+     "fx": 0.368,
+     "lead_time": 0.462,
+     "sailings": 0.625,
+     "tiers": 1.0
+    },
+    "lead_time_estimated": true,
+    "lead_time_weeks": 12.0,
+    "middlemen": [
+     {
+      "category": "honey",
+      "contact": "Contact via the council website",
+      "country_code": "*",
+      "description": "National body for Canada's beekeepers; publishes an exporters catalogue and tracks tariff and market-access changes for honey.",
+      "id": "chc",
+      "name": "Canadian Honey Council",
+      "source": "https://honeycouncil.ca/tariffs/",
+      "type": "Canadian industry association",
+      "website": "https://honeycouncil.ca/"
+     },
+     {
+      "category": "*",
+      "contact": "Find a trade commissioner for the target market",
+      "country_code": "*",
+      "description": "Government of Canada trade commissioners in every one of these markets help Canadian businesses find vetted local partners, at no charge.",
+      "id": "tcs",
+      "name": "Canadian Trade Commissioner Service",
+      "source": "https://www.tradecommissioner.gc.ca/en/about-us/contact-us/find-trade-commissioner.html",
+      "type": "government (free)",
+      "website": "https://www.tradecommissioner.gc.ca/en/about-us/contact-us/find-trade-commissioner.html"
+     }
+    ],
+    "opportunity": 40.36,
+    "opportunity_components": {
+     "demand": 0.681,
+     "foothold": 0.0,
+     "growth": 0.429,
+     "price": null
+    },
+    "opportunity_facts": {
+     "canada_share": 0.0,
+     "canada_unit_value_usd_kg": 4.04,
+     "growth_rate": -0.0142,
+     "growth_years": "2019–2024",
+     "import_value_usd": 110418996.0,
+     "import_volume_kg": 0.0,
+     "net_unit_value_usd_kg": 0.0,
+     "note": "No 2024 import weights reported: price data unavailable.",
+     "sources": [
+      "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=251&period=2024&cmdCode=040900&flowCode=M&partnerCode=0,124",
+      "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=251&period=2019&cmdCode=040900&flowCode=M&partnerCode=0",
+      "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=124&period=2024&cmdCode=0409&flowCode=X&partnerCode=0"
+     ],
+     "unit_value_usd_kg": 0.0,
+     "year": 2024
+    },
+    "overall": 63.53,
+    "rank": 5,
+    "score": 0.0,
+    "status": "open",
+    "status_note": "",
+    "top_blocker": null
+   },
+   {
+    "breakdown": {
+     "compliance": 0.0,
+     "logistics": 0.0,
+     "risk": 0.0,
+     "tariff": 0.0,
+     "tax": 0.0
+    },
+    "components": {
+     "compliance": 0.785,
+     "logistics": 0.543,
+     "risk": 0.221,
+     "tariff": 0.0,
+     "tax": 0.0
+    },
+    "country": "Italy (EU)",
+    "country_code": "IT",
+    "country_facts": {
+     "as_of": "<TODAY>",
+     "country_code": "IT",
+     "country_risk": 0,
+     "country_risk_source": "https://www.oecd.org/en/topics/country-risk-classification.html",
+     "currency": "EUR",
+     "fx_note": "Annualized volatility of monthly CAD/EUR rates, Sep 2023 – Aug 2026 (Bank of Canada).",
+     "fx_source": "https://www.bankofcanada.ca/valet/observations/FXMEURCAD/csv?start_date=2023-09-01&end_date=2026-08-31",
+     "fx_volatility": 0.0368
+    },
+    "entry": {
+     "as_of": "<TODAY>",
+     "category": "honey",
+     "compliance_confidence": "verified",
+     "compliance_requirements": [
+      {
+       "confidence": "verified",
+       "detail": "The packing establishment must hold a Safe Food for Canadians licence and be on the EU's approved list for honey; request listing through the local CFIA office. Lists are updated in batches (the US FDA transmits its updates quarterly), so allow about 3 months.",
+       "lead_time_basis": "estimate",
+       "lead_time_weeks": 12.0,
+       "name": "EU honey establishment listing (DG SANTE)",
+       "source": "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+       "tier": 2
+      },
+      {
+       "confidence": "verified",
+       "detail": "A CFIA inspector or veterinarian issues the model HON certificate in the EU's TRACES system for every consignment, before it leaves Canada.",
+       "lead_time_basis": "estimate",
+       "lead_time_weeks": 1.0,
+       "name": "EU 'HON' export certificate via TRACES",
+       "source": "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+       "tier": 2
+      },
+      {
+       "confidence": "verified",
+       "detail": "Composition limits (moisture, HMF, sugars) and labelling rules, plus EU residue limits.",
+       "lead_time_basis": "estimate",
+       "lead_time_weeks": 2.0,
+       "name": "Honey Directive 2001/110/EC composition and labelling",
+       "source": "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+       "tier": 1
+      },
+      {
+       "confidence": "verified",
+       "detail": "From July 20, 2026, primary packaging may not contain bisphenol A (Regulation 2024/3190).",
+       "lead_time_basis": "estimate",
+       "lead_time_weeks": 2.0,
+       "name": "BPA-free food-contact packaging",
+       "source": "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+       "tier": 1
+      },
+      {
+       "confidence": "verified",
+       "detail": "Self-declared origin statement on the invoice to claim 0% duty.",
+       "lead_time_basis": "official",
+       "lead_time_weeks": 0.0,
+       "name": "CETA origin declaration",
+       "source": "https://www.cbsa-asfc.gc.ca/publications/dm-md/d11/d11-4-14-eng.html",
+       "tier": 1
+      },
+      {
+       "confidence": "verified",
+       "detail": "Mandatory food information must be in Italian; food sold without it is a sanctioned offence (D.Lgs. 231/2017). EU law lets member states require their language (Reg. 1169/2011, Art. 15).",
+       "lead_time_basis": "estimate",
+       "lead_time_weeks": 2.0,
+       "name": "Italian-language labelling",
+       "source": "https://www.gazzettaufficiale.it/eli/id/2018/02/08/18G00023/sg",
+       "tier": 1
+      }
+     ],
+     "country": "Italy (EU)",
+     "country_code": "IT",
+     "language": "it",
+     "lpi_customs_score": 3.4,
+     "mfn_rate": 0.173,
+     "notes": [
+      "Compliance: EU rules, same as Germany (EU import rules are harmonised), plus Italian-language labelling."
+     ],
+     "sea_distance_nm": 4793.0,
+     "shipping_route": "Montreal → Genoa, ~20 days, direct sailings every 1-2 weeks",
+     "shipping_source": "https://www.fluentcargo.com/routes/montreal-ca/genoa-it",
+     "sources": [
+      "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+      "https://wits.worldbank.org/tariff/trains/en/country/EUN/partner/CAN/product/040900",
+      "https://www.gazzettaufficiale.it/eli/id/2018/02/08/18G00023/sg",
+      "https://www.agenziaentrate.gov.it/",
+      "https://www.fluentcargo.com/routes/montreal-ca/genoa-it",
+      "https://api.worldbank.org/v2/country/FRA;NLD;ITA;DEU/indicator/LP.LPI.CUST.XQ?format=json&date=2018:2024"
+     ],
+     "status": "open",
+     "status_note": "",
+     "tariff_note": "Duty-free under CETA. Without it, the EU tariff on natural honey is 17.3%.",
+     "tariff_rate": 0.0,
+     "tax_burden": 0.0,
+     "tax_note": "Import VAT at Italy's reduced food rate is paid and recovered by the Italian importer (rate not verified here: confirm with the Agenzia delle Entrate).",
+     "trade_agreement": "CETA",
+     "weekly_sailings": 0.75
+    },
+    "factors": {
+     "country_risk": 0.0,
+     "customs": 0.4,
+     "distance": 0.479,
+     "fx": 0.368,
+     "lead_time": 0.462,
+     "sailings": 0.812,
+     "tiers": 1.0
+    },
+    "lead_time_estimated": true,
+    "lead_time_weeks": 12.0,
+    "middlemen": [
+     {
+      "category": "honey",
+      "contact": "Contact via the council website",
+      "country_code": "*",
+      "description": "National body for Canada's beekeepers; publishes an exporters catalogue and tracks tariff and market-access changes for honey.",
+      "id": "chc",
+      "name": "Canadian Honey Council",
+      "source": "https://honeycouncil.ca/tariffs/",
+      "type": "Canadian industry association",
+      "website": "https://honeycouncil.ca/"
+     },
+     {
+      "category": "*",
+      "contact": "Find a trade commissioner for the target market",
+      "country_code": "*",
+      "description": "Government of Canada trade commissioners in every one of these markets help Canadian businesses find vetted local partners, at no charge.",
+      "id": "tcs",
+      "name": "Canadian Trade Commissioner Service",
+      "source": "https://www.tradecommissioner.gc.ca/en/about-us/contact-us/find-trade-commissioner.html",
+      "type": "government (free)",
+      "website": "https://www.tradecommissioner.gc.ca/en/about-us/contact-us/find-trade-commissioner.html"
+     }
+    ],
+    "opportunity": 40.3,
+    "opportunity_components": {
+     "demand": 0.616,
+     "foothold": 0.0,
+     "growth": 0.377,
+     "price": 0.523
+    },
+    "opportunity_facts": {
+     "canada_share": 0.0,
+     "canada_unit_value_usd_kg": 4.04,
+     "growth_rate": -0.0246,
+     "growth_years": "2019–2024",
+     "import_value_usd": 70494815.0,
+     "import_volume_kg": 22207910.0,
+     "net_unit_value_usd_kg": 3.17,
+     "note": "",
+     "sources": [
+      "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=380&period=2024&cmdCode=040900&flowCode=M&partnerCode=0,124",
+      "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=380&period=2019&cmdCode=040900&flowCode=M&partnerCode=0",
+      "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=124&period=2024&cmdCode=0409&flowCode=X&partnerCode=0"
+     ],
+     "unit_value_usd_kg": 3.17,
+     "year": 2024
+    },
+    "overall": 63.48,
+    "rank": 6,
     "score": 0.0,
     "status": "open",
     "status_note": "",
@@ -10167,7 +12339,7 @@
      "year": 2024
     },
     "overall": 63.13,
-    "rank": 4,
+    "rank": 7,
     "score": 0.0,
     "status": "open",
     "status_note": "",
@@ -10317,7 +12489,7 @@
      "year": 2024
     },
     "overall": 56.43,
-    "rank": 5,
+    "rank": 8,
     "score": 30.0,
     "status": "open",
     "status_note": "",
@@ -10479,7 +12651,7 @@
      "year": 2024
     },
     "overall": 0.0,
-    "rank": 6,
+    "rank": 9,
     "score": 100.0,
     "status": "open",
     "status_note": "",
@@ -10641,7 +12813,7 @@
      "year": 2024
     },
     "overall": 0.0,
-    "rank": 7,
+    "rank": 10,
     "score": 100.0,
     "status": "open",
     "status_note": "",
@@ -10720,7 +12892,7 @@
     "opportunity_components": {},
     "opportunity_facts": null,
     "overall": null,
-    "rank": 8,
+    "rank": 11,
     "score": null,
     "status": "blocked",
     "status_note": "Canada does not meet Mexico's requirements for exporting honey and apiculture products for human consumption. No CFIA certificate is currently available (CFIA).",
@@ -10916,6 +13088,187 @@
    },
    {
     "breakdown": {
+     "compliance": 23.54,
+     "logistics": 6.42,
+     "risk": 2.21,
+     "tariff": 0.0,
+     "tax": 0.0
+    },
+    "components": {
+     "compliance": 0.785,
+     "logistics": 0.428,
+     "risk": 0.221,
+     "tariff": 0.0,
+     "tax": 0.0
+    },
+    "country": "Netherlands (EU)",
+    "country_code": "NL",
+    "country_facts": {
+     "as_of": "<TODAY>",
+     "country_code": "NL",
+     "country_risk": 0,
+     "country_risk_source": "https://www.oecd.org/en/topics/country-risk-classification.html",
+     "currency": "EUR",
+     "fx_note": "Annualized volatility of monthly CAD/EUR rates, Sep 2023 – Aug 2026 (Bank of Canada).",
+     "fx_source": "https://www.bankofcanada.ca/valet/observations/FXMEURCAD/csv?start_date=2023-09-01&end_date=2026-08-31",
+     "fx_volatility": 0.0368
+    },
+    "entry": {
+     "as_of": "<TODAY>",
+     "category": "honey",
+     "compliance_confidence": "verified",
+     "compliance_requirements": [
+      {
+       "confidence": "verified",
+       "detail": "The packing establishment must hold a Safe Food for Canadians licence and be on the EU's approved list for honey; request listing through the local CFIA office. Lists are updated in batches (the US FDA transmits its updates quarterly), so allow about 3 months.",
+       "lead_time_basis": "estimate",
+       "lead_time_weeks": 12.0,
+       "name": "EU honey establishment listing (DG SANTE)",
+       "source": "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+       "tier": 2
+      },
+      {
+       "confidence": "verified",
+       "detail": "A CFIA inspector or veterinarian issues the model HON certificate in the EU's TRACES system for every consignment, before it leaves Canada.",
+       "lead_time_basis": "estimate",
+       "lead_time_weeks": 1.0,
+       "name": "EU 'HON' export certificate via TRACES",
+       "source": "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+       "tier": 2
+      },
+      {
+       "confidence": "verified",
+       "detail": "Composition limits (moisture, HMF, sugars) and labelling rules, plus EU residue limits.",
+       "lead_time_basis": "estimate",
+       "lead_time_weeks": 2.0,
+       "name": "Honey Directive 2001/110/EC composition and labelling",
+       "source": "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+       "tier": 1
+      },
+      {
+       "confidence": "verified",
+       "detail": "From July 20, 2026, primary packaging may not contain bisphenol A (Regulation 2024/3190).",
+       "lead_time_basis": "estimate",
+       "lead_time_weeks": 2.0,
+       "name": "BPA-free food-contact packaging",
+       "source": "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+       "tier": 1
+      },
+      {
+       "confidence": "verified",
+       "detail": "Self-declared origin statement on the invoice to claim 0% duty.",
+       "lead_time_basis": "official",
+       "lead_time_weeks": 0.0,
+       "name": "CETA origin declaration",
+       "source": "https://www.cbsa-asfc.gc.ca/publications/dm-md/d11/d11-4-14-eng.html",
+       "tier": 1
+      },
+      {
+       "confidence": "verified",
+       "detail": "Mandatory food information must be given in Dutch (Dutch government business portal; Warenwetbesluit informatie levensmiddelen). EU law lets member states require their language (Reg. 1169/2011, Art. 15).",
+       "lead_time_basis": "estimate",
+       "lead_time_weeks": 2.0,
+       "name": "Dutch-language labelling",
+       "source": "https://ondernemersplein.overheid.nl/wetten-en-regels/regels-voor-etiketten-van-levensmiddelen/",
+       "tier": 1
+      }
+     ],
+     "country": "Netherlands (EU)",
+     "country_code": "NL",
+     "language": "nl",
+     "lpi_customs_score": 3.9,
+     "mfn_rate": 0.173,
+     "notes": [
+      "Compliance: EU rules, same as Germany (EU import rules are harmonised), plus Dutch-language labelling."
+     ],
+     "sea_distance_nm": 3314.0,
+     "shipping_route": "Halifax → Rotterdam, ~12 days, direct sailings about weekly",
+     "shipping_source": "https://www.fluentcargo.com/routes/halifax-ca/rotterdam-nl",
+     "sources": [
+      "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+      "https://wits.worldbank.org/tariff/trains/en/country/EUN/partner/CAN/product/040900",
+      "https://ondernemersplein.overheid.nl/wetten-en-regels/regels-voor-etiketten-van-levensmiddelen/",
+      "https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/zakelijk/btw/tarieven_en_vrijstellingen/goederen_9_btw/voedingsmiddelen/",
+      "https://www.fluentcargo.com/routes/halifax-ca/rotterdam-nl",
+      "https://api.worldbank.org/v2/country/FRA;NLD;ITA;DEU/indicator/LP.LPI.CUST.XQ?format=json&date=2018:2024"
+     ],
+     "status": "open",
+     "status_note": "",
+     "tariff_note": "Duty-free under CETA. Without it, the EU tariff on natural honey is 17.3%.",
+     "tariff_rate": 0.0,
+     "tax_burden": 0.0,
+     "tax_note": "Import VAT at the Dutch 9% food rate is paid and recovered by the Dutch importer (Belastingdienst).",
+     "trade_agreement": "CETA",
+     "weekly_sailings": 0.9
+    },
+    "factors": {
+     "country_risk": 0.0,
+     "customs": 0.275,
+     "distance": 0.331,
+     "fx": 0.368,
+     "lead_time": 0.462,
+     "sailings": 0.775,
+     "tiers": 1.0
+    },
+    "lead_time_estimated": true,
+    "lead_time_weeks": 12.0,
+    "middlemen": [
+     {
+      "category": "honey",
+      "contact": "Contact via the council website",
+      "country_code": "*",
+      "description": "National body for Canada's beekeepers; publishes an exporters catalogue and tracks tariff and market-access changes for honey.",
+      "id": "chc",
+      "name": "Canadian Honey Council",
+      "source": "https://honeycouncil.ca/tariffs/",
+      "type": "Canadian industry association",
+      "website": "https://honeycouncil.ca/"
+     },
+     {
+      "category": "*",
+      "contact": "Find a trade commissioner for the target market",
+      "country_code": "*",
+      "description": "Government of Canada trade commissioners in every one of these markets help Canadian businesses find vetted local partners, at no charge.",
+      "id": "tcs",
+      "name": "Canadian Trade Commissioner Service",
+      "source": "https://www.tradecommissioner.gc.ca/en/about-us/contact-us/find-trade-commissioner.html",
+      "type": "government (free)",
+      "website": "https://www.tradecommissioner.gc.ca/en/about-us/contact-us/find-trade-commissioner.html"
+     }
+    ],
+    "opportunity": 54.58,
+    "opportunity_components": {
+     "demand": 0.655,
+     "foothold": 0.0,
+     "growth": 1.0,
+     "price": 0.666
+    },
+    "opportunity_facts": {
+     "canada_share": 0.0,
+     "canada_unit_value_usd_kg": 4.04,
+     "growth_rate": 0.1205,
+     "growth_years": "2019–2024",
+     "import_value_usd": 92323735.0,
+     "import_volume_kg": 22846446.0,
+     "net_unit_value_usd_kg": 4.04,
+     "note": "",
+     "sources": [
+      "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=528&period=2024&cmdCode=040900&flowCode=M&partnerCode=0,124",
+      "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=528&period=2019&cmdCode=040900&flowCode=M&partnerCode=0",
+      "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=124&period=2024&cmdCode=0409&flowCode=X&partnerCode=0"
+     ],
+     "unit_value_usd_kg": 4.04,
+     "year": 2024
+    },
+    "overall": 60.85,
+    "rank": 2,
+    "score": 32.17,
+    "status": "open",
+    "status_note": "",
+    "top_blocker": "compliance"
+   },
+   {
+    "breakdown": {
      "compliance": 7.67,
      "logistics": 6.04,
      "risk": 2.03,
@@ -11083,7 +13436,7 @@
      "year": 2024
     },
     "overall": 59.38,
-    "rank": 2,
+    "rank": 3,
     "score": 15.74,
     "status": "open",
     "status_note": "",
@@ -11276,7 +13629,7 @@
      "year": 2024
     },
     "overall": 57.66,
-    "rank": 3,
+    "rank": 4,
     "score": 30.2,
     "status": "open",
     "status_note": "",
@@ -11438,7 +13791,7 @@
      "year": 2024
     },
     "overall": 56.33,
-    "rank": 4,
+    "rank": 5,
     "score": 50.7,
     "status": "open",
     "status_note": "",
@@ -11591,7 +13944,7 @@
      "year": 2024
     },
     "overall": 55.84,
-    "rank": 5,
+    "rank": 6,
     "score": 21.75,
     "status": "open",
     "status_note": "",
@@ -11741,8 +14094,370 @@
      "year": 2024
     },
     "overall": 52.74,
-    "rank": 6,
+    "rank": 7,
     "score": 38.86,
+    "status": "open",
+    "status_note": "",
+    "top_blocker": "compliance"
+   },
+   {
+    "breakdown": {
+     "compliance": 23.54,
+     "logistics": 6.55,
+     "risk": 2.21,
+     "tariff": 0.0,
+     "tax": 0.0
+    },
+    "components": {
+     "compliance": 0.785,
+     "logistics": 0.437,
+     "risk": 0.221,
+     "tariff": 0.0,
+     "tax": 0.0
+    },
+    "country": "France (EU)",
+    "country_code": "FR",
+    "country_facts": {
+     "as_of": "<TODAY>",
+     "country_code": "FR",
+     "country_risk": 0,
+     "country_risk_source": "https://www.oecd.org/en/topics/country-risk-classification.html",
+     "currency": "EUR",
+     "fx_note": "Annualized volatility of monthly CAD/EUR rates, Sep 2023 – Aug 2026 (Bank of Canada).",
+     "fx_source": "https://www.bankofcanada.ca/valet/observations/FXMEURCAD/csv?start_date=2023-09-01&end_date=2026-08-31",
+     "fx_volatility": 0.0368
+    },
+    "entry": {
+     "as_of": "<TODAY>",
+     "category": "honey",
+     "compliance_confidence": "verified",
+     "compliance_requirements": [
+      {
+       "confidence": "verified",
+       "detail": "The packing establishment must hold a Safe Food for Canadians licence and be on the EU's approved list for honey; request listing through the local CFIA office. Lists are updated in batches (the US FDA transmits its updates quarterly), so allow about 3 months.",
+       "lead_time_basis": "estimate",
+       "lead_time_weeks": 12.0,
+       "name": "EU honey establishment listing (DG SANTE)",
+       "source": "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+       "tier": 2
+      },
+      {
+       "confidence": "verified",
+       "detail": "A CFIA inspector or veterinarian issues the model HON certificate in the EU's TRACES system for every consignment, before it leaves Canada.",
+       "lead_time_basis": "estimate",
+       "lead_time_weeks": 1.0,
+       "name": "EU 'HON' export certificate via TRACES",
+       "source": "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+       "tier": 2
+      },
+      {
+       "confidence": "verified",
+       "detail": "Composition limits (moisture, HMF, sugars) and labelling rules, plus EU residue limits.",
+       "lead_time_basis": "estimate",
+       "lead_time_weeks": 2.0,
+       "name": "Honey Directive 2001/110/EC composition and labelling",
+       "source": "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+       "tier": 1
+      },
+      {
+       "confidence": "verified",
+       "detail": "From July 20, 2026, primary packaging may not contain bisphenol A (Regulation 2024/3190).",
+       "lead_time_basis": "estimate",
+       "lead_time_weeks": 2.0,
+       "name": "BPA-free food-contact packaging",
+       "source": "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+       "tier": 1
+      },
+      {
+       "confidence": "verified",
+       "detail": "Self-declared origin statement on the invoice to claim 0% duty.",
+       "lead_time_basis": "official",
+       "lead_time_weeks": 0.0,
+       "name": "CETA origin declaration",
+       "source": "https://www.cbsa-asfc.gc.ca/publications/dm-md/d11/d11-4-14-eng.html",
+       "tier": 1
+      },
+      {
+       "confidence": "verified",
+       "detail": "Mandatory label information must be at least in French (Loi n° 94-665 'Toubon', Art. 2; DGCCRF food-labelling rules). EU law lets member states require their language (Reg. 1169/2011, Art. 15).",
+       "lead_time_basis": "estimate",
+       "lead_time_weeks": 2.0,
+       "name": "French-language labelling",
+       "source": "https://www.economie.gouv.fr/dgccrf/les-fiches-pratiques/etiquetage-des-denrees-alimentaires-les-regles-connaitre",
+       "tier": 1
+      }
+     ],
+     "country": "France (EU)",
+     "country_code": "FR",
+     "language": "fr",
+     "lpi_customs_score": 3.7,
+     "mfn_rate": 0.173,
+     "notes": [
+      "Compliance: EU rules, same as Germany (EU import rules are harmonised), plus French-language labelling."
+     ],
+     "sea_distance_nm": 3984.0,
+     "shipping_route": "Montreal → Le Havre, ~16 days, direct sailings 1-2×/week",
+     "shipping_source": "https://www.fluentcargo.com/routes/montreal-ca/le-havre-fr",
+     "sources": [
+      "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+      "https://wits.worldbank.org/tariff/trains/en/country/EUN/partner/CAN/product/040900",
+      "https://www.economie.gouv.fr/dgccrf/les-fiches-pratiques/etiquetage-des-denrees-alimentaires-les-regles-connaitre",
+      "https://www.economie.gouv.fr/particuliers/impots-et-fiscalite/gerer-mes-autres-impots-et-taxes/tva-quels-sont-les-taux-de-votre-quotidien",
+      "https://www.fluentcargo.com/routes/montreal-ca/le-havre-fr",
+      "https://api.worldbank.org/v2/country/FRA;NLD;ITA;DEU/indicator/LP.LPI.CUST.XQ?format=json&date=2018:2024"
+     ],
+     "status": "open",
+     "status_note": "",
+     "tariff_note": "Duty-free under CETA. Without it, the EU tariff on natural honey is 17.3%.",
+     "tariff_rate": 0.0,
+     "tax_burden": 0.0,
+     "tax_note": "Import VAT at France's 5.5% food rate is paid and recovered by the French importer (economie.gouv.fr).",
+     "trade_agreement": "CETA",
+     "weekly_sailings": 1.5
+    },
+    "factors": {
+     "country_risk": 0.0,
+     "customs": 0.325,
+     "distance": 0.398,
+     "fx": 0.368,
+     "lead_time": 0.462,
+     "sailings": 0.625,
+     "tiers": 1.0
+    },
+    "lead_time_estimated": true,
+    "lead_time_weeks": 12.0,
+    "middlemen": [
+     {
+      "category": "honey",
+      "contact": "Contact via the council website",
+      "country_code": "*",
+      "description": "National body for Canada's beekeepers; publishes an exporters catalogue and tracks tariff and market-access changes for honey.",
+      "id": "chc",
+      "name": "Canadian Honey Council",
+      "source": "https://honeycouncil.ca/tariffs/",
+      "type": "Canadian industry association",
+      "website": "https://honeycouncil.ca/"
+     },
+     {
+      "category": "*",
+      "contact": "Find a trade commissioner for the target market",
+      "country_code": "*",
+      "description": "Government of Canada trade commissioners in every one of these markets help Canadian businesses find vetted local partners, at no charge.",
+      "id": "tcs",
+      "name": "Canadian Trade Commissioner Service",
+      "source": "https://www.tradecommissioner.gc.ca/en/about-us/contact-us/find-trade-commissioner.html",
+      "type": "government (free)",
+      "website": "https://www.tradecommissioner.gc.ca/en/about-us/contact-us/find-trade-commissioner.html"
+     }
+    ],
+    "opportunity": 40.36,
+    "opportunity_components": {
+     "demand": 0.681,
+     "foothold": 0.0,
+     "growth": 0.429,
+     "price": null
+    },
+    "opportunity_facts": {
+     "canada_share": 0.0,
+     "canada_unit_value_usd_kg": 4.04,
+     "growth_rate": -0.0142,
+     "growth_years": "2019–2024",
+     "import_value_usd": 110418996.0,
+     "import_volume_kg": 0.0,
+     "net_unit_value_usd_kg": 0.0,
+     "note": "No 2024 import weights reported: price data unavailable.",
+     "sources": [
+      "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=251&period=2024&cmdCode=040900&flowCode=M&partnerCode=0,124",
+      "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=251&period=2019&cmdCode=040900&flowCode=M&partnerCode=0",
+      "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=124&period=2024&cmdCode=0409&flowCode=X&partnerCode=0"
+     ],
+     "unit_value_usd_kg": 0.0,
+     "year": 2024
+    },
+    "overall": 52.27,
+    "rank": 8,
+    "score": 32.3,
+    "status": "open",
+    "status_note": "",
+    "top_blocker": "compliance"
+   },
+   {
+    "breakdown": {
+     "compliance": 23.54,
+     "logistics": 8.14,
+     "risk": 2.21,
+     "tariff": 0.0,
+     "tax": 0.0
+    },
+    "components": {
+     "compliance": 0.785,
+     "logistics": 0.543,
+     "risk": 0.221,
+     "tariff": 0.0,
+     "tax": 0.0
+    },
+    "country": "Italy (EU)",
+    "country_code": "IT",
+    "country_facts": {
+     "as_of": "<TODAY>",
+     "country_code": "IT",
+     "country_risk": 0,
+     "country_risk_source": "https://www.oecd.org/en/topics/country-risk-classification.html",
+     "currency": "EUR",
+     "fx_note": "Annualized volatility of monthly CAD/EUR rates, Sep 2023 – Aug 2026 (Bank of Canada).",
+     "fx_source": "https://www.bankofcanada.ca/valet/observations/FXMEURCAD/csv?start_date=2023-09-01&end_date=2026-08-31",
+     "fx_volatility": 0.0368
+    },
+    "entry": {
+     "as_of": "<TODAY>",
+     "category": "honey",
+     "compliance_confidence": "verified",
+     "compliance_requirements": [
+      {
+       "confidence": "verified",
+       "detail": "The packing establishment must hold a Safe Food for Canadians licence and be on the EU's approved list for honey; request listing through the local CFIA office. Lists are updated in batches (the US FDA transmits its updates quarterly), so allow about 3 months.",
+       "lead_time_basis": "estimate",
+       "lead_time_weeks": 12.0,
+       "name": "EU honey establishment listing (DG SANTE)",
+       "source": "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+       "tier": 2
+      },
+      {
+       "confidence": "verified",
+       "detail": "A CFIA inspector or veterinarian issues the model HON certificate in the EU's TRACES system for every consignment, before it leaves Canada.",
+       "lead_time_basis": "estimate",
+       "lead_time_weeks": 1.0,
+       "name": "EU 'HON' export certificate via TRACES",
+       "source": "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+       "tier": 2
+      },
+      {
+       "confidence": "verified",
+       "detail": "Composition limits (moisture, HMF, sugars) and labelling rules, plus EU residue limits.",
+       "lead_time_basis": "estimate",
+       "lead_time_weeks": 2.0,
+       "name": "Honey Directive 2001/110/EC composition and labelling",
+       "source": "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+       "tier": 1
+      },
+      {
+       "confidence": "verified",
+       "detail": "From July 20, 2026, primary packaging may not contain bisphenol A (Regulation 2024/3190).",
+       "lead_time_basis": "estimate",
+       "lead_time_weeks": 2.0,
+       "name": "BPA-free food-contact packaging",
+       "source": "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+       "tier": 1
+      },
+      {
+       "confidence": "verified",
+       "detail": "Self-declared origin statement on the invoice to claim 0% duty.",
+       "lead_time_basis": "official",
+       "lead_time_weeks": 0.0,
+       "name": "CETA origin declaration",
+       "source": "https://www.cbsa-asfc.gc.ca/publications/dm-md/d11/d11-4-14-eng.html",
+       "tier": 1
+      },
+      {
+       "confidence": "verified",
+       "detail": "Mandatory food information must be in Italian; food sold without it is a sanctioned offence (D.Lgs. 231/2017). EU law lets member states require their language (Reg. 1169/2011, Art. 15).",
+       "lead_time_basis": "estimate",
+       "lead_time_weeks": 2.0,
+       "name": "Italian-language labelling",
+       "source": "https://www.gazzettaufficiale.it/eli/id/2018/02/08/18G00023/sg",
+       "tier": 1
+      }
+     ],
+     "country": "Italy (EU)",
+     "country_code": "IT",
+     "language": "it",
+     "lpi_customs_score": 3.4,
+     "mfn_rate": 0.173,
+     "notes": [
+      "Compliance: EU rules, same as Germany (EU import rules are harmonised), plus Italian-language labelling."
+     ],
+     "sea_distance_nm": 4793.0,
+     "shipping_route": "Montreal → Genoa, ~20 days, direct sailings every 1-2 weeks",
+     "shipping_source": "https://www.fluentcargo.com/routes/montreal-ca/genoa-it",
+     "sources": [
+      "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+      "https://wits.worldbank.org/tariff/trains/en/country/EUN/partner/CAN/product/040900",
+      "https://www.gazzettaufficiale.it/eli/id/2018/02/08/18G00023/sg",
+      "https://www.agenziaentrate.gov.it/",
+      "https://www.fluentcargo.com/routes/montreal-ca/genoa-it",
+      "https://api.worldbank.org/v2/country/FRA;NLD;ITA;DEU/indicator/LP.LPI.CUST.XQ?format=json&date=2018:2024"
+     ],
+     "status": "open",
+     "status_note": "",
+     "tariff_note": "Duty-free under CETA. Without it, the EU tariff on natural honey is 17.3%.",
+     "tariff_rate": 0.0,
+     "tax_burden": 0.0,
+     "tax_note": "Import VAT at Italy's reduced food rate is paid and recovered by the Italian importer (rate not verified here: confirm with the Agenzia delle Entrate).",
+     "trade_agreement": "CETA",
+     "weekly_sailings": 0.75
+    },
+    "factors": {
+     "country_risk": 0.0,
+     "customs": 0.4,
+     "distance": 0.479,
+     "fx": 0.368,
+     "lead_time": 0.462,
+     "sailings": 0.812,
+     "tiers": 1.0
+    },
+    "lead_time_estimated": true,
+    "lead_time_weeks": 12.0,
+    "middlemen": [
+     {
+      "category": "honey",
+      "contact": "Contact via the council website",
+      "country_code": "*",
+      "description": "National body for Canada's beekeepers; publishes an exporters catalogue and tracks tariff and market-access changes for honey.",
+      "id": "chc",
+      "name": "Canadian Honey Council",
+      "source": "https://honeycouncil.ca/tariffs/",
+      "type": "Canadian industry association",
+      "website": "https://honeycouncil.ca/"
+     },
+     {
+      "category": "*",
+      "contact": "Find a trade commissioner for the target market",
+      "country_code": "*",
+      "description": "Government of Canada trade commissioners in every one of these markets help Canadian businesses find vetted local partners, at no charge.",
+      "id": "tcs",
+      "name": "Canadian Trade Commissioner Service",
+      "source": "https://www.tradecommissioner.gc.ca/en/about-us/contact-us/find-trade-commissioner.html",
+      "type": "government (free)",
+      "website": "https://www.tradecommissioner.gc.ca/en/about-us/contact-us/find-trade-commissioner.html"
+     }
+    ],
+    "opportunity": 40.3,
+    "opportunity_components": {
+     "demand": 0.616,
+     "foothold": 0.0,
+     "growth": 0.377,
+     "price": 0.523
+    },
+    "opportunity_facts": {
+     "canada_share": 0.0,
+     "canada_unit_value_usd_kg": 4.04,
+     "growth_rate": -0.0246,
+     "growth_years": "2019–2024",
+     "import_value_usd": 70494815.0,
+     "import_volume_kg": 22207910.0,
+     "net_unit_value_usd_kg": 3.17,
+     "note": "",
+     "sources": [
+      "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=380&period=2024&cmdCode=040900&flowCode=M&partnerCode=0,124",
+      "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=380&period=2019&cmdCode=040900&flowCode=M&partnerCode=0",
+      "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=124&period=2024&cmdCode=0409&flowCode=X&partnerCode=0"
+     ],
+     "unit_value_usd_kg": 3.17,
+     "year": 2024
+    },
+    "overall": 51.62,
+    "rank": 9,
+    "score": 33.89,
     "status": "open",
     "status_note": "",
     "top_blocker": "compliance"
@@ -11903,7 +14618,7 @@
      "year": 2024
     },
     "overall": 47.83,
-    "rank": 7,
+    "rank": 10,
     "score": 57.36,
     "status": "open",
     "status_note": "",
@@ -11982,7 +14697,7 @@
     "opportunity_components": {},
     "opportunity_facts": null,
     "overall": null,
-    "rank": 8,
+    "rank": 11,
     "score": null,
     "status": "blocked",
     "status_note": "Canada does not meet Mexico's requirements for exporting honey and apiculture products for human consumption. No CFIA certificate is currently available (CFIA).",
@@ -12340,6 +15055,187 @@
    },
    {
     "breakdown": {
+     "compliance": 23.54,
+     "logistics": 6.42,
+     "risk": 2.21,
+     "tariff": 0.0,
+     "tax": 0.0
+    },
+    "components": {
+     "compliance": 0.785,
+     "logistics": 0.428,
+     "risk": 0.221,
+     "tariff": 0.0,
+     "tax": 0.0
+    },
+    "country": "Netherlands (EU)",
+    "country_code": "NL",
+    "country_facts": {
+     "as_of": "<TODAY>",
+     "country_code": "NL",
+     "country_risk": 0,
+     "country_risk_source": "https://www.oecd.org/en/topics/country-risk-classification.html",
+     "currency": "EUR",
+     "fx_note": "Annualized volatility of monthly CAD/EUR rates, Sep 2023 – Aug 2026 (Bank of Canada).",
+     "fx_source": "https://www.bankofcanada.ca/valet/observations/FXMEURCAD/csv?start_date=2023-09-01&end_date=2026-08-31",
+     "fx_volatility": 0.0368
+    },
+    "entry": {
+     "as_of": "<TODAY>",
+     "category": "honey",
+     "compliance_confidence": "verified",
+     "compliance_requirements": [
+      {
+       "confidence": "verified",
+       "detail": "The packing establishment must hold a Safe Food for Canadians licence and be on the EU's approved list for honey; request listing through the local CFIA office. Lists are updated in batches (the US FDA transmits its updates quarterly), so allow about 3 months.",
+       "lead_time_basis": "estimate",
+       "lead_time_weeks": 12.0,
+       "name": "EU honey establishment listing (DG SANTE)",
+       "source": "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+       "tier": 2
+      },
+      {
+       "confidence": "verified",
+       "detail": "A CFIA inspector or veterinarian issues the model HON certificate in the EU's TRACES system for every consignment, before it leaves Canada.",
+       "lead_time_basis": "estimate",
+       "lead_time_weeks": 1.0,
+       "name": "EU 'HON' export certificate via TRACES",
+       "source": "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+       "tier": 2
+      },
+      {
+       "confidence": "verified",
+       "detail": "Composition limits (moisture, HMF, sugars) and labelling rules, plus EU residue limits.",
+       "lead_time_basis": "estimate",
+       "lead_time_weeks": 2.0,
+       "name": "Honey Directive 2001/110/EC composition and labelling",
+       "source": "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+       "tier": 1
+      },
+      {
+       "confidence": "verified",
+       "detail": "From July 20, 2026, primary packaging may not contain bisphenol A (Regulation 2024/3190).",
+       "lead_time_basis": "estimate",
+       "lead_time_weeks": 2.0,
+       "name": "BPA-free food-contact packaging",
+       "source": "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+       "tier": 1
+      },
+      {
+       "confidence": "verified",
+       "detail": "Self-declared origin statement on the invoice to claim 0% duty.",
+       "lead_time_basis": "official",
+       "lead_time_weeks": 0.0,
+       "name": "CETA origin declaration",
+       "source": "https://www.cbsa-asfc.gc.ca/publications/dm-md/d11/d11-4-14-eng.html",
+       "tier": 1
+      },
+      {
+       "confidence": "verified",
+       "detail": "Mandatory food information must be given in Dutch (Dutch government business portal; Warenwetbesluit informatie levensmiddelen). EU law lets member states require their language (Reg. 1169/2011, Art. 15).",
+       "lead_time_basis": "estimate",
+       "lead_time_weeks": 2.0,
+       "name": "Dutch-language labelling",
+       "source": "https://ondernemersplein.overheid.nl/wetten-en-regels/regels-voor-etiketten-van-levensmiddelen/",
+       "tier": 1
+      }
+     ],
+     "country": "Netherlands (EU)",
+     "country_code": "NL",
+     "language": "nl",
+     "lpi_customs_score": 3.9,
+     "mfn_rate": 0.173,
+     "notes": [
+      "Compliance: EU rules, same as Germany (EU import rules are harmonised), plus Dutch-language labelling."
+     ],
+     "sea_distance_nm": 3314.0,
+     "shipping_route": "Halifax → Rotterdam, ~12 days, direct sailings about weekly",
+     "shipping_source": "https://www.fluentcargo.com/routes/halifax-ca/rotterdam-nl",
+     "sources": [
+      "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+      "https://wits.worldbank.org/tariff/trains/en/country/EUN/partner/CAN/product/040900",
+      "https://ondernemersplein.overheid.nl/wetten-en-regels/regels-voor-etiketten-van-levensmiddelen/",
+      "https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/zakelijk/btw/tarieven_en_vrijstellingen/goederen_9_btw/voedingsmiddelen/",
+      "https://www.fluentcargo.com/routes/halifax-ca/rotterdam-nl",
+      "https://api.worldbank.org/v2/country/FRA;NLD;ITA;DEU/indicator/LP.LPI.CUST.XQ?format=json&date=2018:2024"
+     ],
+     "status": "open",
+     "status_note": "",
+     "tariff_note": "Duty-free under CETA. Without it, the EU tariff on natural honey is 17.3%.",
+     "tariff_rate": 0.0,
+     "tax_burden": 0.0,
+     "tax_note": "Import VAT at the Dutch 9% food rate is paid and recovered by the Dutch importer (Belastingdienst).",
+     "trade_agreement": "CETA",
+     "weekly_sailings": 0.9
+    },
+    "factors": {
+     "country_risk": 0.0,
+     "customs": 0.275,
+     "distance": 0.331,
+     "fx": 0.368,
+     "lead_time": 0.462,
+     "sailings": 0.775,
+     "tiers": 1.0
+    },
+    "lead_time_estimated": true,
+    "lead_time_weeks": 12.0,
+    "middlemen": [
+     {
+      "category": "honey",
+      "contact": "Contact via the council website",
+      "country_code": "*",
+      "description": "National body for Canada's beekeepers; publishes an exporters catalogue and tracks tariff and market-access changes for honey.",
+      "id": "chc",
+      "name": "Canadian Honey Council",
+      "source": "https://honeycouncil.ca/tariffs/",
+      "type": "Canadian industry association",
+      "website": "https://honeycouncil.ca/"
+     },
+     {
+      "category": "*",
+      "contact": "Find a trade commissioner for the target market",
+      "country_code": "*",
+      "description": "Government of Canada trade commissioners in every one of these markets help Canadian businesses find vetted local partners, at no charge.",
+      "id": "tcs",
+      "name": "Canadian Trade Commissioner Service",
+      "source": "https://www.tradecommissioner.gc.ca/en/about-us/contact-us/find-trade-commissioner.html",
+      "type": "government (free)",
+      "website": "https://www.tradecommissioner.gc.ca/en/about-us/contact-us/find-trade-commissioner.html"
+     }
+    ],
+    "opportunity": 54.58,
+    "opportunity_components": {
+     "demand": 0.655,
+     "foothold": 0.0,
+     "growth": 1.0,
+     "price": 0.666
+    },
+    "opportunity_facts": {
+     "canada_share": 0.0,
+     "canada_unit_value_usd_kg": 4.04,
+     "growth_rate": 0.1205,
+     "growth_years": "2019–2024",
+     "import_value_usd": 92323735.0,
+     "import_volume_kg": 22846446.0,
+     "net_unit_value_usd_kg": 4.04,
+     "note": "",
+     "sources": [
+      "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=528&period=2024&cmdCode=040900&flowCode=M&partnerCode=0,124",
+      "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=528&period=2019&cmdCode=040900&flowCode=M&partnerCode=0",
+      "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=124&period=2024&cmdCode=0409&flowCode=X&partnerCode=0"
+     ],
+     "unit_value_usd_kg": 4.04,
+     "year": 2024
+    },
+    "overall": 54.58,
+    "rank": 3,
+    "score": 32.17,
+    "status": "open",
+    "status_note": "",
+    "top_blocker": "compliance"
+   },
+   {
+    "breakdown": {
      "compliance": 14.42,
      "logistics": 4.6,
      "risk": 3.34,
@@ -12494,7 +15390,7 @@
      "year": 2024
     },
     "overall": 53.65,
-    "rank": 3,
+    "rank": 4,
     "score": 57.36,
     "status": "open",
     "status_note": "",
@@ -12687,7 +15583,7 @@
      "year": 2024
     },
     "overall": 47.63,
-    "rank": 4,
+    "rank": 5,
     "score": 30.2,
     "status": "open",
     "status_note": "",
@@ -12837,7 +15733,7 @@
      "year": 2024
     },
     "overall": 45.49,
-    "rank": 5,
+    "rank": 6,
     "score": 38.86,
     "status": "open",
     "status_note": "",
@@ -13012,8 +15908,370 @@
      "year": 2024
     },
     "overall": 41.85,
-    "rank": 6,
+    "rank": 7,
     "score": 15.74,
+    "status": "open",
+    "status_note": "",
+    "top_blocker": "compliance"
+   },
+   {
+    "breakdown": {
+     "compliance": 23.54,
+     "logistics": 6.55,
+     "risk": 2.21,
+     "tariff": 0.0,
+     "tax": 0.0
+    },
+    "components": {
+     "compliance": 0.785,
+     "logistics": 0.437,
+     "risk": 0.221,
+     "tariff": 0.0,
+     "tax": 0.0
+    },
+    "country": "France (EU)",
+    "country_code": "FR",
+    "country_facts": {
+     "as_of": "<TODAY>",
+     "country_code": "FR",
+     "country_risk": 0,
+     "country_risk_source": "https://www.oecd.org/en/topics/country-risk-classification.html",
+     "currency": "EUR",
+     "fx_note": "Annualized volatility of monthly CAD/EUR rates, Sep 2023 – Aug 2026 (Bank of Canada).",
+     "fx_source": "https://www.bankofcanada.ca/valet/observations/FXMEURCAD/csv?start_date=2023-09-01&end_date=2026-08-31",
+     "fx_volatility": 0.0368
+    },
+    "entry": {
+     "as_of": "<TODAY>",
+     "category": "honey",
+     "compliance_confidence": "verified",
+     "compliance_requirements": [
+      {
+       "confidence": "verified",
+       "detail": "The packing establishment must hold a Safe Food for Canadians licence and be on the EU's approved list for honey; request listing through the local CFIA office. Lists are updated in batches (the US FDA transmits its updates quarterly), so allow about 3 months.",
+       "lead_time_basis": "estimate",
+       "lead_time_weeks": 12.0,
+       "name": "EU honey establishment listing (DG SANTE)",
+       "source": "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+       "tier": 2
+      },
+      {
+       "confidence": "verified",
+       "detail": "A CFIA inspector or veterinarian issues the model HON certificate in the EU's TRACES system for every consignment, before it leaves Canada.",
+       "lead_time_basis": "estimate",
+       "lead_time_weeks": 1.0,
+       "name": "EU 'HON' export certificate via TRACES",
+       "source": "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+       "tier": 2
+      },
+      {
+       "confidence": "verified",
+       "detail": "Composition limits (moisture, HMF, sugars) and labelling rules, plus EU residue limits.",
+       "lead_time_basis": "estimate",
+       "lead_time_weeks": 2.0,
+       "name": "Honey Directive 2001/110/EC composition and labelling",
+       "source": "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+       "tier": 1
+      },
+      {
+       "confidence": "verified",
+       "detail": "From July 20, 2026, primary packaging may not contain bisphenol A (Regulation 2024/3190).",
+       "lead_time_basis": "estimate",
+       "lead_time_weeks": 2.0,
+       "name": "BPA-free food-contact packaging",
+       "source": "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+       "tier": 1
+      },
+      {
+       "confidence": "verified",
+       "detail": "Self-declared origin statement on the invoice to claim 0% duty.",
+       "lead_time_basis": "official",
+       "lead_time_weeks": 0.0,
+       "name": "CETA origin declaration",
+       "source": "https://www.cbsa-asfc.gc.ca/publications/dm-md/d11/d11-4-14-eng.html",
+       "tier": 1
+      },
+      {
+       "confidence": "verified",
+       "detail": "Mandatory label information must be at least in French (Loi n° 94-665 'Toubon', Art. 2; DGCCRF food-labelling rules). EU law lets member states require their language (Reg. 1169/2011, Art. 15).",
+       "lead_time_basis": "estimate",
+       "lead_time_weeks": 2.0,
+       "name": "French-language labelling",
+       "source": "https://www.economie.gouv.fr/dgccrf/les-fiches-pratiques/etiquetage-des-denrees-alimentaires-les-regles-connaitre",
+       "tier": 1
+      }
+     ],
+     "country": "France (EU)",
+     "country_code": "FR",
+     "language": "fr",
+     "lpi_customs_score": 3.7,
+     "mfn_rate": 0.173,
+     "notes": [
+      "Compliance: EU rules, same as Germany (EU import rules are harmonised), plus French-language labelling."
+     ],
+     "sea_distance_nm": 3984.0,
+     "shipping_route": "Montreal → Le Havre, ~16 days, direct sailings 1-2×/week",
+     "shipping_source": "https://www.fluentcargo.com/routes/montreal-ca/le-havre-fr",
+     "sources": [
+      "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+      "https://wits.worldbank.org/tariff/trains/en/country/EUN/partner/CAN/product/040900",
+      "https://www.economie.gouv.fr/dgccrf/les-fiches-pratiques/etiquetage-des-denrees-alimentaires-les-regles-connaitre",
+      "https://www.economie.gouv.fr/particuliers/impots-et-fiscalite/gerer-mes-autres-impots-et-taxes/tva-quels-sont-les-taux-de-votre-quotidien",
+      "https://www.fluentcargo.com/routes/montreal-ca/le-havre-fr",
+      "https://api.worldbank.org/v2/country/FRA;NLD;ITA;DEU/indicator/LP.LPI.CUST.XQ?format=json&date=2018:2024"
+     ],
+     "status": "open",
+     "status_note": "",
+     "tariff_note": "Duty-free under CETA. Without it, the EU tariff on natural honey is 17.3%.",
+     "tariff_rate": 0.0,
+     "tax_burden": 0.0,
+     "tax_note": "Import VAT at France's 5.5% food rate is paid and recovered by the French importer (economie.gouv.fr).",
+     "trade_agreement": "CETA",
+     "weekly_sailings": 1.5
+    },
+    "factors": {
+     "country_risk": 0.0,
+     "customs": 0.325,
+     "distance": 0.398,
+     "fx": 0.368,
+     "lead_time": 0.462,
+     "sailings": 0.625,
+     "tiers": 1.0
+    },
+    "lead_time_estimated": true,
+    "lead_time_weeks": 12.0,
+    "middlemen": [
+     {
+      "category": "honey",
+      "contact": "Contact via the council website",
+      "country_code": "*",
+      "description": "National body for Canada's beekeepers; publishes an exporters catalogue and tracks tariff and market-access changes for honey.",
+      "id": "chc",
+      "name": "Canadian Honey Council",
+      "source": "https://honeycouncil.ca/tariffs/",
+      "type": "Canadian industry association",
+      "website": "https://honeycouncil.ca/"
+     },
+     {
+      "category": "*",
+      "contact": "Find a trade commissioner for the target market",
+      "country_code": "*",
+      "description": "Government of Canada trade commissioners in every one of these markets help Canadian businesses find vetted local partners, at no charge.",
+      "id": "tcs",
+      "name": "Canadian Trade Commissioner Service",
+      "source": "https://www.tradecommissioner.gc.ca/en/about-us/contact-us/find-trade-commissioner.html",
+      "type": "government (free)",
+      "website": "https://www.tradecommissioner.gc.ca/en/about-us/contact-us/find-trade-commissioner.html"
+     }
+    ],
+    "opportunity": 40.36,
+    "opportunity_components": {
+     "demand": 0.681,
+     "foothold": 0.0,
+     "growth": 0.429,
+     "price": null
+    },
+    "opportunity_facts": {
+     "canada_share": 0.0,
+     "canada_unit_value_usd_kg": 4.04,
+     "growth_rate": -0.0142,
+     "growth_years": "2019–2024",
+     "import_value_usd": 110418996.0,
+     "import_volume_kg": 0.0,
+     "net_unit_value_usd_kg": 0.0,
+     "note": "No 2024 import weights reported: price data unavailable.",
+     "sources": [
+      "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=251&period=2024&cmdCode=040900&flowCode=M&partnerCode=0,124",
+      "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=251&period=2019&cmdCode=040900&flowCode=M&partnerCode=0",
+      "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=124&period=2024&cmdCode=0409&flowCode=X&partnerCode=0"
+     ],
+     "unit_value_usd_kg": 0.0,
+     "year": 2024
+    },
+    "overall": 40.36,
+    "rank": 8,
+    "score": 32.3,
+    "status": "open",
+    "status_note": "",
+    "top_blocker": "compliance"
+   },
+   {
+    "breakdown": {
+     "compliance": 23.54,
+     "logistics": 8.14,
+     "risk": 2.21,
+     "tariff": 0.0,
+     "tax": 0.0
+    },
+    "components": {
+     "compliance": 0.785,
+     "logistics": 0.543,
+     "risk": 0.221,
+     "tariff": 0.0,
+     "tax": 0.0
+    },
+    "country": "Italy (EU)",
+    "country_code": "IT",
+    "country_facts": {
+     "as_of": "<TODAY>",
+     "country_code": "IT",
+     "country_risk": 0,
+     "country_risk_source": "https://www.oecd.org/en/topics/country-risk-classification.html",
+     "currency": "EUR",
+     "fx_note": "Annualized volatility of monthly CAD/EUR rates, Sep 2023 – Aug 2026 (Bank of Canada).",
+     "fx_source": "https://www.bankofcanada.ca/valet/observations/FXMEURCAD/csv?start_date=2023-09-01&end_date=2026-08-31",
+     "fx_volatility": 0.0368
+    },
+    "entry": {
+     "as_of": "<TODAY>",
+     "category": "honey",
+     "compliance_confidence": "verified",
+     "compliance_requirements": [
+      {
+       "confidence": "verified",
+       "detail": "The packing establishment must hold a Safe Food for Canadians licence and be on the EU's approved list for honey; request listing through the local CFIA office. Lists are updated in batches (the US FDA transmits its updates quarterly), so allow about 3 months.",
+       "lead_time_basis": "estimate",
+       "lead_time_weeks": 12.0,
+       "name": "EU honey establishment listing (DG SANTE)",
+       "source": "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+       "tier": 2
+      },
+      {
+       "confidence": "verified",
+       "detail": "A CFIA inspector or veterinarian issues the model HON certificate in the EU's TRACES system for every consignment, before it leaves Canada.",
+       "lead_time_basis": "estimate",
+       "lead_time_weeks": 1.0,
+       "name": "EU 'HON' export certificate via TRACES",
+       "source": "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+       "tier": 2
+      },
+      {
+       "confidence": "verified",
+       "detail": "Composition limits (moisture, HMF, sugars) and labelling rules, plus EU residue limits.",
+       "lead_time_basis": "estimate",
+       "lead_time_weeks": 2.0,
+       "name": "Honey Directive 2001/110/EC composition and labelling",
+       "source": "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+       "tier": 1
+      },
+      {
+       "confidence": "verified",
+       "detail": "From July 20, 2026, primary packaging may not contain bisphenol A (Regulation 2024/3190).",
+       "lead_time_basis": "estimate",
+       "lead_time_weeks": 2.0,
+       "name": "BPA-free food-contact packaging",
+       "source": "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+       "tier": 1
+      },
+      {
+       "confidence": "verified",
+       "detail": "Self-declared origin statement on the invoice to claim 0% duty.",
+       "lead_time_basis": "official",
+       "lead_time_weeks": 0.0,
+       "name": "CETA origin declaration",
+       "source": "https://www.cbsa-asfc.gc.ca/publications/dm-md/d11/d11-4-14-eng.html",
+       "tier": 1
+      },
+      {
+       "confidence": "verified",
+       "detail": "Mandatory food information must be in Italian; food sold without it is a sanctioned offence (D.Lgs. 231/2017). EU law lets member states require their language (Reg. 1169/2011, Art. 15).",
+       "lead_time_basis": "estimate",
+       "lead_time_weeks": 2.0,
+       "name": "Italian-language labelling",
+       "source": "https://www.gazzettaufficiale.it/eli/id/2018/02/08/18G00023/sg",
+       "tier": 1
+      }
+     ],
+     "country": "Italy (EU)",
+     "country_code": "IT",
+     "language": "it",
+     "lpi_customs_score": 3.4,
+     "mfn_rate": 0.173,
+     "notes": [
+      "Compliance: EU rules, same as Germany (EU import rules are harmonised), plus Italian-language labelling."
+     ],
+     "sea_distance_nm": 4793.0,
+     "shipping_route": "Montreal → Genoa, ~20 days, direct sailings every 1-2 weeks",
+     "shipping_source": "https://www.fluentcargo.com/routes/montreal-ca/genoa-it",
+     "sources": [
+      "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+      "https://wits.worldbank.org/tariff/trains/en/country/EUN/partner/CAN/product/040900",
+      "https://www.gazzettaufficiale.it/eli/id/2018/02/08/18G00023/sg",
+      "https://www.agenziaentrate.gov.it/",
+      "https://www.fluentcargo.com/routes/montreal-ca/genoa-it",
+      "https://api.worldbank.org/v2/country/FRA;NLD;ITA;DEU/indicator/LP.LPI.CUST.XQ?format=json&date=2018:2024"
+     ],
+     "status": "open",
+     "status_note": "",
+     "tariff_note": "Duty-free under CETA. Without it, the EU tariff on natural honey is 17.3%.",
+     "tariff_rate": 0.0,
+     "tax_burden": 0.0,
+     "tax_note": "Import VAT at Italy's reduced food rate is paid and recovered by the Italian importer (rate not verified here: confirm with the Agenzia delle Entrate).",
+     "trade_agreement": "CETA",
+     "weekly_sailings": 0.75
+    },
+    "factors": {
+     "country_risk": 0.0,
+     "customs": 0.4,
+     "distance": 0.479,
+     "fx": 0.368,
+     "lead_time": 0.462,
+     "sailings": 0.812,
+     "tiers": 1.0
+    },
+    "lead_time_estimated": true,
+    "lead_time_weeks": 12.0,
+    "middlemen": [
+     {
+      "category": "honey",
+      "contact": "Contact via the council website",
+      "country_code": "*",
+      "description": "National body for Canada's beekeepers; publishes an exporters catalogue and tracks tariff and market-access changes for honey.",
+      "id": "chc",
+      "name": "Canadian Honey Council",
+      "source": "https://honeycouncil.ca/tariffs/",
+      "type": "Canadian industry association",
+      "website": "https://honeycouncil.ca/"
+     },
+     {
+      "category": "*",
+      "contact": "Find a trade commissioner for the target market",
+      "country_code": "*",
+      "description": "Government of Canada trade commissioners in every one of these markets help Canadian businesses find vetted local partners, at no charge.",
+      "id": "tcs",
+      "name": "Canadian Trade Commissioner Service",
+      "source": "https://www.tradecommissioner.gc.ca/en/about-us/contact-us/find-trade-commissioner.html",
+      "type": "government (free)",
+      "website": "https://www.tradecommissioner.gc.ca/en/about-us/contact-us/find-trade-commissioner.html"
+     }
+    ],
+    "opportunity": 40.3,
+    "opportunity_components": {
+     "demand": 0.616,
+     "foothold": 0.0,
+     "growth": 0.377,
+     "price": 0.523
+    },
+    "opportunity_facts": {
+     "canada_share": 0.0,
+     "canada_unit_value_usd_kg": 4.04,
+     "growth_rate": -0.0246,
+     "growth_years": "2019–2024",
+     "import_value_usd": 70494815.0,
+     "import_volume_kg": 22207910.0,
+     "net_unit_value_usd_kg": 3.17,
+     "note": "",
+     "sources": [
+      "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=380&period=2024&cmdCode=040900&flowCode=M&partnerCode=0,124",
+      "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=380&period=2019&cmdCode=040900&flowCode=M&partnerCode=0",
+      "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=124&period=2024&cmdCode=0409&flowCode=X&partnerCode=0"
+     ],
+     "unit_value_usd_kg": 3.17,
+     "year": 2024
+    },
+    "overall": 40.3,
+    "rank": 9,
+    "score": 33.89,
     "status": "open",
     "status_note": "",
     "top_blocker": "compliance"
@@ -13165,7 +16423,7 @@
      "year": 2024
     },
     "overall": 39.85,
-    "rank": 7,
+    "rank": 10,
     "score": 21.75,
     "status": "open",
     "status_note": "",
@@ -13244,7 +16502,7 @@
     "opportunity_components": {},
     "opportunity_facts": null,
     "overall": null,
-    "rank": 8,
+    "rank": 11,
     "score": null,
     "status": "blocked",
     "status_note": "Canada does not meet Mexico's requirements for exporting honey and apiculture products for human consumption. No CFIA certificate is currently available (CFIA).",

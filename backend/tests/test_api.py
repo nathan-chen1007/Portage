@@ -21,7 +21,7 @@ HONEY_DESC = ("We're Prairie Gold Apiaries, a family beekeeping operation near L
 
 def test_health_and_categories(client):
     h = client.get("/health").json()
-    assert h["status"] == "ok" and h["markets"] == 24 and h["llm"] is False
+    assert h["status"] == "ok" and h["markets"] == 30 and h["llm"] is False
     assert {c["id"] for c in client.get("/api/categories").json()} == {"honey", "icewine", "b2b_saas"}
 
 

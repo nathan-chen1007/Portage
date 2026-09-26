@@ -100,6 +100,42 @@
           "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=842&period=2019&cmdCode=0409&flowCode=M&partnerCode=0",
           "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=842&period=2024&cmdCode=0409&flowCode=M&partnerCode=124"
         ]
+      },
+      {
+        "country_code": "FR",
+        "import_value_usd": 110418996,
+        "import_volume_kg": 0,
+        "import_value_base_usd": 118632244,
+        "canada_value_usd": 1868,
+        "note": "No 2024 import weights reported: price data unavailable.",
+        "sources": [
+          "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=251&period=2024&cmdCode=040900&flowCode=M&partnerCode=0,124",
+          "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=251&period=2019&cmdCode=040900&flowCode=M&partnerCode=0"
+        ]
+      },
+      {
+        "country_code": "NL",
+        "import_value_usd": 92323735,
+        "import_volume_kg": 22846446,
+        "import_value_base_usd": 52281228,
+        "canada_value_usd": 286,
+        "note": "",
+        "sources": [
+          "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=528&period=2024&cmdCode=040900&flowCode=M&partnerCode=0,124",
+          "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=528&period=2019&cmdCode=040900&flowCode=M&partnerCode=0"
+        ]
+      },
+      {
+        "country_code": "IT",
+        "import_value_usd": 70494815,
+        "import_volume_kg": 22207910,
+        "import_value_base_usd": 79846470,
+        "canada_value_usd": 0,
+        "note": "",
+        "sources": [
+          "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=380&period=2024&cmdCode=040900&flowCode=M&partnerCode=0,124",
+          "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=380&period=2019&cmdCode=040900&flowCode=M&partnerCode=0"
+        ]
       }
     ]
   },
@@ -208,6 +244,42 @@
         "sources": [
           "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=484&period=2024&cmdCode=220421&flowCode=M&partnerCode=0,124",
           "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=484&period=2019&cmdCode=220421&flowCode=M&partnerCode=0"
+        ]
+      },
+      {
+        "country_code": "FR",
+        "import_value_usd": 509956685,
+        "import_volume_kg": 0,
+        "import_value_base_usd": 553124530,
+        "canada_value_usd": 34307,
+        "note": "HS 2204.21 covers all bottled wine; market size is the wine market, not icewine specifically. No 2024 import weights reported: price data unavailable.",
+        "sources": [
+          "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=251&period=2024&cmdCode=220421&flowCode=M&partnerCode=0,124",
+          "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=251&period=2019&cmdCode=220421&flowCode=M&partnerCode=0"
+        ]
+      },
+      {
+        "country_code": "NL",
+        "import_value_usd": 1272366365,
+        "import_volume_kg": 331206658,
+        "import_value_base_usd": 1122682064,
+        "canada_value_usd": 353715,
+        "note": "HS 2204.21 covers all bottled wine; market size is the wine market, not icewine specifically.",
+        "sources": [
+          "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=528&period=2024&cmdCode=220421&flowCode=M&partnerCode=0,124",
+          "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=528&period=2019&cmdCode=220421&flowCode=M&partnerCode=0"
+        ]
+      },
+      {
+        "country_code": "IT",
+        "import_value_usd": 137199448,
+        "import_volume_kg": 19525020,
+        "import_value_base_usd": 77622670,
+        "canada_value_usd": 23634,
+        "note": "HS 2204.21 covers all bottled wine; market size is the wine market, not icewine specifically.",
+        "sources": [
+          "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=380&period=2024&cmdCode=220421&flowCode=M&partnerCode=0,124",
+          "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=380&period=2019&cmdCode=220421&flowCode=M&partnerCode=0"
         ]
       }
     ]

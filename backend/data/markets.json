@@ -237,6 +237,249 @@
   },
   {
     "category": "honey",
+    "country": "France (EU)",
+    "country_code": "FR",
+    "language": "fr",
+    "status": "open",
+    "status_note": "",
+    "tariff_rate": 0.0,
+    "mfn_rate": 0.173,
+    "tariff_note": "Duty-free under CETA. Without it, the EU tariff on natural honey is 17.3%.",
+    "trade_agreement": "CETA",
+    "compliance_requirements": [
+      {
+        "name": "EU honey establishment listing (DG SANTE)",
+        "tier": 2,
+        "detail": "The packing establishment must hold a Safe Food for Canadians licence and be on the EU's approved list for honey; request listing through the local CFIA office. Lists are updated in batches (the US FDA transmits its updates quarterly), so allow about 3 months.",
+        "source": "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+        "lead_time_weeks": 12,
+        "lead_time_basis": "estimate"
+      },
+      {
+        "name": "EU 'HON' export certificate via TRACES",
+        "tier": 2,
+        "detail": "A CFIA inspector or veterinarian issues the model HON certificate in the EU's TRACES system for every consignment, before it leaves Canada.",
+        "source": "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+        "lead_time_weeks": 1,
+        "lead_time_basis": "estimate"
+      },
+      {
+        "name": "Honey Directive 2001/110/EC composition and labelling",
+        "tier": 1,
+        "detail": "Composition limits (moisture, HMF, sugars) and labelling rules, plus EU residue limits.",
+        "source": "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+        "lead_time_weeks": 2,
+        "lead_time_basis": "estimate"
+      },
+      {
+        "name": "BPA-free food-contact packaging",
+        "tier": 1,
+        "detail": "From July 20, 2026, primary packaging may not contain bisphenol A (Regulation 2024/3190).",
+        "source": "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+        "lead_time_weeks": 2,
+        "lead_time_basis": "estimate"
+      },
+      {
+        "name": "CETA origin declaration",
+        "tier": 1,
+        "detail": "Self-declared origin statement on the invoice to claim 0% duty.",
+        "source": "https://www.cbsa-asfc.gc.ca/publications/dm-md/d11/d11-4-14-eng.html",
+        "lead_time_weeks": 0,
+        "lead_time_basis": "official"
+      },
+      {
+        "name": "French-language labelling",
+        "tier": 1,
+        "detail": "Mandatory label information must be at least in French (Loi n° 94-665 'Toubon', Art. 2; DGCCRF food-labelling rules). EU law lets member states require their language (Reg. 1169/2011, Art. 15).",
+        "source": "https://www.economie.gouv.fr/dgccrf/les-fiches-pratiques/etiquetage-des-denrees-alimentaires-les-regles-connaitre",
+        "lead_time_weeks": 2,
+        "lead_time_basis": "estimate"
+      }
+    ],
+    "lpi_customs_score": 3.7,
+    "tax_burden": 0.0,
+    "tax_note": "Import VAT at France's 5.5% food rate is paid and recovered by the French importer (economie.gouv.fr).",
+    "sea_distance_nm": 3984,
+    "weekly_sailings": 1.5,
+    "shipping_route": "Montreal → Le Havre, ~16 days, direct sailings 1-2×/week",
+    "shipping_source": "https://www.fluentcargo.com/routes/montreal-ca/le-havre-fr",
+    "notes": [
+      "Compliance: EU rules, same as Germany (EU import rules are harmonised), plus French-language labelling."
+    ],
+    "sources": [
+      "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+      "https://wits.worldbank.org/tariff/trains/en/country/EUN/partner/CAN/product/040900",
+      "https://www.economie.gouv.fr/dgccrf/les-fiches-pratiques/etiquetage-des-denrees-alimentaires-les-regles-connaitre",
+      "https://www.economie.gouv.fr/particuliers/impots-et-fiscalite/gerer-mes-autres-impots-et-taxes/tva-quels-sont-les-taux-de-votre-quotidien",
+      "https://www.fluentcargo.com/routes/montreal-ca/le-havre-fr",
+      "https://api.worldbank.org/v2/country/FRA;NLD;ITA;DEU/indicator/LP.LPI.CUST.XQ?format=json&date=2018:2024"
+    ],
+    "as_of": "2026-09-26"
+  },
+  {
+    "category": "honey",
+    "country": "Netherlands (EU)",
+    "country_code": "NL",
+    "language": "nl",
+    "status": "open",
+    "status_note": "",
+    "tariff_rate": 0.0,
+    "mfn_rate": 0.173,
+    "tariff_note": "Duty-free under CETA. Without it, the EU tariff on natural honey is 17.3%.",
+    "trade_agreement": "CETA",
+    "compliance_requirements": [
+      {
+        "name": "EU honey establishment listing (DG SANTE)",
+        "tier": 2,
+        "detail": "The packing establishment must hold a Safe Food for Canadians licence and be on the EU's approved list for honey; request listing through the local CFIA office. Lists are updated in batches (the US FDA transmits its updates quarterly), so allow about 3 months.",
+        "source": "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+        "lead_time_weeks": 12,
+        "lead_time_basis": "estimate"
+      },
+      {
+        "name": "EU 'HON' export certificate via TRACES",
+        "tier": 2,
+        "detail": "A CFIA inspector or veterinarian issues the model HON certificate in the EU's TRACES system for every consignment, before it leaves Canada.",
+        "source": "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+        "lead_time_weeks": 1,
+        "lead_time_basis": "estimate"
+      },
+      {
+        "name": "Honey Directive 2001/110/EC composition and labelling",
+        "tier": 1,
+        "detail": "Composition limits (moisture, HMF, sugars) and labelling rules, plus EU residue limits.",
+        "source": "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+        "lead_time_weeks": 2,
+        "lead_time_basis": "estimate"
+      },
+      {
+        "name": "BPA-free food-contact packaging",
+        "tier": 1,
+        "detail": "From July 20, 2026, primary packaging may not contain bisphenol A (Regulation 2024/3190).",
+        "source": "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+        "lead_time_weeks": 2,
+        "lead_time_basis": "estimate"
+      },
+      {
+        "name": "CETA origin declaration",
+        "tier": 1,
+        "detail": "Self-declared origin statement on the invoice to claim 0% duty.",
+        "source": "https://www.cbsa-asfc.gc.ca/publications/dm-md/d11/d11-4-14-eng.html",
+        "lead_time_weeks": 0,
+        "lead_time_basis": "official"
+      },
+      {
+        "name": "Dutch-language labelling",
+        "tier": 1,
+        "detail": "Mandatory food information must be given in Dutch (Dutch government business portal; Warenwetbesluit informatie levensmiddelen). EU law lets member states require their language (Reg. 1169/2011, Art. 15).",
+        "source": "https://ondernemersplein.overheid.nl/wetten-en-regels/regels-voor-etiketten-van-levensmiddelen/",
+        "lead_time_weeks": 2,
+        "lead_time_basis": "estimate"
+      }
+    ],
+    "lpi_customs_score": 3.9,
+    "tax_burden": 0.0,
+    "tax_note": "Import VAT at the Dutch 9% food rate is paid and recovered by the Dutch importer (Belastingdienst).",
+    "sea_distance_nm": 3314,
+    "weekly_sailings": 0.9,
+    "shipping_route": "Halifax → Rotterdam, ~12 days, direct sailings about weekly",
+    "shipping_source": "https://www.fluentcargo.com/routes/halifax-ca/rotterdam-nl",
+    "notes": [
+      "Compliance: EU rules, same as Germany (EU import rules are harmonised), plus Dutch-language labelling."
+    ],
+    "sources": [
+      "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+      "https://wits.worldbank.org/tariff/trains/en/country/EUN/partner/CAN/product/040900",
+      "https://ondernemersplein.overheid.nl/wetten-en-regels/regels-voor-etiketten-van-levensmiddelen/",
+      "https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/zakelijk/btw/tarieven_en_vrijstellingen/goederen_9_btw/voedingsmiddelen/",
+      "https://www.fluentcargo.com/routes/halifax-ca/rotterdam-nl",
+      "https://api.worldbank.org/v2/country/FRA;NLD;ITA;DEU/indicator/LP.LPI.CUST.XQ?format=json&date=2018:2024"
+    ],
+    "as_of": "2026-09-26"
+  },
+  {
+    "category": "honey",
+    "country": "Italy (EU)",
+    "country_code": "IT",
+    "language": "it",
+    "status": "open",
+    "status_note": "",
+    "tariff_rate": 0.0,
+    "mfn_rate": 0.173,
+    "tariff_note": "Duty-free under CETA. Without it, the EU tariff on natural honey is 17.3%.",
+    "trade_agreement": "CETA",
+    "compliance_requirements": [
+      {
+        "name": "EU honey establishment listing (DG SANTE)",
+        "tier": 2,
+        "detail": "The packing establishment must hold a Safe Food for Canadians licence and be on the EU's approved list for honey; request listing through the local CFIA office. Lists are updated in batches (the US FDA transmits its updates quarterly), so allow about 3 months.",
+        "source": "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+        "lead_time_weeks": 12,
+        "lead_time_basis": "estimate"
+      },
+      {
+        "name": "EU 'HON' export certificate via TRACES",
+        "tier": 2,
+        "detail": "A CFIA inspector or veterinarian issues the model HON certificate in the EU's TRACES system for every consignment, before it leaves Canada.",
+        "source": "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+        "lead_time_weeks": 1,
+        "lead_time_basis": "estimate"
+      },
+      {
+        "name": "Honey Directive 2001/110/EC composition and labelling",
+        "tier": 1,
+        "detail": "Composition limits (moisture, HMF, sugars) and labelling rules, plus EU residue limits.",
+        "source": "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+        "lead_time_weeks": 2,
+        "lead_time_basis": "estimate"
+      },
+      {
+        "name": "BPA-free food-contact packaging",
+        "tier": 1,
+        "detail": "From July 20, 2026, primary packaging may not contain bisphenol A (Regulation 2024/3190).",
+        "source": "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+        "lead_time_weeks": 2,
+        "lead_time_basis": "estimate"
+      },
+      {
+        "name": "CETA origin declaration",
+        "tier": 1,
+        "detail": "Self-declared origin statement on the invoice to claim 0% duty.",
+        "source": "https://www.cbsa-asfc.gc.ca/publications/dm-md/d11/d11-4-14-eng.html",
+        "lead_time_weeks": 0,
+        "lead_time_basis": "official"
+      },
+      {
+        "name": "Italian-language labelling",
+        "tier": 1,
+        "detail": "Mandatory food information must be in Italian; food sold without it is a sanctioned offence (D.Lgs. 231/2017). EU law lets member states require their language (Reg. 1169/2011, Art. 15).",
+        "source": "https://www.gazzettaufficiale.it/eli/id/2018/02/08/18G00023/sg",
+        "lead_time_weeks": 2,
+        "lead_time_basis": "estimate"
+      }
+    ],
+    "lpi_customs_score": 3.4,
+    "tax_burden": 0.0,
+    "tax_note": "Import VAT at Italy's reduced food rate is paid and recovered by the Italian importer (rate not verified here: confirm with the Agenzia delle Entrate).",
+    "sea_distance_nm": 4793,
+    "weekly_sailings": 0.75,
+    "shipping_route": "Montreal → Genoa, ~20 days, direct sailings every 1-2 weeks",
+    "shipping_source": "https://www.fluentcargo.com/routes/montreal-ca/genoa-it",
+    "notes": [
+      "Compliance: EU rules, same as Germany (EU import rules are harmonised), plus Italian-language labelling."
+    ],
+    "sources": [
+      "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+      "https://wits.worldbank.org/tariff/trains/en/country/EUN/partner/CAN/product/040900",
+      "https://www.gazzettaufficiale.it/eli/id/2018/02/08/18G00023/sg",
+      "https://www.agenziaentrate.gov.it/",
+      "https://www.fluentcargo.com/routes/montreal-ca/genoa-it",
+      "https://api.worldbank.org/v2/country/FRA;NLD;ITA;DEU/indicator/LP.LPI.CUST.XQ?format=json&date=2018:2024"
+    ],
+    "as_of": "2026-09-26"
+  },
+  {
+    "category": "honey",
     "country": "China",
     "country_code": "CN",
     "language": "zh",
@@ -956,6 +1199,204 @@
       "https://www.international.gc.ca/trade-commerce/trade-agreements-accords-commerciaux/agr-acc/ceta-aecg/2024-07-31_wines_summary-sommaire_vins.aspx?lang=eng",
       "https://www.zoll.de/DE/Fachthemen/Steuern/Verbrauchsteuern/Alkohol-Tabakwaren-Kaffee/Steuergegenstand-Besonderheiten-Wein/Besonderheiten-Wein/besonderheiten_wein_node.html",
       "https://wits.worldbank.org/tariff/trains/en/country/DEU/partner/CAN/product/220421"
+    ]
+  },
+  {
+    "country": "France (EU)",
+    "country_code": "FR",
+    "language": "fr",
+    "lpi_customs_score": 3.7,
+    "sea_distance_nm": 3984,
+    "weekly_sailings": 1.5,
+    "shipping_route": "Montreal → Le Havre, ~16 days, direct sailings 1-2×/week",
+    "shipping_source": "https://www.fluentcargo.com/routes/montreal-ca/le-havre-fr",
+    "category": "icewine",
+    "status": "open",
+    "status_note": "",
+    "tax_burden": 0.0,
+    "tax_note": "Excise on still wine is €4.19 per hectolitre in 2026 (French customs), plus 20% VAT; both are paid by the French importer.",
+    "notes": [
+      "Compliance: EU rules, same as Germany (EU import rules are harmonised), plus French-language labelling.",
+      "HS 2204.21 covers all bottled wine; market size is the wine market, not icewine specifically."
+    ],
+    "as_of": "2026-09-26",
+    "tariff_rate": 0.0,
+    "mfn_rate": 0.035,
+    "tariff_note": "Duty-free under CETA (WITS/TRAINS: 0% for Canada). Without it, the EU tariff on bottled still wine is €13.1-15.4 per hectolitre (about 3.5% ad valorem).",
+    "trade_agreement": "CETA",
+    "compliance_requirements": [
+      {
+        "name": "VI-1 wine import document (simplified self-certification)",
+        "tier": 2,
+        "detail": "EU wine imports need a VI-1 document. Canadian wine can use the simplified certificate: producers on Canada's authorised list self-certify (Canada-EU Wine Agreement, Art. 23).",
+        "source": "https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:22004A0206(02)",
+        "lead_time_weeks": 4,
+        "lead_time_basis": "estimate"
+      },
+      {
+        "name": "EU icewine standard and labelling",
+        "tier": 1,
+        "detail": "'Icewine' must come from grapes naturally frozen on the vine (no artificial freezing), with minimum alcohol and sulphite limits (Art. 25); French-language labelling with allergens (sulphites).",
+        "source": "https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:22004A0206(02)",
+        "lead_time_weeks": 2,
+        "lead_time_basis": "estimate"
+      },
+      {
+        "name": "CETA origin declaration",
+        "tier": 1,
+        "detail": "Origin declaration on the invoice with your CRA Business Number to claim 0% duty. Icewine from Canadian-grown grapes is wholly obtained (CETA Origin Protocol, Art. 4).",
+        "source": "https://www.international.gc.ca/trade-commerce/trade-agreements-accords-commerciaux/agr-acc/ceta-aecg/text-texte/P1.aspx?lang=eng",
+        "lead_time_weeks": 0,
+        "lead_time_basis": "official"
+      },
+      {
+        "name": "French-language labelling",
+        "tier": 1,
+        "detail": "Mandatory label information must be at least in French (Loi n° 94-665 'Toubon', Art. 2; DGCCRF food-labelling rules). EU law lets member states require their language (Reg. 1169/2011, Art. 15).",
+        "source": "https://www.economie.gouv.fr/dgccrf/les-fiches-pratiques/etiquetage-des-denrees-alimentaires-les-regles-connaitre",
+        "lead_time_weeks": 2,
+        "lead_time_basis": "estimate"
+      }
+    ],
+    "sources": [
+      "https://www.international.gc.ca/trade-commerce/trade-agreements-accords-commerciaux/agr-acc/ceta-aecg/2024-07-31_wines_summary-sommaire_vins.aspx?lang=eng",
+      "https://wits.worldbank.org/tariff/trains/en/country/DEU/partner/CAN/product/220421",
+      "https://www.economie.gouv.fr/dgccrf/les-fiches-pratiques/etiquetage-des-denrees-alimentaires-les-regles-connaitre",
+      "https://www.douane.gouv.fr/fiche/droits-des-alcools-et-boissons-alcooliques",
+      "https://www.fluentcargo.com/routes/montreal-ca/le-havre-fr",
+      "https://api.worldbank.org/v2/country/FRA;NLD;ITA;DEU/indicator/LP.LPI.CUST.XQ?format=json&date=2018:2024"
+    ]
+  },
+  {
+    "country": "Netherlands (EU)",
+    "country_code": "NL",
+    "language": "nl",
+    "lpi_customs_score": 3.9,
+    "sea_distance_nm": 3314,
+    "weekly_sailings": 0.9,
+    "shipping_route": "Halifax → Rotterdam, ~12 days, direct sailings about weekly",
+    "shipping_source": "https://www.fluentcargo.com/routes/halifax-ca/rotterdam-nl",
+    "category": "icewine",
+    "status": "open",
+    "status_note": "",
+    "tax_burden": 0.0,
+    "tax_note": "Dutch excise on still wine is €95.69 per hectolitre above 8.5% ABV (Douane rate list, 2026), plus 21% VAT; both are paid by the Dutch importer.",
+    "notes": [
+      "Compliance: EU rules, same as Germany (EU import rules are harmonised), plus Dutch-language labelling.",
+      "HS 2204.21 covers all bottled wine; market size is the wine market, not icewine specifically."
+    ],
+    "as_of": "2026-09-26",
+    "tariff_rate": 0.0,
+    "mfn_rate": 0.035,
+    "tariff_note": "Duty-free under CETA (WITS/TRAINS: 0% for Canada). Without it, the EU tariff on bottled still wine is €13.1-15.4 per hectolitre (about 3.5% ad valorem).",
+    "trade_agreement": "CETA",
+    "compliance_requirements": [
+      {
+        "name": "VI-1 wine import document (simplified self-certification)",
+        "tier": 2,
+        "detail": "EU wine imports need a VI-1 document. Canadian wine can use the simplified certificate: producers on Canada's authorised list self-certify (Canada-EU Wine Agreement, Art. 23).",
+        "source": "https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:22004A0206(02)",
+        "lead_time_weeks": 4,
+        "lead_time_basis": "estimate"
+      },
+      {
+        "name": "EU icewine standard and labelling",
+        "tier": 1,
+        "detail": "'Icewine' must come from grapes naturally frozen on the vine (no artificial freezing), with minimum alcohol and sulphite limits (Art. 25); Dutch-language labelling with allergens (sulphites).",
+        "source": "https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:22004A0206(02)",
+        "lead_time_weeks": 2,
+        "lead_time_basis": "estimate"
+      },
+      {
+        "name": "CETA origin declaration",
+        "tier": 1,
+        "detail": "Origin declaration on the invoice with your CRA Business Number to claim 0% duty. Icewine from Canadian-grown grapes is wholly obtained (CETA Origin Protocol, Art. 4).",
+        "source": "https://www.international.gc.ca/trade-commerce/trade-agreements-accords-commerciaux/agr-acc/ceta-aecg/text-texte/P1.aspx?lang=eng",
+        "lead_time_weeks": 0,
+        "lead_time_basis": "official"
+      },
+      {
+        "name": "Dutch-language labelling",
+        "tier": 1,
+        "detail": "Mandatory food information must be given in Dutch (Dutch government business portal; Warenwetbesluit informatie levensmiddelen). EU law lets member states require their language (Reg. 1169/2011, Art. 15).",
+        "source": "https://ondernemersplein.overheid.nl/wetten-en-regels/regels-voor-etiketten-van-levensmiddelen/",
+        "lead_time_weeks": 2,
+        "lead_time_basis": "estimate"
+      }
+    ],
+    "sources": [
+      "https://www.international.gc.ca/trade-commerce/trade-agreements-accords-commerciaux/agr-acc/ceta-aecg/2024-07-31_wines_summary-sommaire_vins.aspx?lang=eng",
+      "https://wits.worldbank.org/tariff/trains/en/country/DEU/partner/CAN/product/220421",
+      "https://ondernemersplein.overheid.nl/wetten-en-regels/regels-voor-etiketten-van-levensmiddelen/",
+      "https://www.douane.nl/wp-content/uploads/2025/12/Tarievenlijst-accijns-ACC-055-2Z-97FD_TG.pdf",
+      "https://www.fluentcargo.com/routes/halifax-ca/rotterdam-nl",
+      "https://api.worldbank.org/v2/country/FRA;NLD;ITA;DEU/indicator/LP.LPI.CUST.XQ?format=json&date=2018:2024"
+    ]
+  },
+  {
+    "country": "Italy (EU)",
+    "country_code": "IT",
+    "language": "it",
+    "lpi_customs_score": 3.4,
+    "sea_distance_nm": 4793,
+    "weekly_sailings": 0.75,
+    "shipping_route": "Montreal → Genoa, ~20 days, direct sailings every 1-2 weeks",
+    "shipping_source": "https://www.fluentcargo.com/routes/montreal-ca/genoa-it",
+    "category": "icewine",
+    "status": "open",
+    "status_note": "",
+    "tax_burden": 0.0,
+    "tax_note": "Italy's excise on still wine is zero (European Commission, Access2Markets); import VAT (standard rate) is paid by the Italian importer.",
+    "notes": [
+      "Compliance: EU rules, same as Germany (EU import rules are harmonised), plus Italian-language labelling.",
+      "HS 2204.21 covers all bottled wine; market size is the wine market, not icewine specifically."
+    ],
+    "as_of": "2026-09-26",
+    "tariff_rate": 0.0,
+    "mfn_rate": 0.035,
+    "tariff_note": "Duty-free under CETA (WITS/TRAINS: 0% for Canada). Without it, the EU tariff on bottled still wine is €13.1-15.4 per hectolitre (about 3.5% ad valorem).",
+    "trade_agreement": "CETA",
+    "compliance_requirements": [
+      {
+        "name": "VI-1 wine import document (simplified self-certification)",
+        "tier": 2,
+        "detail": "EU wine imports need a VI-1 document. Canadian wine can use the simplified certificate: producers on Canada's authorised list self-certify (Canada-EU Wine Agreement, Art. 23).",
+        "source": "https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:22004A0206(02)",
+        "lead_time_weeks": 4,
+        "lead_time_basis": "estimate"
+      },
+      {
+        "name": "EU icewine standard and labelling",
+        "tier": 1,
+        "detail": "'Icewine' must come from grapes naturally frozen on the vine (no artificial freezing), with minimum alcohol and sulphite limits (Art. 25); Italian-language labelling with allergens (sulphites).",
+        "source": "https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:22004A0206(02)",
+        "lead_time_weeks": 2,
+        "lead_time_basis": "estimate"
+      },
+      {
+        "name": "CETA origin declaration",
+        "tier": 1,
+        "detail": "Origin declaration on the invoice with your CRA Business Number to claim 0% duty. Icewine from Canadian-grown grapes is wholly obtained (CETA Origin Protocol, Art. 4).",
+        "source": "https://www.international.gc.ca/trade-commerce/trade-agreements-accords-commerciaux/agr-acc/ceta-aecg/text-texte/P1.aspx?lang=eng",
+        "lead_time_weeks": 0,
+        "lead_time_basis": "official"
+      },
+      {
+        "name": "Italian-language labelling",
+        "tier": 1,
+        "detail": "Mandatory food information must be in Italian; food sold without it is a sanctioned offence (D.Lgs. 231/2017). EU law lets member states require their language (Reg. 1169/2011, Art. 15).",
+        "source": "https://www.gazzettaufficiale.it/eli/id/2018/02/08/18G00023/sg",
+        "lead_time_weeks": 2,
+        "lead_time_basis": "estimate"
+      }
+    ],
+    "sources": [
+      "https://www.international.gc.ca/trade-commerce/trade-agreements-accords-commerciaux/agr-acc/ceta-aecg/2024-07-31_wines_summary-sommaire_vins.aspx?lang=eng",
+      "https://wits.worldbank.org/tariff/trains/en/country/DEU/partner/CAN/product/220421",
+      "https://www.gazzettaufficiale.it/eli/id/2018/02/08/18G00023/sg",
+      "https://trade.ec.europa.eu/access-to-markets/it/content/accise",
+      "https://www.fluentcargo.com/routes/montreal-ca/genoa-it",
+      "https://api.worldbank.org/v2/country/FRA;NLD;ITA;DEU/indicator/LP.LPI.CUST.XQ?format=json&date=2018:2024"
     ]
   },
   {

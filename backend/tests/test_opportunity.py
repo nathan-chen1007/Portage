@@ -93,6 +93,7 @@ def test_missing_inputs_are_unavailable_not_zero(catalog):
     assert parts3["growth"] is None
     assert weighted_opportunity({"demand": 1.0, "price": None, "growth": None, "foothold": 0.0}) == pytest.approx(
         100 * 0.35 / 0.6, abs=0.01)
-    # Every curated market with full data has no unavailable component.
+    # France reports no 2024 import weights for honey (UN Comtrade), so only its price is unavailable.
     for m in rank_markets("honey", catalog):
-        assert None not in (m.opportunity_components or {}).values()
+        missing = [k for k, v in (m.opportunity_components or {}).items() if v is None]
+        assert missing == (["price"] if m.country_code == "FR" else [])

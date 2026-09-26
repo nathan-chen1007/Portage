@@ -74,6 +74,8 @@ export const LANGUAGE_NAMES = {
   es: "Spanish",
   zh: "Chinese",
   fr: "French",
+  nl: "Dutch",
+  it: "Italian",
 };
 
 export const TIER_LABEL = { 1: "Paperwork", 2: "Registration", 3: "Licence / approval" };
