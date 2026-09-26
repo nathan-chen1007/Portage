@@ -117,6 +117,20 @@ export default function App() {
     if (!result?.lookup || hs6 === result.lookup.product.hs6) return;
     setReranking(true);
     setError(null);
+    // A code we have verified data for (honey 0409.00, icewine 2204.21) goes to the verified path, with
+    // Paperwork, Partners & outreach and Ship together, instead of the any-product ranking.
+    const curated = categories.find((c) => c.kind === "goods" && c.hs_code && c.hs_code.replace(".", "") === hs6);
+    if (curated) {
+      try {
+        const markets = await api.rank(curated.id);
+        showResult({ profile: { ...result.profile, category: curated.id }, category: curated, markets, mode: result.mode });
+      } catch (e) {
+        setError(e.message);
+      } finally {
+        setReranking(false);
+      }
+      return;
+    }
     try {
       const resp = await api.lookupRank(hs6, {
         description: result.lookup.product.founder_description,

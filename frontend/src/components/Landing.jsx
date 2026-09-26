@@ -12,6 +12,11 @@ export const EXAMPLES = [
     text: "We're Prairie Gold Apiaries, a family beekeeping operation near Falher, Alberta. We sell raw creamed clover honey in 500 g jars and 20 kg pails. Most of our sales used to go to the US. Contact: Dana Morin, dana@prairiegold.ca",
   },
   {
+    label: "Icewine, Niagara",
+    color: "#7c3aed",
+    text: "We're a small family winery in Niagara-on-the-Lake, Ontario. We make Vidal and Cabernet Franc icewine in 200 ml and 375 ml bottles, about 2,000 cases a year. The US was our biggest export market. Contact: Sam Lee, sam@example.ca",
+  },
+  {
     label: "HR software, Waterloo",
     color: "#2a78d6",
     text: "Northwind HR is a Waterloo startup selling cloud HR analytics software to mid-size companies. We store employee records, performance reviews and payroll data for our customers. Contact: Sam Lee, sam@northwindhr.com",
@@ -325,7 +330,7 @@ function Home({ categories, description, setDescription, onAnalyze, onPickCatego
                 <p className="font-medium">We don't have verified data for that product yet.</p>
                 <p className="mt-1 text-sm text-neutral-500">
                   We only show sourced tariff and regulatory data, never guesses. Supported today:{" "}
-                  {categories.map((c) => c.label).join(" and ") || "honey and B2B software"}.
+                  {categories.map((c) => c.label).join(", ") || "honey, icewine and B2B software"}.
                 </p>
               </div>
             )}

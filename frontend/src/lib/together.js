@@ -30,6 +30,32 @@ const GOODS_PLACES = [
 ];
 const GOODS_KINDS = ["Family apiary", "Beekeeping co-op", "Honey packer", "Apiary", "Meadery"];
 
+// Icewine regions: Niagara (Ontario), the Okanagan (British Columbia) and Nova Scotia (sample group).
+const ICEWINE_PLACES = [
+  ["Niagara-on-the-Lake", "ON"],
+  ["Beamsville", "ON"],
+  ["Jordan Station", "ON"],
+  ["Vineland", "ON"],
+  ["St. Catharines", "ON"],
+  ["Kelowna", "BC"],
+  ["Oliver", "BC"],
+  ["Osoyoos", "BC"],
+  ["Penticton", "BC"],
+  ["Wolfville", "NS"],
+];
+const ICEWINE_KINDS = ["Estate winery", "Family winery", "Icewine producer", "Craft winery", "Vineyard and winery"];
+
+// Goods sample groups per curated category (honey keeps its original seed, so its cohort is unchanged).
+const GOODS = {
+  honey: { places: GOODS_PLACES, kinds: GOODS_KINDS, seed: "goods", kgBase: 1, kgSpan: 3.5, me: "Your apiary" },
+  icewine: { places: ICEWINE_PLACES, kinds: ICEWINE_KINDS, seed: "icewine", kgBase: 0.4, kgSpan: 1.6, me: "Your winery" },
+};
+
+/** Name for the founder's own business in the sample group. */
+export function ownLabel(kind, category) {
+  return kind === "goods" ? (GOODS[category] ?? GOODS.honey).me : "Your company";
+}
+
 const SERVICE_PLACES = [
   ["Waterloo", "ON"],
   ["Toronto", "ON"],
@@ -43,11 +69,12 @@ const SERVICE_PLACES = [
 const SERVICE_KINDS = ["HR software", "Scheduling SaaS", "CRM startup", "Analytics platform", "Payroll tool", "Support desk software"];
 
 /** Sample cohort of Canadian businesses also heading to this market (preview only). */
-export function sampleCohort(market, kind) {
-  const rnd = seeded(`${kind}:${market.country_code}`);
+export function sampleCohort(market, kind, category = "honey") {
   const goods = kind === "goods";
-  const places = goods ? GOODS_PLACES : SERVICE_PLACES;
-  const kinds = goods ? GOODS_KINDS : SERVICE_KINDS;
+  const g = GOODS[category] ?? GOODS.honey;
+  const rnd = seeded(`${goods ? g.seed : kind}:${market.country_code}`);
+  const places = goods ? g.places : SERVICE_PLACES;
+  const kinds = goods ? g.kinds : SERVICE_KINDS;
   const n = 4 + Math.floor(rnd() * 4); // 4-7 others
   const used = new Set();
   const members = [];
@@ -61,7 +88,7 @@ export function sampleCohort(market, kind) {
       name: kinds[Math.floor(rnd() * kinds.length)],
       town,
       prov,
-      kg: goods ? Math.round((1 + rnd() * 3.5) * 10) * 100 : null, // 1-4.5 t
+      kg: goods ? Math.round((g.kgBase + rnd() * g.kgSpan) * 10) * 100 : null, // honey 1-4.5 t, icewine 0.4-2 t
       joinedDaysAgo: 1 + Math.floor(rnd() * 20),
     });
   }

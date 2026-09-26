@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { api } from "../lib/api.js";
 import { Badge, Button, Slider } from "./ui.jsx";
-import { CONTAINER_KG, UNITY_RED, cad, freightEstimate, sampleCohort, sharedCosts } from "../lib/together.js";
+import { CONTAINER_KG, UNITY_RED, cad, freightEstimate, ownLabel, sampleCohort, sharedCosts } from "../lib/together.js";
 
 /**
  * "Ship together" (PREVIEW, sample data): small Canadian exporters heading to the same market pool one
@@ -9,7 +9,8 @@ import { CONTAINER_KG, UNITY_RED, cad, freightEstimate, sampleCohort, sharedCost
  */
 export function ShipTogether({ market, kind, profile }) {
   const goods = kind === "goods";
-  const cohort = useMemo(() => sampleCohort(market, kind), [market, kind]);
+  const category = profile?.category;
+  const cohort = useMemo(() => sampleCohort(market, kind, category), [market, kind, category]);
   const [joined, setJoined] = useState(false);
   const [myKg, setMyKg] = useState(2000);
   const [copied, setCopied] = useState(false);
@@ -34,7 +35,7 @@ export function ShipTogether({ market, kind, profile }) {
   const soloFixed = costs.reduce((a, c) => a + c.solo, 0);
   const myShare = soloFixed / withMe;
 
-  const me = profile?.company_name || (goods ? "Your apiary" : "Your company");
+  const me = profile?.company_name || ownLabel(kind, category);
 
   async function invite() {
     try {
@@ -191,7 +192,7 @@ export function ShipTogether({ market, kind, profile }) {
         </div>
       </div>
 
-      {goods && joined && <FreightQuote market={market} cohort={cohort} myKg={myKg} myProvince={profile?.province} />}
+      {goods && joined && <FreightQuote market={market} cohort={cohort} myKg={myKg} myProvince={profile?.province} category={category} />}
 
       <p className="text-[11px] leading-relaxed text-neutral-400">
         Preview: the {goods ? "producers" : "companies"} shown are sample data. In the full product, Portage matches exporters heading to the same
@@ -286,7 +287,7 @@ function n_label(me, joined, y) {
  * After joining: ONE drafted quote request for the whole group (fixed template on the backend, never sent)
  * plus three real CIFFA-member forwarders to send it to. Portage makes the match; the forwarder ships.
  */
-function FreightQuote({ market, cohort, myKg, myProvince }) {
+function FreightQuote({ market, cohort, myKg, myProvince, category }) {
   const [copied, setCopied] = useState(false);
   const [draft, setDraft] = useState(null);
   const [fw, setFw] = useState(null);
@@ -301,8 +302,8 @@ function FreightQuote({ market, cohort, myKg, myProvince }) {
     let live = true;
     setError(null);
     Promise.all([
-      api.groupQuote({ country_code: code, producers, combined_kg: combinedKg, provinces }),
-      api.forwarders(code),
+      api.groupQuote({ country_code: code, producers, combined_kg: combinedKg, provinces, ...(category && category !== "honey" ? { category } : {}) }),
+      api.forwarders(code, category),
     ])
       .then(([d, f]) => live && (setDraft(d), setFw(f)))
       .catch((e) => live && setError(e.message));
@@ -310,7 +311,7 @@ function FreightQuote({ market, cohort, myKg, myProvince }) {
       live = false;
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [code, producers, combinedKg, provKey]);
+  }, [code, producers, combinedKg, provKey, category]);
 
   async function copy() {
     if (!draft) return;

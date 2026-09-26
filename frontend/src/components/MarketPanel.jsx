@@ -69,7 +69,7 @@ export function MarketPanel({ market, profile, kind, weights, openFactor, onOpen
               {((e.compliance_confidence ?? "verified") !== "verified" || !anyProduct) && (
                 <div className="mt-3 flex flex-wrap items-center gap-1.5">
                   {(e.compliance_confidence ?? "verified") !== "verified" && <ConfidenceBadge level={e.compliance_confidence} />}
-                  {!anyProduct && <TogetherChip market={market} kind={kind} onOpen={() => setTab("together")} />}
+                  {!anyProduct && <TogetherChip market={market} kind={kind} category={profile?.category} onOpen={() => setTab("together")} />}
                 </div>
               )}
             </>
@@ -112,7 +112,7 @@ export function MarketPanel({ market, profile, kind, weights, openFactor, onOpen
             )}
             {anyProduct && (
               <p className="mt-4 text-xs text-neutral-500">
-                Paperwork drafts, partner outreach and Ship together are available for products with verified data (honey, B2B software).
+                Paperwork drafts, partner outreach and Ship together are available for products with verified data (honey, icewine, B2B software).
                 For this product, the Trade Commissioner Service can help with the next steps.
               </p>
             )}
@@ -481,22 +481,35 @@ function FactorDetail({ market, kind, factorKey, onExplore }) {
 
 function Opportunity({ market }) {
   const f = market.opportunity_facts;
+  const oc = market.opportunity_components ?? {};
   return (
     <div className="space-y-4">
       <div className="grid gap-3 sm:grid-cols-4">
         <Stat label="Imports a year" value={usd(f.import_value_usd)} sub={`${Math.round(f.import_volume_kg / 1000).toLocaleString()} t in ${f.year}`} strong />
-        <Stat label="Price after tariff" value={`$${f.net_unit_value_usd_kg.toFixed(2)}/kg`} sub={`Canada sells at $${f.canada_unit_value_usd_kg.toFixed(2)}`} />
-        <Stat label="Growth" value={`${f.growth_rate >= 0 ? "+" : ""}${(f.growth_rate * 100).toFixed(1)}%/yr`} sub={f.growth_years} />
+        {oc.price === null ? (
+          <Stat label="Price after tariff" value="Unavailable" sub="price data unavailable (no import weights reported)" />
+        ) : (
+          <Stat label="Price after tariff" value={`$${f.net_unit_value_usd_kg.toFixed(2)}/kg`} sub={`Canada sells at $${f.canada_unit_value_usd_kg.toFixed(2)}`} />
+        )}
+        {oc.growth === null ? (
+          <Stat label="Growth" value="Unavailable" sub={`growth data unavailable (${f.growth_years})`} />
+        ) : (
+          <Stat label="Growth" value={`${f.growth_rate >= 0 ? "+" : ""}${(f.growth_rate * 100).toFixed(1)}%/yr`} sub={f.growth_years} />
+        )}
         <Stat label="Canada's share" value={pct(f.canada_share, 1)} sub="of its imports today" />
       </div>
       <div className="grid gap-3 sm:grid-cols-4">
-        {Object.entries(market.opportunity_components ?? {}).map(([k, v]) => (
+        {Object.entries(oc).map(([k, v]) => (
           <div key={k}>
             <div className="flex justify-between text-xs text-neutral-500">
               <span>{OPPORTUNITY_LABELS[k] ?? k}</span>
-              <span className="tabular-nums">{Math.round(v * 100)}</span>
+              <span className="tabular-nums">{v == null ? "n/a" : Math.round(v * 100)}</span>
             </div>
-            <Meter value={v} color={PRIZE_COLOR} className="mt-1" />
+            {v == null ? (
+              <p className="mt-1 text-xs text-neutral-400">{k} data unavailable: left out, the rest re-weighted</p>
+            ) : (
+              <Meter value={v} color={PRIZE_COLOR} className="mt-1" />
+            )}
           </div>
         ))}
       </div>
@@ -533,8 +546,8 @@ function Sources({ entry, className = "" }) {
 }
 
 /** Header chip: how many Canadian businesses are heading to the same market (preview data). Opens the Ship together tab. */
-function TogetherChip({ market, kind, onOpen }) {
-  const n = sampleCohort(market, kind).length;
+function TogetherChip({ market, kind, category, onOpen }) {
+  const n = sampleCohort(market, kind, category).length;
   return (
     <button
       type="button"

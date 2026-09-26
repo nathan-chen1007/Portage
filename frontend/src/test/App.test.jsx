@@ -197,4 +197,28 @@ describe("Any-product mode (products that aren't honey or B2B software)", () => 
       expect(bodies.some((b) => b.hs6 === "950670" && b.classified_by === "user")).toBe(true);
     });
   });
+
+  it("switching to a curated HS code (honey 0409.00) goes to the verified path with all the tabs", async () => {
+    const withHoney = {
+      ...analyzeResponse,
+      lookup: {
+        ...analyzeResponse.lookup,
+        candidates: [...analyzeResponse.lookup.candidates, { hs6: "040900", description: "Natural honey", reason: "", source: "keyword" }],
+      },
+    };
+    const fetchMock = backend({ "/api/analyze": withHoney });
+    vi.stubGlobal("fetch", fetchMock);
+    render(<App />);
+    await userEvent.click(await screen.findByText("Honey producer, Alberta"));
+    await userEvent.click(screen.getByRole("button", { name: "Find my markets" }));
+    const select = await screen.findByRole("combobox", { name: "HS code" });
+    expect(screen.queryByRole("tab", { name: "Paperwork" })).not.toBeInTheDocument();
+
+    await userEvent.selectOptions(select, "040900");
+    expect(await screen.findByRole("tab", { name: "Paperwork" })).toBeInTheDocument();
+    expect(screen.queryByRole("combobox", { name: "HS code" })).not.toBeInTheDocument();
+    const rankCalls = fetchMock.mock.calls.filter(([u]) => u.endsWith("/api/rank")).map(([, i]) => JSON.parse(i.body));
+    expect(rankCalls.at(-1).category).toBe("honey");
+    expect(fetchMock.mock.calls.some(([u]) => u.endsWith("/api/explore/lookup/rank"))).toBe(false);
+  });
 });

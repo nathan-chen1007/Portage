@@ -60,7 +60,8 @@ export const api = {
     return request("/api/explore/lookup/rank", body);
   },
   lookupSearch: (q) => request(`/api/explore/lookup/search?q=${encodeURIComponent(q)}`),
-  forwarders: (market) => request(`/api/forwarders?market=${encodeURIComponent(market)}`),
+  forwarders: (market, category) =>
+    request(`/api/forwarders?market=${encodeURIComponent(market)}${category && category !== "honey" ? `&category=${encodeURIComponent(category)}` : ""}`),
   groupQuote: (body) => request("/api/group-quote", body),
   async pdf(profile, country_code, docId) {
     const res = await fetch(`${API_URL}/api/documents/${docId}/pdf`, {
