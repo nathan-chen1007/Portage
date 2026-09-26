@@ -153,7 +153,13 @@ def checklist(p: BusinessProfile, cat: Category, entry: MarketEntry) -> Document
         lines.append(f"Tariff you'll pay: {entry.tariff_rate:.0%}. {entry.tariff_note}\n")
     for i, r in enumerate(entry.compliance_requirements, start=1):
         effort = {1: "paperwork", 2: "registration / certificate", 3: "licence or approval"}[r.tier]
-        lines.append(f"[ ] {i}. {r.name} — {effort}\n      {r.detail}\n      Source: {r.source}")
+        wait = ""
+        if r.lead_time_weeks:
+            wait = f", ~{r.lead_time_weeks:g} week{'s' if r.lead_time_weeks != 1 else ''} before first shipment" + (
+                " (estimate)" if r.lead_time_basis == "estimate" else "")
+        lines.append(f"[ ] {i}. {r.name} — {effort}{wait}\n      {r.detail}\n      Source: {r.source}")
+    if entry.shipping_route:
+        lines.append(f"\nShipping: {entry.shipping_route}." + (f" Source: {entry.shipping_source}" if entry.shipping_source else ""))
     if entry.tax_note:
         lines.append(f"\nTax: {entry.tax_note}")
     for n in entry.notes:
