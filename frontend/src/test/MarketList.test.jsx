@@ -48,31 +48,32 @@ describe("MarketList", () => {
     expect(onSelect).toHaveBeenCalledWith("US");
   });
 
-  it("shows the overall score in the recommended view", () => {
+  it("shows one score and no bars in the recommended view", () => {
     const markets = [{ ...MARKETS[0], overall: 71.2, opportunity: 60.4 }];
     render(<MarketList markets={markets} kind="goods" selected={null} onSelect={() => {}} view="overall" />);
     expect(screen.getByText("71")).toBeInTheDocument();
-    expect(screen.getByText("Prize")).toBeInTheDocument();
-    expect(screen.getByText("Ease")).toBeInTheDocument();
+    expect(screen.queryByText("Opportunity")).not.toBeInTheDocument();
+    expect(screen.queryByText("Ease")).not.toBeInTheDocument();
   });
 
-  it("shows the prize and its parts in the biggest-prize view", () => {
-    const markets = [
-      { ...MARKETS[0], overall: 71.2, opportunity: 60.4, opportunity_components: { demand: 1, price: 0.5, growth: 0.2, foothold: 0 } },
-    ];
+  it("shows the opportunity score in the biggest-opportunity view", () => {
+    const markets = [{ ...MARKETS[0], overall: 71.2, opportunity: 60.4 }];
     render(<MarketList markets={markets} kind="goods" selected={null} onSelect={() => {}} view="opportunity" />);
     expect(screen.getByText("60")).toBeInTheDocument();
-    expect(screen.getByTestId("prize-demand").style.width).toBe("35%");
-    expect(screen.queryByTestId("prize-foothold")).not.toBeInTheDocument();
+  });
+
+  it("says why a high tariff applies", () => {
+    render(<MarketList markets={MARKETS} kind="goods" selected={null} onSelect={() => {}} />);
+    expect(screen.getByText("CUSMA does not exempt Section 338 tariffs")).toBeInTheDocument();
   });
 });
 
 describe("MarketList confidence badges", () => {
-  it("badges every market: verified green, auto-sourced amber, unknown red", () => {
+  it("badges only markets that aren't verified: auto-sourced amber, unknown red", () => {
     const markets = MARKETS.map((m, i) => ({ ...m, entry: { ...m.entry, compliance_confidence: ["verified", "auto_sourced", "unknown"][i] ?? "verified" } }));
     render(<MarketList markets={markets} kind="goods" selected={null} onSelect={() => {}} />);
-    expect(screen.getAllByTestId(/^confidence-/).length).toBe(markets.length);
-    expect(screen.getByText("Verified")).toBeInTheDocument();
+    expect(screen.getAllByTestId(/^confidence-/).length).toBe(2);
+    expect(screen.queryByText("Verified")).not.toBeInTheDocument();
     expect(screen.getByText("Auto-sourced: confirm with CFIA or the Trade Commissioner Service")).toBeInTheDocument();
     expect(screen.getByText("Not verified: confirm with the Trade Commissioner Service")).toBeInTheDocument();
   });

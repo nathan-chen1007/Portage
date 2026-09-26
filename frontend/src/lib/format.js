@@ -180,3 +180,21 @@ export function agreementShort(a) {
   const m = a.match(/\(([A-Z][A-Z0-9-]{2,})\)/);
   return m ? m[1] : a.split(" (")[0];
 }
+
+/** Tariffs at or above this read as a barrier on screen (red). */
+export const HIGH_TARIFF = 0.2;
+
+/**
+ * The agreement part of a market's tariff line, with the reason when the agreement doesn't help:
+ * "CUSMA (does not exempt Section 338 tariffs)" -> "CUSMA does not exempt Section 338 tariffs",
+ * "Canada-Korea FTA (CKFTA) — honey excluded" -> "CKFTA: honey excluded", none + a tariff -> "no trade deal".
+ */
+export function agreementLine(entry) {
+  const a = entry?.trade_agreement || "";
+  if (!a) return entry?.tariff_rate > 0 ? "no trade deal" : "";
+  const short = agreementShort(a);
+  const dash = a.split(/\s+[—–-]\s+/)[1];
+  if (dash) return `${short}: ${dash}`;
+  const caveat = a.match(/\(([a-z][^)]*)\)/)?.[1];
+  return caveat ? `${short} ${caveat}` : short;
+}
