@@ -1,0 +1,346 @@
+[
+  {
+    "category": "honey",
+    "country": "United Kingdom",
+    "country_code": "GB",
+    "language": "en",
+    "tariff_rate": 0.0,
+    "mfn_rate": 0.16,
+    "tariff_note": "Duty-free under the Canada-UK Trade Continuity Agreement. Without it, the UK tariff on natural honey is 16%.",
+    "trade_agreement": "Canada-UK Trade Continuity Agreement (CUKTCA)",
+    "compliance_requirements": [
+      {
+        "name": "Supplier's commercial document",
+        "tier": 1,
+        "detail": "Since April 30, 2024 Canadian honey needs no CFIA health certificate for Great Britain: a commercial document completed by the supplier is enough. It's classed low-risk, so there are no routine border checks.",
+        "source": "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements/united-kingdom-honey-and-apiculture-products"
+      },
+      {
+        "name": "UK honey labelling (Honey (England) Regulations 2015)",
+        "tier": 1,
+        "detail": "Reserved description 'honey', country of origin and the name and address of the UK food business operator.",
+        "source": "https://www.legislation.gov.uk/uksi/2015/1348"
+      },
+      {
+        "name": "CUKTCA origin declaration",
+        "tier": 1,
+        "detail": "Self-declared origin statement on the invoice to claim 0% duty.",
+        "source": "https://www.cbsa-asfc.gc.ca/publications/dm-md/d11/d11-4-14-eng.html"
+      }
+    ],
+    "lpi_customs_score": 3.5,
+    "tax_burden": 0.0,
+    "tax_note": "Honey is zero-rated food for UK VAT (VAT Notice 701/14); any import VAT is handled by the UK importer.",
+    "notes": [
+      "Lowest paperwork of any honey market in this set: no government certificate at all."
+    ],
+    "sources": [
+      "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements/united-kingdom-honey-and-apiculture-products",
+      "https://wits.worldbank.org/tariff/trains/en/country/GBR/partner/CAN/product/040900",
+      "https://www.gov.uk/guidance/food-products-and-vat-notice-70114",
+      "https://data.worldbank.org/indicator/LP.LPI.CUST.XQ"
+    ],
+    "as_of": "2026-09-26"
+  },
+  {
+    "category": "honey",
+    "country": "Japan",
+    "country_code": "JP",
+    "language": "ja",
+    "tariff_rate": 0.0,
+    "mfn_rate": 0.255,
+    "tariff_note": "Duty-free under CPTPP as of the August 8, 2026 Japanese tariff schedule (the phase-out of the 25.5% WTO rate is complete).",
+    "trade_agreement": "CPTPP",
+    "compliance_requirements": [
+      {
+        "name": "Food Sanitation Act import notification",
+        "tier": 1,
+        "detail": "The Japanese importer files an import notification with an MHLW quarantine station for each shipment.",
+        "source": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/shokuhin/yunyu_kanshi/kanshi/index_00004.html"
+      },
+      {
+        "name": "Japanese food labelling",
+        "tier": 1,
+        "detail": "Labels in Japanese under the Food Labeling Act, usually applied by the importer.",
+        "source": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/shokuhin/yunyu_kanshi/kanshi/index_00004.html"
+      },
+      {
+        "name": "CPTPP certification of origin",
+        "tier": 1,
+        "detail": "Self-certified by the exporter using the CPTPP minimum data elements. No official form.",
+        "source": "https://www.cbsa-asfc.gc.ca/publications/dm-md/d11/d11-4-14-eng.html"
+      }
+    ],
+    "lpi_customs_score": 3.9,
+    "tax_burden": 0.0,
+    "tax_note": "Consumption tax (reduced 8% food rate) is paid by the Japanese importer.",
+    "notes": [
+      "Already Canada's #2 honey market: 29% of 2024 export volume, $19.8M (AAFC)."
+    ],
+    "sources": [
+      "https://www.customs.go.jp/english/tariff/2026_08_08/index.htm",
+      "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/shokuhin/yunyu_kanshi/kanshi/index_00004.html",
+      "https://agriculture.canada.ca/en/sector/horticulture/reports/statistical-overview-canadian-honey-and-bee-industry-2024",
+      "https://data.worldbank.org/indicator/LP.LPI.CUST.XQ"
+    ],
+    "as_of": "2026-09-26"
+  },
+  {
+    "category": "honey",
+    "country": "Australia",
+    "country_code": "AU",
+    "language": "en",
+    "tariff_rate": 0.0,
+    "mfn_rate": 0.0,
+    "tariff_note": "No tariff on honey (0% MFN), so CPTPP adds nothing on duty.",
+    "trade_agreement": "CPTPP",
+    "compliance_requirements": [
+      {
+        "name": "BICON bee-product import conditions",
+        "tier": 1,
+        "detail": "Biosecurity conditions for bee products (manufacturer's declaration or inspection) must be met before food-safety checks apply.",
+        "source": "https://www.agriculture.gov.au/biosecurity-trade/import/goods/food/type/honey"
+      },
+      {
+        "name": "Imported Food Inspection Scheme: surveillance food",
+        "tier": 1,
+        "detail": "Honey is a surveillance food: 5% of consignments are referred for testing (C4 sugar adulteration, moisture, reducing sugars) and label review.",
+        "source": "https://www.agriculture.gov.au/biosecurity-trade/import/goods/food/inspection-testing/ifis"
+      },
+      {
+        "name": "Food Standards Code labelling",
+        "tier": 1,
+        "detail": "Labels must meet the Australia New Zealand Food Standards Code.",
+        "source": "https://www.foodstandards.gov.au/food-standards-code"
+      }
+    ],
+    "lpi_customs_score": 3.7,
+    "tax_burden": 0.0,
+    "tax_note": "Any import GST is handled by the Australian importer.",
+    "notes": [
+      "Australia is itself a large honey producer with strict biosecurity, so expect price competition and careful importer scrutiny."
+    ],
+    "sources": [
+      "https://www.agriculture.gov.au/biosecurity-trade/import/goods/food/type/honey",
+      "https://www.agriculture.gov.au/biosecurity-trade/import/goods/food/inspection-testing/ifis",
+      "https://wits.worldbank.org/tariff/trains/en/country/AUS/partner/CAN/product/040900",
+      "https://data.worldbank.org/indicator/LP.LPI.CUST.XQ"
+    ],
+    "as_of": "2026-09-26"
+  },
+  {
+    "category": "honey",
+    "country": "Germany (EU)",
+    "country_code": "DE",
+    "language": "de",
+    "tariff_rate": 0.0,
+    "mfn_rate": 0.173,
+    "tariff_note": "Duty-free under CETA. Without it, the EU tariff on natural honey is 17.3%.",
+    "trade_agreement": "CETA",
+    "compliance_requirements": [
+      {
+        "name": "EU honey establishment listing (DG SANTE)",
+        "tier": 2,
+        "detail": "The packing establishment must hold a Safe Food for Canadians licence and be on the EU's approved list for honey; request listing through the local CFIA office.",
+        "source": "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products"
+      },
+      {
+        "name": "EU 'HON' export certificate via TRACES",
+        "tier": 2,
+        "detail": "A CFIA inspector or veterinarian issues the model HON certificate in the EU's TRACES system for every consignment, before it leaves Canada.",
+        "source": "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products"
+      },
+      {
+        "name": "Honey Directive 2001/110/EC composition and labelling",
+        "tier": 1,
+        "detail": "Composition limits (moisture, HMF, sugars) and labelling rules, plus EU residue limits.",
+        "source": "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products"
+      },
+      {
+        "name": "BPA-free food-contact packaging",
+        "tier": 1,
+        "detail": "From July 20, 2026, primary packaging may not contain bisphenol A (Regulation 2024/3190).",
+        "source": "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products"
+      },
+      {
+        "name": "CETA origin declaration",
+        "tier": 1,
+        "detail": "Self-declared origin statement on the invoice to claim 0% duty.",
+        "source": "https://www.cbsa-asfc.gc.ca/publications/dm-md/d11/d11-4-14-eng.html"
+      }
+    ],
+    "lpi_customs_score": 3.9,
+    "tax_burden": 0.0,
+    "tax_note": "Import VAT (reduced 7% food rate) is paid and recovered by the German importer.",
+    "notes": [
+      "Most honey enters Germany in 200 L drums for importers to blend and pack (CBI)."
+    ],
+    "sources": [
+      "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/eu-honey-and-apiculture-products",
+      "https://wits.worldbank.org/tariff/trains/en/country/EUN/partner/CAN/product/040900",
+      "https://www.cbi.eu/market-information/honey/germany/market-entry",
+      "https://data.worldbank.org/indicator/LP.LPI.CUST.XQ"
+    ],
+    "as_of": "2026-09-26"
+  },
+  {
+    "category": "honey",
+    "country": "China",
+    "country_code": "CN",
+    "language": "zh",
+    "tariff_rate": 0.15,
+    "mfn_rate": 0.15,
+    "tariff_note": "No Canada-China FTA: 15% MFN tariff on natural honey.",
+    "trade_agreement": null,
+    "compliance_requirements": [
+      {
+        "name": "CIFER registration and GACC approval",
+        "tier": 2,
+        "detail": "Licensed establishment gets a CFIA establishment ID, then registers and is certified in China's CIFER system before GACC approves its products (Decree 280 since June 1, 2026).",
+        "source": "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/china-peoples-republic-honey-and-bee-products"
+      },
+      {
+        "name": "CFIA export certificate (CFIA/ACIA 2659)",
+        "tier": 2,
+        "detail": "Request inspection and certificate from the local CFIA office; each honey lot must be graded first.",
+        "source": "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/china-peoples-republic-honey-and-bee-products"
+      },
+      {
+        "name": "Registration number on packaging",
+        "tier": 1,
+        "detail": "Inner and outer packaging must show the GACC registration number or CFIA establishment ID.",
+        "source": "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/china-peoples-republic-honey-and-bee-products"
+      }
+    ],
+    "lpi_customs_score": 3.3,
+    "tax_burden": 0.0,
+    "tax_note": "Import VAT is paid by the Chinese importer.",
+    "notes": [],
+    "sources": [
+      "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/china-peoples-republic-honey-and-bee-products",
+      "https://wits.worldbank.org/tariff/trains/en/country/CHN/partner/CAN/product/040900",
+      "https://data.worldbank.org/indicator/LP.LPI.CUST.XQ"
+    ],
+    "as_of": "2026-09-26"
+  },
+  {
+    "category": "honey",
+    "country": "South Korea",
+    "country_code": "KR",
+    "language": "ko",
+    "tariff_rate": 2.43,
+    "mfn_rate": 2.43,
+    "tariff_note": "243% tariff: honey was excluded from tariff cuts under the Canada-Korea FTA, so the full MFN rate applies.",
+    "trade_agreement": "Canada-Korea FTA (CKFTA) — honey excluded",
+    "compliance_requirements": [
+      {
+        "name": "MFDS overseas facility registration",
+        "tier": 2,
+        "detail": "The producing facility must be registered with Korea's Ministry of Food and Drug Safety at least 7 days before import.",
+        "source": "https://www.mfds.go.kr/eng/wpge/m_11/de011002l001.do"
+      },
+      {
+        "name": "First-import laboratory inspection",
+        "tier": 2,
+        "detail": "A product's first import into Korea goes through a detailed lab inspection before release.",
+        "source": "https://www.mfds.go.kr/eng/wpge/m_11/de011002l001.do"
+      },
+      {
+        "name": "CFIA export or free-sale certificate",
+        "tier": 1,
+        "detail": "CFIA/ACIA 2659 (recommended for graded honey) or a Certificate of Free Sale (CFIA/ACIA 5786).",
+        "source": "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/korea-honey-and-bee-products"
+      },
+      {
+        "name": "Korean-language labelling",
+        "tier": 1,
+        "detail": "Korean labels applied before sale.",
+        "source": "https://www.mfds.go.kr/eng/wpge/m_11/de011002l001.do"
+      }
+    ],
+    "lpi_customs_score": 3.9,
+    "tax_burden": 0.0,
+    "tax_note": "Any import VAT is paid by the Korean importer.",
+    "notes": [
+      "The tariff alone makes Canadian honey uncompetitive here despite the FTA."
+    ],
+    "sources": [
+      "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/korea-honey-and-bee-products",
+      "https://wits.worldbank.org/tariff/trains/en/country/KOR/partner/CAN/product/040900",
+      "https://www.mfds.go.kr/eng/wpge/m_11/de011002l001.do",
+      "https://data.worldbank.org/indicator/LP.LPI.CUST.XQ"
+    ],
+    "as_of": "2026-09-26"
+  },
+  {
+    "category": "honey",
+    "country": "United States",
+    "country_code": "US",
+    "language": "en",
+    "tariff_rate": 0.5,
+    "mfn_rate": 0.0,
+    "tariff_note": "50% Section 338 tariff on Canadian natural honey (HTS 0409.00.00, heading 9903.03.14), in force since August 22, 2026, with NO CUSMA exemption.",
+    "trade_agreement": "CUSMA (does not exempt Section 338 tariffs)",
+    "compliance_requirements": [
+      {
+        "name": "FDA food facility registration",
+        "tier": 2,
+        "detail": "The producing facility must register with the FDA before shipping food to the US, and renew every two years.",
+        "source": "https://www.fda.gov/food/registration-food-facilities-and-other-submissions/online-registration-food-facilities"
+      },
+      {
+        "name": "FDA Prior Notice",
+        "tier": 1,
+        "detail": "Prior Notice must be filed with the FDA for every food shipment before it arrives.",
+        "source": "https://www.fda.gov/industry/fda-import-process/prior-notice-imported-foods"
+      },
+      {
+        "name": "Foreign Supplier Verification Program (FSVP)",
+        "tier": 1,
+        "detail": "The US importer must verify the Canadian supplier's food safety controls; expect questionnaires and document requests.",
+        "source": "https://www.fda.gov/food/food-safety-modernization-act-fsma/fsma-final-rule-foreign-supplier-verification-programs-fsvp-importers-food-humans-and-animals"
+      },
+      {
+        "name": "US food labelling",
+        "tier": 1,
+        "detail": "Labels must follow FDA format (Nutrition Facts, US units).",
+        "source": "https://www.fda.gov/food/nutrition-food-labeling-and-critical-foods"
+      }
+    ],
+    "lpi_customs_score": 3.7,
+    "tax_burden": 0.0,
+    "tax_note": "No federal VAT; sold through a US importer, so the Canadian exporter doesn't collect sales tax.",
+    "notes": [
+      "Took 68% of Canada's honey exports by volume in 2024 ($37.6M) — which is why the tariff hurts (AAFC)."
+    ],
+    "sources": [
+      "https://content.govdelivery.com/attachments/USDHSCBP/2026/08/21/file_attachments/3754630/Section%20338%20Canada%20HTS%20LIST%20Final.pdf",
+      "https://honeycouncil.ca/tariffs/",
+      "https://agriculture.canada.ca/en/sector/horticulture/reports/statistical-overview-canadian-honey-and-bee-industry-2024",
+      "https://data.worldbank.org/indicator/LP.LPI.CUST.XQ"
+    ],
+    "as_of": "2026-09-26"
+  },
+  {
+    "category": "honey",
+    "country": "Mexico",
+    "country_code": "MX",
+    "language": "es",
+    "status": "blocked",
+    "status_note": "Canada does not meet Mexico's requirements for exporting honey and apiculture products for human consumption. No CFIA certificate is currently available (CFIA).",
+    "tariff_rate": 0.0,
+    "mfn_rate": 0.2,
+    "tariff_note": "Would be duty-free under CUSMA (20% without it), but the market is closed to Canadian honey.",
+    "trade_agreement": "CUSMA",
+    "compliance_requirements": [],
+    "lpi_customs_score": 2.5,
+    "tax_burden": 0.0,
+    "tax_note": "",
+    "notes": [],
+    "sources": [
+      "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements/mexico-honey-and-apiculture-products",
+      "https://wits.worldbank.org/tariff/trains/en/country/MEX/partner/CAN/product/040900"
+    ],
+    "as_of": "2026-09-26"
+  }
+]
