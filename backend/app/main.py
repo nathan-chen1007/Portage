@@ -11,7 +11,7 @@ from fastapi.responses import Response
 
 load_dotenv()
 
-from app.engine.scoring import load_catalog, rank_markets  # noqa: E402
+from app.engine.scoring import load_catalog, middlemen_for, rank_markets  # noqa: E402
 from app.models import (  # noqa: E402
     AnalyzeRequest,
     AnalyzeResponse,
@@ -19,6 +19,8 @@ from app.models import (  # noqa: E402
     DocumentDraft,
     DocumentRequest,
     MarketEntry,
+    OutreachDraft,
+    OutreachRequest,
     RankRequest,
     ScoredMarket,
 )
@@ -107,3 +109,19 @@ def document_pdf(doc_id: str, req: DocumentRequest) -> Response:
             return Response(documents.to_pdf(d), media_type="application/pdf",
                             headers={"Content-Disposition": f'attachment; filename="{filename}"'})
     raise HTTPException(404, f"No document '{doc_id}' for this market")
+
+
+@app.post("/api/outreach", response_model=OutreachDraft)
+def outreach(req: OutreachRequest) -> OutreachDraft:
+    """English first-contact email to a curated partner, drafted only from sourced facts. The founder edits
+    and approves it before anything else happens (nothing is ever sent automatically)."""
+    cat = _category(req.profile.category)
+    entry = _open_market(cat.id, req.country_code)
+    mm = next((m for m in middlemen_for(catalog, cat.id, entry.country_code) if m.id == req.middleman_id), None)
+    if not mm:
+        raise HTTPException(404, f"Unknown partner '{req.middleman_id}' for {entry.country}")
+    try:
+        return llm.draft_outreach(req.profile, entry, mm)
+    except Exception as e:
+        log.warning("outreach drafting fell back to the template: %s", e)
+        return llm.fallback_outreach(req.profile, entry, mm)
