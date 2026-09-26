@@ -1,0 +1,16 @@
+{
+ "v": 2,
+ "key": "trade-950699-CN-M-2024",
+ "fetched_at": "2026-09-26T20:50:33+00:00",
+ "url": "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=156&period=2024&cmdCode=950699&flowCode=M&partnerCode=0,124",
+ "payload": {
+  "0": {
+   "value_usd": 40862062.0,
+   "kg": 2515531.691
+  },
+  "124": {
+   "value_usd": 270664.0,
+   "kg": 4690.0
+  }
+ }
+}
