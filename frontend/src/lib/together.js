@@ -15,7 +15,7 @@ function seeded(str) {
   };
 }
 
-// Mostly Prairie towns: the Prairies ship about 77% of Canada's honey exports (AAFC 2024).
+// Prairie towns: the Prairies ship about 77% of Canada's honey exports (AAFC 2024), and the demo group is a Prairie group.
 const GOODS_PLACES = [
   ["Peace River", "AB"],
   ["Falher", "AB"],
@@ -25,8 +25,8 @@ const GOODS_PLACES = [
   ["Melfort", "SK"],
   ["Dauphin", "MB"],
   ["Swan River", "MB"],
-  ["Vernon", "BC"],
-  ["Guelph", "ON"],
+  ["Brooks", "AB"],
+  ["Carman", "MB"],
 ];
 const GOODS_KINDS = ["Family apiary", "Beekeeping co-op", "Honey packer", "Apiary", "Meadery"];
 
