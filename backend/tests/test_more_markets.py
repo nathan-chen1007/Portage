@@ -9,7 +9,7 @@ from fastapi.testclient import TestClient
 from app.explore.lookup import markets as lookup_markets
 from app.explore.lookup import sources
 from app.explore.more_markets import fetch, router, service
-from app.explore.more_markets.markets import CATEGORY_HS6, EXTRA_MARKETS
+from app.explore.more_markets.markets import CATEGORY_HS6, EXTRA_MARKETS, PREWARM_HS6
 from app.explore.more_markets.schemas import NOT_VERIFIED
 from tests.curated_snapshot import build as curated_build
 
@@ -196,10 +196,11 @@ def test_no_effect_on_curated_paths_or_main_markets(net, client):
 
 
 def test_committed_cache_serves_demo_products_offline():
-    """The demo never depends on a live call: honey and icewine are fully cached and committed."""
-    for category, code in CATEGORY_HS6.items():
-        assert service.cache_complete(code), f"{category} ({code}) cache incomplete: run the prewarm"
-        resp = service.more_markets(code, category=category, timeout=0.5)
+    """The demo never depends on a live call: honey, icewine, hockey sticks and maple syrup are cached and committed."""
+    assert set(CATEGORY_HS6.values()) <= set(PREWARM_HS6)
+    for code in PREWARM_HS6:
+        assert service.cache_complete(code), f"HS {code} cache incomplete: run the prewarm"
+        resp = service.more_markets(code, timeout=0.5)
         assert {m.tariff.origin for m in resp.markets} == {"cache"}
         assert len(resp.markets) == 8
         assert sum(m.tariff.status in ("ok", "mfn_only") for m in resp.markets) >= 6

@@ -139,9 +139,12 @@ def combine_tariff(m: ExtraMarket, hs6: str, mfn: dict | None, pref: dict | None
         if mfn and pref["rate"] < mfn["rate"]:
             agreement = fta or "preference on record"
             note += f", under {agreement}; {_pct(mfn['rate'])} without it"
-        if mfn and mfn["year"] > pref["year"] and mfn["rate"] < applied:  # MFN since cut below the old preference
+        if mfn and mfn["year"] > pref["year"] and mfn["rate"] <= applied:  # newer MFN at or below the old preference
+            below = mfn["rate"] < applied
             applied, year, agreement = mfn["rate"], mfn["year"], None
-            note = f"MFN rate {_pct(applied)} (WITS/TRAINS {year}) is now below the last recorded preference{label}"
+            note = (f"MFN rate {_pct(applied)} (WITS/TRAINS {year})"
+                    + (" is now below the last recorded preference" if below else ", same as the last recorded preference")
+                    + label)
         return MoreTariff(status="ok", applied=applied, mfn=mfn["rate"] if mfn else applied, year=year, agreement=agreement,
                           note=note + ". TRAINS lags: cuts since then are not reflected.", origin=origin, fetched=fetched,
                           sources=srcs)

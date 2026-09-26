@@ -1,0 +1,11 @@
+{
+ "v": 2,
+ "key": "tariff-170220-784-mfn",
+ "fetched_at": "2026-09-26T22:44:59+00:00",
+ "url": "https://wits.worldbank.org/API/V1/SDMX/V21/datasource/TRN/reporter/784/partner/000/product/170220/year/ALL/datatype/aveestimated?format=JSON",
+ "payload": {
+  "rate": 0.05,
+  "year": 2021,
+  "type": "MFN"
+ }
+}

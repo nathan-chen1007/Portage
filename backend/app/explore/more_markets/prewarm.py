@@ -2,13 +2,13 @@
 
     cd backend && .venv\\Scripts\\python -m app.explore.more_markets.prewarm [hs6 ...]
 
-Default: honey (040900) and icewine (220421). Waits up to 180 s per product; run again if anything is pending.
+Default: honey (040900), icewine (220421), hockey sticks (950699), maple syrup (170220). Waits up to 180 s per product; run again if anything is pending.
 """
 
 import sys
 
 from app.explore.more_markets import service
-from app.explore.more_markets.markets import CATEGORY_HS6
+from app.explore.more_markets.markets import PREWARM_HS6
 
 
 def main(codes: list[str]) -> int:
@@ -28,4 +28,4 @@ def main(codes: list[str]) -> int:
 
 
 if __name__ == "__main__":
-    sys.exit(main(sys.argv[1:] or list(CATEGORY_HS6.values())))
+    sys.exit(main(sys.argv[1:] or PREWARM_HS6))

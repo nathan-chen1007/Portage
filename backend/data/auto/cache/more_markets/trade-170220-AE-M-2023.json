@@ -1,0 +1,16 @@
+{
+ "v": 2,
+ "key": "trade-170220-AE-M-2023",
+ "fetched_at": "2026-09-26T22:47:57+00:00",
+ "url": "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=784&period=2023&cmdCode=170220&flowCode=M&partnerCode=0,124",
+ "payload": {
+  "0": {
+   "value_usd": 3119020,
+   "kg": 601807.42
+  },
+  "124": {
+   "value_usd": 1722112.684,
+   "kg": 219743
+  }
+ }
+}

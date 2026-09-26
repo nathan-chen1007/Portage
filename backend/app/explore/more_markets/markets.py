@@ -39,3 +39,7 @@ EXTRA_MARKETS: dict[str, ExtraMarket] = {m.code: m for m in [
 # Products the demo pre-warms. Icewine: HS 2204.21 (still wine, containers of 2 L or less), the code the
 # lookup's own classifier maps "ice wine" to (app/explore/lookup/classify.py).
 CATEGORY_HS6 = {"honey": "040900", "icewine": "220421"}
+
+# Everything committed to the cache: the two categories plus the any-product demo products (hockey sticks, maple
+# syrup), so no demo path makes a live call.
+PREWARM_HS6 = [*CATEGORY_HS6.values(), "950699", "170220"]
