@@ -1,50 +1,81 @@
 import { useState } from "react";
-import { COMPONENTS } from "../lib/format.js";
+import { COMPONENTS, PRIZE_PARTS, earned } from "../lib/format.js";
 
-/** Stacked bar: each blocker's weighted share of the 0-100 friction score. Blocked markets render nothing. */
-export function FrictionBar({ market, max = 100, thin = false, onSegment }) {
+/**
+ * Stacked bar out of 100 where each coloured segment is the ease points a factor EARNS
+ * (its weight minus what it costs). A longer bar means an easier market; the grey gap is
+ * points lost. Blocked markets render nothing.
+ */
+export function FrictionBar({ market, weights, thin = false, onSegment }) {
   const [hover, setHover] = useState(null);
   if (market.status === "blocked" || market.score === null) return null;
 
-  const parts = COMPONENTS.filter((c) => (market.breakdown?.[c.key] ?? 0) > 0);
-  const summary = parts.map((c) => `${c.label} ${market.breakdown[c.key].toFixed(1)}`).join(", ");
-  const h = hover && COMPONENTS.find((c) => c.key === hover);
+  const parts = COMPONENTS.map((c) => ({ ...c, ...earned(market, c.key, weights) }));
+  const total = parts.reduce((a, p) => a + p.points, 0);
+  const summary = parts.map((p) => `${p.label} ${p.points.toFixed(0)} of ${p.max.toFixed(0)}`).join(", ");
+  const h = hover && parts.find((p) => p.key === hover);
 
   return (
-    <div className="relative w-full" aria-label={`Friction ${market.score.toFixed(1)}: ${summary || "no barriers"}`}>
-      <div className={`flex w-full overflow-hidden rounded-full bg-neutral-100 ${thin ? "h-1.5" : "h-2.5"}`}>
-        {parts.map((c, i) => (
-          <div
-            key={c.key}
-            data-testid={`seg-${c.key}`}
-            className={`seg h-full transition-opacity ${onSegment ? "cursor-pointer" : ""}`}
-            onMouseEnter={() => setHover(c.key)}
-            onMouseLeave={() => setHover(null)}
-            onClick={
-              onSegment
-                ? (e) => {
-                    e.stopPropagation();
-                    onSegment(c.key);
-                  }
-                : undefined
-            }
-            style={{
-              width: `${(market.breakdown[c.key] / max) * 100}%`,
-              background: c.color,
-              opacity: hover && hover !== c.key ? 0.35 : 1,
-              borderTopRightRadius: i === parts.length - 1 ? 4 : 0,
-              borderBottomRightRadius: i === parts.length - 1 ? 4 : 0,
-            }}
-          />
-        ))}
-      </div>
+    <div className="relative w-full" aria-label={`Ease ${total.toFixed(0)} of 100: ${summary}`}>
+      <Track thin={thin}>
+        {parts
+          .filter((p) => p.points > 0.05)
+          .map((p) => (
+            <div
+              key={p.key}
+              data-testid={`seg-${p.key}`}
+              title={`${p.label}: ${p.points.toFixed(0)} of ${p.max.toFixed(0)} points`}
+              className={`seg h-full transition-opacity ${onSegment ? "cursor-pointer" : ""}`}
+              onMouseEnter={() => setHover(p.key)}
+              onMouseLeave={() => setHover(null)}
+              onClick={
+                onSegment
+                  ? (e) => {
+                      e.stopPropagation();
+                      onSegment(p.key);
+                    }
+                  : undefined
+              }
+              style={{ width: `${p.points}%`, background: p.color, opacity: hover && hover !== p.key ? 0.35 : 1 }}
+            />
+          ))}
+      </Track>
       {h && !thin && (
         <div className="pointer-events-none absolute -top-9 left-0 z-10 whitespace-nowrap rounded-md border border-neutral-200 bg-white px-2 py-1 text-xs text-neutral-700 shadow-sm">
-          {h.label}: {market.breakdown[hover].toFixed(1)} of {market.score.toFixed(1)} points
+          {h.label}: {h.points.toFixed(0)} of {h.max.toFixed(0)} points
         </div>
       )}
     </div>
   );
+}
+
+/** Same idea for the prize: each segment is the points a part of the opportunity score earns. */
+export function PrizeBar({ market, thin = false }) {
+  const oc = market.opportunity_components;
+  if (market.status === "blocked" || market.opportunity == null || !oc) return null;
+  const parts = PRIZE_PARTS.map((p) => ({ ...p, points: 100 * p.weight * (oc[p.key] ?? 0), max: 100 * p.weight }));
+  const summary = parts.map((p) => `${p.label} ${p.points.toFixed(0)} of ${p.max.toFixed(0)}`).join(", ");
+  return (
+    <div className="w-full" aria-label={`Prize ${market.opportunity.toFixed(0)} of 100: ${summary}`}>
+      <Track thin={thin}>
+        {parts
+          .filter((p) => p.points > 0.05)
+          .map((p) => (
+            <div
+              key={p.key}
+              data-testid={`prize-${p.key}`}
+              title={`${p.label}: ${p.points.toFixed(0)} of ${p.max.toFixed(0)} points`}
+              className="seg h-full"
+              style={{ width: `${p.points}%`, background: p.color }}
+            />
+          ))}
+      </Track>
+    </div>
+  );
+}
+
+function Track({ thin, children }) {
+  return <div className={`flex w-full overflow-hidden rounded-full bg-neutral-100 ${thin ? "h-1.5" : "h-2.5"}`}>{children}</div>;
 }
 
 /** Clickable legend: each chip opens that factor's panel. */

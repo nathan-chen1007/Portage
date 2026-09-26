@@ -17,7 +17,7 @@ body {
   color: #0a0a0a;
 }
 
-/* Friction-bar segments get a 2px surface gap between fills. */
+/* Score-bar segments get a 2px surface gap between fills. */
 .seg + .seg {
   margin-left: 2px;
 }

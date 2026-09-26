@@ -1,6 +1,6 @@
 import { FrictionBar, PrizeBar } from "./FrictionBar.jsx";
 import { Badge, CountryMark } from "./ui.jsx";
-import { EASE_COLOR, PRIZE_COLOR, agreementShort, component, ease, pct, viewScore } from "../lib/format.js";
+import { EASE_COLOR, PRIZE_COLOR, PRIZE_PARTS, agreementShort, component, ease, pct, viewScore } from "../lib/format.js";
 
 const SCORE_LABEL = { overall: "score", friction: "ease", opportunity: "prize" };
 
@@ -85,9 +85,14 @@ function ScoreBreakdown({ market, view, weights, onFactor }) {
     );
   }
   if (view === "opportunity" && market.opportunity != null) {
+    const oc = market.opportunity_components ?? {};
+    const best = [...PRIZE_PARTS].sort((x, y) => y.weight * (oc[y.key] ?? 0) - x.weight * (oc[x.key] ?? 0))[0];
     return (
       <div className="mt-2.5 flex items-center gap-2 pl-[4.25rem]">
         <PrizeBar market={market} thin />
+        <span className="w-24 shrink-0 truncate text-right text-[11px] text-neutral-400" title="The part earning this market the most prize points">
+          {best ? `best: ${best.short}` : ""}
+        </span>
       </div>
     );
   }
@@ -95,8 +100,8 @@ function ScoreBreakdown({ market, view, weights, onFactor }) {
   return (
     <div className="mt-2.5 flex items-center gap-2 pl-[4.25rem]">
       <FrictionBar market={market} weights={weights} thin onSegment={onFactor} />
-      <span className="w-20 shrink-0 text-right text-[11px] text-neutral-400" title="The factor costing this market the most points">
-        {drag ? `held back by ${drag.label.toLowerCase()}` : "no big barriers"}
+      <span className="w-24 shrink-0 truncate text-right text-[11px] text-neutral-400" title="The factor costing this market the most points">
+        {drag ? `worst: ${drag.label.toLowerCase()}` : "no big barriers"}
       </span>
     </div>
   );

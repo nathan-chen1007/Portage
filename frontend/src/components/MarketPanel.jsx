@@ -4,7 +4,11 @@ import { OutreachPanel } from "./OutreachPanel.jsx";
 import { Badge, CountryMark, ExternalLink, Icon, Meter, ScoreRing, Segmented } from "./ui.jsx";
 import {
   COMPONENTS,
+  EASE_COLOR,
+  PRIZE_COLOR,
   agreementShort,
+  earned,
+  ease,
   FACTOR_LABELS,
   LANGUAGE_NAMES,
   OPPORTUNITY_LABELS,
@@ -24,7 +28,7 @@ const TABS = [
 ];
 
 /** Right-hand panel for one market: scores, clickable factor tiles that expand in place, and the action tabs. */
-export function MarketPanel({ market, profile, kind, openFactor, onOpenFactor, onExploreFactor }) {
+export function MarketPanel({ market, profile, kind, weights, openFactor, onOpenFactor, onExploreFactor }) {
   const [tab, setTab] = useState("why");
   const e = market.entry;
   const blocked = market.status === "blocked";
@@ -62,12 +66,12 @@ export function MarketPanel({ market, profile, kind, openFactor, onOpenFactor, o
         {!blocked && (
           <div className="flex gap-4">
             {market.overall != null && market.opportunity != null && (
-              <ScoreRing value={market.overall} label="Overall" color="#171717" hint="Opportunity and ease combined. Higher is better." />
+              <ScoreRing value={market.overall} label="Overall" color="#171717" hint="Prize and ease combined. Higher is better." />
             )}
             {market.opportunity != null && (
-              <ScoreRing value={market.opportunity} label="Prize" color="#0f766e" hint="How much the market is worth. Higher is better." />
+              <ScoreRing value={market.opportunity} label="Prize" color={PRIZE_COLOR} hint="How much the market is worth. Higher is better." />
             )}
-            <ScoreRing value={market.score} label="Friction" color="#eb6834" hint="Barriers to entry. Lower is easier." />
+            <ScoreRing value={ease(market)} label="Ease" color={EASE_COLOR} hint="How clear the path in is (100 minus friction). Higher is better." />
           </div>
         )}
       </header>
@@ -84,7 +88,7 @@ export function MarketPanel({ market, profile, kind, openFactor, onOpenFactor, o
           </div>
           <div className="mt-5">
             {tab === "why" && (
-              <Overview market={market} kind={kind} openFactor={openFactor} onOpenFactor={onOpenFactor} onExploreFactor={onExploreFactor} />
+              <Overview market={market} kind={kind} weights={weights} openFactor={openFactor} onOpenFactor={onOpenFactor} onExploreFactor={onExploreFactor} />
             )}
             {tab === "docs" && <DocumentsPanel profile={profile} countryCode={e.country_code} />}
             {tab === "partners" && <OutreachPanel profile={profile} market={market} />}
@@ -95,24 +99,31 @@ export function MarketPanel({ market, profile, kind, openFactor, onOpenFactor, o
   );
 }
 
-function Overview({ market, kind, openFactor, onOpenFactor, onExploreFactor }) {
+function Overview({ market, kind, weights, openFactor, onOpenFactor, onExploreFactor }) {
+  // Each factor shows the ease points it earns out of its weight: a full bar means no barrier there.
   const tiles = [
-    ...COMPONENTS.map((c) => ({
-      key: c.key,
-      label: c.label,
-      color: c.color,
-      value: market.components?.[c.key] ?? 0,
-      points: market.breakdown?.[c.key] ?? 0,
-      blocker: market.top_blocker === c.key,
-    })),
+    ...COMPONENTS.map((c) => {
+      const { points, max } = earned(market, c.key, weights);
+      return {
+        key: c.key,
+        label: c.label,
+        color: c.color,
+        value: 1 - (market.components?.[c.key] ?? 0),
+        points,
+        max,
+        blocker: market.top_blocker === c.key,
+      };
+    }),
   ];
   if (market.opportunity_facts) {
-    tiles.push({ key: "opportunity", label: "Prize", color: "#0f766e", value: (market.opportunity ?? 0) / 100, points: null });
+    tiles.push({ key: "opportunity", label: "Prize", color: PRIZE_COLOR, value: (market.opportunity ?? 0) / 100, points: market.opportunity ?? 0, max: 100 });
   }
 
   return (
     <div className="space-y-4">
-      <p className="text-xs text-neutral-500">Click a factor to see what's behind it.</p>
+      <p className="text-xs text-neutral-500">
+        Each factor earns up to its share of the ease score; a full bar means no barrier there. Click one to see what's behind it.
+      </p>
       <div className={`grid grid-cols-2 gap-2 sm:grid-cols-3 ${tiles.length > 5 ? "xl:grid-cols-6" : "xl:grid-cols-5"}`}>
         {tiles.map((t) => {
           const open = openFactor === t.key;
@@ -132,11 +143,15 @@ function Overview({ market, kind, openFactor, onOpenFactor, onExploreFactor }) {
                   <span className="h-2 w-2 rounded-full" style={{ background: t.color }} />
                   {t.label}
                 </span>
-                {t.blocker && <span className="rounded bg-neutral-900 px-1 text-[9px] font-semibold uppercase text-white">Top</span>}
+                {t.blocker && (
+                  <span className="rounded bg-neutral-900 px-1 text-[9px] font-semibold uppercase text-white" title="Costs this market the most points">
+                    Worst
+                  </span>
+                )}
               </span>
               <span className="mt-1.5 block text-xl font-semibold tabular-nums">
-                {t.points == null ? Math.round(t.value * 100) : t.points.toFixed(1)}
-                <span className="ml-1 text-[11px] font-normal text-neutral-400">{t.points == null ? "/100" : "pts"}</span>
+                {Math.round(t.points)}
+                <span className="ml-1 text-[11px] font-normal text-neutral-400">/ {Math.round(t.max)}</span>
               </span>
               <Meter value={t.value} color={t.color} className="mt-2" />
             </button>
@@ -170,7 +185,7 @@ function Overview({ market, kind, openFactor, onOpenFactor, onExploreFactor }) {
 function FactorDetail({ market, kind, factorKey, onExplore }) {
   const e = market.entry;
   const c = component(factorKey);
-  const color = c?.color ?? "#0f766e";
+  const color = c?.color ?? PRIZE_COLOR;
 
   return (
     <div className="fade-up rounded-xl border bg-white p-4" style={{ borderColor: `${color}55` }}>
@@ -192,9 +207,9 @@ function FactorDetail({ market, kind, factorKey, onExplore }) {
             <div key={f}>
               <div className="flex justify-between text-xs text-neutral-500">
                 <span>{FACTOR_LABELS[f]}</span>
-                <span className="tabular-nums">{Math.round((market.factors?.[f] ?? 0) * 100)}</span>
+                <span className="tabular-nums" title="0–100, higher is better">{Math.round((1 - (market.factors?.[f] ?? 0)) * 100)}</span>
               </div>
-              <Meter value={market.factors?.[f]} color={color} className="mt-1" />
+              <Meter value={1 - (market.factors?.[f] ?? 0)} color={color} className="mt-1" />
             </div>
           ))}
         </div>
@@ -320,7 +335,7 @@ function Opportunity({ market }) {
               <span>{OPPORTUNITY_LABELS[k] ?? k}</span>
               <span className="tabular-nums">{Math.round(v * 100)}</span>
             </div>
-            <Meter value={v} color="#0f766e" className="mt-1" />
+            <Meter value={v} color={PRIZE_COLOR} className="mt-1" />
           </div>
         ))}
       </div>

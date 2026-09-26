@@ -7,8 +7,8 @@ export const COMPONENTS = [
     label: "Tariffs",
     color: "#2a78d6",
     weight: 0.35,
-    help: "Duty a Canadian exporter pays at the border (50% = maximum friction).",
-    method: "Applied tariff ÷ 50%, capped at 1. Fifty percent is the highest rate currently applied to Canadian goods, so it counts as maximum friction.",
+    help: "Duty a Canadian exporter pays at the border. No duty earns the full points; 50% or more earns none.",
+    method: "Applied tariff ÷ 50%, capped at 1. Fifty percent is the highest rate currently applied to Canadian goods, so a 50% tariff loses every tariff point.",
     factors: [],
   },
   {
@@ -107,16 +107,52 @@ export function componentLabel(key) {
 // The three ways to rank markets (see docs/SCORING.md).
 export const VIEWS = [
   { key: "overall", label: "Recommended", title: "Where to go first", help: "Opportunity and ease combined. Higher is better." },
-  { key: "friction", label: "Easiest", title: "Easiest to enter", help: "Friction score 0–100. Lower means fewer barriers." },
+  { key: "friction", label: "Easiest", title: "Easiest to enter", help: "Ease 0–100: how clear the path in is. Higher means fewer barriers." },
   { key: "opportunity", label: "Biggest prize", title: "Most worth entering", help: "Import demand, price after tariff, growth and Canada's foothold. Higher is better." },
 ];
 
-/** The number a market shows under a view; falls back to friction when that score isn't available. */
+/** The number a market shows under a view. Every view reads "higher is better"; falls back to ease when a score isn't available. */
 export function viewScore(market, view) {
   if (view === "opportunity" && market.opportunity != null) return market.opportunity;
   if (view === "overall" && market.overall != null) return market.overall;
-  return market.score;
+  return ease(market);
 }
+
+/*
+ * Display convention: the engine scores friction (0-100, lower is easier). On screen we only show
+ * "higher is better" numbers, so friction is flipped into ease = 100 - friction, and each factor shows
+ * the points it EARNS out of its weight instead of the points it costs. Same algorithm, same ranking.
+ */
+
+/** Ease 0-100 (100 - friction). Null for blocked markets. */
+export function ease(market) {
+  return market?.score == null ? null : Math.max(0, 100 - market.score);
+}
+
+/** Weights rescaled to sum to 1 (what the backend does). Falls back to the default weights. */
+export function normWeights(weights) {
+  const w = weights ?? Object.fromEntries(COMPONENTS.map((c) => [c.key, c.weight]));
+  const total = COMPONENTS.reduce((a, c) => a + (w[c.key] ?? 0), 0) || 1;
+  return Object.fromEntries(COMPONENTS.map((c) => [c.key, (w[c.key] ?? 0) / total]));
+}
+
+/** Ease points a factor earns for a market, and the most it could earn (its weight × 100). */
+export function earned(market, key, weights) {
+  const max = 100 * normWeights(weights)[key];
+  const lost = market?.breakdown?.[key] ?? 0;
+  return { points: Math.max(0, max - lost), max };
+}
+
+// The four parts of the prize (opportunity) score, with the backend's fixed mix. Shades of the prize teal.
+export const PRIZE_PARTS = [
+  { key: "demand", short: "demand", label: "Import demand", weight: 0.35, color: "#0f766e" },
+  { key: "price", short: "price", label: "Price after tariff", weight: 0.25, color: "#14a39a" },
+  { key: "growth", short: "growth", label: "Growth", weight: 0.15, color: "#4fd1c5" },
+  { key: "foothold", short: "foothold", label: "Canada's foothold", weight: 0.25, color: "#9fe8dd" },
+];
+
+export const EASE_COLOR = "#475569";
+export const PRIZE_COLOR = "#0f766e";
 
 export function usd(x) {
   if (x === null || x === undefined) return "–";

@@ -261,6 +261,7 @@ export default function App() {
                 onSelect={(c) => selectMarket(c)}
                 onFactor={(k) => openFactorPanel(k)}
                 view={activeView}
+                weights={weights}
               />
             )}
           </div>
@@ -285,6 +286,7 @@ export default function App() {
                 market={market}
                 profile={result.profile}
                 kind={result.category.kind}
+                weights={weights}
                 openFactor={openFactor}
                 onOpenFactor={setOpenFactor}
                 onExploreFactor={openFactorPanel}
