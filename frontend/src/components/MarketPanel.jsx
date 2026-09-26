@@ -47,6 +47,7 @@ export function MarketPanel({ market, profile, kind, openFactor, onOpenFactor, o
                 <Badge>Rank #{market.rank}</Badge>
                 {e.trade_agreement && <Badge tone="outline">{agreementShort(e.trade_agreement)}</Badge>}
                 <Badge tone="outline">{LANGUAGE_NAMES[e.language] ?? e.language}</Badge>
+                <ConfidenceBadge level={e.compliance_confidence ?? "verified"} />
                 {market.lead_time_weeks != null && (
                   <Badge tone="outline">
                     <Icon name="clock" className="h-3 w-3" />
@@ -228,6 +229,7 @@ function FactorDetail({ market, kind, factorKey, onExplore }) {
                     <span className="text-sm font-medium">{r.name}</span>
                     <span className="flex items-center gap-1.5">
                       <Badge>{TIER_LABEL[r.tier]}</Badge>
+                      {r.confidence && r.confidence !== "verified" && <ConfidenceBadge level={r.confidence} />}
                       {r.lead_time_weeks > 0 && (
                         <Badge tone="outline">
                           {weeks(r.lead_time_weeks)}
@@ -351,5 +353,22 @@ function Sources({ entry, className = "" }) {
         </span>
       ))}
     </p>
+  );
+}
+
+// How much to trust the compliance data: verified (a person read the official source), auto-sourced
+// (official structured data, not yet checked by a person), unknown (no data: ask the Trade Commissioner Service).
+const CONFIDENCE = {
+  verified: { tone: "success", label: "Compliance verified", title: "A person checked every requirement against the official source." },
+  auto_sourced: { tone: "accent", label: "Auto-sourced", title: "From official structured data, not yet checked by a person. Confirm with CFIA or the Trade Commissioner Service." },
+  unknown: { tone: "danger", label: "Compliance not verified", title: "No compliance data yet. Confirm with the Trade Commissioner Service before shipping." },
+};
+
+function ConfidenceBadge({ level }) {
+  const c = CONFIDENCE[level] ?? CONFIDENCE.unknown;
+  return (
+    <Badge tone={c.tone}>
+      <span title={c.title}>{c.label}</span>
+    </Badge>
   );
 }
