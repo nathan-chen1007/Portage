@@ -2,10 +2,11 @@
 
 // Categorical slots 1-4 of a CVD-validated palette, always in this fixed order.
 export const COMPONENTS = [
-  { key: "tariff", label: "Tariffs", color: "#2a78d6", help: "Duty a Canadian exporter pays at the border (50% = maximum friction)." },
-  { key: "compliance", label: "Compliance", color: "#eb6834", help: "Rules to clear first: paperwork, registrations, licences, weighted by effort." },
-  { key: "customs", label: "Customs", color: "#1baf7a", help: "How smooth clearance is (World Bank Logistics Performance Index)." },
-  { key: "tax", label: "Tax", color: "#eda100", help: "Whether you must register for or collect tax in that market." },
+  { key: "tariff", label: "Tariffs", color: "#2a78d6", weight: 0.35, help: "Duty a Canadian exporter pays at the border (50% = maximum friction)." },
+  { key: "compliance", label: "Compliance", color: "#eb6834", weight: 0.3, help: "Rules to clear first, weighted by effort, plus the weeks you wait before the first shipment." },
+  { key: "logistics", label: "Logistics", color: "#1baf7a", weight: 0.15, help: "Distance by sea, how often ships sail, and how smoothly customs clears." },
+  { key: "risk", label: "Risk", color: "#8a5cd6", weight: 0.1, help: "Currency swings against CAD and the risk of not getting paid (OECD country risk)." },
+  { key: "tax", label: "Tax", color: "#eda100", weight: 0.1, help: "Whether you must register for or collect tax in that market." },
 ];
 
 export const LANGUAGE_NAMES = {
