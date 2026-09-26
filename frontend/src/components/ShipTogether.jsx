@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { Badge, Button, Slider } from "./ui.jsx";
-import { CONTAINER_KG, UNITY_RED, cad, freightEstimate, sampleCohort, sharedCosts } from "../lib/together.js";
+import { CONTAINER_KG, UNITY_RED, cad, freightEstimate, freightQuoteEmail, sampleCohort, sharedCosts } from "../lib/together.js";
 
 /**
  * "Ship together" (PREVIEW, sample data): small Canadian exporters heading to the same market pool one
@@ -163,13 +163,14 @@ export function ShipTogether({ market, kind, profile }) {
                   <path d="M5 10.5l3 3L15 7" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </div>
-              <p className="mt-2 text-sm font-semibold">You're in.</p>
+              <p className="mt-2 text-sm font-semibold">You're in the group.</p>
               <p className="text-xs font-medium" style={{ color: UNITY_RED }}>
-                Canada is stronger together.
+                Growing Canada, together.
               </p>
               <p className="text-xs text-neutral-500">
-                {withMe} {goods ? "producers" : "companies"} from {new Set([...provinces, profile?.province].filter(Boolean)).size} provinces, one{" "}
-                {goods ? "shipment" : "team"} to {country}.
+                {goods
+                  ? "When there's enough volume, we'll introduce you to a freight partner who ships for the whole group."
+                  : "When there are enough companies, we'll introduce you to a partner who serves the whole group."}
               </p>
               <Button variant="outline" size="sm" className="mt-3 w-full" onClick={invite}>
                 {copied ? "Invite copied" : "Invite a producer you know"}
@@ -181,13 +182,15 @@ export function ShipTogether({ market, kind, profile }) {
           ) : (
             <>
               <Button size="lg" className="w-full hover:opacity-90" style={{ background: UNITY_RED }} onClick={() => setJoined(true)}>
-                {goods ? "Join this shipment" : "Join this group"}
+                Join the group
               </Button>
-              <p className="mt-2 text-center text-xs text-neutral-500">Free to join. Nothing is booked until everyone confirms.</p>
+              <p className="mt-2 text-center text-xs text-neutral-500">Free to join. Portage matches exporters; it never books or ships.</p>
             </>
           )}
         </div>
       </div>
+
+      {goods && joined && <FreightQuote market={market} cohort={cohort} myKg={myKg} myProvince={profile?.province} />}
 
       <p className="text-[11px] leading-relaxed text-neutral-400">
         Preview: the {goods ? "producers" : "companies"} shown are sample data. In the full product, Portage matches exporters heading to the same
@@ -276,4 +279,65 @@ function n_label(me, joined, y) {
       {joined ? me : "your spot"}
     </text>
   );
+}
+
+/** After joining: a drafted quote request to a generic freight forwarder. Fixed template; copy only, never sent. */
+function FreightQuote({ market, cohort, myKg, myProvince }) {
+  const [copied, setCopied] = useState(false);
+  const q = freightQuoteEmail({ market, cohort, myKg, myProvince: provinceCode(myProvince) });
+
+  async function copy() {
+    try {
+      await navigator.clipboard.writeText(`To: ${q.recipient}\nSubject: ${q.subject}\n\n${q.body}`);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1500);
+    } catch {
+      /* clipboard blocked */
+    }
+  }
+
+  return (
+    <section className="pop rounded-2xl border border-neutral-200 p-4" aria-labelledby="freight-quote-title">
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <h4 id="freight-quote-title" className="text-sm font-semibold">
+          Request freight quotes for the group
+        </h4>
+        <span className="flex flex-wrap gap-1.5">
+          <Badge tone="accent">Preview: sample group</Badge>
+          <Badge tone="outline">Draft: nothing is sent</Badge>
+        </span>
+      </div>
+      <p className="mt-1 text-xs text-neutral-500">
+        Portage writes to a forwarder on behalf of all {q.producers} producers ({(q.kg / 1000).toFixed(1)} t combined). The forwarder ships; Portage only
+        makes the match.
+      </p>
+      <dl className="mt-3 space-y-1 text-sm">
+        <div className="flex gap-2">
+          <dt className="w-16 shrink-0 text-neutral-500">To</dt>
+          <dd className="font-medium">{q.recipient}</dd>
+        </div>
+        <div className="flex gap-2">
+          <dt className="w-16 shrink-0 text-neutral-500">Subject</dt>
+          <dd>{q.subject}</dd>
+        </div>
+      </dl>
+      <pre className="mt-3 max-h-72 overflow-auto whitespace-pre-wrap rounded-lg bg-neutral-50 p-3 font-sans text-sm leading-relaxed text-neutral-800">
+        {q.body}
+      </pre>
+      <div className="mt-3 flex justify-end">
+        <Button variant="outline" size="sm" onClick={copy}>
+          {copied ? "Copied" : "Copy email"}
+        </Button>
+      </div>
+    </section>
+  );
+}
+
+const PROVINCE_CODES = {
+  alberta: "AB", saskatchewan: "SK", manitoba: "MB", "british columbia": "BC", ontario: "ON", quebec: "QC", québec: "QC",
+  "nova scotia": "NS", "new brunswick": "NB", "prince edward island": "PE", "newfoundland and labrador": "NL",
+};
+function provinceCode(p) {
+  if (!p) return null;
+  return p.length === 2 ? p.toUpperCase() : PROVINCE_CODES[p.toLowerCase()] ?? null;
 }

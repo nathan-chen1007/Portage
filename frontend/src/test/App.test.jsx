@@ -96,8 +96,14 @@ describe("App", () => {
     await userEvent.click(screen.getByRole("tab", { name: "Ship together" }));
     expect(screen.getByRole("heading", { name: /Canada is stronger together/ })).toBeInTheDocument();
     expect(screen.getByText("Preview · sample producers")).toBeInTheDocument();
-    await userEvent.click(screen.getByRole("button", { name: "Join this shipment" }));
-    expect(await screen.findByText("You're in.")).toBeInTheDocument();
+    await userEvent.click(screen.getByRole("button", { name: "Join the group" }));
+    expect(await screen.findByText("You're in the group.")).toBeInTheDocument();
+    // Joining reveals the drafted forwarder quote request: sample data, never sent, no real company named.
+    expect(screen.getByRole("heading", { name: "Request freight quotes for the group" })).toBeInTheDocument();
+    expect(screen.getByText("Draft: nothing is sent")).toBeInTheDocument();
+    expect(screen.getByText("Preview: sample group")).toBeInTheDocument();
+    expect(screen.getByText(/CIFFA-certified freight forwarder/)).toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: /send/i })).not.toBeInTheDocument();
   });
 
   it("shows a blocked market's reason instead of tabs", async () => {
