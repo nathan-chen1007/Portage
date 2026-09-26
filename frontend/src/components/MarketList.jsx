@@ -1,14 +1,17 @@
 import { FrictionBar, FrictionLegend } from "./FrictionBar.jsx";
 import { Badge } from "./ui.jsx";
-import { componentLabel, flag, pct } from "../lib/format.js";
+import { VIEWS, componentLabel, flag, pct, viewScore } from "../lib/format.js";
 
-export function MarketList({ markets, kind, selected, onSelect }) {
+const HEADINGS = { overall: "Markets, best bet first", friction: "Markets, easiest first", opportunity: "Markets, biggest opportunity first" };
+
+export function MarketList({ markets, kind, selected, onSelect, view = "friction" }) {
+  const v = VIEWS.find((x) => x.key === view) ?? VIEWS[1];
   return (
     <section>
       <div className="mb-3 flex flex-wrap items-end justify-between gap-3">
         <div>
-          <h2 className="text-lg font-semibold tracking-tight">Markets, easiest first</h2>
-          <p className="text-sm text-neutral-500">Friction score 0–100. Lower means fewer barriers.</p>
+          <h2 className="text-lg font-semibold tracking-tight">{HEADINGS[view] ?? HEADINGS.friction}</h2>
+          <p className="text-sm text-neutral-500">{v.help}</p>
         </div>
         <FrictionLegend />
       </div>
@@ -56,12 +59,17 @@ export function MarketList({ markets, kind, selected, onSelect }) {
                       <FrictionBar market={m} />
                       <span className="text-xs text-neutral-500">
                         {m.top_blocker ? `Biggest blocker: ${componentLabel(m.top_blocker).toLowerCase()}` : "No significant blockers"}
+                        {m.opportunity != null && (
+                          <span className="text-neutral-400">
+                            {" "}· friction {m.score.toFixed(0)} · opportunity {m.opportunity.toFixed(0)}
+                          </span>
+                        )}
                       </span>
                     </>
                   )}
                 </span>
                 <span className="text-right text-xl font-semibold tabular-nums tracking-tight">
-                  {blocked ? "—" : m.score.toFixed(0)}
+                  {blocked ? "—" : viewScore(m, view).toFixed(0)}
                 </span>
               </button>
             </li>

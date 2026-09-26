@@ -43,7 +43,12 @@ export const api = {
   health: () => request("/health"),
   categories: () => request("/api/categories"),
   analyze: (description) => request("/api/analyze", { description }),
-  rank: (category, weights) => request("/api/rank", weights ? { category, weights } : { category }),
+  // opts: { weights, sort_by: "overall" | "friction" | "opportunity", prize_weight: 0 (quick wins) .. 1 (biggest prize) }
+  rank: (category, opts = {}) => {
+    const body = { category };
+    for (const k of ["weights", "sort_by", "prize_weight"]) if (opts[k] !== undefined && opts[k] !== null) body[k] = opts[k];
+    return request("/api/rank", body);
+  },
   documents: (profile, country_code) => request("/api/documents", { profile, country_code }),
   outreach: (profile, country_code, middleman_id) => request("/api/outreach", { profile, country_code, middleman_id }),
   voice: (text, language) => request("/api/voice", { text, language }),
@@ -80,4 +85,5 @@ export function emptyProfile(category = "") {
   };
 }
 
-export const DEFAULT_WEIGHTS = { tariff: 0.4, compliance: 0.35, customs: 0.15, tax: 0.1 };
+export const DEFAULT_WEIGHTS = { tariff: 0.35, compliance: 0.3, logistics: 0.15, risk: 0.1, tax: 0.1 };
+export const DEFAULT_PRIZE_WEIGHT = 0.5;

@@ -42,3 +42,25 @@ export function hostname(url) {
 export function componentLabel(key) {
   return COMPONENTS.find((c) => c.key === key)?.label ?? key;
 }
+
+// The three ways to rank markets (see docs/SCORING.md).
+export const VIEWS = [
+  { key: "overall", label: "Recommended", title: "Where to go first", help: "Opportunity and ease combined. Higher is better." },
+  { key: "friction", label: "Easiest", title: "Easiest to enter", help: "Friction score 0–100. Lower means fewer barriers." },
+  { key: "opportunity", label: "Biggest opportunity", title: "Most worth entering", help: "Import demand, price after tariff, growth and Canada's foothold. Higher is better." },
+];
+
+/** The number a market shows under a view; falls back to friction when that score isn't available. */
+export function viewScore(market, view) {
+  if (view === "opportunity" && market.opportunity != null) return market.opportunity;
+  if (view === "overall" && market.overall != null) return market.overall;
+  return market.score;
+}
+
+export function usd(x) {
+  if (x === null || x === undefined) return "–";
+  if (x >= 1e9) return `$${(x / 1e9).toFixed(1)}B`;
+  if (x >= 1e6) return `$${Math.round(x / 1e6)}M`;
+  if (x >= 1e3) return `$${Math.round(x / 1e3)}K`;
+  return `$${Math.round(x)}`;
+}

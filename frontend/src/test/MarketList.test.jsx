@@ -34,4 +34,12 @@ describe("MarketList", () => {
     await userEvent.click(screen.getByText("United States"));
     expect(onSelect).toHaveBeenCalledWith("US");
   });
+
+  it("shows the overall score and heading in the recommended view", () => {
+    const markets = [{ ...MARKETS[0], overall: 71.2, opportunity: 60.4 }];
+    render(<MarketList markets={markets} kind="goods" selected={null} onSelect={() => {}} view="overall" />);
+    expect(screen.getByText("Markets, best bet first")).toBeInTheDocument();
+    expect(screen.getByText("71")).toBeInTheDocument();
+    expect(screen.getByText(/opportunity 60/)).toBeInTheDocument();
+  });
 });

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { DocumentsPanel } from "./DocumentsPanel.jsx";
 import { OutreachPanel } from "./OutreachPanel.jsx";
 import { Badge, ExternalLink } from "./ui.jsx";
-import { COMPONENTS, TIER_LABEL, flag, hostname, pct } from "../lib/format.js";
+import { COMPONENTS, TIER_LABEL, flag, hostname, pct, usd } from "../lib/format.js";
 
 const TABS = [
   { id: "why", label: "Why this score" },
@@ -26,6 +26,12 @@ export function MarketDetail({ market, profile, kind }) {
           <Badge tone="danger">Not currently accessible</Badge>
         ) : (
           <span className="text-sm text-neutral-500">
+            {market.overall != null && market.opportunity != null && (
+              <>
+                Overall <span className="font-semibold tabular-nums text-neutral-900">{market.overall.toFixed(1)}</span> ·
+                Opportunity <span className="font-semibold tabular-nums text-neutral-900">{market.opportunity.toFixed(1)}</span> ·{" "}
+              </>
+            )}
             Friction <span className="font-semibold tabular-nums text-neutral-900">{market.score.toFixed(1)}</span> / 100 · rank #{market.rank}
           </span>
         )}
@@ -70,7 +76,7 @@ function WhyTab({ market, kind }) {
   const e = market.entry;
   return (
     <div className="space-y-6">
-      <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+      <div className="grid grid-cols-2 gap-3 sm:grid-cols-5">
         {COMPONENTS.map((c) => (
           <div key={c.key} className="rounded-lg border border-neutral-200 px-3 py-2.5" title={c.help}>
             <div className="flex items-center gap-1.5 text-xs text-neutral-500">
@@ -81,6 +87,8 @@ function WhyTab({ market, kind }) {
           </div>
         ))}
       </div>
+
+      {market.opportunity_facts && <OpportunityFacts facts={market.opportunity_facts} />}
 
       {kind === "goods" && (
         <div>
@@ -143,5 +151,33 @@ function Sources({ entry }) {
         </span>
       ))}
     </p>
+  );
+}
+
+function OpportunityFacts({ facts: f }) {
+  const tiles = [
+    ["Imports a year", usd(f.import_value_usd), `${Math.round(f.import_volume_kg / 1000).toLocaleString()} t in ${f.year}`],
+    ["Price after tariff", `$${f.net_unit_value_usd_kg.toFixed(2)}/kg`, `pays $${f.unit_value_usd_kg.toFixed(2)}; Canada sells at $${f.canada_unit_value_usd_kg.toFixed(2)}`],
+    ["Growth", `${f.growth_rate >= 0 ? "+" : ""}${(f.growth_rate * 100).toFixed(1)}%/yr`, f.growth_years],
+    ["Canada's share", pct(f.canada_share, 1), "of its imports today"],
+  ];
+  return (
+    <div>
+      <h3 className="text-sm font-medium">Why it's worth it</h3>
+      <div className="mt-2 grid grid-cols-2 gap-3 sm:grid-cols-4">
+        {tiles.map(([label, value, sub]) => (
+          <div key={label} className="rounded-lg border border-neutral-200 px-3 py-2.5">
+            <div className="text-xs text-neutral-500">{label}</div>
+            <div className="mt-1 text-lg font-semibold tabular-nums">{value}</div>
+            <div className="text-xs text-neutral-400">{sub}</div>
+          </div>
+        ))}
+      </div>
+      {f.note && <p className="mt-2 text-xs text-neutral-500">{f.note}</p>}
+      <p className="mt-1 text-xs text-neutral-400">
+        UN Comtrade:{" "}
+        <ExternalLink href={f.sources[0]}>{hostname(f.sources[0])}</ExternalLink>
+      </p>
+    </div>
   );
 }

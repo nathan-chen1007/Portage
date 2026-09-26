@@ -1,7 +1,9 @@
 import { useEffect, useRef, useState } from "react";
-import { API_URL, DEFAULT_WEIGHTS, api, emptyProfile } from "./lib/api.js";
+import { API_URL, DEFAULT_PRIZE_WEIGHT, DEFAULT_WEIGHTS, api, emptyProfile } from "./lib/api.js";
 import { MarketDetail } from "./components/MarketDetail.jsx";
 import { MarketList } from "./components/MarketList.jsx";
+import { OpportunityMap } from "./components/OpportunityMap.jsx";
+import { ViewControls } from "./components/ViewControls.jsx";
 import { WeightsPanel } from "./components/WeightsPanel.jsx";
 import { Badge, Button, ErrorNote, Skeleton, Spinner } from "./components/ui.jsx";
 
@@ -23,6 +25,8 @@ export default function App() {
   const [result, setResult] = useState(null); // { profile, category, markets, mode }
   const [selected, setSelected] = useState(null);
   const [weights, setWeights] = useState(DEFAULT_WEIGHTS);
+  const [view, setView] = useState("overall"); // overall | friction | opportunity
+  const [prize, setPrize] = useState(DEFAULT_PRIZE_WEIGHT);
   const [loading, setLoading] = useState(false);
   const [reranking, setReranking] = useState(false);
   const [error, setError] = useState(null);
@@ -41,8 +45,11 @@ export default function App() {
   }, []);
 
   function showResult(r) {
-    setResult(r);
+    const available = r.opportunity_available ?? r.markets.some((m) => m.opportunity != null);
+    setResult({ ...r, opportunity_available: available });
     setWeights(DEFAULT_WEIGHTS);
+    setView(available ? "overall" : "friction");
+    setPrize(DEFAULT_PRIZE_WEIGHT);
     const firstOpen = r.markets.find((m) => m.status !== "blocked") ?? r.markets[0];
     setSelected(firstOpen?.country_code ?? null);
     setTimeout(() => resultsRef.current?.scrollIntoView?.({ behavior: "smooth", block: "start" }), 50);
@@ -77,13 +84,28 @@ export default function App() {
 
   function changeWeights(w) {
     setWeights(w);
+    rerank({ weights: w });
+  }
+
+  function changeView(v) {
+    setView(v);
+    rerank({ view: v });
+  }
+
+  function changePrize(p) {
+    setPrize(p);
+    rerank({ prize: p });
+  }
+
+  // Re-rank on the backend with the current controls (any argument overrides the current state).
+  function rerank({ weights: w = weights, view: v = view, prize: p = prize } = {}) {
     if (!result?.category) return;
     clearTimeout(rerankTimer.current);
     rerankTimer.current = setTimeout(async () => {
-      if (Object.values(w).every((v) => v === 0)) return;
+      if (Object.values(w).every((x) => x === 0)) return;
       setReranking(true);
       try {
-        const markets = await api.rank(result.category.id, w);
+        const markets = await api.rank(result.category.id, { weights: w, sort_by: v, prize_weight: p });
         setResult((r) => ({ ...r, markets }));
       } catch (e) {
         setError(e.message);
@@ -127,7 +149,7 @@ export default function App() {
           </p>
           <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl">Find your next market.</h1>
           <p className="mx-auto mt-4 max-w-xl text-lg text-neutral-500">
-            Describe what you sell. Portage ranks every market by tariffs, regulations and customs friction, then drafts the
+            Describe what you sell. Portage ranks every market by how much it buys and how hard it is to enter (tariffs, rules, shipping, risk), then drafts the
             paperwork and your first message to a real importer.
           </p>
 
@@ -217,13 +239,31 @@ export default function App() {
           {result?.category && (
             <>
               <ProfileSummary result={result} />
+              {!result.opportunity_available && result.category.kind === "services" && (
+                <p className="text-xs text-neutral-500">
+                  Opportunity scores come from customs trade data, which doesn't exist for software, so services are
+                  ranked by how easy each market is to enter.
+                </p>
+              )}
+              {result.opportunity_available && (
+                <>
+                  <ViewControls view={view} onView={changeView} prize={prize} onPrize={changePrize} busy={reranking} />
+                  <OpportunityMap markets={result.markets} selected={selected} onSelect={select} />
+                </>
+              )}
               <WeightsPanel
                 weights={weights}
                 onChange={changeWeights}
                 onReset={() => changeWeights(DEFAULT_WEIGHTS)}
                 busy={reranking}
               />
-              <MarketList markets={result.markets} kind={result.category.kind} selected={selected} onSelect={select} />
+              <MarketList
+                markets={result.markets}
+                kind={result.category.kind}
+                selected={selected}
+                onSelect={select}
+                view={result.opportunity_available ? view : "friction"}
+              />
               <div ref={detailRef} className="scroll-mt-6">
                 {market && (
                   <MarketDetail key={market.country_code} market={market} profile={result.profile} kind={result.category.kind} />
