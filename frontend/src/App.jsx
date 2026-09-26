@@ -114,8 +114,8 @@ export default function App() {
       {health === "down" && (
         <div className="mx-auto max-w-3xl px-4 sm:px-6">
           <ErrorNote>
-            Can't reach the backend at {API_URL}. Start it from <code>backend/</code> with{" "}
-            <code>uvicorn app.main:app --reload --port 8000</code>, then refresh.
+            Can't reach the backend{API_URL ? ` at ${API_URL}` : ""}. Start it with <code>backend\run.bat</code>, then
+            refresh this page.
           </ErrorNote>
         </div>
       )}

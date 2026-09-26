@@ -2,19 +2,19 @@
 
 The web app for Portage: React 19 + Vite, styled with Tailwind CSS v4, in plain JavaScript. It talks to the FastAPI backend in `../backend`.
 
-## Run it (Windows PowerShell)
+## Run it (Windows)
 
-Start the backend first (see `../backend/README.md`), in its own terminal:
+Easiest: double-click `backend\run.bat` and leave it running, then double-click `frontend\run.bat`. The frontend script installs packages, runs the tests and starts the app. Each writes its output to a `logs` folder next to it.
+
+Or by hand, in two terminals:
 
 ```powershell
+# terminal 1
 cd backend
 .venv\Scripts\Activate.ps1
 uvicorn app.main:app --reload --port 8000
-```
 
-Then, in a second terminal:
-
-```powershell
+# terminal 2
 cd frontend
 npm install        # first time only
 npm run dev
@@ -22,7 +22,7 @@ npm run dev
 
 Open http://localhost:3000. The pill in the top-right corner shows **Live data** once the backend is reachable.
 
-The app must run on port 3000, because that's the origin the backend allows through CORS. To point at a different backend, copy `.env.example` to `.env.local` and change `VITE_API_URL`.
+The dev server forwards `/api/*` and `/health` to the backend, so there's no CORS setup. It finds the backend port from `API_PORT` in `backend/.env` (8000 if unset), which is the same setting `backend\run.bat` uses. If Windows refuses port 8000 (`WinError 10013` in `backend/logs/server.log`), put e.g. `API_PORT=8765` in `backend/.env` and restart both.
 
 ## Test it
 

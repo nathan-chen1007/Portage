@@ -108,7 +108,7 @@ export const PROFILE = {
 /** Build a fetch mock that answers by path. Unknown paths return 404. */
 export function mockFetch(routes) {
   return vi.fn(async (url, init) => {
-    const path = new URL(url).pathname;
+    const path = new URL(url, "http://localhost").pathname;
     const handler = routes[path];
     if (!handler) return new Response(JSON.stringify({ detail: "Not Found" }), { status: 404 });
     const body = init?.body ? JSON.parse(init.body) : undefined;

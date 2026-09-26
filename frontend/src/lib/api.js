@@ -1,6 +1,9 @@
 // Portage API client. Shapes mirror backend/app/models.py (typed copy: docs/contract/api.ts).
 
-export const API_URL = (import.meta.env?.VITE_API_URL || "http://localhost:8000").replace(/\/$/, "");
+// Empty = same origin: the Vite dev server proxies /api and /health to the backend (see vite.config.js).
+// Set VITE_API_URL only to call a backend directly (it must allow this origin via CORS).
+export const API_URL = (import.meta.env?.VITE_API_URL || "").replace(/\/$/, "");
+const BACKEND_LABEL = API_URL || "the backend";
 
 export class ApiError extends Error {
   constructor(message, status) {
@@ -19,7 +22,7 @@ async function request(path, body) {
       body: body === undefined ? undefined : JSON.stringify(body),
     });
   } catch {
-    throw new ApiError(`Can't reach the backend at ${API_URL}. Is it running?`, 0);
+    throw new ApiError(`Can't reach ${BACKEND_LABEL}. Is it running?`, 0);
   }
   if (!res.ok) {
     let detail = `Request failed (${res.status})`;
@@ -27,7 +30,8 @@ async function request(path, body) {
       const data = await res.json();
       if (data?.detail) detail = typeof data.detail === "string" ? data.detail : JSON.stringify(data.detail);
     } catch {
-      /* non-JSON error body */
+      // Non-JSON error body: the dev proxy answers like this when the backend is down.
+      if (res.status >= 500) throw new ApiError(`Can't reach ${BACKEND_LABEL}. Is it running?`, res.status);
     }
     if (res.status === 404 && detail === "Not Found") detail = "This feature isn't available on the backend yet.";
     throw new ApiError(detail, res.status);
