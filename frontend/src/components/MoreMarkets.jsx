@@ -98,7 +98,10 @@ export function MoreMarkets({ hsCode, category }) {
                   <span className="text-neutral-400"> · </span>
                   <span>{m.agreement_in_force ? `Agreement: ${m.agreement_in_force}` : "No trade agreement with Canada"}</span>
                 </div>
-                <ConfidenceBadge level="unknown" className="mt-1" />
+                <div className="mt-1 flex flex-wrap items-center gap-1.5">
+                  <ConfidenceBadge level={m.compliance_confidence ?? "unknown"} />
+                  {m.compliance_note && <span className="text-[11px] text-neutral-500">{m.compliance_note}</span>}
+                </div>
               </button>
               {open === m.country_code && <Details m={m} data={data} />}
             </li>
@@ -147,6 +150,21 @@ function Details({ m, data }) {
         <p className="mt-1">{m.opportunity_note}</p>
       )}
       {f && m.opportunity_note && <p className="mt-1">{m.opportunity_note}</p>}
+      {m.requirements?.length > 0 && (
+        <>
+          <p className="mt-1.5 font-medium">Requirements ({m.compliance_note || "verified"})</p>
+          <ul className="mt-0.5 space-y-1">
+            {m.requirements.map((r) => (
+              <li key={r.name}>
+                <span className="font-medium">{r.name}.</span> {r.detail}{" "}
+                <a href={r.source} target="_blank" rel="noreferrer" className="text-sky-700 underline">
+                  {sourceLabel(r.source)}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
       <p className="mt-1.5 text-neutral-500">{m.ease_note}</p>
       <p className="mt-1.5 font-medium">Sources (as of {data.as_of})</p>
       <ul className="mt-0.5 space-y-0.5">

@@ -110,3 +110,28 @@ test("renders nothing when the backend doesn't serve it, or for services", async
   expect(c2).toBeEmptyDOMElement();
   expect(g).not.toHaveBeenCalled();
 });
+
+test("France, Netherlands and Italy can carry Germany's verified EU rules, with a green badge and no score change", async () => {
+  const FR_EU = {
+    ...FR,
+    compliance_confidence: "verified",
+    verified: true,
+    badge: "Verified",
+    compliance_note: "EU rules, same as Germany",
+    requirements: [
+      { name: "CETA origin declaration", tier: 1, detail: "Origin declaration on the invoice.", source: "https://www.international.gc.ca/", lead_time_weeks: 0, lead_time_basis: "official", confidence: "verified" },
+      { name: "French-language labelling", tier: 1, detail: "Mandatory label information must be at least in French.", source: "https://www.economie.gouv.fr/dgccrf/", lead_time_weeks: 2, lead_time_basis: "estimate", confidence: "verified" },
+    ],
+  };
+  backend({ "/api/more-markets": { ...RESPONSE, markets: [FR_EU, IN] } });
+  render(<MoreMarkets hsCode="040900" />);
+  const section = await screen.findByTestId("more-markets");
+  expect(await within(section).findByTestId("confidence-verified")).toHaveTextContent("Verified");
+  expect(within(section).getAllByTestId("confidence-unknown")).toHaveLength(1); // India stays Not verified
+  expect(section).toHaveTextContent("EU rules, same as Germany");
+  expect(section).not.toHaveTextContent(/Overall|Ease \d/);
+  await userEvent.click(screen.getByRole("button", { name: /France/ }));
+  const d = screen.getByTestId("more-details-FR");
+  expect(d).toHaveTextContent("French-language labelling");
+  expect(within(d).getByRole("link", { name: /economie\.gouv\.fr|DGCCRF|economie/i })).toBeInTheDocument();
+});

@@ -137,11 +137,16 @@ def test_old_percentage_superseded_by_specific_duty_is_unavailable(net):
     assert r["FR"].tariff.status == "ok"
 
 
-def test_never_verified_never_eased(net):
+def test_never_eased_and_only_eu_markets_of_curated_products_verified(net):
     resp = service.more_markets("040900", timeout=10)
     assert [m.country_code for m in resp.markets] != [] and len(resp.markets) == 8
     for m in resp.markets:
-        assert m.compliance_confidence == "unknown" and m.verified is False and m.badge == NOT_VERIFIED
+        if m.country_code in ("FR", "NL", "IT"):  # honey is curated: EU rules, same as Germany
+            assert m.compliance_confidence == "verified" and m.verified is True and m.badge == "Verified"
+            assert m.compliance_note == "EU rules, same as Germany" and m.requirements
+        else:
+            assert m.compliance_confidence == "unknown" and m.verified is False and m.badge == NOT_VERIFIED
+            assert m.requirements == []
         assert m.ease is None and m.overall is None and "No ease score" in m.ease_note
         assert 0 <= m.opportunity <= 100 and set(m.opportunity_components) == {"demand", "price", "growth", "foothold"}
     opps = [m.opportunity for m in resp.markets]
@@ -222,3 +227,26 @@ def test_committed_cache_serves_demo_products_offline():
         assert {m.tariff.origin for m in resp.markets} == {"cache"}
         assert len(resp.markets) == 8
         assert sum(m.tariff.status in ("ok", "mfn_only") for m in resp.markets) >= 6
+
+
+@pytest.mark.parametrize("hs6,category", [("040900", "honey"), ("220421", "icewine")])
+def test_eu_markets_reuse_germanys_verified_rules_plus_national_language(net, hs6, category):
+    from app.explore.more_markets import eu_rules
+    from app.explore.lookup.service import base_catalog
+
+    de = base_catalog().market(category, "DE")
+    r = by_code(service.more_markets(hs6, category=category, timeout=10))
+    for cc, lang in (("FR", "French"), ("NL", "Dutch"), ("IT", "Italian")):
+        reqs = r[cc].requirements
+        assert [q.name for q in reqs[:-1]] == [q.name for q in de.compliance_requirements]
+        assert reqs[-1].name == f"{lang}-language labelling" and reqs[-1].source.startswith("https://")
+        assert all(q.confidence == "verified" for q in reqs)
+        assert "German-language" not in " ".join(q.detail for q in reqs)
+        assert r[cc].ease is None and r[cc].overall is None
+    for cc in ("VN", "SG", "NZ", "IN", "AE"):
+        assert r[cc].verified is False and r[cc].requirements == []
+
+
+def test_non_curated_products_stay_unverified_everywhere(net):
+    resp = service.more_markets("950699", timeout=10)  # hockey sticks: no curated Germany row
+    assert all(m.verified is False and m.badge == NOT_VERIFIED for m in resp.markets)

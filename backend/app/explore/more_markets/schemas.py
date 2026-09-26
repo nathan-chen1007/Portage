@@ -4,9 +4,10 @@ from typing import Literal
 
 from pydantic import BaseModel
 
-from app.models import OpportunityFacts
+from app.models import OpportunityFacts, Requirement
 
 NOT_VERIFIED = "Not verified: confirm with the Trade Commissioner Service"
+VERIFIED = "Verified"
 
 
 class MoreTariff(BaseModel):
@@ -35,9 +36,11 @@ class MoreMarket(BaseModel):
     ease: None = None                  # never scored: see ease_note
     overall: None = None
     ease_note: str = ""
-    compliance_confidence: Literal["unknown"] = "unknown"
-    verified: Literal[False] = False
+    compliance_confidence: Literal["verified", "unknown"] = "unknown"
+    verified: bool = False             # True only for FR/NL/IT on a curated product (EU rules, same as Germany)
     badge: str = NOT_VERIFIED
+    compliance_note: str = ""          # e.g. "EU rules, same as Germany"
+    requirements: list[Requirement] = []  # verified requirements, empty when not verified
     sources: list[str] = []
 
 
