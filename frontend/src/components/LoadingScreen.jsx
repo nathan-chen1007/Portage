@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 export const STEPS = [
   { label: "Reading your description", ms: 650 },
   { label: "Classifying your product", ms: 600 },
-  { label: "Checking tariffs in 8 markets", ms: 700 },
+  { label: "Checking tariffs in every market", ms: 700 },
   { label: "Matching trade agreements", ms: 500 },
   { label: "Mapping compliance requirements", ms: 750 },
   { label: "Measuring shipping lanes and customs", ms: 600 },
