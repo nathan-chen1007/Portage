@@ -33,6 +33,11 @@ def _pct(x: float) -> str:
     return f"{s}%"
 
 
+def _the(country: str) -> str:
+    """'United Kingdom' -> 'the United Kingdom'; 'Japan' stays 'Japan'."""
+    return f"the {country}" if country.startswith("United ") else country
+
+
 # Offline fallback: category keywords (lowercase substrings).
 CATEGORY_KEYWORDS = {
     "honey": ["honey", "beekeep", "apiar", "apicult", "hive", " bees", "miel"],
@@ -167,7 +172,9 @@ def draft_outreach(profile: BusinessProfile, entry: MarketEntry, middleman: Midd
     system = (
         "You write short, specific cold outreach emails from a small Canadian company to a potential "
         "importer, distributor or partner abroad. Rules: use ONLY the facts in the JSON provided; never "
-        "invent numbers, certifications, customers or prices; if something useful is missing, write a "
+        "invent numbers, certifications, customers or prices, and never claim the sender already meets a "
+        "requirement (key_requirements is background only; you may offer to provide the origin paperwork); "
+        "if something useful is missing, write a "
         "placeholder like [your annual volume]. Under 170 words, warm and concrete, one clear ask (a "
         "20-minute call or a sample shipment). Mention the trade-agreement advantage if the tariff is 0%. "
         "If the recipient is a government service or association, ask for introductions to buyers instead. "
@@ -187,22 +194,25 @@ def fallback_outreach(profile: BusinessProfile, entry: MarketEntry, middleman: M
     """Offline template with the same facts and placeholders the LLM version would use."""
     company = profile.company_name or "[your company]"
     product = profile.product_name or PRODUCT_NOUNS.get(profile.category, "[your product]")
+    product = product[0].lower() + product[1:] if product[:1].isupper() and not product.startswith("Canadian") else product
+    country = _the(entry.country)
+    article = "an" if middleman.type[:1].lower() in "aeiou" else "a"
     where = ", ".join(x for x in [profile.city, profile.province] if x) or "[your city, province]"
     fta = ""
     if entry.tariff_rate == 0 and entry.trade_agreement and entry.mfn_rate > 0:
-        fta = (f" Under {entry.trade_agreement.split(' (')[0]}, our product enters {entry.country} duty-free "
+        fta = (f" Under the {entry.trade_agreement.split(' (')[0]}, our product enters {country} duty-free "
                f"(instead of {_pct(entry.mfn_rate)}).")
     ask = ("Could you introduce us to buyers you work with?" if "association" in middleman.type or "government" in middleman.type
            else "Would you be open to a 20-minute call, or should we send a sample?")
     body = (
-        f"Dear {middleman.name} team,\n\n"
+        f"Dear {middleman.name.split(' (')[0]} team,\n\n"
         f"I'm {profile.contact_name or '[your name]'} from {company} in {where}, Canada. We produce {product}.{fta}\n\n"
-        f"We're looking for a partner in {entry.country} and your work as a {middleman.type} stood out. "
+        f"We're looking for a partner in {country} and your work as {article} {middleman.type.split(' (')[0]} stood out. "
         f"We can supply [your annual volume] and share specifications and certificates on request.\n\n"
         f"{ask}\n\nBest regards,\n{profile.contact_name or '[your name]'}\n{company}"
         + (f"\n{profile.contact_email}" if profile.contact_email else "")
     )
-    subject = f"{product[0].upper()}{product[1:]} from {company if company != '[your company]' else 'Canada'} for {entry.country}"
+    subject = f"{product[0].upper()}{product[1:]} from {company if company != '[your company]' else 'Canada'} for {country}"
     return OutreachDraft(subject=subject, body=body, language="en")
 
 
@@ -231,10 +241,11 @@ def voice_script(text: str, language: str) -> str:
 
 def _json_from_text(text: str) -> dict:
     text = text.strip()
+    # strict=False accepts raw newlines/tabs inside strings, which models sometimes emit in JSON mode.
     try:
-        return json.loads(text)
+        return json.loads(text, strict=False)
     except json.JSONDecodeError:
         m = re.search(r"\{.*\}", text, re.S)
         if not m:
             raise ValueError(f"model did not return JSON: {text[:200]}")
-        return json.loads(m.group(0))
+        return json.loads(m.group(0), strict=False)
