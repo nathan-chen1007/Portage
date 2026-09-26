@@ -11,7 +11,7 @@ def test_any_product_routes_always_mounted():
     client = TestClient(main.app)
     assert client.get("/api/explore/health").json() == {"modules": ["compliance", "lookup"]}
     assert client.get("/api/explore/lookup/cached").status_code == 200
-    assert client.post("/api/explore/lookup/rank", json={"hs6": "999999"}).status_code == 422  # mounted, validates
+    assert client.post("/api/explore/lookup/rank", json={"hs6": "maple"}).status_code == 422  # mounted, validates input
 
 
 def test_modules_import_strictly():
