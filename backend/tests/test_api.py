@@ -79,3 +79,12 @@ def test_outreach_offline(client):
 def test_voice_without_key_is_a_clear_502(client):
     r = client.post("/api/voice", json={"text": "Hello", "language": "ja"})
     assert r.status_code == 502 and "ELEVENLABS_API_KEY" in r.json()["detail"]
+
+
+def test_forwarders_and_group_quote(client):
+    f = client.get("/api/forwarders", params={"market": "JP"}).json()
+    assert len(f["forwarders"]) == 3 and f["route"] == "Vancouver → Japan"
+    assert f["confirm_note"] == "Confirm the route (Vancouver → Japan) and food handling when you request a quote."
+    q = client.post("/api/group-quote", json={"country_code": "JP", "producers": 6, "combined_kg": 15000, "provinces": ["AB", "SK"]})
+    assert q.status_code == 200 and "HS 0409.00" in q.json()["body"]
+    assert client.get("/api/forwarders", params={"market": "MX"}).status_code == 422

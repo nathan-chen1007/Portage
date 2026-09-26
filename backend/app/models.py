@@ -181,6 +181,47 @@ class Weights(BaseModel):
     tax: float = Field(0.10, ge=0)
 
 
+class Forwarder(BaseModel):
+    """A real freight forwarder (public company pages only, no personal contacts)."""
+
+    id: str
+    name: str
+    why: str = Field(description="One line: why it's listed")
+    lcl_url: str = Field(description="Their public LCL (shared-container) service page")
+    contact_url: str = Field(description="Their public quote / contact page")
+
+    @field_validator("lcl_url", "contact_url")
+    @classmethod
+    def _https(cls, v: str) -> str:
+        if not v.startswith("https://"):
+            raise ValueError(f"forwarder links must be https: {v}")
+        return v
+
+
+class ForwarderList(BaseModel):
+    as_of: str
+    note: str
+    source: str
+    route: str = Field("", description="e.g. 'Vancouver → Japan'")
+    confirm_note: str = Field("", description="Shown under the list: what to confirm when requesting a quote")
+    forwarders: list[Forwarder]
+
+
+class GroupQuoteRequest(BaseModel):
+    """Sample group numbers from the Ship together preview."""
+
+    country_code: str = Field(min_length=2, max_length=2)
+    producers: int = Field(ge=2, le=200)
+    combined_kg: float = Field(gt=0, le=1_000_000)
+    provinces: list[str] = Field(default_factory=list, description="Province codes of the producers, e.g. ['AB', 'SK']")
+
+
+class GroupQuoteDraft(BaseModel):
+    subject: str
+    body: str
+    sample: bool = Field(True, description="Always true in the preview: group numbers are sample data")
+
+
 SortBy = Literal["overall", "friction", "opportunity"]
 
 

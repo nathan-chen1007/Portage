@@ -20,6 +20,9 @@ from app.models import (  # noqa: E402
     Category,
     DocumentDraft,
     DocumentRequest,
+    ForwarderList,
+    GroupQuoteDraft,
+    GroupQuoteRequest,
     MarketEntry,
     OutreachDraft,
     OutreachRequest,
@@ -28,13 +31,14 @@ from app.models import (  # noqa: E402
     VoiceRequest,
     VoiceResponse,
 )
-from app.services import documents, llm, voice  # noqa: E402
+from app.services import documents, group_quote, llm, voice  # noqa: E402
 
 log = logging.getLogger("portage")
 
 DATA_DIR = Path(__file__).resolve().parent.parent / "data"
 EXPERIMENTAL = os.getenv("EXPERIMENTAL") == "1"
 catalog = load_catalog(DATA_DIR)  # validated once at startup: bad data stops the server immediately
+FORWARDERS = ForwarderList.model_validate_json((DATA_DIR / "forwarders.json").read_text(encoding="utf-8"))
 
 app = FastAPI(title="Portage API", version="0.1.0")
 app.add_middleware(
@@ -160,3 +164,32 @@ def make_voice(req: VoiceRequest) -> VoiceResponse:
     except Exception as e:
         raise HTTPException(502, f"Voice generation failed: {e}")
     return VoiceResponse(script=script, language=language, audio_base64=base64.b64encode(audio).decode())
+
+
+# ---------- Ship together (preview): freight forwarders + one group quote request ----------
+
+def _goods_market(country_code: str) -> MarketEntry:
+    """The goods (honey) row for this market: the lane and destination the group would ship on."""
+    for m in catalog.markets:
+        if m.country_code == country_code.upper() and catalog.categories[m.category].kind == "goods":
+            if m.status == "blocked":
+                raise HTTPException(422, f"{m.country} is not currently accessible: {m.status_note}")
+            return m
+    raise HTTPException(404, f"No goods market data for {country_code}")
+
+
+@app.get("/api/forwarders", response_model=ForwarderList)
+def forwarders(market: str = "JP") -> ForwarderList:
+    """Real CIFFA-member forwarders with LCL services (public pages only). Portage matches; the forwarder ships."""
+    entry = _goods_market(market)
+    route = group_quote.route_label(entry)
+    return FORWARDERS.model_copy(update={
+        "route": route,
+        "confirm_note": f"Confirm the route ({route}) and food handling when you request a quote.",
+    })
+
+
+@app.post("/api/group-quote", response_model=GroupQuoteDraft)
+def group_quote_draft(req: GroupQuoteRequest) -> GroupQuoteDraft:
+    """One drafted quote request for the whole group. Fixed template (no LLM), never sent."""
+    return group_quote.draft(req, _goods_market(req.country_code))

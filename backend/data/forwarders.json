@@ -1,0 +1,28 @@
+{
+  "as_of": "2026-09-26",
+  "note": "CIFFA membership from the CIFFA 2024 Membership Directory (ciffa.com/the-forwarder/CIFFA-2024-Membership-Directory/37/). Food/honey experience and Vancouver-Japan LCL schedules NOT confirmed; the UI must say to confirm these in the quote request.",
+  "source": "https://www.ciffa.com/the-forwarder/CIFFA-2024-Membership-Directory/37/",
+  "forwarders": [
+    {
+      "id": "yusen-canada",
+      "name": "Yusen Logistics (Canada) Inc.",
+      "why": "CIFFA member (2024 directory) · part of Japan's NYK group · offers LCL (shared-container) ocean freight from Canada",
+      "lcl_url": "https://www.yusen-logistics.com/ca_en/services/end-to-end-transportation/ocean-freight-forwarding/less-container-load-lcl",
+      "contact_url": "https://www.yusen-logistics.com/ca_en/contact-us"
+    },
+    {
+      "id": "kuehne-nagel-canada",
+      "name": "Kuehne+Nagel Canada",
+      "why": "CIFFA member (2024 directory) · global LCL network · online quote request",
+      "lcl_url": "https://www.kuehne-nagel.com/ca/services/sea-freight/lcl",
+      "contact_url": "https://www.kuehne-nagel.com/ca/contact/get-a-quote"
+    },
+    {
+      "id": "dhl-gf-canada",
+      "name": "DHL Global Forwarding (Canada) Inc.",
+      "why": "CIFFA member (2024 directory) · LCL ocean freight from Canada · online quote and booking",
+      "lcl_url": "https://www.dhl.com/ca-en/home/global-forwarding/products-and-solutions/ocean-freight/less-than-container-load.html",
+      "contact_url": "https://www.dhl.com/ca-en/home/global-forwarding/mydhli/discover-quote-and-book.html"
+    }
+  ]
+}
