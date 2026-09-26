@@ -1,0 +1,156 @@
+[
+  {
+    "id": "jp-yamada",
+    "category": "honey",
+    "country_code": "JP",
+    "name": "Yamada Bee Farm (山田養蜂場)",
+    "type": "honey company / retailer",
+    "description": "One of Japan's best-known honey companies; sells a Canadian clover honey (クローバー蜂蜜 カナダ産) under its own brand and has featured Alberta clover beekeeping in its 'Bee World' series.",
+    "website": "https://www.3838.com/",
+    "contact": "Contact form on the company website",
+    "source": "https://www.3838.com/bee-world/backnumber/161020_ca1/"
+  },
+  {
+    "id": "jp-mizutani",
+    "category": "honey",
+    "country_code": "JP",
+    "name": "Mizutani Bee Farm (水谷養蜂園)",
+    "type": "honey packer / retailer",
+    "description": "Mie-based honey company that sells Canadian white clover honey (カナダ産結晶蜜) alongside domestic honey.",
+    "website": "https://www.mizutani.co.jp/",
+    "contact": "Contact details on the company website",
+    "source": "https://mizutani.shop/products/canadianwhiteclover_130g"
+  },
+  {
+    "id": "jp-qbg",
+    "category": "honey",
+    "country_code": "JP",
+    "name": "Queen Bee Garden (クインビーガーデン)",
+    "type": "honey and maple importer / wholesaler",
+    "description": "Honey and maple syrup specialist that sells Canadian pure clover honey in retail and 2.5 kg foodservice formats through wholesalers.",
+    "website": "https://qbg.co.jp/",
+    "contact": "Contact details on the company website",
+    "source": "https://skweb.marubishi-group.co.jp/shopdetail/000000001438/"
+  },
+  {
+    "id": "de-dsc",
+    "category": "honey",
+    "country_code": "DE",
+    "name": "D. Schumacher GmbH & Co. KG",
+    "type": "honey broker / agent",
+    "description": "Bremen honey broker (founded 2017 by a veteran of Germany's large honey importers) that matches honey producers worldwide with buyers; member of the German Honey Association.",
+    "website": "https://www.dsc-kg.de/",
+    "contact": "mail@dsc-kg.de (published contact)",
+    "source": "https://www.honig-verband.de/d-schumacher-gmbh-stellt-sich-vor"
+  },
+  {
+    "id": "de-honigverband",
+    "category": "honey",
+    "country_code": "DE",
+    "name": "Honig-Verband e.V. (German Honey Association)",
+    "type": "industry association (importer directory)",
+    "description": "Association of German honey importers and packers. Its member list is the standard starting point for finding German buyers of bulk honey.",
+    "website": "https://www.honig-verband.de/honig-verband-mitglieder",
+    "contact": "Member list on the association website",
+    "source": "https://www.cbi.eu/market-information/honey/germany/market-entry"
+  },
+  {
+    "id": "uk-scarletts",
+    "category": "honey",
+    "country_code": "GB",
+    "name": "Scarletts Scotland",
+    "type": "honey packer",
+    "description": "Scottish company that describes itself as one of the UK's leading honey packers.",
+    "website": "http://www.scarletts.scot/honey/honey-packing/",
+    "contact": "Contact details on the company website",
+    "source": "http://www.scarletts.scot/honey/honey-packing/"
+  },
+  {
+    "id": "uk-bhipa",
+    "category": "honey",
+    "country_code": "GB",
+    "name": "The Honey Association (British Honey Importers and Packers Association)",
+    "type": "industry association (importer directory)",
+    "description": "The UK trade body for honey importers and packers; the route to the companies that buy imported honey for UK retail.",
+    "website": "https://www.honeyassociation.com/",
+    "contact": "Contact via the association website",
+    "source": "https://www.honeyassociation.com/"
+  },
+  {
+    "id": "chc",
+    "category": "honey",
+    "country_code": "*",
+    "name": "Canadian Honey Council",
+    "type": "Canadian industry association",
+    "description": "National body for Canada's beekeepers; publishes an exporters catalogue and tracks tariff and market-access changes for honey.",
+    "website": "https://honeycouncil.ca/",
+    "contact": "Contact via the council website",
+    "source": "https://honeycouncil.ca/tariffs/"
+  },
+  {
+    "id": "us-pax8",
+    "category": "b2b_saas",
+    "country_code": "US",
+    "name": "Pax8",
+    "type": "cloud distributor / marketplace",
+    "description": "Cloud software distributor whose marketplace sells vendors' SaaS through thousands of managed service providers. Has a vendor onboarding program.",
+    "website": "https://www.pax8.com/en-us/marketplace/vendors/",
+    "contact": "Vendor application on the Pax8 website",
+    "source": "https://www.pax8.com/en-us/marketplace/vendors/"
+  },
+  {
+    "id": "au-dicker",
+    "category": "b2b_saas",
+    "country_code": "AU",
+    "name": "Dicker Data",
+    "type": "IT and software distributor",
+    "description": "ASX-listed Australian IT distributor that signs software vendors for distribution across Australia and New Zealand (e.g. CrowdStrike, One Identity).",
+    "website": "https://www.dickerdata.com.au/",
+    "contact": "Vendor enquiries via the company website",
+    "source": "https://www.crowdstrike.com/en-us/press-releases/crowdstrike-announces-new-distribution-agreement-with-dicker-data/"
+  },
+  {
+    "id": "uk-giacom",
+    "category": "b2b_saas",
+    "country_code": "GB",
+    "name": "Giacom (Cloud Market)",
+    "type": "cloud marketplace / distributor",
+    "description": "UK cloud marketplace that supplies software to more than 6,000 local technology providers. Accepts new vendors.",
+    "website": "https://cloudmarket.com/about/become-a-vendor",
+    "contact": "Become-a-vendor form",
+    "source": "https://giacom.com/partners/"
+  },
+  {
+    "id": "de-also",
+    "category": "b2b_saas",
+    "country_code": "DE",
+    "name": "ALSO Cloud Marketplace",
+    "type": "cloud marketplace / distributor",
+    "description": "European IT distributor ALSO Holding's cloud marketplace, which resells SaaS through its reseller network across Europe, including Germany.",
+    "website": "https://www.also.com/ec/cms5/en_6000/6000/also-cloud-marketplace/index.jsp",
+    "contact": "Vendor enquiries via the ALSO website",
+    "source": "https://www.also.com/ec/cms5/en_6000/6000/also-cloud-marketplace/index.jsp"
+  },
+  {
+    "id": "de-cancom",
+    "category": "b2b_saas",
+    "country_code": "DE",
+    "name": "CANCOM Cloud Marketplace (ISV partners)",
+    "type": "IT services / cloud marketplace",
+    "description": "German IT services company whose cloud marketplace onboards ISV partners' SaaS applications.",
+    "website": "https://www.cancom.de/en/cloud/cloud-marketplace/isv-partners/",
+    "contact": "ISV partner page",
+    "source": "https://www.cancom.de/en/cloud/cloud-marketplace/isv-partners/"
+  },
+  {
+    "id": "tcs",
+    "category": "*",
+    "country_code": "*",
+    "name": "Canadian Trade Commissioner Service",
+    "type": "government (free)",
+    "description": "Government of Canada trade commissioners in every one of these markets help Canadian businesses find vetted local partners, at no charge.",
+    "website": "https://www.tradecommissioner.gc.ca/en/about-us/contact-us/find-trade-commissioner.html",
+    "contact": "Find a trade commissioner for the target market",
+    "source": "https://www.tradecommissioner.gc.ca/en/about-us/contact-us/find-trade-commissioner.html"
+  }
+]
