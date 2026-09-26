@@ -1,5 +1,6 @@
 """Portage API."""
 
+import logging
 import os
 from pathlib import Path
 
@@ -10,7 +11,17 @@ from fastapi.middleware.cors import CORSMiddleware
 load_dotenv()
 
 from app.engine.scoring import load_catalog, rank_markets  # noqa: E402
-from app.models import Category, MarketEntry, RankRequest, ScoredMarket  # noqa: E402
+from app.models import (  # noqa: E402
+    AnalyzeRequest,
+    AnalyzeResponse,
+    Category,
+    MarketEntry,
+    RankRequest,
+    ScoredMarket,
+)
+from app.services import llm  # noqa: E402
+
+log = logging.getLogger("portage")
 
 DATA_DIR = Path(__file__).resolve().parent.parent / "data"
 catalog = load_catalog(DATA_DIR)  # validated once at startup: bad data stops the server immediately
@@ -58,3 +69,21 @@ def rank(req: RankRequest) -> list[ScoredMarket]:
         return rank_markets(req.category, catalog, req.weights)
     except ValueError as e:  # e.g. all-zero weights
         raise HTTPException(422, str(e))
+
+
+@app.post("/api/analyze", response_model=AnalyzeResponse)
+def analyze(req: AnalyzeRequest) -> AnalyzeResponse:
+    """Founder's description -> structured profile (LLM) -> ranked markets with partners (engine).
+
+    If the LLM isn't configured or fails, falls back to keyword matching so the demo never dead-ends.
+    """
+    cats = list(catalog.categories.values())
+    mode = "llm"
+    try:
+        profile = llm.extract_profile(req.description, cats)
+    except Exception as e:  # no key, network error, bad model output
+        log.warning("profile extraction fell back to offline mode: %s", e)
+        profile, mode = llm.fallback_profile(req.description, cats), "offline"
+    cat = catalog.categories.get(profile.category)
+    markets = rank_markets(cat.id, catalog) if cat else []
+    return AnalyzeResponse(profile=profile, category=cat, markets=markets, mode=mode)
