@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { DocumentsPanel } from "./DocumentsPanel.jsx";
 import { OutreachPanel } from "./OutreachPanel.jsx";
 import { ShipTogether } from "./ShipTogether.jsx";
+import { ConfidenceBadge } from "./Confidence.jsx";
 import { UNITY_RED, sampleCohort } from "../lib/together.js";
 import { Badge, CountryMark, ExternalLink, Icon, Meter, ScoreRing, Segmented } from "./ui.jsx";
 import {
@@ -31,10 +32,13 @@ const TABS = [
 ];
 
 /** Right-hand panel for one market: scores, clickable factor tiles that expand in place, and the action tabs. */
-export function MarketPanel({ market, profile, kind, weights, openFactor, onOpenFactor, onExploreFactor }) {
+export function MarketPanel({ market, profile, kind, weights, openFactor, onOpenFactor, onExploreFactor, anyProduct = false }) {
+  // Paperwork, outreach and Ship together use verified data; for any-product results only the overview applies.
+  const tabs = anyProduct ? TABS.filter((t) => t.key === "why") : TABS;
   const [tab, setTab] = useState("why");
   const e = market.entry;
   const blocked = market.status === "blocked";
+  const unscored = !blocked && market.score == null; // any-product: a source (e.g. the tariff) didn't answer
 
   useEffect(() => setTab("why"), [market.country_code]);
 
@@ -67,12 +71,12 @@ export function MarketPanel({ market, profile, kind, weights, openFactor, onOpen
               </p>
               <div className="mt-3 flex flex-wrap items-center gap-1.5">
                 <ConfidenceBadge level={e.compliance_confidence ?? "verified"} />
-                <TogetherChip market={market} kind={kind} onOpen={() => setTab("together")} />
+                {!anyProduct && <TogetherChip market={market} kind={kind} onOpen={() => setTab("together")} />}
               </div>
             </>
           )}
         </div>
-        {!blocked && (
+        {!blocked && !unscored && (
           <div className="flex gap-3">
             {market.overall != null && market.opportunity != null && (
               <ScoreRing value={market.overall} label="Overall" size={56} color="#171717" hint="Prize and ease combined. Higher is better." />
@@ -85,7 +89,12 @@ export function MarketPanel({ market, profile, kind, weights, openFactor, onOpen
         )}
       </header>
 
-      {blocked ? (
+      {unscored ? (
+        <div className="mt-6 rounded-xl border border-neutral-200 bg-neutral-50 p-4">
+          <p className="text-sm text-neutral-800">Not scored: {market.status_note || "a data source didn't answer in time."}</p>
+          <Sources entry={e} className="mt-3" />
+        </div>
+      ) : blocked ? (
         <div className="mt-6 rounded-xl border border-red-100 bg-red-50/50 p-4">
           <p className="text-sm text-neutral-800">{market.status_note || e.status_note}</p>
           <Sources entry={e} className="mt-3" />
@@ -94,7 +103,7 @@ export function MarketPanel({ market, profile, kind, weights, openFactor, onOpen
         <>
           <div className="scroll-thin -mx-1 mt-6 overflow-x-auto px-1 pb-1">
             <Segmented
-              options={TABS.map((t) => (t.key === "together" && kind !== "goods" ? { ...t, label: "Team up" } : t))}
+              options={tabs.map((t) => (t.key === "together" && kind !== "goods" ? { ...t, label: "Team up" } : t))}
               value={tab}
               onChange={setTab}
               label="Market sections"
@@ -105,6 +114,12 @@ export function MarketPanel({ market, profile, kind, weights, openFactor, onOpen
           <div className="mt-5">
             {tab === "why" && (
               <Overview market={market} kind={kind} weights={weights} openFactor={openFactor} onOpenFactor={onOpenFactor} onExploreFactor={onExploreFactor} />
+            )}
+            {anyProduct && (
+              <p className="mt-4 text-xs text-neutral-500">
+                Paperwork drafts, partner outreach and Ship together are available for products with verified data (honey, B2B software).
+                For this product, the Trade Commissioner Service can help with the next steps.
+              </p>
             )}
             {tab === "docs" && <DocumentsPanel profile={profile} countryCode={e.country_code} />}
             {tab === "partners" && <OutreachPanel profile={profile} market={market} />}
@@ -265,7 +280,7 @@ function FactorDetail({ market, kind, factorKey, onExplore }) {
                     <span className="text-sm font-medium">{r.name}</span>
                     <span className="flex items-center gap-1.5">
                       <Badge>{TIER_LABEL[r.tier]}</Badge>
-                      {r.confidence && r.confidence !== "verified" && <ConfidenceBadge level={r.confidence} />}
+                      <ConfidenceBadge level={r.confidence ?? "verified"} />
                       {r.lead_time_weeks > 0 && (
                         <Badge tone="outline">
                           {weeks(r.lead_time_weeks)}
@@ -389,23 +404,6 @@ function Sources({ entry, className = "" }) {
         </span>
       ))}
     </p>
-  );
-}
-
-// How much to trust the compliance data: verified (a person read the official source), auto-sourced
-// (official structured data, not yet checked by a person), unknown (no data: ask the Trade Commissioner Service).
-const CONFIDENCE = {
-  verified: { tone: "success", label: "Compliance verified", title: "A person checked every requirement against the official source." },
-  auto_sourced: { tone: "accent", label: "Auto-sourced", title: "From official structured data, not yet checked by a person. Confirm with CFIA or the Trade Commissioner Service." },
-  unknown: { tone: "danger", label: "Compliance not verified", title: "No compliance data yet. Confirm with the Trade Commissioner Service before shipping." },
-};
-
-function ConfidenceBadge({ level }) {
-  const c = CONFIDENCE[level] ?? CONFIDENCE.unknown;
-  return (
-    <Badge tone={c.tone}>
-      <span title={c.title}>{c.label}</span>
-    </Badge>
   );
 }
 

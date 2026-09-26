@@ -56,7 +56,7 @@ export default function App() {
     setPrize(DEFAULT_PRIZE_WEIGHT);
     setPanel("market");
     setOpenFactor(null);
-    const firstOpen = r.markets.find((m) => m.status !== "blocked") ?? r.markets[0];
+    const firstOpen = r.markets.find((m) => m.status !== "blocked" && m.score != null) ?? r.markets[0];
     setSelected(firstOpen?.country_code ?? null);
   }
 
@@ -100,6 +100,42 @@ export default function App() {
     setError(null);
   }
 
+  // Any-product result (not honey / B2B SaaS): ranked by the HS-code lookup instead of the curated catalog.
+  function applyLookup(resp) {
+    setResult((r) => ({
+      ...r,
+      markets: resp.markets,
+      opportunity_available: resp.opportunity_available,
+      category: { ...r.category, id: `hs${resp.product.hs6}`, label: resp.product.description.slice(0, 120), hs_code: `${resp.product.hs6.slice(0, 4)}.${resp.product.hs6.slice(4)}` },
+      profile: { ...r.profile, category: `hs${resp.product.hs6}` },
+      lookup: { ...r.lookup, product: resp.product, data_status: resp.data_status, notes: resp.notes },
+    }));
+  }
+
+  // The founder confirms or switches the HS code we suggested: re-rank every market for the new code.
+  async function switchHs(hs6) {
+    if (!result?.lookup || hs6 === result.lookup.product.hs6) return;
+    setReranking(true);
+    setError(null);
+    try {
+      const resp = await api.lookupRank(hs6, {
+        description: result.lookup.product.founder_description,
+        weights,
+        sort_by: result.opportunity_available ? view : "friction",
+        prize_weight: prize,
+      });
+      applyLookup(resp);
+      if (!resp.opportunity_available) setView("friction");
+      const firstOpen = resp.markets.find((m) => m.status !== "blocked" && m.score != null) ?? resp.markets[0];
+      setSelected(firstOpen?.country_code ?? null);
+      setPanel("market");
+    } catch (e) {
+      setError(e.message);
+    } finally {
+      setReranking(false);
+    }
+  }
+
   // Re-rank on the backend with the current controls (any argument overrides the current state).
   function rerank({ weights: w = weights, view: v = view, prize: p = prize } = {}) {
     if (!result?.category) return;
@@ -108,6 +144,17 @@ export default function App() {
       if (Object.values(w).every((x) => x === 0)) return;
       setReranking(true);
       try {
+        if (result.lookup) {
+          const resp = await api.lookupRank(result.lookup.product.hs6, {
+            description: result.lookup.product.founder_description,
+            classified_by: result.lookup.product.classified_by,
+            weights: w,
+            sort_by: v,
+            prize_weight: p,
+          });
+          applyLookup(resp);
+          return;
+        }
         const markets = await api.rank(result.category.id, { weights: w, sort_by: v, prize_weight: p });
         setResult((r) => ({ ...r, markets }));
       } catch (e) {
@@ -184,6 +231,8 @@ export default function App() {
         onReset={reset}
         loading={loading}
       />
+
+      {result.lookup && <HsStrip lookup={result.lookup} onSwitch={switchHs} busy={reranking} />}
 
       {error && (
         <div className="border-b border-red-100 bg-red-50 px-4 py-2 text-sm text-red-700" role="alert">
@@ -281,6 +330,7 @@ export default function App() {
                 openFactor={openFactor}
                 onOpenFactor={setOpenFactor}
                 onExploreFactor={openFactorPanel}
+                anyProduct={Boolean(result.lookup)}
               />
             ) : (
               <p className="text-sm text-neutral-500">Pick a market on the left.</p>
@@ -334,5 +384,87 @@ function TopBar({ health, result, description, setDescription, onAnalyze, onRese
         </span>
       </div>
     </header>
+  );
+}
+
+/**
+ * Any-product mode: the HS code Portage picked for the founder's description, with the alternatives and a
+ * search to switch. Everything below re-ranks for the chosen code.
+ */
+function HsStrip({ lookup, onSwitch, busy }) {
+  const [q, setQ] = useState("");
+  const [hits, setHits] = useState(null);
+  const p = lookup.product;
+  const code = (c) => `${c.slice(0, 4)}.${c.slice(4)}`;
+  const options = [...lookup.candidates];
+  if (!options.some((c) => c.hs6 === p.hs6)) options.unshift({ hs6: p.hs6, description: p.description, source: "user" });
+
+  async function search(e) {
+    e.preventDefault();
+    if (q.trim().length < 2) return;
+    try {
+      setHits(await api.lookupSearch(q.trim()));
+    } catch {
+      setHits([]);
+    }
+  }
+
+  return (
+    <div className="border-b border-amber-100 bg-amber-50/50 px-4 py-2.5 text-sm sm:px-5" aria-label="Product code">
+      <div className="flex flex-wrap items-center gap-2">
+        <span className="text-xs font-medium uppercase tracking-wide text-amber-800">Any-product mode</span>
+        <label className="flex min-w-0 flex-1 items-center gap-2">
+          <span className="shrink-0 text-neutral-600">Product code</span>
+          <select
+            aria-label="HS code"
+            value={p.hs6}
+            disabled={busy}
+            onChange={(e) => onSwitch(e.target.value)}
+            className="min-w-0 max-w-full flex-1 truncate rounded-md border border-neutral-200 bg-white px-2 py-1 text-sm"
+          >
+            {options.map((c) => (
+              <option key={c.hs6} value={c.hs6}>
+                HS {code(c.hs6)} · {c.description.slice(0, 90)}
+              </option>
+            ))}
+          </select>
+        </label>
+        <form onSubmit={search} className="flex items-center gap-1.5">
+          <input
+            value={q}
+            onChange={(e) => setQ(e.target.value)}
+            placeholder="Not right? Search codes"
+            aria-label="Search HS codes"
+            className="w-44 rounded-md border border-neutral-200 bg-white px-2 py-1 text-sm"
+          />
+          <Button type="submit" size="sm" variant="outline" disabled={busy}>
+            Search
+          </Button>
+        </form>
+        {busy && <Spinner />}
+      </div>
+      {hits && (
+        <div className="mt-2 flex flex-wrap gap-1.5">
+          {hits.length === 0 && <span className="text-xs text-neutral-500">No matching codes.</span>}
+          {hits.slice(0, 8).map((h) => (
+            <button
+              key={h.hs6}
+              type="button"
+              onClick={() => {
+                setHits(null);
+                onSwitch(h.hs6);
+              }}
+              className="rounded-full border border-neutral-200 bg-white px-2.5 py-0.5 text-xs hover:border-neutral-400"
+            >
+              HS {code(h.hs6)} · {h.description.slice(0, 60)}
+            </button>
+          ))}
+        </div>
+      )}
+      <p className="mt-1.5 text-xs text-neutral-500">
+        Tariffs and trade data come live from official sources ({p.tariff_source}; {p.trade_source}). Compliance is only as good as its badge:
+        confirm anything not marked Verified.
+      </p>
+    </div>
   );
 }

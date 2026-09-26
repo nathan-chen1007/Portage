@@ -66,3 +66,14 @@ describe("MarketList", () => {
     expect(screen.queryByTestId("prize-foothold")).not.toBeInTheDocument();
   });
 });
+
+describe("MarketList confidence badges", () => {
+  it("badges every market: verified green, auto-sourced amber, unknown red", () => {
+    const markets = MARKETS.map((m, i) => ({ ...m, entry: { ...m.entry, compliance_confidence: ["verified", "auto_sourced", "unknown"][i] ?? "verified" } }));
+    render(<MarketList markets={markets} kind="goods" selected={null} onSelect={() => {}} />);
+    expect(screen.getAllByTestId(/^confidence-/).length).toBe(markets.length);
+    expect(screen.getByText("Verified")).toBeInTheDocument();
+    expect(screen.getByText("Auto-sourced: confirm with CFIA or the Trade Commissioner Service")).toBeInTheDocument();
+    expect(screen.getByText("Not verified: confirm with the Trade Commissioner Service")).toBeInTheDocument();
+  });
+});

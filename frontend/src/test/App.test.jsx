@@ -136,3 +136,63 @@ describe("App", () => {
     expect(await screen.findByText(/isn't available on the backend yet/)).toBeInTheDocument();
   });
 });
+
+describe("Any-product mode (products that aren't honey or B2B software)", () => {
+  const lookupMarkets = MARKETS.map((m, i) => ({
+    ...m,
+    entry: {
+      ...m.entry,
+      category: "hs950699",
+      compliance_confidence: ["auto_sourced", "unknown", "unknown"][i] ?? "unknown",
+      compliance_requirements: (m.entry.compliance_requirements ?? []).map((r) => ({ ...r, confidence: i === 0 ? "auto_sourced" : "unknown" })),
+    },
+  }));
+  const product = (hs6, description) => ({
+    hs6, description, founder_description: "I make hockey sticks", classified_by: "keyword", catalog: "comtrade",
+    trade_year: 2024, base_year: 2019, tariff_source: "WITS / UNCTAD TRAINS", trade_source: "UN Comtrade", fetched: {}, pending: false, as_of: "2026-09-26",
+  });
+  const analyzeResponse = {
+    profile: { ...PROFILE, category: "hs950699" },
+    category: { id: "hs950699", label: "Equipment for outdoor games", kind: "goods", hs_code: "9506.99", description: "Equipment for outdoor games", examples: [] },
+    markets: lookupMarkets,
+    mode: "offline",
+    opportunity_available: false,
+    lookup: {
+      product: product("950699", "Equipment for outdoor games and recreation n.e.c. in heading no. 9506"),
+      candidates: [
+        { hs6: "950699", description: "Equipment for outdoor games and recreation n.e.c. in heading no. 9506", reason: "", source: "keyword" },
+        { hs6: "950670", description: "Skates; ice and roller", reason: "", source: "keyword" },
+      ],
+      classify_mode: "offline",
+      data_status: [],
+      notes: [],
+    },
+  };
+
+  it("shows the HS code to confirm or switch, and a confidence badge on every market", async () => {
+    const fetchMock = backend({
+      "/api/analyze": analyzeResponse,
+      "/api/explore/lookup/rank": (body) => ({
+        product: product(body.hs6, "Skates; ice and roller"), markets: lookupMarkets, data_status: [], opportunity_available: false, notes: [],
+      }),
+    });
+    vi.stubGlobal("fetch", fetchMock);
+    render(<App />);
+    await userEvent.click(await screen.findByText("Honey producer, Alberta"));
+    await userEvent.click(screen.getByRole("button", { name: "Find my markets" }));
+
+    const select = await screen.findByRole("combobox", { name: "HS code" });
+    expect(select).toHaveValue("950699");
+    const list = screen.getByRole("list", { name: "Ranked markets" });
+    expect(within(list).getAllByText("Auto-sourced: confirm with CFIA or the Trade Commissioner Service").length).toBe(1);
+    expect(within(list).getAllByText("Not verified: confirm with the Trade Commissioner Service").length).toBe(2);
+    // Paperwork / outreach / Ship together need verified data: not offered for any-product results.
+    expect(screen.queryByRole("tab", { name: "Paperwork" })).not.toBeInTheDocument();
+
+    await userEvent.selectOptions(select, "950670");
+    await vi.waitFor(() => {
+      const bodies = fetchMock.mock.calls.filter(([u]) => u.endsWith("/api/explore/lookup/rank")).map(([, i]) => JSON.parse(i.body));
+      expect(bodies.some((b) => b.hs6 === "950670" && b.classified_by === "user")).toBe(true);
+    });
+  });
+});

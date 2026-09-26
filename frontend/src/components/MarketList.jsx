@@ -1,5 +1,6 @@
 import { FrictionBar, PrizeBar } from "./FrictionBar.jsx";
 import { Badge, CountryMark } from "./ui.jsx";
+import { ConfidenceBadge } from "./Confidence.jsx";
 import { EASE_COLOR, PRIZE_COLOR, agreementShort, ease, pct, viewScore } from "../lib/format.js";
 
 /**
@@ -60,9 +61,14 @@ export function MarketList({ markets, kind, selected, onSelect, onFactor, view =
               </div>
               {blocked ? (
                 <p className="mt-2 line-clamp-2 pl-[4.25rem] text-xs text-neutral-500">{m.status_note}</p>
+              ) : m.score == null ? (
+                <p className="mt-2 line-clamp-2 pl-[4.25rem] text-xs text-neutral-500">{m.status_note || "Not scored: data unavailable."}</p>
               ) : (
                 <ScoreBreakdown market={m} view={view} weights={weights} onFactor={onFactor} />
               )}
+              <div className="mt-2 pl-[4.25rem]">
+                <ConfidenceBadge level={m.entry.compliance_confidence ?? "verified"} />
+              </div>
             </button>
           </li>
         );

@@ -53,6 +53,13 @@ export const api = {
   outreach: (profile, country_code, middleman_id) => request("/api/outreach", { profile, country_code, middleman_id }),
   voice: (text, language) => request("/api/voice", { text, language }),
   // Ship together (preview): real CIFFA-member forwarders + one drafted group quote request (fixed template).
+  // Any-product mode: rank another HS code (the founder confirms or switches the one we suggested), search codes.
+  lookupRank: (hs6, opts = {}) => {
+    const body = { hs6, classified_by: opts.classified_by ?? "user", description: opts.description ?? "" };
+    for (const k of ["weights", "sort_by", "prize_weight"]) if (opts[k] !== undefined && opts[k] !== null) body[k] = opts[k];
+    return request("/api/explore/lookup/rank", body);
+  },
+  lookupSearch: (q) => request(`/api/explore/lookup/search?q=${encodeURIComponent(q)}`),
   forwarders: (market) => request(`/api/forwarders?market=${encodeURIComponent(market)}`),
   groupQuote: (body) => request("/api/group-quote", body),
   async pdf(profile, country_code, docId) {
