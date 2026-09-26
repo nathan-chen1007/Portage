@@ -146,7 +146,96 @@ body {
   overflow: hidden;
 }
 
+/* ---------- loading sequence ---------- */
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.fade-in {
+  animation: fade-in 0.25s ease-out both;
+}
+@keyframes loader-out {
+  0% { opacity: 1; transform: none; }
+  60% { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(1.03); }
+}
+.loader-out {
+  animation: loader-out 0.65s ease-in both;
+}
+.loader-bar {
+  transition: width 0.55s cubic-bezier(0.3, 0.8, 0.3, 1);
+  background-image: linear-gradient(90deg, #171717 0%, #525252 50%, #171717 100%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s linear infinite;
+}
+@keyframes shimmer {
+  from { background-position: 200% 0; }
+  to { background-position: 0 0; }
+}
+@keyframes mark-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+.loader-mark {
+  animation: mark-float 2.2s ease-in-out infinite;
+}
+.loader-arc {
+  stroke-dasharray: 40;
+  animation: arc-draw 1.6s ease-in-out infinite;
+}
+@keyframes arc-draw {
+  0% { stroke-dashoffset: 40; }
+  50% { stroke-dashoffset: 0; }
+  100% { stroke-dashoffset: -40; }
+}
+.loader-dot {
+  animation: dot-pulse 1.6s ease-in-out infinite;
+  transform-origin: 16px 11px;
+}
+@keyframes dot-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.35); }
+}
+.tick {
+  animation: tick-pop 0.3s cubic-bezier(0.3, 1.6, 0.5, 1) both;
+}
+@keyframes tick-pop {
+  from { transform: scale(0.4); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+/* ---------- reveal after loading ---------- */
+.reveal {
+  animation: fade-in 0.4s ease-out both;
+}
+.reveal-left {
+  animation: slide-from-left 0.55s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+@keyframes slide-from-left {
+  from { opacity: 0; transform: translateX(-18px); }
+  to { opacity: 1; transform: none; }
+}
+.reveal-panel {
+  animation: panel-in 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) 0.15s both;
+}
+@keyframes panel-in {
+  from { opacity: 0; transform: translateY(14px) scale(0.985); filter: blur(4px); }
+  to { opacity: 1; transform: none; filter: none; }
+}
+.rise {
+  animation: fade-up 0.45s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
 @media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal-left,
+  .reveal-panel,
+  .rise,
+  .loader-bar,
+  .loader-mark,
+  .loader-arc,
+  .loader-dot,
+  .tick,
   .fade-up,
   .slide-in,
   .pop {

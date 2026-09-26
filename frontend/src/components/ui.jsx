@@ -1,5 +1,15 @@
 // Shared UI primitives (dependency-free on purpose).
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+
+/** Starts at 0 and moves to the real value after mount, so rings and meters animate in. */
+function useGrowIn(value) {
+  const [v, setV] = useState(0);
+  useEffect(() => {
+    const t = setTimeout(() => setV(value ?? 0), 60);
+    return () => clearTimeout(t);
+  }, [value]);
+  return v;
+}
 
 export function Button({ variant = "primary", size = "md", className = "", ...props }) {
   const base =
@@ -80,7 +90,7 @@ export function Slider({ value, onChange, min = 0, max = 1, step = 0.05, color =
 export function ScoreRing({ value, label, color = "#171717", size = 64, hint }) {
   const r = (size - 8) / 2;
   const c = 2 * Math.PI * r;
-  const v = value == null ? 0 : Math.max(0, Math.min(100, value));
+  const v = useGrowIn(value == null ? 0 : Math.max(0, Math.min(100, value)));
   return (
     <div className="flex flex-col items-center gap-1" title={hint}>
       <div className="relative" style={{ width: size, height: size }}>
@@ -96,7 +106,7 @@ export function ScoreRing({ value, label, color = "#171717", size = 64, hint }) 
             strokeLinecap="round"
             strokeDasharray={c}
             strokeDashoffset={c * (1 - v / 100)}
-            className="transition-[stroke-dashoffset] duration-500 ease-out"
+            className="transition-[stroke-dashoffset] duration-1000 ease-out"
           />
         </svg>
         <span className="absolute inset-0 grid place-items-center text-base font-semibold tabular-nums">
@@ -110,10 +120,10 @@ export function ScoreRing({ value, label, color = "#171717", size = 64, hint }) 
 
 /** Thin 0-1 bar. */
 export function Meter({ value, color = "#171717", className = "" }) {
-  const v = Math.max(0, Math.min(1, value ?? 0));
+  const v = useGrowIn(Math.max(0, Math.min(1, value ?? 0)));
   return (
     <div className={`h-1.5 w-full overflow-hidden rounded-full bg-neutral-100 ${className}`}>
-      <div className="h-full rounded-full transition-[width] duration-500 ease-out" style={{ width: `${v * 100}%`, background: color }} />
+      <div className="h-full rounded-full transition-[width] duration-500 ease-out" style={{ width: `${v * 100}%`, background: color, transitionDuration: "800ms" }} />
     </div>
   );
 }

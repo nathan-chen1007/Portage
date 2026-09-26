@@ -38,6 +38,16 @@ describe("App", () => {
     expect(screen.getByRole("heading", { level: 2, name: /United Kingdom/ })).toBeInTheDocument();
   });
 
+  it("plays the loading sequence, then reveals the results", async () => {
+    vi.stubGlobal("fetch", backend());
+    render(<App />);
+    await userEvent.click(await screen.findByRole("button", { name: "Natural honey" }));
+    expect(screen.getByText("Finding your markets")).toBeInTheDocument();
+    expect(screen.getByRole("progressbar")).toBeInTheDocument();
+    expect(await screen.findByText("Easiest first")).toBeInTheDocument();
+    await vi.waitFor(() => expect(screen.queryByText("Finding your markets")).not.toBeInTheDocument());
+  });
+
   it("browses a category without the LLM", async () => {
     const fetchMock = backend();
     vi.stubGlobal("fetch", fetchMock);

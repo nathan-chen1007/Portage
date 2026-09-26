@@ -1,19 +1,24 @@
-import { FrictionBar } from "./FrictionBar.jsx";
+import { FrictionBar, PrizeBar } from "./FrictionBar.jsx";
 import { Badge, CountryMark } from "./ui.jsx";
-import { agreementShort, componentLabel, pct, viewScore } from "../lib/format.js";
+import { EASE_COLOR, PRIZE_COLOR, agreementShort, component, ease, pct, viewScore } from "../lib/format.js";
 
-const SCORE_LABEL = { overall: "score", friction: "friction", opportunity: "prize" };
+const SCORE_LABEL = { overall: "score", friction: "ease", opportunity: "prize" };
 
-/** Compact ranked list. Click a row to open that market's panel; click a bar segment to open that factor. */
-export function MarketList({ markets, kind, selected, onSelect, onFactor, view = "friction" }) {
+/**
+ * Compact ranked list. Every number reads "higher is better", and the bar under each row shows where
+ * that number comes from: ease points per factor (Easiest), prize points per part (Biggest prize), or
+ * prize and ease side by side (Recommended, which blends the two). Click a row to open that market;
+ * click an ease segment to open that factor.
+ */
+export function MarketList({ markets, kind, selected, onSelect, onFactor, view = "friction", weights }) {
   return (
     <ul className="space-y-1.5" aria-label="Ranked markets">
-      {markets.map((m) => {
+      {markets.map((m, i) => {
         const blocked = m.status === "blocked";
         const isSel = selected === m.country_code;
         const score = blocked ? null : viewScore(m, view);
         return (
-          <li key={m.country_code}>
+          <li key={m.country_code} className="rise" style={{ animationDelay: `${180 + i * 70}ms` }}>
             <button
               type="button"
               onClick={() => onSelect(m.country_code)}
@@ -59,17 +64,53 @@ export function MarketList({ markets, kind, selected, onSelect, onFactor, view =
               {blocked ? (
                 <p className="mt-2 line-clamp-2 pl-[4.25rem] text-xs text-neutral-500">{m.status_note}</p>
               ) : (
-                <div className="mt-2.5 flex items-center gap-2 pl-[4.25rem]">
-                  <FrictionBar market={m} thin onSegment={onFactor} />
-                  <span className="w-16 shrink-0 text-right text-[11px] text-neutral-400">
-                    {m.top_blocker ? componentLabel(m.top_blocker).toLowerCase() : "clear"}
-                  </span>
-                </div>
+                <ScoreBreakdown market={m} view={view} weights={weights} onFactor={onFactor} />
               )}
             </button>
           </li>
         );
       })}
     </ul>
+  );
+}
+
+/** The bar under a row, matching the view's number. */
+function ScoreBreakdown({ market, view, weights, onFactor }) {
+  if (view === "overall" && market.overall != null && market.opportunity != null) {
+    return (
+      <div className="mt-2.5 grid grid-cols-2 gap-3 pl-[4.25rem]">
+        <MiniMeter label="Prize" value={market.opportunity} color={PRIZE_COLOR} />
+        <MiniMeter label="Ease" value={ease(market)} color={EASE_COLOR} />
+      </div>
+    );
+  }
+  if (view === "opportunity" && market.opportunity != null) {
+    return (
+      <div className="mt-2.5 flex items-center gap-2 pl-[4.25rem]">
+        <PrizeBar market={market} thin />
+      </div>
+    );
+  }
+  const drag = component(market.top_blocker);
+  return (
+    <div className="mt-2.5 flex items-center gap-2 pl-[4.25rem]">
+      <FrictionBar market={market} weights={weights} thin onSegment={onFactor} />
+      <span className="w-20 shrink-0 text-right text-[11px] text-neutral-400" title="The factor costing this market the most points">
+        {drag ? `held back by ${drag.label.toLowerCase()}` : "no big barriers"}
+      </span>
+    </div>
+  );
+}
+
+function MiniMeter({ label, value, color }) {
+  const v = Math.max(0, Math.min(100, value ?? 0));
+  return (
+    <div className="flex items-center gap-1.5 text-[11px] text-neutral-500" title={`${label} ${v.toFixed(0)} of 100`}>
+      <span className="w-8 shrink-0">{label}</span>
+      <span className="h-1.5 flex-1 overflow-hidden rounded-full bg-neutral-100">
+        <span className="block h-full rounded-full" style={{ width: `${v}%`, background: color }} />
+      </span>
+      <span className="w-5 text-right tabular-nums text-neutral-700">{v.toFixed(0)}</span>
+    </div>
   );
 }

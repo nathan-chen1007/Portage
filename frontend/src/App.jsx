@@ -2,11 +2,12 @@ import { useEffect, useRef, useState } from "react";
 import { API_URL, DEFAULT_PRIZE_WEIGHT, DEFAULT_WEIGHTS, api, emptyProfile } from "./lib/api.js";
 import { FactorChips } from "./components/FrictionBar.jsx";
 import { FactorPanel } from "./components/FactorPanel.jsx";
+import { LoadingScreen } from "./components/LoadingScreen.jsx";
 import { MarketList } from "./components/MarketList.jsx";
 import { MarketPanel } from "./components/MarketPanel.jsx";
 import { OpportunityMap } from "./components/OpportunityMap.jsx";
 import { TunePanel } from "./components/TunePanel.jsx";
-import { Badge, Button, ErrorNote, Icon, Segmented, Skeleton, Spinner } from "./components/ui.jsx";
+import { Badge, Button, ErrorNote, Icon, Segmented, Spinner } from "./components/ui.jsx";
 import { COMPONENTS, VIEWS } from "./lib/format.js";
 
 export const EXAMPLES = [
@@ -34,7 +35,10 @@ export default function App() {
   const [view, setView] = useState("overall"); // overall | friction | opportunity
   const [layout, setLayout] = useState("list"); // list | map
   const [prize, setPrize] = useState(DEFAULT_PRIZE_WEIGHT);
-  const [loading, setLoading] = useState(false);
+  const [loader, setLoader] = useState(null); // { subject, ready } while the loading sequence runs
+  const [revealKey, setRevealKey] = useState(0);
+  const pending = useRef(null);
+  const loading = loader !== null;
   const [reranking, setReranking] = useState(false);
   const [error, setError] = useState(null);
   const rerankTimer = useRef(null);
@@ -63,30 +67,38 @@ export default function App() {
     setSelected(firstOpen?.country_code ?? null);
   }
 
-  async function analyze(text = description) {
-    if (text.trim().length < 10) return;
-    setLoading(true);
+  // Run a backend call behind the animated loading sequence; the result is revealed when the sequence ends.
+  async function runWithLoader(subject, fetchResult) {
     setError(null);
+    pending.current = null;
+    setLoader({ subject, ready: false });
     try {
-      showResult(await api.analyze(text.trim()));
+      pending.current = await fetchResult();
+      setLoader((l) => (l ? { ...l, ready: true } : l));
     } catch (e) {
+      setLoader(null);
       setError(e.message);
-    } finally {
-      setLoading(false);
     }
   }
 
-  async function pickCategory(cat) {
-    setLoading(true);
-    setError(null);
-    try {
+  function finishLoading() {
+    if (pending.current) showResult(pending.current);
+    pending.current = null;
+    setLoader(null);
+    setRevealKey((k) => k + 1);
+  }
+
+  function analyze(text = description) {
+    const t = text.trim();
+    if (t.length < 10) return;
+    runWithLoader(t, () => api.analyze(t));
+  }
+
+  function pickCategory(cat) {
+    runWithLoader(cat.label, async () => {
       const markets = await api.rank(cat.id);
-      showResult({ profile: emptyProfile(cat.id), category: cat, markets, mode: "direct" });
-    } catch (e) {
-      setError(e.message);
-    } finally {
-      setLoading(false);
-    }
+      return { profile: emptyProfile(cat.id), category: cat, markets, mode: "direct" };
+    });
   }
 
   function reset() {
@@ -142,9 +154,12 @@ export default function App() {
     focusPanel();
   }
 
+  const overlay = loader && <LoadingScreen subject={loader.subject} ready={loader.ready} onFinished={finishLoading} />;
+
   if (!result?.category) {
     return (
-      <Landing
+      <>
+        <Landing
         health={health}
         categories={categories}
         description={description}
@@ -154,7 +169,9 @@ export default function App() {
         loading={loading}
         error={error}
         unsupported={result && !result.category}
-      />
+        />
+        {overlay}
+      </>
     );
   }
 
@@ -163,7 +180,8 @@ export default function App() {
   const factorOpen = panel !== "market" && COMPONENTS.some((c) => c.key === panel);
 
   return (
-    <div className="flex min-h-screen flex-col bg-white text-neutral-900 lg:h-screen lg:overflow-hidden">
+    <div key={revealKey} className="reveal flex min-h-screen flex-col bg-white text-neutral-900 lg:h-screen lg:overflow-hidden">
+      {overlay}
       <TopBar
         health={health}
         result={result}
@@ -182,7 +200,7 @@ export default function App() {
 
       <div className="grid min-h-0 flex-1 lg:grid-cols-[27rem_1fr]">
         {/* ---------- left: controls + ranked list ---------- */}
-        <aside className="flex min-h-0 flex-col border-neutral-200 lg:border-r">
+        <aside className="reveal-left flex min-h-0 flex-col border-neutral-200 lg:border-r">
           <div className="space-y-3 border-b border-neutral-100 p-4">
             {result.opportunity_available ? (
               <Segmented
@@ -250,7 +268,7 @@ export default function App() {
 
         {/* ---------- right: market or factor panel ---------- */}
         <main ref={panelRef} className="scroll-thin min-h-0 overflow-y-auto bg-neutral-50/70 p-4 sm:p-6">
-          <div className="mx-auto max-w-4xl rounded-2xl border border-neutral-200 bg-white p-5 shadow-[0_1px_3px_rgba(0,0,0,0.04)] sm:p-7">
+          <div className="reveal-panel mx-auto max-w-4xl rounded-2xl border border-neutral-200 bg-white p-5 shadow-[0_1px_3px_rgba(0,0,0,0.04)] sm:p-7">
             {factorOpen ? (
               <FactorPanel
                 key={panel}
@@ -374,14 +392,6 @@ function Landing({ health, categories, description, setDescription, onAnalyze, o
             <ErrorNote>{error}</ErrorNote>
           </div>
         </form>
-
-        {loading && (
-          <div className="mt-10 space-y-2 text-left" data-testid="loading">
-            {Array.from({ length: 4 }).map((_, i) => (
-              <Skeleton key={i} className="h-14 w-full" />
-            ))}
-          </div>
-        )}
 
         {unsupported && !loading && (
           <div className="fade-up mt-10 rounded-2xl border border-neutral-200 p-6">
