@@ -7,6 +7,7 @@ from pathlib import Path
 from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import Response
 
 load_dotenv()
 
@@ -15,11 +16,13 @@ from app.models import (  # noqa: E402
     AnalyzeRequest,
     AnalyzeResponse,
     Category,
+    DocumentDraft,
+    DocumentRequest,
     MarketEntry,
     RankRequest,
     ScoredMarket,
 )
-from app.services import llm  # noqa: E402
+from app.services import documents, llm  # noqa: E402
 
 log = logging.getLogger("portage")
 
@@ -87,3 +90,20 @@ def analyze(req: AnalyzeRequest) -> AnalyzeResponse:
     cat = catalog.categories.get(profile.category)
     markets = rank_markets(cat.id, catalog) if cat else []
     return AnalyzeResponse(profile=profile, category=cat, markets=markets, mode=mode)
+
+
+@app.post("/api/documents", response_model=list[DocumentDraft])
+def make_documents(req: DocumentRequest) -> list[DocumentDraft]:
+    """Paperwork drafts for one market: origin declaration (if the FTA saves duty), DPA (SaaS into EU/UK), checklist."""
+    cat = _category(req.profile.category)
+    return documents.drafts_for(req.profile, cat, _open_market(cat.id, req.country_code))
+
+
+@app.post("/api/documents/{doc_id}/pdf")
+def document_pdf(doc_id: str, req: DocumentRequest) -> Response:
+    for d in make_documents(req):
+        if d.id == doc_id:
+            filename = f"{doc_id}-{req.country_code.upper()}.pdf"
+            return Response(documents.to_pdf(d), media_type="application/pdf",
+                            headers={"Content-Disposition": f'attachment; filename="{filename}"'})
+    raise HTTPException(404, f"No document '{doc_id}' for this market")
