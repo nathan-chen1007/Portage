@@ -255,7 +255,7 @@ function Home({ categories, description, setDescription, onAnalyze, onPickCatego
                 if (canSubmit) onAnalyze();
               }}
             >
-              <div className="rounded-2xl border border-neutral-900/10 bg-white/85 p-2 shadow-[0_12px_40px_-20px_rgba(47,100,224,0.45)] backdrop-blur transition-all focus-within:border-brand/50 focus-within:ring-4 focus-within:ring-brand/10">
+              <div className="rounded-2xl border border-neutral-900/10 bg-white/85 p-2 shadow-[0_12px_40px_-20px_rgba(213,43,30,0.45)] backdrop-blur transition-all focus-within:border-brand/50 focus-within:ring-4 focus-within:ring-brand/10">
                 <label htmlFor="description" className="sr-only">
                   Describe your business
                 </label>
@@ -363,7 +363,7 @@ function Home({ categories, description, setDescription, onAnalyze, onPickCatego
           <ol className="mt-10 grid gap-8 md:grid-cols-3">
             {STEPS.map((s) => (
               <li key={s.n} className="flex gap-4">
-                <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-brand text-xs font-semibold text-white shadow-[0_4px_12px_-4px_rgba(47,100,224,0.6)]">{s.n}</span>
+                <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-brand text-xs font-semibold text-white shadow-[0_4px_12px_-4px_rgba(213,43,30,0.6)]">{s.n}</span>
                 <div>
                   <h3 className="font-semibold">{s.title}</h3>
                   <p className="mt-1 text-sm leading-relaxed text-neutral-600">{s.body}</p>
@@ -391,7 +391,7 @@ function NetworkDiagram() {
   const hub = { x: 214, y: 180 };
   const mY = (i) => 54 + i * 36;
   return (
-    <div className="glass mx-auto w-full max-w-md rounded-2xl border border-white/70 p-5 shadow-[0_18px_50px_-24px_rgba(47,100,224,0.35)] ring-1 ring-neutral-900/[0.05] lg:max-w-none" aria-hidden>
+    <div className="glass mx-auto w-full max-w-md rounded-2xl border border-white/70 p-5 shadow-[0_18px_50px_-24px_rgba(213,43,30,0.35)] ring-1 ring-neutral-900/[0.05] lg:max-w-none" aria-hidden>
       <div className="grid grid-cols-3 text-[11px] font-medium uppercase tracking-wider text-neutral-400">
         <span>Businesses</span>
         <span className="text-center">Portage</span>
@@ -399,7 +399,7 @@ function NetworkDiagram() {
       </div>
       <svg viewBox="0 0 420 340" className="mt-2 w-full">
         {PRODUCERS.map((y) => (
-          <path key={y} d={`M44 ${y} C 130 ${y}, 120 ${hub.y}, ${hub.x - 40} ${hub.y}`} fill="none" stroke="#2f64e0" strokeOpacity="0.5" strokeWidth="1.4" className="flow" />
+          <path key={y} d={`M44 ${y} C 130 ${y}, 120 ${hub.y}, ${hub.x - 40} ${hub.y}`} fill="none" stroke="#d52b1e" strokeOpacity="0.5" strokeWidth="1.4" className="flow" />
         ))}
         {MARKETS.map((m, i) => (
           <path key={m} d={`M${hub.x + 40} ${hub.y} C 300 ${hub.y}, 300 ${mY(i)}, 356 ${mY(i)}`} fill="none" stroke={UNITY_RED} strokeWidth="1.4" className="flow" />
@@ -407,10 +407,10 @@ function NetworkDiagram() {
         {PRODUCERS.map((y, i) => (
           <g key={y} className="node-pop" style={{ animationDelay: `${i * 0.06}s` }}>
             <circle cx="32" cy={y} r="12" fill="#fff" stroke="#d4d4d4" />
-            <circle cx="32" cy={y} r="4.5" fill="#2f64e0" />
+            <circle cx="32" cy={y} r="4.5" fill="#d52b1e" />
           </g>
         ))}
-        <rect x={hub.x - 40} y={hub.y - 22} width="80" height="44" rx="12" fill="#2f64e0" />
+        <rect x={hub.x - 40} y={hub.y - 22} width="80" height="44" rx="12" fill="#d52b1e" />
         <text x={hub.x} y={hub.y + 5} textAnchor="middle" fontSize="13" fontWeight="600" fill="#fff" fontFamily="Inter, sans-serif">
           Portage
         </text>

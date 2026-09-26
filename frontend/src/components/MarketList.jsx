@@ -22,7 +22,7 @@ export function MarketList({ markets, kind, selected, onSelect, view = "friction
               aria-pressed={isSel}
               className={`group relative w-full rounded-xl border px-3.5 py-3 text-left transition-all duration-150 ${
                 isSel
-                  ? "border-brand/50 bg-brand-50/80 shadow-[0_4px_16px_-8px_rgba(47,100,224,0.45)] ring-1 ring-brand/20"
+                  ? "border-brand/50 bg-brand-50/80 shadow-[0_4px_16px_-8px_rgba(213,43,30,0.45)] ring-1 ring-brand/20"
                   : "border-neutral-900/[0.07] bg-white/80 hover:border-brand/30 hover:bg-white hover:shadow-sm"
               } ${blocked ? "bg-neutral-50/60" : ""}`}
             >
@@ -63,11 +63,11 @@ function TariffLine({ entry, kind }) {
   if (kind !== "goods") return deal ? <span>{deal}</span> : null;
   const high = (entry.tariff_rate ?? 0) >= HIGH_TARIFF;
   return (
-    <span className={high ? "text-red-700" : ""}>
+    <span className={high ? "text-blue-700" : ""}>
       <span className={high ? "font-semibold" : ""}>{pct(entry.tariff_rate)} tariff</span>
       {deal && (
         <>
-          <span className={high ? "text-red-300" : "text-neutral-300"}> · </span>
+          <span className={high ? "text-blue-300" : "text-neutral-300"}> · </span>
           <span>{deal}</span>
         </>
       )}
