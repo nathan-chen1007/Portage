@@ -1,0 +1,18 @@
+[
+  {
+    "id": "honey",
+    "label": "Natural honey",
+    "kind": "goods",
+    "hs_code": "0409.00",
+    "description": "Natural honey from Canadian hives (liquid, creamed or comb), packaged for retail or shipped in bulk drums.",
+    "examples": ["clover honey", "creamed honey", "raw or unpasteurized honey", "bulk honey in drums"]
+  },
+  {
+    "id": "b2b_saas",
+    "label": "B2B software (SaaS) that handles personal data",
+    "kind": "services",
+    "hs_code": null,
+    "description": "Cloud software sold to businesses that stores or processes personal information about their employees or customers (HR, CRM, analytics, scheduling, etc.).",
+    "examples": ["HR analytics platform", "CRM", "scheduling software", "customer support tool"]
+  }
+]
