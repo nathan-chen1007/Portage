@@ -102,5 +102,114 @@
         ]
       }
     ]
+  },
+  {
+    "category": "icewine",
+    "hs_code": "2204.21",
+    "year": 2024,
+    "base_year": 2019,
+    "canada_export_value_usd": 20138088,
+    "canada_export_volume_kg": 1170279,
+    "canada_export_source": "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=124&period=2024&cmdCode=220421&flowCode=X&partnerCode=0",
+    "description": "UN Comtrade annual imports of wine in containers of 2 L or less (HS 2204.21), all partners and from Canada, in US dollars as reported by each importing country. HS 2204.21 covers all bottled wine; market size is the wine market, not icewine specifically.",
+    "as_of": "2026-09-26",
+    "markets": [
+      {
+        "country_code": "GB",
+        "import_value_usd": 2943796721,
+        "import_volume_kg": 0,
+        "import_value_base_usd": 2787569728,
+        "canada_value_usd": 483163,
+        "note": "HS 2204.21 covers all bottled wine; market size is the wine market, not icewine specifically. No 2024 import weights reported: price data unavailable.",
+        "sources": [
+          "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=826&period=2024&cmdCode=220421&flowCode=M&partnerCode=0,124",
+          "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=826&period=2019&cmdCode=220421&flowCode=M&partnerCode=0"
+        ]
+      },
+      {
+        "country_code": "JP",
+        "import_value_usd": 931982275,
+        "import_volume_kg": 0,
+        "import_value_base_usd": 1021054047,
+        "canada_value_usd": 441842,
+        "note": "HS 2204.21 covers all bottled wine; market size is the wine market, not icewine specifically. No 2024 import weights reported: price data unavailable.",
+        "sources": [
+          "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=392&period=2024&cmdCode=220421&flowCode=M&partnerCode=0,124",
+          "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=392&period=2019&cmdCode=220421&flowCode=M&partnerCode=0"
+        ]
+      },
+      {
+        "country_code": "AU",
+        "import_value_usd": 294749626,
+        "import_volume_kg": 42018622,
+        "import_value_base_usd": 329676387,
+        "canada_value_usd": 45754,
+        "note": "HS 2204.21 covers all bottled wine; market size is the wine market, not icewine specifically.",
+        "sources": [
+          "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=36&period=2024&cmdCode=220421&flowCode=M&partnerCode=0,124",
+          "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=36&period=2019&cmdCode=220421&flowCode=M&partnerCode=0"
+        ]
+      },
+      {
+        "country_code": "DE",
+        "import_value_usd": 1631788981,
+        "import_volume_kg": 492472241,
+        "import_value_base_usd": 1874642146,
+        "canada_value_usd": 54012,
+        "note": "HS 2204.21 covers all bottled wine; market size is the wine market, not icewine specifically.",
+        "sources": [
+          "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=276&period=2024&cmdCode=220421&flowCode=M&partnerCode=0,124",
+          "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=276&period=2019&cmdCode=220421&flowCode=M&partnerCode=0"
+        ]
+      },
+      {
+        "country_code": "CN",
+        "import_value_usd": 1435243568,
+        "import_volume_kg": 164680679,
+        "import_value_base_usd": 2192008491,
+        "canada_value_usd": 4162929,
+        "note": "HS 2204.21 covers all bottled wine; market size is the wine market, not icewine specifically.",
+        "sources": [
+          "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=156&period=2024&cmdCode=220421&flowCode=M&partnerCode=0,124",
+          "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=156&period=2019&cmdCode=220421&flowCode=M&partnerCode=0"
+        ]
+      },
+      {
+        "country_code": "KR",
+        "import_value_usd": 351276906,
+        "import_volume_kg": 40154447,
+        "import_value_base_usd": 203859740,
+        "canada_value_usd": 663232,
+        "note": "HS 2204.21 covers all bottled wine; market size is the wine market, not icewine specifically.",
+        "sources": [
+          "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=410&period=2024&cmdCode=220421&flowCode=M&partnerCode=0,124",
+          "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=410&period=2019&cmdCode=220421&flowCode=M&partnerCode=0"
+        ]
+      },
+      {
+        "country_code": "US",
+        "import_value_usd": 5018440934,
+        "import_volume_kg": 684131446,
+        "import_value_base_usd": 4730122750,
+        "canada_value_usd": 5943438,
+        "note": "HS 2204.21 covers all bottled wine; market size is the wine market, not icewine specifically.",
+        "sources": [
+          "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=842&period=2024&cmdCode=220421&flowCode=M&partnerCode=0,124",
+          "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=842&period=2019&cmdCode=220421&flowCode=M&partnerCode=0"
+        ]
+      },
+      {
+        "country_code": "MX",
+        "import_value_usd": 261800004,
+        "import_volume_kg": 62835810,
+        "import_value_base_usd": 202712041,
+        "canada_value_usd": 0,
+        "note": "HS 2204.21 covers all bottled wine; market size is the wine market, not icewine specifically.",
+        "sources": [
+          "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=484&period=2024&cmdCode=220421&flowCode=M&partnerCode=0,124",
+          "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=484&period=2019&cmdCode=220421&flowCode=M&partnerCode=0"
+        ]
+      }
+    ]
   }
 ]

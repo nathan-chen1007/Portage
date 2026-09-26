@@ -5,7 +5,12 @@
     "kind": "goods",
     "hs_code": "0409.00",
     "description": "Natural honey from Canadian hives (liquid, creamed or comb), packaged for retail or shipped in bulk drums.",
-    "examples": ["clover honey", "creamed honey", "raw or unpasteurized honey", "bulk honey in drums"]
+    "examples": [
+      "clover honey",
+      "creamed honey",
+      "raw or unpasteurized honey",
+      "bulk honey in drums"
+    ]
   },
   {
     "id": "b2b_saas",
@@ -13,6 +18,24 @@
     "kind": "services",
     "hs_code": null,
     "description": "Cloud software sold to businesses that stores or processes personal information about their employees or customers (HR, CRM, analytics, scheduling, etc.).",
-    "examples": ["HR analytics platform", "CRM", "scheduling software", "customer support tool"]
+    "examples": [
+      "HR analytics platform",
+      "CRM",
+      "scheduling software",
+      "customer support tool"
+    ]
+  },
+  {
+    "id": "icewine",
+    "label": "Icewine",
+    "kind": "goods",
+    "hs_code": "2204.21",
+    "description": "Canadian icewine: wine made from grapes naturally frozen on the vine (VQA Ontario / BC VQA), sold in 200-375 ml bottles. Canadian tariff item 2204.21.10.10.",
+    "examples": [
+      "Vidal icewine",
+      "Riesling icewine",
+      "Cabernet Franc icewine",
+      "ice wine from Niagara or the Okanagan"
+    ]
   }
 ]

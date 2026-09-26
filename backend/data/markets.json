@@ -785,5 +785,413 @@
       "https://www.china-briefing.com/news/china-internet-business-licenses-foreign-companies/"
     ],
     "as_of": "2026-09-26"
+  },
+  {
+    "country": "Japan",
+    "country_code": "JP",
+    "language": "ja",
+    "lpi_customs_score": 3.9,
+    "sea_distance_nm": 4349,
+    "weekly_sailings": 1.5,
+    "shipping_route": "Vancouver → Yokohama, ~11 days, direct sailings 1-2×/week",
+    "shipping_source": "https://www.fluentcargo.com/routes/vancouver-ca/tokyo-jp",
+    "category": "icewine",
+    "status": "open",
+    "status_note": "",
+    "tax_burden": 0.0,
+    "tax_note": "Liquor tax on wine is ¥100 per litre (¥100,000/kL, National Tax Agency), plus consumption tax; both are paid by the Japanese importer at customs.",
+    "notes": [
+      "HS 2204.21 covers all bottled wine; market size is the wine market, not icewine specifically."
+    ],
+    "as_of": "2026-09-26",
+    "tariff_rate": 0.0,
+    "mfn_rate": 0.15,
+    "tariff_note": "Duty-free under CPTPP (Japan Customs tariff schedule, April 1 2026, item 2204.21-020). Without it, 15% or ¥125/L, whichever is less (min. ¥67/L).",
+    "trade_agreement": "CPTPP",
+    "compliance_requirements": [
+      {
+        "name": "Importer holds a liquor sales licence (Liquor Tax Act)",
+        "tier": 2,
+        "detail": "Imported wine can only be sold in Japan by a licence holder, so you ship to a licensed importer (the partners listed here already hold one).",
+        "source": "https://www.customs.go.jp/english/c-answer_e/kojin/3105_e.htm",
+        "lead_time_weeks": 0,
+        "lead_time_basis": "estimate"
+      },
+      {
+        "name": "Food Sanitation Act import notification",
+        "tier": 1,
+        "detail": "The importer files a 'Notification Form for Importation of Foods' with a quarantine station for every shipment (Art. 27).",
+        "source": "https://www.mhlw.go.jp/english/topics/importedfoods/index.html",
+        "lead_time_weeks": 0,
+        "lead_time_basis": "official"
+      },
+      {
+        "name": "Japanese labelling",
+        "tier": 1,
+        "detail": "Product description and alcohol strength displayed in a readily visible place, in Japanese; the importer's name and address. Usually a sticker applied by the importer.",
+        "source": "https://www.customs.go.jp/english/c-answer_e/kojin/3105_e.htm",
+        "lead_time_weeks": 2,
+        "lead_time_basis": "estimate"
+      },
+      {
+        "name": "CPTPP certification of origin",
+        "tier": 1,
+        "detail": "Self-certified by the exporter to claim 0% duty. Icewine from Canadian-grown grapes is wholly obtained (CPTPP Art. 3.3(a) and (k)).",
+        "source": "https://www.cbsa-asfc.gc.ca/publications/dm-md/d11/d11-4-14-eng.html",
+        "lead_time_weeks": 0,
+        "lead_time_basis": "official"
+      }
+    ],
+    "sources": [
+      "https://www.customs.go.jp/english/tariff/2026_04_01/data/e_22.htm",
+      "https://www.nta.go.jp/taxes/sake/qa/01/03.pdf",
+      "https://www.mhlw.go.jp/english/topics/importedfoods/index.html"
+    ]
+  },
+  {
+    "country": "United Kingdom",
+    "country_code": "GB",
+    "language": "en",
+    "lpi_customs_score": 3.5,
+    "sea_distance_nm": 3047,
+    "weekly_sailings": 1.5,
+    "shipping_route": "Montreal → Liverpool, ~13 days, direct sailings 1-2×/week",
+    "shipping_source": "https://www.fluentcargo.com/routes/montreal-ca/liverpool-gb",
+    "category": "icewine",
+    "status": "open",
+    "status_note": "",
+    "tax_burden": 0.0,
+    "tax_note": "UK alcohol duty is charged per litre of pure alcohol (8.5-22% ABV band), plus 20% VAT; both are paid by the UK importer.",
+    "notes": [
+      "HS 2204.21 covers all bottled wine; market size is the wine market, not icewine specifically.",
+      "Organic icewine needs a UK organic certificate of inspection (C644); non-organic wine is declared exempt (UK Trade Tariff)."
+    ],
+    "as_of": "2026-09-26",
+    "tariff_rate": 0.0,
+    "mfn_rate": 0.032,
+    "tariff_note": "Duty-free under the Canada-UK Trade Continuity Agreement: 0.00% for Canada on every 2204 21 line (UK Trade Tariff API). Without it, £10-26 per hectolitre (about 3% ad valorem, WITS).",
+    "trade_agreement": "Canada-UK Trade Continuity Agreement (CUKTCA)",
+    "compliance_requirements": [
+      {
+        "name": "UK importer registered for alcohol (AWRS)",
+        "tier": 2,
+        "detail": "Anyone selling alcohol to other UK businesses must be approved under the Alcohol Wholesaler Registration Scheme; overseas exporters don't register, the UK importer does.",
+        "source": "https://www.gov.uk/guidance/alcohol-wholesaler-registration-scheme-awrs-apply-to-register",
+        "lead_time_weeks": 0,
+        "lead_time_basis": "estimate"
+      },
+      {
+        "name": "UK wine labelling",
+        "tier": 1,
+        "detail": "UK importer's name and address, alcohol by volume, and 'contains sulphites' above 10 mg/L. No VI-1 form is needed for wine entering Great Britain.",
+        "source": "https://www.gov.uk/guidance/importing-selling-and-labelling-wine",
+        "lead_time_weeks": 2,
+        "lead_time_basis": "estimate"
+      },
+      {
+        "name": "CUKTCA origin declaration",
+        "tier": 1,
+        "detail": "Origin declaration on the invoice to claim 0% duty (the UK Trade Tariff lists it as the accepted proof of origin for Canada).",
+        "source": "https://www.trade-tariff.service.gov.uk/api/v2/rules_of_origin_schemes/220421/CA",
+        "lead_time_weeks": 0,
+        "lead_time_basis": "official"
+      }
+    ],
+    "sources": [
+      "https://www.trade-tariff.service.gov.uk/api/v2/commodities/2204210600",
+      "https://www.gov.uk/guidance/importing-selling-and-labelling-wine",
+      "https://www.gov.uk/guidance/alcohol-duty-rates",
+      "https://wits.worldbank.org/tariff/trains/en/country/GBR/partner/CAN/product/220421"
+    ]
+  },
+  {
+    "country": "Germany (EU)",
+    "country_code": "DE",
+    "language": "de",
+    "lpi_customs_score": 3.9,
+    "sea_distance_nm": 3502,
+    "weekly_sailings": 0.75,
+    "shipping_route": "Halifax → Hamburg, ~10 days, direct sailings every 1-2 weeks",
+    "shipping_source": "https://www.fluentcargo.com/routes/halifax-ca/hamburg-de",
+    "category": "icewine",
+    "status": "open",
+    "status_note": "",
+    "tax_burden": 0.0,
+    "tax_note": "Germany levies no excise duty on still wine (Zoll). Import VAT (19%) is paid and recovered by the German importer.",
+    "notes": [
+      "HS 2204.21 covers all bottled wine; market size is the wine market, not icewine specifically."
+    ],
+    "as_of": "2026-09-26",
+    "tariff_rate": 0.0,
+    "mfn_rate": 0.035,
+    "tariff_note": "Duty-free under CETA (WITS/TRAINS: 0% for Canada). Without it, the EU tariff on bottled still wine is €13.1-15.4 per hectolitre (about 3.5% ad valorem).",
+    "trade_agreement": "CETA",
+    "compliance_requirements": [
+      {
+        "name": "VI-1 wine import document (simplified self-certification)",
+        "tier": 2,
+        "detail": "EU wine imports need a VI-1 document. Canadian wine can use the simplified certificate: producers on Canada's authorised list self-certify (Canada-EU Wine Agreement, Art. 23).",
+        "source": "https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:22004A0206(02)",
+        "lead_time_weeks": 4,
+        "lead_time_basis": "estimate"
+      },
+      {
+        "name": "EU icewine standard and labelling",
+        "tier": 1,
+        "detail": "'Icewine' must come from grapes naturally frozen on the vine (no artificial freezing), with minimum alcohol and sulphite limits (Art. 25); German-language labelling with allergens (sulphites).",
+        "source": "https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:22004A0206(02)",
+        "lead_time_weeks": 2,
+        "lead_time_basis": "estimate"
+      },
+      {
+        "name": "CETA origin declaration",
+        "tier": 1,
+        "detail": "Origin declaration on the invoice with your CRA Business Number to claim 0% duty. Icewine from Canadian-grown grapes is wholly obtained (CETA Origin Protocol, Art. 4).",
+        "source": "https://www.international.gc.ca/trade-commerce/trade-agreements-accords-commerciaux/agr-acc/ceta-aecg/text-texte/P1.aspx?lang=eng",
+        "lead_time_weeks": 0,
+        "lead_time_basis": "official"
+      }
+    ],
+    "sources": [
+      "https://www.international.gc.ca/trade-commerce/trade-agreements-accords-commerciaux/agr-acc/ceta-aecg/2024-07-31_wines_summary-sommaire_vins.aspx?lang=eng",
+      "https://www.zoll.de/DE/Fachthemen/Steuern/Verbrauchsteuern/Alkohol-Tabakwaren-Kaffee/Steuergegenstand-Besonderheiten-Wein/Besonderheiten-Wein/besonderheiten_wein_node.html",
+      "https://wits.worldbank.org/tariff/trains/en/country/DEU/partner/CAN/product/220421"
+    ]
+  },
+  {
+    "country": "South Korea",
+    "country_code": "KR",
+    "language": "ko",
+    "lpi_customs_score": 3.9,
+    "sea_distance_nm": 4764,
+    "weekly_sailings": 4,
+    "shipping_route": "Vancouver → Busan, ~13 days, departures every 1-2 days",
+    "shipping_source": "https://www.fluentcargo.com/routes/vancouver-ca/busan-kr",
+    "category": "icewine",
+    "status": "open",
+    "status_note": "",
+    "tax_burden": 0.0,
+    "tax_note": "Korea's liquor tax (30% on fruit wine), education tax and VAT are paid by the Korean importer (US TTB summary).",
+    "notes": [
+      "HS 2204.21 covers all bottled wine; market size is the wine market, not icewine specifically."
+    ],
+    "as_of": "2026-09-26",
+    "tariff_rate": 0.0,
+    "mfn_rate": 0.15,
+    "tariff_note": "Duty-free under the Canada-Korea FTA, which eliminated Korea's tariff on 'wine (including icewine)' from 15% (Global Affairs Canada).",
+    "trade_agreement": "Canada-Korea FTA (CKFTA)",
+    "compliance_requirements": [
+      {
+        "name": "MFDS overseas facility registration",
+        "tier": 2,
+        "detail": "The Canadian winery must be registered with Korea's Ministry of Food and Drug Safety at least 7 days before the import declaration.",
+        "source": "https://www.mfds.go.kr/eng/wpge/m_11/de011002l001.do",
+        "lead_time_weeks": 1,
+        "lead_time_basis": "official"
+      },
+      {
+        "name": "MFDS import declaration and inspection",
+        "tier": 2,
+        "detail": "The Korean importer declares every shipment to MFDS; the first import of a product is inspected (lab-tested).",
+        "source": "https://www.mfds.go.kr/eng/wpge/m_11/de011002l001.do",
+        "lead_time_weeks": 2,
+        "lead_time_basis": "estimate"
+      },
+      {
+        "name": "Korean labelling",
+        "tier": 1,
+        "detail": "Korean-language label (product, alcohol %, importer, allergens) applied before sale.",
+        "source": "https://www.mfds.go.kr/eng/wpge/m_11/de011002l001.do",
+        "lead_time_weeks": 2,
+        "lead_time_basis": "estimate"
+      },
+      {
+        "name": "CKFTA certificate of origin (BSF760)",
+        "tier": 1,
+        "detail": "Exporter completes CBSA form BSF760, preference criterion A (wholly obtained), to claim 0% duty.",
+        "source": "https://www.cbsa-asfc.gc.ca/publications/forms-formulaires/bsf760-eng.html",
+        "lead_time_weeks": 0,
+        "lead_time_basis": "official"
+      }
+    ],
+    "sources": [
+      "https://www.international.gc.ca/trade-commerce/trade-agreements-accords-commerciaux/agr-acc/korea-coree/pt/bc-cb.aspx?lang=eng",
+      "https://www.mfds.go.kr/eng/wpge/m_11/de011002l001.do",
+      "https://wits.worldbank.org/tariff/trains/en/country/KOR/partner/CAN/product/220421"
+    ]
+  },
+  {
+    "country": "Australia",
+    "country_code": "AU",
+    "language": "en",
+    "lpi_customs_score": 3.7,
+    "sea_distance_nm": 10054,
+    "weekly_sailings": 0.75,
+    "shipping_route": "Vancouver → Sydney, ~33 days, sailings every 1-2 weeks",
+    "shipping_source": "https://www.fluentcargo.com/routes/vancouver-ca/sydney-au",
+    "category": "icewine",
+    "status": "open",
+    "status_note": "",
+    "tax_burden": 0.0,
+    "tax_note": "Wine Equalisation Tax (29% of the wholesale value) and 10% GST apply at import (ATO); paid by the Australian importer.",
+    "notes": [
+      "HS 2204.21 covers all bottled wine; market size is the wine market, not icewine specifically."
+    ],
+    "as_of": "2026-09-26",
+    "tariff_rate": 0.0,
+    "mfn_rate": 0.05,
+    "compliance_confidence": "unknown",
+    "tariff_note": "Duty-free under CPTPP (Australian Border Force tariff, Schedule 8B: grape wine 2204.21.20 has no CPTPP phasing, so Free). Without it, 5%.",
+    "trade_agreement": "CPTPP",
+    "compliance_requirements": [
+      {
+        "name": "Import requirements not verified (assumed: a government approval or certificate)",
+        "tier": 3,
+        "detail": "We have not verified this market's import rules for icewine, so we assume a typical burden rather than none. Compliance not verified — confirm with the Trade Commissioner Service.",
+        "source": "https://www.tradecommissioner.gc.ca/",
+        "lead_time_weeks": 8,
+        "lead_time_basis": "estimate",
+        "confidence": "unknown"
+      },
+      {
+        "name": "Registration not verified (assumed: registering with a foreign regulator)",
+        "tier": 2,
+        "detail": "Placeholder so an unverified market doesn't look easier than a verified one. Compliance not verified — confirm with the Trade Commissioner Service.",
+        "source": "https://www.tradecommissioner.gc.ca/",
+        "lead_time_weeks": 4,
+        "lead_time_basis": "estimate",
+        "confidence": "unknown"
+      }
+    ],
+    "sources": [
+      "https://www.abf.gov.au/importing-exporting-and-manufacturing/tariff-classification/current-tariff/schedule-8b",
+      "https://www.ato.gov.au/businesses-and-organisations/gst-excise-and-indirect-taxes/wine-equalisation-tax/how-much-to-pay/imported-wine",
+      "https://www.tradecommissioner.gc.ca/"
+    ]
+  },
+  {
+    "country": "China",
+    "country_code": "CN",
+    "language": "zh",
+    "lpi_customs_score": 3.3,
+    "sea_distance_nm": 5344,
+    "weekly_sailings": 3,
+    "shipping_route": "Vancouver → Shanghai, ~20 days, 2-4 sailings/week",
+    "shipping_source": "https://www.fluentcargo.com/routes/vancouver-ca/shanghai-cn",
+    "category": "icewine",
+    "status": "open",
+    "status_note": "",
+    "tax_burden": 0.0,
+    "tax_note": "Consumption tax and import VAT are paid by the Chinese importer.",
+    "notes": [
+      "HS 2204.21 covers all bottled wine; market size is the wine market, not icewine specifically."
+    ],
+    "as_of": "2026-09-26",
+    "tariff_rate": 0.14,
+    "mfn_rate": 0.14,
+    "compliance_confidence": "unknown",
+    "tariff_note": "14% MFN tariff (WITS/TRAINS 2023); Canada has no trade agreement with China. Wine is not on China's 2025 list of retaliatory surtaxes on Canadian goods.",
+    "trade_agreement": null,
+    "compliance_requirements": [
+      {
+        "name": "Import requirements not verified (assumed: a government approval or certificate)",
+        "tier": 3,
+        "detail": "We have not verified this market's import rules for icewine, so we assume a typical burden rather than none. Compliance not verified — confirm with the Trade Commissioner Service.",
+        "source": "https://www.tradecommissioner.gc.ca/",
+        "lead_time_weeks": 8,
+        "lead_time_basis": "estimate",
+        "confidence": "unknown"
+      },
+      {
+        "name": "Registration not verified (assumed: registering with a foreign regulator)",
+        "tier": 2,
+        "detail": "Placeholder so an unverified market doesn't look easier than a verified one. Compliance not verified — confirm with the Trade Commissioner Service.",
+        "source": "https://www.tradecommissioner.gc.ca/",
+        "lead_time_weeks": 4,
+        "lead_time_basis": "estimate",
+        "confidence": "unknown"
+      }
+    ],
+    "sources": [
+      "https://wits.worldbank.org/tariff/trains/en/country/CHN/partner/CAN/product/220421",
+      "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/notices/2026-05-08",
+      "https://www.tradecommissioner.gc.ca/"
+    ]
+  },
+  {
+    "country": "Mexico",
+    "country_code": "MX",
+    "language": "es",
+    "lpi_customs_score": 2.5,
+    "sea_distance_nm": 10400,
+    "weekly_sailings": 0.75,
+    "shipping_route": "Vancouver → Manzanillo, ~32 days, transshipment only",
+    "shipping_source": "https://www.fluentcargo.com/routes/vancouver-ca/manzanillo-mx",
+    "category": "icewine",
+    "status": "open",
+    "status_note": "",
+    "tax_burden": 0.0,
+    "tax_note": "Mexico's excise (IEPS) and 16% VAT are paid by the Mexican importer.",
+    "notes": [
+      "HS 2204.21 covers all bottled wine; market size is the wine market, not icewine specifically."
+    ],
+    "as_of": "2026-09-26",
+    "tariff_rate": 0.0,
+    "mfn_rate": 0.2,
+    "compliance_confidence": "unknown",
+    "tariff_note": "Duty-free under CUSMA (WITS/TRAINS: 0% for Canada). Without it, 20%.",
+    "trade_agreement": "CUSMA",
+    "compliance_requirements": [
+      {
+        "name": "Import requirements not verified (assumed: a government approval or certificate)",
+        "tier": 3,
+        "detail": "We have not verified this market's import rules for icewine, so we assume a typical burden rather than none. Compliance not verified — confirm with the Trade Commissioner Service.",
+        "source": "https://www.tradecommissioner.gc.ca/",
+        "lead_time_weeks": 8,
+        "lead_time_basis": "estimate",
+        "confidence": "unknown"
+      },
+      {
+        "name": "Registration not verified (assumed: registering with a foreign regulator)",
+        "tier": 2,
+        "detail": "Placeholder so an unverified market doesn't look easier than a verified one. Compliance not verified — confirm with the Trade Commissioner Service.",
+        "source": "https://www.tradecommissioner.gc.ca/",
+        "lead_time_weeks": 4,
+        "lead_time_basis": "estimate",
+        "confidence": "unknown"
+      }
+    ],
+    "sources": [
+      "https://wits.worldbank.org/tariff/trains/en/country/MEX/partner/CAN/product/220421",
+      "https://www.tradecommissioner.gc.ca/"
+    ]
+  },
+  {
+    "country": "United States",
+    "country_code": "US",
+    "language": "en",
+    "lpi_customs_score": 3.7,
+    "sea_distance_nm": 0,
+    "weekly_sailings": 7,
+    "shipping_route": "Land border: truck or rail, no ocean leg",
+    "shipping_source": null,
+    "category": "icewine",
+    "status": "blocked",
+    "status_note": "Banned from September 29, 2026: Proclamation 11061 excludes Canadian wine in bottles of 2 L or less (HTS 2204.21.50, which includes icewine 2204.21.50.28) from import into the US. Until then, a 50% Section 338 tariff applies (heading 9903.03.12) with no CUSMA exemption.",
+    "tax_burden": 0.0,
+    "tax_note": "",
+    "notes": [
+      "HS 2204.21 covers all bottled wine; market size is the wine market, not icewine specifically."
+    ],
+    "as_of": "2026-09-26",
+    "tariff_rate": 0.5,
+    "mfn_rate": 0.02,
+    "tariff_note": "50% Section 338 tariff (heading 9903.03.12, no CUSMA exemption) until the import ban starts on September 29, 2026.",
+    "trade_agreement": "CUSMA (does not exempt Section 338)",
+    "compliance_requirements": [],
+    "sources": [
+      "https://www.federalregister.gov/documents/2026/09/14/2026-18835/excluding-certain-canadian-products-from-importation-into-the-united-states-in-response-to-continued",
+      "https://content.govdelivery.com/attachments/USDHSCBP/2026/08/21/file_attachments/3754630/Section%20338%20Canada%20HTS%20LIST%20Final.pdf"
+    ]
   }
 ]

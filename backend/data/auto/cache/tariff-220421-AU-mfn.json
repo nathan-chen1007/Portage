@@ -1,0 +1,11 @@
+{
+ "v": 2,
+ "key": "tariff-220421-AU-mfn",
+ "fetched_at": "2026-09-26T22:31:13+00:00",
+ "url": "https://wits.worldbank.org/API/V1/SDMX/V21/datasource/TRN/reporter/036/partner/000/product/220421/year/ALL/datatype/aveestimated?format=JSON",
+ "payload": {
+  "rate": 0.05,
+  "year": 2023,
+  "type": "MFN"
+ }
+}

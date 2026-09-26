@@ -1,0 +1,71 @@
+{
+ "hs6": "220421",
+ "country_code": "GB",
+ "fetched_at": "2026-09-26T22:30:30+00:00",
+ "commodities": [
+  "2204210600",
+  "2204210700",
+  "2204210800",
+  "2204210900",
+  "2204211110",
+  "2204211190"
+ ],
+ "requirements": [
+  {
+   "name": "Import control of organic products (UK Trade Tariff)",
+   "tier": 1,
+   "detail": "UK Trade Tariff: 'Import control of organic products'. Only if your goods are covered, present C644: Other certificates: Certificate of Inspection for Organic Products as referred to in Article 33(1)(d) of Regulation (EC) No 834/2007 as retained in UK law.. Otherwise the importer declares the exemption Y929: Particular provisions: Goods not covered by Regulation (EC) No 834/2007 (e.g. non organic goods) as retained in UK Law..",
+   "source": "https://www.trade-tariff.service.gov.uk/api/v2/commodities/2204210600",
+   "lead_time_weeks": 0.0,
+   "lead_time_basis": "estimate",
+   "confidence": "auto_sourced"
+  },
+  {
+   "name": "Proof of origin to claim the preferential tariff (UK Trade Tariff)",
+   "tier": 1,
+   "detail": "UK Trade Tariff rules of origin for UK-Canada Trade Continuity Agreement: accepted proof: Origin declaration.",
+   "source": "https://www.trade-tariff.service.gov.uk/api/v2/rules_of_origin_schemes/220421/CA",
+   "lead_time_weeks": 0.0,
+   "lead_time_basis": "estimate",
+   "confidence": "auto_sourced"
+  }
+ ],
+ "blocked": false,
+ "blocked_note": "",
+ "duties": {
+  "2204210600": {
+   "mfn": "26.00 GBP / hl",
+   "canada": "0.00 %"
+  },
+  "2204210700": {
+   "mfn": "26.00 GBP / hl",
+   "canada": "0.00 %"
+  },
+  "2204210800": {
+   "mfn": "26.00 GBP / hl",
+   "canada": "0.00 %"
+  },
+  "2204210900": {
+   "mfn": "26.00 GBP / hl",
+   "canada": "0.00 %"
+  },
+  "2204211110": {
+   "mfn": "10.00 GBP / hl",
+   "canada": "0.00 %"
+  },
+  "2204211190": {
+   "mfn": "12.00 GBP / hl",
+   "canada": "0.00 %"
+  }
+ },
+ "sources": [
+  "https://www.trade-tariff.service.gov.uk/api/v2/headings/2204",
+  "https://www.trade-tariff.service.gov.uk/api/v2/commodities/2204210600",
+  "https://www.trade-tariff.service.gov.uk/api/v2/commodities/2204210700",
+  "https://www.trade-tariff.service.gov.uk/api/v2/commodities/2204210800",
+  "https://www.trade-tariff.service.gov.uk/api/v2/commodities/2204210900",
+  "https://www.trade-tariff.service.gov.uk/api/v2/commodities/2204211110",
+  "https://www.trade-tariff.service.gov.uk/api/v2/commodities/2204211190",
+  "https://www.trade-tariff.service.gov.uk/api/v2/rules_of_origin_schemes/220421/CA"
+ ]
+}

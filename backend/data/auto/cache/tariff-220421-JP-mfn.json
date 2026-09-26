@@ -1,0 +1,11 @@
+{
+ "v": 2,
+ "key": "tariff-220421-JP-mfn",
+ "fetched_at": "2026-09-26T22:31:03+00:00",
+ "url": "https://wits.worldbank.org/API/V1/SDMX/V21/datasource/TRN/reporter/392/partner/000/product/220421/year/ALL/datatype/aveestimated?format=JSON",
+ "payload": {
+  "rate": 0.1485,
+  "year": 2023,
+  "type": "MFN"
+ }
+}

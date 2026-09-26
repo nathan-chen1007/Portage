@@ -143,6 +143,83 @@
     "source": "https://www.cancom.de/en/cloud/cloud-marketplace/isv-partners/"
   },
   {
+    "id": "jp-eleven-icewine",
+    "category": "icewine",
+    "country_code": "JP",
+    "name": "Eleven International Co., Ltd. (Canadian Icewine Gallery)",
+    "type": "Canadian icewine importer / online retailer",
+    "description": "Osaka-based importer that runs a shop dedicated to Canadian icewine, listing Pillitteri, Reif and other Canadian producers.",
+    "website": "https://www.rakuten.co.jp/canadian/",
+    "contact": "Company information page (rakuten.co.jp/canadian/info.html)",
+    "source": "https://item.rakuten.co.jp/canadian/c/0000000119/"
+  },
+  {
+    "id": "jp-enoteca",
+    "category": "icewine",
+    "country_code": "JP",
+    "name": "Enoteca Co., Ltd. (エノテカ)",
+    "type": "wine importer / retailer",
+    "description": "One of Japan's largest wine importer-retailers (Tokyo); its producer pages list Inniskillin Gold Vidal Icewine and Peller Icewine from Canada.",
+    "website": "https://www.enoteca.co.jp/",
+    "contact": "Contact form on the company website",
+    "source": "https://www.enoteca.co.jp/producer/detail/1769"
+  },
+  {
+    "id": "gb-laithwaites",
+    "category": "icewine",
+    "country_code": "GB",
+    "name": "Laithwaite's Wine / Direct Wines",
+    "type": "wine importer / merchant",
+    "description": "Reading-based wine merchant named by Pillitteri Estates as its UK distributor; has sold Pillitteri Vidal Icewine.",
+    "website": "https://www.laithwaites.co.uk/",
+    "contact": "Contact details on the company website",
+    "source": "https://www.pillitteri.com/europe/"
+  },
+  {
+    "id": "gb-dudley-craig",
+    "category": "icewine",
+    "country_code": "GB",
+    "name": "Dudley Craig Wines",
+    "type": "wine importer (on-trade / specialist retail)",
+    "description": "London importer named by Pillitteri Estates as its UK on-trade and specialist-retail distributor.",
+    "website": "https://www.dcwines.co.uk/",
+    "contact": "Contact details on the company website",
+    "source": "https://www.pillitteri.com/europe/"
+  },
+  {
+    "id": "gb-hedonism",
+    "category": "icewine",
+    "country_code": "GB",
+    "name": "Hedonism Wines",
+    "type": "fine wine retailer",
+    "description": "Mayfair (London) fine-wine shop that stocks Inniskillin Gold Vidal Icewine: a retail buyer for premium Canadian icewine.",
+    "website": "https://hedonism.co.uk/",
+    "contact": "Contact details on the company website",
+    "source": "https://hedonism.co.uk/product/inniskillin-gold-vidal-icewine-half-2021"
+  },
+  {
+    "id": "de-wine-in-motion",
+    "category": "icewine",
+    "country_code": "DE",
+    "name": "wine in motion GmbH",
+    "type": "wine importer / distributor",
+    "description": "Bavarian (Neumarkt-Sankt Veit) importer named by Pillitteri Estates as its German distributor.",
+    "website": "https://www.wine-in-motion.com/",
+    "contact": "Contact details on the company website",
+    "source": "https://www.pillitteri.com/europe/"
+  },
+  {
+    "id": "winegrowers-canada",
+    "category": "icewine",
+    "country_code": "*",
+    "name": "Wine Growers Canada",
+    "type": "Canadian industry association",
+    "description": "National winery association; runs export programs and trade missions for Canadian wine and icewine.",
+    "website": "https://www.winegrowerscanada.ca/",
+    "contact": "Contact details on the association website",
+    "source": "https://www.winegrowerscanada.ca/export-opportunities/"
+  },
+  {
     "id": "tcs",
     "category": "*",
     "country_code": "*",

@@ -21,8 +21,8 @@ HONEY_DESC = ("We're Prairie Gold Apiaries, a family beekeeping operation near L
 
 def test_health_and_categories(client):
     h = client.get("/health").json()
-    assert h["status"] == "ok" and h["markets"] == 16 and h["llm"] is False
-    assert {c["id"] for c in client.get("/api/categories").json()} == {"honey", "b2b_saas"}
+    assert h["status"] == "ok" and h["markets"] == 24 and h["llm"] is False
+    assert {c["id"] for c in client.get("/api/categories").json()} == {"honey", "icewine", "b2b_saas"}
 
 
 def test_analyze_honey_offline(client):
@@ -92,3 +92,19 @@ def test_forwarders_and_group_quote(client):
     q = client.post("/api/group-quote", json={"country_code": "JP", "producers": 6, "combined_kg": 15000, "provinces": ["AB", "SK"]})
     assert q.status_code == 200 and "HS 0409.00" in q.json()["body"]
     assert client.get("/api/forwarders", params={"market": "MX"}).status_code == 422
+
+
+def test_icewine_is_a_curated_product_end_to_end(client):
+    r = client.post("/api/analyze", json={"description": "We're a family winery in Niagara making Vidal icewine"})
+    body = r.json()
+    assert r.status_code == 200 and body["category"]["id"] == "icewine" and body.get("lookup") is None
+    assert [m["country_code"] for m in body["markets"]][-1] == "US" and body["markets"][-1]["status"] == "blocked"
+    top = body["markets"][0]["country_code"]
+    docs = client.post("/api/documents", json={"profile": body["profile"], "country_code": top}).json()
+    assert docs[0]["id"] == "origin" and "2204.21" in docs[0]["body"]
+    fw = client.get("/api/forwarders", params={"market": "JP", "category": "icewine"}).json()
+    assert "alcohol" in fw["confirm_note"]
+    q = client.post("/api/group-quote", json={"country_code": "JP", "producers": 4, "combined_kg": 3000,
+                                              "provinces": ["ON"], "category": "icewine"}).json()
+    assert "icewine" in q["subject"] and "honey" not in q["body"]
+    assert client.post("/api/documents", json={"profile": body["profile"], "country_code": "US"}).status_code == 422

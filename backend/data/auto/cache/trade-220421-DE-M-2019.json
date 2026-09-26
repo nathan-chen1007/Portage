@@ -1,0 +1,12 @@
+{
+ "v": 2,
+ "key": "trade-220421-DE-M-2019",
+ "fetched_at": "2026-09-26T22:30:41+00:00",
+ "url": "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=276&period=2019&cmdCode=220421&flowCode=M&partnerCode=0",
+ "payload": {
+  "0": {
+   "value_usd": 1874642146.455,
+   "kg": 525145330.803
+  }
+ }
+}
