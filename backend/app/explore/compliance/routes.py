@@ -19,6 +19,19 @@ router = APIRouter()
 
 TCS_URL = "https://www.tradecommissioner.gc.ca/"
 
+# A market with no sourced requirements must not look easy (no requirements = zero compliance friction). For
+# ranking only, stand in a typical burden (an approval + a registration, 8 weeks), badged "unknown". Same rule as
+# lab C's lookup (app/explore/lookup/compliance.py), so the two views agree.
+UNKNOWN_PLACEHOLDERS = [
+    Requirement(name="Import requirements not verified (assumed: a government approval or certificate)", tier=3,
+                detail="No sourced requirements for this product and market, so we assume a typical burden rather "
+                       "than none. Confirm with the Trade Commissioner Service.",
+                source=TCS_URL, lead_time_weeks=8, lead_time_basis="estimate", confidence="unknown"),
+    Requirement(name="Registration not verified (assumed: registering with a foreign regulator)", tier=2,
+                detail="Placeholder so an unverified market doesn't look easier than a sourced one.",
+                source=TCS_URL, lead_time_weeks=4, lead_time_basis="estimate", confidence="unknown"),
+]
+
 
 class MarketCompliance(BaseModel):
     hs6: str
@@ -40,13 +53,17 @@ def list_products() -> list[service.AutoProduct]:
 @router.get("/{hs6}/rank")
 def rank(hs6: str, sort_by: Literal["overall", "friction"] = Query("overall")) -> list[ScoredMarket]:
     """Score every auto-sourced market for the product with the same engine as honey (no opportunity data yet,
-    so overall = ease = 100 - friction and the two sorts agree). Blocked markets come last."""
+    so overall = ease = 100 - friction and the two sorts agree). Blocked markets come last. Markets without
+    sourced requirements are scored with UNKNOWN_PLACEHOLDERS so they don't look artificially easy."""
     entries = service.auto_markets(hs6)
     if not entries:
         raise HTTPException(404, f"No auto-sourced compliance data for HS {hs6}")
     facts = service.country_facts()
     scored = []
     for e in entries:
+        if e.status == "open" and not e.compliance_requirements:
+            e = e.model_copy(update={"compliance_requirements": [r.model_copy() for r in UNKNOWN_PLACEHOLDERS],
+                                     "compliance_confidence": "unknown"})
         s = score_market(e, None, facts.get(e.country_code))
         if s.status == "open":
             s.overall = overall_score(None, s.score)

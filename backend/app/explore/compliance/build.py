@@ -15,6 +15,7 @@ Rules:
   - A national-source requirement tagged with a `step` merges into the TRAINS requirement for that step (its name
     and URL are more specific, so they win); otherwise it's added as its own requirement.
   - A prohibition that names Canada makes the market "blocked".
+  - Horizontal measures (covering HORIZONTAL_CHAPTERS or more HS chapters) are dropped: they aren't about this product.
   - No requirement is ever written from memory: if a market has no TRAINS rows and no national-source rows, it
     gets no requirements and compliance_confidence "unknown".
 
@@ -39,6 +40,10 @@ COPIED_FROM_HONEY = ("lpi_customs_score", "sea_distance_nm", "weekly_sailings", 
                      "language", "country")
 MAX_DETAIL = 600
 LPI_SOURCE = "https://data.worldbank.org/indicator/LP.LPI.CUST.XQ"  # the LPI customs score copied from markets.json
+# A measure covering this many HS chapters or more is horizontal (it applies to nearly all goods, e.g. Japan's
+# Consumer Product Safety Act): it says nothing about this product, so it's dropped, like TRAINS's own
+# "exclude measures affecting ALL products" filter.
+HORIZONTAL_CHAPTERS = 60
 
 
 def _read(path: Path):
@@ -57,6 +62,8 @@ def trains_requirements(rows: list[dict], source_url: str) -> tuple[list[dict], 
     blocked = None
     for row in rows:
         code = (row.get("ntmCode") or "").strip()
+        if (row.get("hsChapters") or 0) >= HORIZONTAL_CHAPTERS:
+            continue
         step = step_for(code)
         if step is None:
             continue

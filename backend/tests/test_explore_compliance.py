@@ -72,6 +72,12 @@ def test_trains_rows_merge_by_step_and_keep_every_code():
     assert by["certification"]["tier"] == 2
 
 
+def test_horizontal_measures_are_dropped():
+    rows = [dict(_row("B83", "consumer product safety certificate"), hsChapters=84), dict(_row("A31"), hsChapters=20)]
+    reqs, _ = build.trains_requirements(rows, "https://x")
+    assert [r["step"] for r in reqs] == ["labelling"]
+
+
 def test_prohibition_blocks_only_when_it_names_canada():
     assert build.trains_requirements([_row("A11", "ban", "World")], "https://x")[1] is None
     assert build.trains_requirements([_row("A11", "ban on Canadian syrup", "Canada")], "https://x")[1]
@@ -155,6 +161,17 @@ def test_rank_route(client):
     assert [m["score"] for m in open_] == sorted(m["score"] for m in open_)
     assert all(m["overall"] == pytest.approx(100 - m["score"]) for m in open_)
     assert all(m["entry"]["compliance_confidence"] in ("auto_sourced", "unknown") for m in body)
+
+
+def test_rank_unknown_markets_are_not_artificially_easy(client):
+    body = client.get("/api/explore/compliance/170220/rank").json()
+    for m in body:
+        if m["entry"]["compliance_confidence"] == "unknown" and m["status"] == "open":
+            reqs = m["entry"]["compliance_requirements"]
+            assert reqs and all(r["confidence"] == "unknown" for r in reqs)
+            assert m["components"]["compliance"] > 0
+    # the saved data itself is untouched
+    assert all(r.confidence == "auto_sourced" for e in service.auto_markets("170220") for r in e.compliance_requirements)
 
 
 def test_rank_route_unknown_product(client):

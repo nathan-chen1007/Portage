@@ -56,20 +56,57 @@
     "country": "Japan",
     "status": "open",
     "status_note": "",
-    "compliance_confidence": "unknown",
+    "compliance_confidence": "auto_sourced",
     "tariff_rate": 0.0,
     "mfn_rate": 0.175,
     "tariff_note": "Japan Customs tariff schedule (Aug 8, 2026), 1702.20 item 200 maple syrup: free under CPTPP; WTO rate 17.5% or 13.50 yen/kg, whichever is greater.",
     "trade_agreement": "CPTPP",
-    "compliance_requirements": [],
+    "compliance_requirements": [
+      {
+        "name": "Hygiene requirements (A41, A42)",
+        "tier": 1,
+        "detail": "UNCTAD TRAINS: A41: Only import items that conform to food safety standards on the number of bacteria can be imported. (Standards of food, additives etc.) | A42: Only food products that comply with manufacturing, processing and preparation standards can be imported. (Standards of food, additives etc.) | A42: Food or additives which are used for sales (including delivery other than sales to many and unspecified persons; the same shall apply hereinafter) shall be collected, produced, processed, used, cooked, stored, transported, displayed and delivered in a clean and sanitary manner. Apparatus…",
+        "source": "https://trainsonline.unctad.org/detailedSearch?imposingCountryCodes=JPN&affectedCountryCodes=CAN&productCodes=170220",
+        "lead_time_weeks": 0,
+        "lead_time_basis": "estimate",
+        "confidence": "auto_sourced"
+      },
+      {
+        "name": "Labelling, marking and packaging rules (A31, B31)",
+        "tier": 1,
+        "detail": "UNCTAD TRAINS: A31: Pursuant to Chapter 2 of the Standards, processed foods must bear a labelling on name, preserving method, consumption date, etc. (Food Labeling Standards) | B31: Representation of specific quantity of impurities pertaining to imported specific goods (Measurement Act) | B31: Pursuant to Chapter 2 of the Standards, processed foods must bear a labelling on name, preserving method, consumption date, etc. (Food Labeling Standards)",
+        "source": "https://trainsonline.unctad.org/detailedSearch?imposingCountryCodes=JPN&affectedCountryCodes=CAN&productCodes=170220",
+        "lead_time_weeks": 2,
+        "lead_time_basis": "estimate",
+        "confidence": "auto_sourced"
+      },
+      {
+        "name": "Residue and contaminant limits (A21, A22)",
+        "tier": 1,
+        "detail": "UNCTAD TRAINS: A21: Only import items that conform to food safety standards can be imported. Standards for residual agricultural chemicals, radioactivity, heavy metal, and othe harmful substances. (Standards of food, additives etc.) | A22: Only import items that conform to food safety standards on additives can be imported. (Standards of food, additives etc.)",
+        "source": "https://trainsonline.unctad.org/detailedSearch?imposingCountryCodes=JPN&affectedCountryCodes=CAN&productCodes=170220",
+        "lead_time_weeks": 0,
+        "lead_time_basis": "estimate",
+        "confidence": "auto_sourced"
+      },
+      {
+        "name": "Traceability records (A85)",
+        "tier": 1,
+        "detail": "UNCTAD TRAINS: A85: A person who intends to import food, additives, apparatus or containers and packaging to serve for the purpose of marketing or to use in business shall make a notification to the Minister of Health, Labour and Welfare on a case-by-case basis, pursuant to an Ordinance of the Ministry of Health, Labou (Ordinance for Enforcement of the Food Sanitation Act No. 23 of July 1948)",
+        "source": "https://trainsonline.unctad.org/detailedSearch?imposingCountryCodes=JPN&affectedCountryCodes=CAN&productCodes=170220",
+        "lead_time_weeks": 0,
+        "lead_time_basis": "estimate",
+        "confidence": "auto_sourced"
+      }
+    ],
     "tax_burden": 0.0,
     "tax_note": "Tax treatment copied from the honey row (country level: consumption tax is paid by the Japanese importer); not checked for maple syrup.",
     "notes": [
       "CFIA's export requirements library has no maple syrup entry for Japan (checked 2026-09-26).",
-      "UNCTAD TRAINS has no NTM data for this market; requirements come from the national source listed only.",
       "Auto-sourced: pulled from official structured data, not checked by a person for maple syrup. Confirm with the Trade Commissioner Service before the first shipment."
     ],
     "sources": [
+      "https://trainsonline.unctad.org/detailedSearch?imposingCountryCodes=JPN&affectedCountryCodes=CAN&productCodes=170220",
       "https://www.customs.go.jp/english/tariff/2026_08_08/data/e_17.htm",
       "https://wits.worldbank.org/tariff/trains/en/country/JPN/partner/CAN/product/170220",
       "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library",
