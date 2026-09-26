@@ -10,6 +10,10 @@ opportunity = 100 * (0.35 demand + 0.25 price + 0.15 growth + 0.25 foothold)
   foothold  Canada's current share of the market's imports (10% or more -> 1): buyers and shipping
             routes already exist, so a newcomer's risk is lower.
 
+Missing data is not zero. If an input isn't reported (e.g. a country reports import values but no
+weights, so there's no price per kg), that component is "unavailable": it's dropped and the others are
+re-weighted to sum to 1 for that market, and the breakdown shows it as unavailable (None).
+
 Combined with friction into one recommendation:
 
   overall = opportunity^a * ease^(1-a),   ease = 100 - friction,   a = prize_weight (default 0.5)
@@ -58,21 +62,34 @@ def foothold_score(share: float) -> float:
     return max(0.0, min(share / FOOTHOLD_FULL, 1.0))
 
 
+def weighted_opportunity(parts: dict[str, float | None]) -> float:
+    """100 x the weighted mix; unavailable components (None) are dropped and the rest re-weighted."""
+    if all(v is not None for v in parts.values()):
+        return round(100 * sum(OPPORTUNITY_MIX[k] * v for k, v in parts.items()), 2)
+    avail = {k: v for k, v in parts.items() if v is not None}
+    total = sum(OPPORTUNITY_MIX[k] for k in avail)
+    if total <= 0:
+        return 0.0
+    return round(100 * sum(OPPORTUNITY_MIX[k] * v for k, v in avail.items()) / total, 2)
+
+
 def score_opportunity(trade: CategoryTrade, market: MarketTrade, entry: MarketEntry) -> tuple[float, dict, OpportunityFacts]:
-    """Opportunity 0-100, its four components, and the display facts."""
+    """Opportunity 0-100, its four components (None = data unavailable), and the display facts."""
     unit = market.import_value_usd / market.import_volume_kg if market.import_volume_kg else 0.0
     net = unit / (1 + entry.tariff_rate)
     ca_unit = trade.canada_unit_value
     years = trade.year - trade.base_year
     rate = growth_rate(market.import_value_usd, market.import_value_base_usd, years)
     share = market.canada_value_usd / market.import_value_usd if market.import_value_usd else 0.0
+    price_known = market.import_volume_kg > 0 and ca_unit > 0  # no weights reported -> no price per kg
+    growth_known = market.import_value_base_usd > 0 and years > 0
     parts = {
         "demand": demand_score(market.import_value_usd),
-        "price": price_score(net, ca_unit),
-        "growth": growth_score(rate),
+        "price": price_score(net, ca_unit) if price_known else None,
+        "growth": growth_score(rate) if growth_known else None,
         "foothold": foothold_score(share),
     }
-    score = round(100 * sum(OPPORTUNITY_MIX[k] * v for k, v in parts.items()), 2)
+    score = weighted_opportunity(parts)
     facts = OpportunityFacts(
         year=trade.year,
         import_value_usd=market.import_value_usd,
@@ -86,7 +103,7 @@ def score_opportunity(trade: CategoryTrade, market: MarketTrade, entry: MarketEn
         note=market.note,
         sources=market.sources + [trade.canada_export_source],
     )
-    return score, {k: round(v, 3) for k, v in parts.items()}, facts
+    return score, {k: (None if v is None else round(v, 3)) for k, v in parts.items()}, facts
 
 
 def overall_score(opportunity: float | None, friction: float, prize_weight: float = DEFAULT_PRIZE_WEIGHT) -> float:

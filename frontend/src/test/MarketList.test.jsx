@@ -66,6 +66,16 @@ describe("MarketList", () => {
     render(<MarketList markets={MARKETS} kind="goods" selected={null} onSelect={() => {}} />);
     expect(screen.getByText("CUSMA does not exempt Section 338 tariffs")).toBeInTheDocument();
   });
+
+  it("drops an unavailable input and re-weights the rest, saying so", () => {
+    const markets = [
+      { ...MARKETS[0], overall: 70, opportunity: 64.7, opportunity_components: { demand: 1, price: null, growth: 0.2, foothold: 0 } },
+    ];
+    render(<MarketList markets={markets} kind="goods" selected={null} onSelect={() => {}} view="opportunity" />);
+    expect(parseFloat(screen.getByTestId("prize-demand").style.width)).toBeCloseTo((100 * 0.35) / 0.75, 3);
+    expect(screen.queryByTestId("prize-price")).not.toBeInTheDocument();
+    expect(screen.getByTestId("prize-unavailable")).toHaveTextContent("price data unavailable");
+  });
 });
 
 describe("MarketList confidence badges", () => {

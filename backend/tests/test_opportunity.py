@@ -73,3 +73,26 @@ def test_trade_rows_are_sourced(catalog):
     assert t.canada_export_source.startswith("https://")
     for m in t.markets:
         assert all(s.startswith("https://") for s in m.sources)
+
+
+def test_missing_inputs_are_unavailable_not_zero(catalog):
+    """A market that reports import values but no weights has no price per kg: the price component is
+    dropped (None) and the other three are re-weighted, instead of scoring price as 0."""
+    from app.engine.opportunity import OPPORTUNITY_MIX, score_opportunity, weighted_opportunity
+
+    trade = catalog.trade["honey"]
+    entry = catalog.market("honey", "GB")
+    mt = next(m for m in trade.markets if m.country_code == "GB")
+    full, parts, _ = score_opportunity(trade, mt, entry)
+    no_kg, parts2, _ = score_opportunity(trade, mt.model_copy(update={"import_volume_kg": 0}), entry)
+    assert parts2["price"] is None and parts2["demand"] == parts["demand"]
+    rest = {k: v for k, v in parts2.items() if v is not None}
+    expected = 100 * sum(OPPORTUNITY_MIX[k] * v for k, v in rest.items()) / sum(OPPORTUNITY_MIX[k] for k in rest)
+    assert no_kg == pytest.approx(expected, abs=0.01)
+    no_base, parts3, _ = score_opportunity(trade, mt.model_copy(update={"import_value_base_usd": 0}), entry)
+    assert parts3["growth"] is None
+    assert weighted_opportunity({"demand": 1.0, "price": None, "growth": None, "foothold": 0.0}) == pytest.approx(
+        100 * 0.35 / 0.6, abs=0.01)
+    # Every curated market with full data has no unavailable component.
+    for m in rank_markets("honey", catalog):
+        assert None not in (m.opportunity_components or {}).values()

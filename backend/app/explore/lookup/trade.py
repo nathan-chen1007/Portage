@@ -66,14 +66,17 @@ def build(hs6: str, category_id: str, description: str, fetched: dict) -> tuple[
             import_volume_kg=world["kg"],
             import_value_base_usd=base_world["value_usd"],
             canada_value_usd=from_ca["value_usd"],
-            note="" if base_world["value_usd"] else f"No {BASE_YEAR} figure reported: growth counts as flat.",
+            note=" ".join(n for n in [
+                "" if base_world["value_usd"] else f"No {BASE_YEAR} figure reported: growth data unavailable.",
+                "" if world["kg"] else "No import weights reported: price data unavailable.",
+            ] if n),
             sources=[url(m.comtrade, YEAR, hs6, partners=f"0,{CANADA_COMTRADE}"), url(m.comtrade, BASE_YEAR, hs6)],
         ))
         status[cc] = "ok"
 
-    if not ca_world or ca_world["value_usd"] <= 0 or ca_world["kg"] <= 0:
+    if not ca_world or ca_world["value_usd"] <= 0:  # no weight only drops the price component (see opportunity.py)
         why = ("still loading" if ca_origin == "pending" else
-               f"Canada reported no {YEAR} exports of HS {hs6} with a weight, so there's no Canadian price to compare")
+               f"Canada reported no {YEAR} exports of HS {hs6}")
         for cc in status:
             if status[cc] == "ok":
                 status[cc] = "pending" if ca_origin == "pending" else "unavailable"

@@ -120,7 +120,7 @@ class CategoryTrade(BaseModel):
     year: int
     base_year: int
     canada_export_value_usd: float = Field(gt=0)
-    canada_export_volume_kg: float = Field(gt=0)
+    canada_export_volume_kg: float = Field(ge=0)
     canada_export_source: str
     description: str = ""
     as_of: str
@@ -128,7 +128,8 @@ class CategoryTrade(BaseModel):
 
     @property
     def canada_unit_value(self) -> float:
-        return self.canada_export_value_usd / self.canada_export_volume_kg
+        """0 when Canada's export weight isn't reported (the price component is then unavailable)."""
+        return self.canada_export_value_usd / self.canada_export_volume_kg if self.canada_export_volume_kg else 0.0
 
 
 class OpportunityFacts(BaseModel):
@@ -214,6 +215,7 @@ class GroupQuoteRequest(BaseModel):
     producers: int = Field(ge=2, le=200)
     combined_kg: float = Field(gt=0, le=1_000_000)
     provinces: list[str] = Field(default_factory=list, description="Province codes of the producers, e.g. ['AB', 'SK']")
+    category: str = Field("honey", description="Goods category the group ships (honey | icewine)")
 
 
 class GroupQuoteDraft(BaseModel):
@@ -238,7 +240,7 @@ class ScoredMarket(BaseModel):
     factors: dict[str, float] = Field(default_factory=dict, description="The sub-scores (0-1) behind each component, for the 'why this score' view. Empty if blocked")
     breakdown: dict[Component, float] = Field(description="Each blocker's weighted points (sums to score). Empty if blocked")
     top_blocker: Component | None = Field(description="The component contributing most, or null if the score is ~0 or blocked")
-    opportunity_components: dict[str, float] = Field(default_factory=dict, description="demand, price, growth, foothold, each 0-1. Empty when unavailable")
+    opportunity_components: dict[str, float | None] = Field(default_factory=dict, description="demand, price, growth, foothold, each 0-1; None = that input isn't reported (dropped, the rest re-weighted). Empty when unavailable")
     opportunity_facts: OpportunityFacts | None = None
     lead_time_weeks: float = Field(0, description="Weeks before the first legal shipment (longest single step; steps run in parallel)")
     lead_time_estimated: bool = Field(False, description="True if that longest step is our estimate rather than an official figure")

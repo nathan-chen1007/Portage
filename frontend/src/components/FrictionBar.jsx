@@ -53,8 +53,12 @@ export function FrictionBar({ market, weights, thin = false, onSegment }) {
 export function PrizeBar({ market, thin = false }) {
   const oc = market.opportunity_components;
   if (market.status === "blocked" || market.opportunity == null || !oc) return null;
-  const parts = PRIZE_PARTS.map((p) => ({ ...p, points: 100 * p.weight * (oc[p.key] ?? 0), max: 100 * p.weight }));
-  const summary = parts.map((p) => `${p.label} ${p.points.toFixed(0)} of ${p.max.toFixed(0)}`).join(", ");
+  // An unavailable input (null) is dropped and the others re-weighted, exactly as the backend scores it.
+  const avail = PRIZE_PARTS.filter((p) => oc[p.key] != null);
+  const total = avail.reduce((s, p) => s + p.weight, 0) || 1;
+  const parts = avail.map((p) => ({ ...p, points: (100 * p.weight * oc[p.key]) / total, max: (100 * p.weight) / total }));
+  const missing = PRIZE_PARTS.filter((p) => p.key in oc && oc[p.key] == null).map((p) => `${p.short} data unavailable`);
+  const summary = [...parts.map((p) => `${p.label} ${p.points.toFixed(0)} of ${p.max.toFixed(0)}`), ...missing].join(", ");
   return (
     <div className="w-full" aria-label={`Opportunity ${market.opportunity.toFixed(0)} of 100: ${summary}`}>
       <Track thin={thin}>
@@ -70,6 +74,11 @@ export function PrizeBar({ market, thin = false }) {
             />
           ))}
       </Track>
+      {missing.length > 0 && (
+        <p className="mt-1 text-[11px] leading-tight text-neutral-400" data-testid="prize-unavailable">
+          {missing.join(" · ")} (left out, the rest re-weighted)
+        </p>
+      )}
     </div>
   );
 }
