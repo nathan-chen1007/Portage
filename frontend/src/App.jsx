@@ -328,7 +328,6 @@ function TopBar({ health, result, description, setDescription, onAnalyze, onRese
         </Badge>
         {profile.company_name && <span className="truncate">{profile.company_name}</span>}
         {(profile.city || profile.province) && <span className="hidden truncate md:inline">· {[profile.city, profile.province].filter(Boolean).join(", ")}</span>}
-        {category.hs_code && <span className="hidden md:inline">· HS {category.hs_code}</span>}
         {mode === "offline" && <Badge tone="accent">Offline mode: keyword match</Badge>}
         <span className="ml-2 hidden sm:inline">
           <HealthPill health={health} />
