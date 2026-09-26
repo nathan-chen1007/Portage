@@ -182,10 +182,12 @@ def make_voice(req: VoiceRequest) -> VoiceResponse:
 
 # ---------- Ship together (preview): freight forwarders + one group quote request ----------
 
-def _goods_market(country_code: str) -> MarketEntry:
-    """The goods (honey) row for this market: the lane and destination the group would ship on."""
+def _goods_market(country_code: str, category: str = "honey") -> MarketEntry:
+    """The goods row (honey by default) for this market: the lane and destination the group would ship on."""
+    if category not in catalog.categories or catalog.categories[category].kind != "goods":
+        category = "honey"
     for m in catalog.markets:
-        if m.country_code == country_code.upper() and catalog.categories[m.category].kind == "goods":
+        if m.country_code == country_code.upper() and m.category == category:
             if m.status == "blocked":
                 raise HTTPException(422, f"{m.country} is not currently accessible: {m.status_note}")
             return m
@@ -193,17 +195,18 @@ def _goods_market(country_code: str) -> MarketEntry:
 
 
 @app.get("/api/forwarders", response_model=ForwarderList)
-def forwarders(market: str = "JP") -> ForwarderList:
+def forwarders(market: str = "JP", category: str = "honey") -> ForwarderList:
     """Real CIFFA-member forwarders with LCL services (public pages only). Portage matches; the forwarder ships."""
-    entry = _goods_market(market)
+    entry = _goods_market(market, category)
     route = group_quote.route_label(entry)
+    handling = "alcohol and temperature handling" if entry.category == "icewine" else "food handling"
     return FORWARDERS.model_copy(update={
         "route": route,
-        "confirm_note": f"Confirm the route ({route}) and food handling when you request a quote.",
+        "confirm_note": f"Confirm the route ({route}) and {handling} when you request a quote.",
     })
 
 
 @app.post("/api/group-quote", response_model=GroupQuoteDraft)
 def group_quote_draft(req: GroupQuoteRequest) -> GroupQuoteDraft:
     """One drafted quote request for the whole group. Fixed template (no LLM), never sent."""
-    return group_quote.draft(req, _goods_market(req.country_code))
+    return group_quote.draft(req, _goods_market(req.country_code, req.category))

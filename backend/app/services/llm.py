@@ -24,7 +24,7 @@ LANGUAGE_NAMES = {
 }
 
 # Offline fallback: how to name the product when the founder didn't.
-PRODUCT_NOUNS = {"honey": "Canadian honey", "b2b_saas": "B2B software"}
+PRODUCT_NOUNS = {"honey": "Canadian honey", "icewine": "Canadian icewine", "b2b_saas": "B2B software"}
 
 
 def _pct(x: float) -> str:
@@ -41,6 +41,7 @@ def _the(country: str) -> str:
 # Offline fallback: category keywords (lowercase substrings).
 CATEGORY_KEYWORDS = {
     "honey": ["honey", "beekeep", "apiar", "apicult", "hive", " bees", "miel"],
+    "icewine": ["icewine", "ice wine", "ice-wine", "eiswein", "vin de glace"],
     "b2b_saas": ["saas", "software", "platform", "cloud", "b2b", "subscription", "dashboard", " app "],
 }
 

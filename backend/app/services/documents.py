@@ -23,7 +23,12 @@ CERT_STATEMENT = (
 )
 
 # Honey from Canadian hives is "wholly obtained" (an animal product obtained in the territory).
-ORIGIN_CRITERION = {"honey": "A — wholly obtained in Canada (honey from Canadian hives)"}
+# Icewine made only from grapes grown in Canada is wholly obtained too (CPTPP Art. 3.3(a) and (k); CUSMA
+# Art. 4.2(a)/4.3): a plant good harvested there, and a good produced exclusively from it.
+ORIGIN_CRITERION = {
+    "honey": "A — wholly obtained in Canada (honey from Canadian hives)",
+    "icewine": "A — wholly obtained in Canada (icewine made only from grapes grown in Canada)",
+}
 
 
 def _v(value: str, label: str, missing: list[str]) -> str:
@@ -99,7 +104,7 @@ def origin_document(p: BusinessProfile, cat: Category, entry: MarketEntry) -> Do
             f"Producer: {exporter}\n"
             f"Importer: {_v('', 'Importer name and address in South Korea', missing)}\n"
             f"Goods and HS code: {goods}\n"
-            f"Preference criterion: {BLANK}\n"
+            f"Preference criterion: {ORIGIN_CRITERION.get(cat.id) or BLANK}\n"
             f"Signed: {_v(p.contact_name, 'Name of the person signing', missing)}, {today}\n\n"
             "Transfer these fields onto form BSF760 and send it to the Korean importer before the goods arrive."
         )

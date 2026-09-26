@@ -19,6 +19,22 @@ PROVINCE_NAMES = {**PRAIRIES, "BC": "British Columbia", "ON": "Ontario", "QC": "
                   "NB": "New Brunswick", "PE": "Prince Edward Island", "NL": "Newfoundland and Labrador"}
 CONTAINER_KG = 20_000
 
+# What the group ships, per goods category. Honey keeps its original wording exactly.
+PRODUCTS = {
+    "honey": {
+        "noun": "natural honey (HS 0409.00)", "who": "honey producers", "group": "honey group",
+        "line": "- Product: natural honey, HS 0409.00 (food grade, in drums and retail cases)",
+        "paperwork": "- Paperwork: each producer holds its own CFIA export certificate for its lot",
+        "experience": "6. Your experience shipping food exports (honey or similar)",
+    },
+    "icewine": {
+        "noun": "icewine (HS 2204.21)", "who": "icewine producers", "group": "icewine group",
+        "line": "- Product: Canadian icewine, HS 2204.21 (cased 200-375 ml bottles, alcohol, temperature-sensitive)",
+        "paperwork": "- Paperwork: each winery issues its own origin declaration and any wine import documents for its lot",
+        "experience": "6. Your experience shipping wine (alcohol handling, temperature control, bonded delivery)",
+    },
+}
+
 
 def gateway(entry: MarketEntry) -> str:
     """The Canadian port the lane leaves from ('Vancouver → Yokohama, …' -> 'Vancouver'); land border -> ''."""
@@ -34,6 +50,7 @@ def route_label(entry: MarketEntry) -> str:
 
 
 def draft(req: GroupQuoteRequest, entry: MarketEntry) -> GroupQuoteDraft:
+    prod = PRODUCTS.get(req.category, PRODUCTS["honey"])
     country = entry.country.replace(" (EU)", "")
     land = entry.sea_distance_nm == 0
     g = gateway(entry) or "the Prairies"
@@ -54,23 +71,23 @@ def draft(req: GroupQuoteRequest, entry: MarketEntry) -> GroupQuoteDraft:
     fill = "" if land else f", roughly {round(min(req.combined_kg, CONTAINER_KG) / CONTAINER_KG * 100)}% of a 20 ft container"
     dest = f"{country} (delivery address to be confirmed)" if land else f"Port of {port}, {country}"
 
-    subject = (f"Group quote request: {mode} consolidation of natural honey (HS 0409.00), "
+    subject = (f"Group quote request: {mode} consolidation of {prod['noun']}, "
                f"{g} → {port if not land else country}, {req.producers} Canadian producers")
     body = "\n".join([
         "Hello,",
         "",
-        f"I coordinate a group of {req.producers} small Canadian honey producers who want to ship to {country} together, "
+        f"I coordinate a group of {req.producers} small Canadian {prod['who']} who want to ship to {country} together, "
         "and I'm writing on behalf of the whole group. We found each other through Portage, which matches exporters "
         "heading to the same market; Portage doesn't book or ship cargo, so we're looking for a forwarder to handle "
         "the group's shipment.",
         "",
         "Shipment details",
-        "- Product: natural honey, HS 0409.00 (food grade, in drums and retail cases)",
+        prod["line"],
         f"- Combined volume: about {tonnes:.1f} t ({round(req.combined_kg):,} kg) from {req.producers} producers{fill}",
         f"- Origin and pickup: {origin}; pickup from each producer or delivery to one consolidation point, whichever you recommend",
         f"- Destination: {dest}",
         f"- Service: {service}",
-        "- Paperwork: each producer holds its own CFIA export certificate for its lot",
+        prod["paperwork"],
         "",
         "Could you please quote:",
         "1. Price per shipment, and each producer's share (how you'd split it: by weight, by pallet, or otherwise)",
@@ -79,13 +96,13 @@ def draft(req: GroupQuoteRequest, entry: MarketEntry) -> GroupQuoteDraft:
         "4. Cargo insurance options",
         "5. Document handling: commercial invoices, packing lists, origin declarations, certificates, and customs "
         "clearance at destination",
-        "6. Your experience shipping food exports (honey or similar)",
+        prod["experience"],
         "",
         "We're planning a first shipment in [month]. Happy to set up a call.",
         "",
         "Thank you,",
         "[Coordinator name]",
-        f"Coordinator, {country} honey group (organised through Portage)",
+        f"Coordinator, {country} {prod['group']} (organised through Portage)",
         "[contact email]",
         "",
         "Growing Canada, together.",
