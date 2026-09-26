@@ -32,7 +32,7 @@
     "notes": [
       "UK Trade Tariff lists no sanitary or phytosanitary import control for maple syrup from Canada. An organic certificate of inspection (C644) is needed only if the product is sold as organic.",
       "CFIA's export requirements library has no maple syrup entry for the UK (checked 2026-09-26).",
-      "UNCTAD TRAINS has no NTM data for this market; requirements come from the national source listed only.",
+      "UNCTAD TRAINS: The UK is not among TRAINS's imposing countries; the UK Trade Tariff API is used instead. Requirements here come only from the national sources cited.",
       "Auto-sourced: pulled from official structured data, not checked by a person for maple syrup. Confirm with the Trade Commissioner Service before the first shipment."
     ],
     "sources": [
@@ -127,20 +127,115 @@
     "country": "Australia",
     "status": "open",
     "status_note": "",
-    "compliance_confidence": "unknown",
+    "compliance_confidence": "auto_sourced",
     "tariff_rate": 0.0,
     "mfn_rate": 0.0,
     "tariff_note": "Australian Border Force working tariff, 1702.20.00: general rate Free (WITS/TRAINS 2022 still shows a 5% MFN rate, since removed).",
     "trade_agreement": "CPTPP",
-    "compliance_requirements": [],
+    "compliance_requirements": [
+      {
+        "name": "Import authorization (special permit) (B14)",
+        "tier": 3,
+        "detail": "UNCTAD TRAINS: B14: 70 Special clearance goods 2) A person who has imported or proposes to import goods referred to in paragraph (a) of the definition of special clearance goods ma (Customs Act 1901)",
+        "source": "https://trainsonline.unctad.org/detailedSearch?imposingCountryCodes=AUS&affectedCountryCodes=CAN&productCodes=170220",
+        "lead_time_weeks": 12,
+        "lead_time_basis": "estimate",
+        "confidence": "auto_sourced"
+      },
+      {
+        "name": "Certificate requirement (A83)",
+        "tier": 2,
+        "detail": "UNCTAD TRAINS: A83: 8. Application for food control certificate 1. For the purposes of paragraph 11(1)(a) of the Act, an application for a food control certificate must be in a for (Imported Food Control Regulations 2019) | A83: 9. Offences relating to dealing with examinable food Dealing with food where no food control certificate (1) A person commits an offence if: (a) the person deal (Imported Food Control Act 1992)",
+        "source": "https://trainsonline.unctad.org/detailedSearch?imposingCountryCodes=AUS&affectedCountryCodes=CAN&productCodes=170220",
+        "lead_time_weeks": 1,
+        "lead_time_basis": "estimate",
+        "confidence": "auto_sourced"
+      },
+      {
+        "name": "Importer registration (A15)",
+        "tier": 2,
+        "detail": "UNCTAD TRAINS: A15: 9. Offences relating to dealing with examinable food Dealing with food where no food control certificate (1) A person commits an offence if: (a) the person deal (Imported Food Control Act 1992)",
+        "source": "https://trainsonline.unctad.org/detailedSearch?imposingCountryCodes=AUS&affectedCountryCodes=CAN&productCodes=170220",
+        "lead_time_weeks": 2,
+        "lead_time_basis": "estimate",
+        "confidence": "auto_sourced"
+      },
+      {
+        "name": "Other SPS/TBT import restrictions (A19)",
+        "tier": 2,
+        "detail": "UNCTAD TRAINS: A19: Prohibition on sale of food after its use-by date (Australia New Zealand Food Standards Code – Standard 1.2.5 – Information requirements – date marking)",
+        "source": "https://trainsonline.unctad.org/detailedSearch?imposingCountryCodes=AUS&affectedCountryCodes=CAN&productCodes=170220",
+        "lead_time_weeks": 2,
+        "lead_time_basis": "estimate",
+        "confidence": "auto_sourced"
+      },
+      {
+        "name": "Product or establishment registration (B81)",
+        "tier": 2,
+        "detail": "UNCTAD TRAINS: B81: 18JX Permits for certain packed articles (1) The Secretary may, in writing, issue a permit for the importation of an article packed in advance ready for sale if (National Measurement Act 1960)",
+        "source": "https://trainsonline.unctad.org/detailedSearch?imposingCountryCodes=AUS&affectedCountryCodes=CAN&productCodes=170220",
+        "lead_time_weeks": 8,
+        "lead_time_basis": "estimate",
+        "confidence": "auto_sourced"
+      },
+      {
+        "name": "Labelling, marking and packaging rules (A31, B31)",
+        "tier": 1,
+        "detail": "UNCTAD TRAINS: A31: Sets out when a food for sale is required to *bear a label or have other information provided with it, and sets out the information that is to be provided. (Australia New Zealand Food Standards Code – Standard 1.2.1 – Requirements to have labels or otherwis) | A31: Clause 2.9.6-5: 2.9.6-5 Labelling of special purpose foods For the labelling provisions, the required information for special purpose foods is a statement of th (Australia New Zealand Food Standards Code – – Transitional standard for special purpose foods (inclu) | A31: 8A. Labelling offence (1) A person commits…",
+        "source": "https://trainsonline.unctad.org/detailedSearch?imposingCountryCodes=AUS&affectedCountryCodes=CAN&productCodes=170220",
+        "lead_time_weeks": 2,
+        "lead_time_basis": "estimate",
+        "confidence": "auto_sourced"
+      },
+      {
+        "name": "Product identity and composition standards (B6, B7)",
+        "tier": 1,
+        "detail": "UNCTAD TRAINS: B6: Food identity requirements (Australia New Zealand Food Standards Code – Standard 1.1.2 – Definitions used throughout the Code) | B7: 18JT Shortfall offence—importer Offence requiring fault element (1) A person commits an offence if: (a) the person imports into Australia an article; and (b) th (National Measurement Act 1960)",
+        "source": "https://trainsonline.unctad.org/detailedSearch?imposingCountryCodes=AUS&affectedCountryCodes=CAN&productCodes=170220",
+        "lead_time_weeks": 0,
+        "lead_time_basis": "estimate",
+        "confidence": "auto_sourced"
+      },
+      {
+        "name": "Production and processing requirements (A63, A69)",
+        "tier": 1,
+        "detail": "UNCTAD TRAINS: A63: 26.1 The goods: The goods have been processed so that they are not viable and there is no risk of contamination or infection from a disease or plant pathogen (Biosecurity (Conditionally Non-prohibited Goods) Determination 2021) | A63: 36 (2) For paragraph 12(1)(b), alternative conditions for bringing or importing the goods into Australian territory are: (a) the goods are not intended for: (i) (Biosecurity (Conditionally Non-prohibited Goods) Determination 2021) | A69: Sources and conditions for irradiation of food (Australia New Zealand Food Standards Code - Standard 1.5.3…",
+        "source": "https://trainsonline.unctad.org/detailedSearch?imposingCountryCodes=AUS&affectedCountryCodes=CAN&productCodes=170220",
+        "lead_time_weeks": 0,
+        "lead_time_basis": "estimate",
+        "confidence": "auto_sourced"
+      },
+      {
+        "name": "Residue and contaminant limits (A21, A22, B21)",
+        "tier": 1,
+        "detail": "UNCTAD TRAINS: A21: Levels of contaminants and natural toxicants in food (Australia New Zealand Food Standards Code – Standard 1.4.1 – Contaminants and natural toxicants) | A21: The measure is MRL of metal, non-metal, and mercury contaminants allowed in food and food products S19—4 Maximum levels of metal contaminants Note For mean leve (Australia New Zealand Food Standards Code – Schedule 19 – Maximum levels of contaminants and natural) | A21: Maximum residue limit (MRL) means the maximum concentration of a residue resulting from the registered use of an agricultural or veterinary chemical w…",
+        "source": "https://trainsonline.unctad.org/detailedSearch?imposingCountryCodes=AUS&affectedCountryCodes=CAN&productCodes=170220",
+        "lead_time_weeks": 0,
+        "lead_time_basis": "estimate",
+        "confidence": "auto_sourced"
+      },
+      {
+        "name": "Traceability records (A85, A851, A853, A859)",
+        "tier": 1,
+        "detail": "UNCTAD TRAINS: A85: Recording keeping requirement (Australia New Zealand Food Standards Code - Standard 1.5.3 - Irradiation of Food) | A85: 28. Keeping and retaining records Keeping of records (1) If food to which this Act applies is imported into Australia, the owner of the food at the time of the (Imported Food Control Act 1992) | A851: 5. Information that must be contained in records (1) If food to which the Act applies is imported into Australia, the owner of the food at the time of importati (Imported Food Control (Record-keeping) Determination 2019) | A853: 5. Information that must be c…",
+        "source": "https://trainsonline.unctad.org/detailedSearch?imposingCountryCodes=AUS&affectedCountryCodes=CAN&productCodes=170220",
+        "lead_time_weeks": 0,
+        "lead_time_basis": "estimate",
+        "confidence": "auto_sourced"
+      }
+    ],
     "tax_burden": 0.0,
     "tax_note": "Tax treatment copied from the honey row (country level: any import GST is handled by the importer); not checked for maple syrup.",
     "notes": [
       "CFIA's export requirements library has no maple syrup entry for Australia (checked 2026-09-26).",
-      "UNCTAD TRAINS has no NTM data for this market; requirements come from the national source listed only.",
+      "Partial: rows 1-60 of 85 (TRAINS rate-limited the remaining pages).",
+      "UNCTAD TRAINS lists measures with no product scope recorded (A13, A14, A851, B14, B15, B19), such as general customs rules; not counted here.",
+      "UNCTAD TRAINS also lists measures that apply only to novel food products (B7); not counted here.",
+      "Among the measures with no product scope, this one names Canada specifically: A13 (Biosecurity (Conditionally Non-prohibited Goods) Determination 2021). Check with the Trade Commissioner Service whether it applies.",
       "Auto-sourced: pulled from official structured data, not checked by a person for maple syrup. Confirm with the Trade Commissioner Service before the first shipment."
     ],
     "sources": [
+      "https://trainsonline.unctad.org/detailedSearch?imposingCountryCodes=AUS&affectedCountryCodes=CAN&productCodes=170220",
       "https://www.abf.gov.au/importing-exporting-and-manufacturing/tariff-classification/current-tariff/schedule-3/section-iv/chapter-17",
       "https://wits.worldbank.org/tariff/trains/en/country/AUS/partner/CAN/product/170220",
       "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library",
@@ -161,21 +256,91 @@
     "country": "Germany (EU)",
     "status": "open",
     "status_note": "",
-    "compliance_confidence": "unknown",
+    "compliance_confidence": "auto_sourced",
     "tariff_rate": 0.0,
     "mfn_rate": 0.08,
     "tariff_note": "EU TARIC (1702 20 90 90, reference date 2026-09-26): 0% tariff preference for Canada under CETA; 8% third-country duty without it.",
     "trade_agreement": "CETA",
-    "compliance_requirements": [],
+    "compliance_requirements": [
+      {
+        "name": "Combined SPS import conditions (systems approach) (A13)",
+        "tier": 2,
+        "detail": "UNCTAD TRAINS: A13: •General obligation on the operator to monitor the feed safety of products and processes under his responsibility; •Hygiene provisions for primary production an (Health control of feedingstuffs of non-animal origin) | A13: . General foodstuffs hygiene rules The relevant hygiene rules of food which need to be respected by food business operators in third countries are contained in (Health control of foodstuffs of non-animal origin)",
+        "source": "https://trainsonline.unctad.org/detailedSearch?imposingCountryCodes=DEU&affectedCountryCodes=CAN&productCodes=170220",
+        "lead_time_weeks": 4,
+        "lead_time_basis": "estimate",
+        "confidence": "auto_sourced"
+      },
+      {
+        "name": "Other SPS/TBT import restrictions (A19)",
+        "tier": 2,
+        "detail": "UNCTAD TRAINS: A19: EU legislation establishes the lists of materials and ingredients whose circulation or use in animal nutrition is prohibited and the positive lists of the inten (Health control of feedingstuffs of non-animal origin)",
+        "source": "https://trainsonline.unctad.org/detailedSearch?imposingCountryCodes=DEU&affectedCountryCodes=CAN&productCodes=170220",
+        "lead_time_weeks": 2,
+        "lead_time_basis": "estimate",
+        "confidence": "auto_sourced"
+      },
+      {
+        "name": "Hygiene requirements (A41, A42)",
+        "tier": 1,
+        "detail": "UNCTAD TRAINS: A41: Microbiological criteria for certain products which are established in Commission Regulation (EC) No 2073/2005 (OJ L-338 22/12/2005) (CELEX 32005R2073); (Health control of foodstuffs of non-animal origin) | A41: Hygiene provisions for primary production and detailed requirements for all stages of production, processing and distribution of food; •Microbiological criteria (Health control of feedingstuffs of non-animal origin) | A42: General requirements for feed hygiene: Regulation (EC) No 183/2005 of the European Parliament and of the Council (OJ L-35 08/02/2005) (CELEX 320…",
+        "source": "https://trainsonline.unctad.org/detailedSearch?imposingCountryCodes=DEU&affectedCountryCodes=CAN&productCodes=170220",
+        "lead_time_weeks": 0,
+        "lead_time_basis": "estimate",
+        "confidence": "auto_sourced"
+      },
+      {
+        "name": "Labelling, marking and packaging rules (A31, A32, A33, B31)",
+        "tier": 1,
+        "detail": "UNCTAD TRAINS: A31: Food or feed, which is placed or is likely to be placed on the market in the EU, shall also be adequately labelled or identified to facilitate its traceability, (Traceability, compliance and responsibility in food and feed) | A31: Health control of feedingstuffs of non-animal origin. ImportThe products must also comply with specific labelling, packaging and marking provisions, such as: li (Health control of feedingstuffs of non-animal origin) | A31: General rules on food labelling The following table shows the new provisions regarding the mandatory food information which m…",
+        "source": "https://trainsonline.unctad.org/detailedSearch?imposingCountryCodes=DEU&affectedCountryCodes=CAN&productCodes=170220",
+        "lead_time_weeks": 2,
+        "lead_time_basis": "estimate",
+        "confidence": "auto_sourced"
+      },
+      {
+        "name": "Production and processing requirements (A63)",
+        "tier": 1,
+        "detail": "UNCTAD TRAINS: A63: This Regulation includes among others the following elements: •General obligation on the operator to monitor the feed safety of products and processes under his (Health control of feedingstuffs of non-animal origin) | A63: General hygiene provisions for primary production and detailed requirements for all stages of production, processing and distribution of food; Special provision (Health control of foodstuffs of non-animal origin)",
+        "source": "https://trainsonline.unctad.org/detailedSearch?imposingCountryCodes=DEU&affectedCountryCodes=CAN&productCodes=170220",
+        "lead_time_weeks": 0,
+        "lead_time_basis": "estimate",
+        "confidence": "auto_sourced"
+      },
+      {
+        "name": "Residue and contaminant limits (A22)",
+        "tier": 1,
+        "detail": "UNCTAD TRAINS: A22: General conditions concerning contaminants in food Contaminant substances may be present in food as a result of the various stages of its production and marketi (Health control of foodstuffs of non-animal origin)",
+        "source": "https://trainsonline.unctad.org/detailedSearch?imposingCountryCodes=DEU&affectedCountryCodes=CAN&productCodes=170220",
+        "lead_time_weeks": 0,
+        "lead_time_basis": "estimate",
+        "confidence": "auto_sourced"
+      },
+      {
+        "name": "Traceability records (A85, A851, A852, A853)",
+        "tier": 1,
+        "detail": "UNCTAD TRAINS: A85: Traceability The EU Law defines traceability as the ability to trace and follow any food, feed, food-producing animal or substance that will be used for consump (Traceability, compliance and responsibility in food and feed) | A851: Regulation (EC) No 178/2002 of the European Parliament and of the Council (OJ L-31 01/02/2002) (CELEX 32002R0178) lays down the general principles and requireme (European Union - Overview of Import Procedures) | A852: General foodstuffs hygiene rules The relevant hygiene rules of food which need to be respected by food business operators in thir…",
+        "source": "https://trainsonline.unctad.org/detailedSearch?imposingCountryCodes=DEU&affectedCountryCodes=CAN&productCodes=170220",
+        "lead_time_weeks": 0,
+        "lead_time_basis": "estimate",
+        "confidence": "auto_sourced"
+      }
+    ],
     "tax_burden": 0.0,
     "tax_note": "Tax treatment copied from the honey row (country level: import VAT is paid and recovered by the German importer); not checked for maple syrup.",
     "notes": [
       "EU TARIC lists no veterinary or plant-health import control for this code; an organic certificate of inspection (C644) applies only if it is sold as organic.",
       "CFIA's export requirements library has no maple syrup entry for the EU (checked 2026-09-26).",
-      "UNCTAD TRAINS has no NTM data for this market; requirements come from the national source listed only.",
+      "Germany applies the EU's measures: queried Germany and the European Union together (TRAINS ids 84 and 279).",
+      "UNCTAD TRAINS lists A14 for this HS code, but EU TARIC lists no import licence or import-certificate measure for maple syrup (1702 20 90 90) from Canada on 2026-09-26 (https://ec.europa.eu/taxation_customs/dds2/taric/measures.jsp?Lang=en&Taric=1702209090&Area=CA&SimDate=20260926&Expand=true); not counted here.",
+      "UNCTAD TRAINS also lists measures that apply only to GMO / living modified organism products (A15, B31, E125); not counted here.",
+      "UNCTAD TRAINS also lists measures that apply only to animal feed products (A15, A19, A22, A31, A63, A83, B31); not counted here.",
+      "UNCTAD TRAINS also lists measures that apply only to novel food products (A31, A851, B31); not counted here.",
+      "UNCTAD TRAINS also lists measures that apply only to organic products (B31, B84, E1); not counted here.",
       "Auto-sourced: pulled from official structured data, not checked by a person for maple syrup. Confirm with the Trade Commissioner Service before the first shipment."
     ],
     "sources": [
+      "https://trainsonline.unctad.org/detailedSearch?imposingCountryCodes=DEU&affectedCountryCodes=CAN&productCodes=170220",
       "https://ec.europa.eu/taxation_customs/dds2/taric/measures.jsp?Lang=en&Taric=1702209090&Area=CA&SimDate=20260926&Expand=true",
       "https://wits.worldbank.org/tariff/trains/en/country/EUN/partner/CAN/product/170220",
       "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library",
@@ -225,7 +390,7 @@
     "tax_note": "Tax treatment copied from the honey row (country level: import VAT is paid by the Chinese importer); not checked for maple syrup.",
     "notes": [
       "CFIA: ask the Chinese importer whether a CFIA export certificate is required.",
-      "UNCTAD TRAINS has no NTM data for this market; requirements come from the national source listed only.",
+      "UNCTAD TRAINS: Not fetched: TRAINS rate-limited our requests (Cloudflare 1015). Requirements here come only from the national sources cited.",
       "Auto-sourced: pulled from official structured data, not checked by a person for maple syrup. Confirm with the Trade Commissioner Service before the first shipment."
     ],
     "sources": [
@@ -249,20 +414,95 @@
     "country": "South Korea",
     "status": "open",
     "status_note": "",
-    "compliance_confidence": "unknown",
+    "compliance_confidence": "auto_sourced",
     "tariff_rate": 0.0,
     "mfn_rate": 0.08,
     "tariff_note": "Duty-free under the Canada-Korea FTA; 8% MFN without it (UNCTAD TRAINS via WITS, 2022).",
     "trade_agreement": "Canada-Korea FTA (CKFTA)",
-    "compliance_requirements": [],
+    "compliance_requirements": [
+      {
+        "name": "Importer registration (A15)",
+        "tier": 2,
+        "detail": "UNCTAD TRAINS: A15: Persons who intend to conduct business of importing and selling imported food shall register his/her business with the Minister of Food and Drug Safety. (SPECIAL ACT ON IMPORTED FOOD SAFETY MANAGEMENT) | A15: Any person who establishes and operates a foreign establishment shall file an application for registration with the Minister of Food and Drug Safety via the gov (SPECIAL ACT ON IMPORTED FOOD SAFETY MANAGEMENT)",
+        "source": "https://trainsonline.unctad.org/detailedSearch?imposingCountryCodes=KOR&affectedCountryCodes=CAN&productCodes=170220",
+        "lead_time_weeks": 2,
+        "lead_time_basis": "estimate",
+        "confidence": "auto_sourced"
+      },
+      {
+        "name": "Inspection at the border (A84)",
+        "tier": 2,
+        "detail": "UNCTAD TRAINS: A84: Any person who receives an import license shall submit an import inspection application of living modified organisms for marine and fisheries in order to import (Consolidated notice of transboundary movements of living modified organisms)",
+        "source": "https://trainsonline.unctad.org/detailedSearch?imposingCountryCodes=KOR&affectedCountryCodes=CAN&productCodes=170220",
+        "lead_time_weeks": 0,
+        "lead_time_basis": "estimate",
+        "confidence": "auto_sourced"
+      },
+      {
+        "name": "Testing requirement (A82)",
+        "tier": 2,
+        "detail": "UNCTAD TRAINS: A82: Imported food shall require a relevant inspection before customs clearance formalities. (ENFORCEMENT RULE OF THE SPECIAL ACT ON IMPORTED FOOD SAFETY CONTROL)",
+        "source": "https://trainsonline.unctad.org/detailedSearch?imposingCountryCodes=KOR&affectedCountryCodes=CAN&productCodes=170220",
+        "lead_time_weeks": 2,
+        "lead_time_basis": "estimate",
+        "confidence": "auto_sourced"
+      },
+      {
+        "name": "Border formalities (consignment route, port of entry, import monitoring) (C4)",
+        "tier": 1,
+        "detail": "UNCTAD TRAINS: C4: Any person who import / export living modified organisms shall report the performance of production, importation and sale of living modified organisms for food (Consolidated notice of transboundary movements of living modified organisms) | C4: Any person who has been approved for the import / export of living modified organisms for environment purification, shall report the results of import / export (Consolidated notice of transboundary movements of living modified organisms) | C4: Any person who imports and produces the approved living modified organisms for marine and fi…",
+        "source": "https://trainsonline.unctad.org/detailedSearch?imposingCountryCodes=KOR&affectedCountryCodes=CAN&productCodes=170220",
+        "lead_time_weeks": 0,
+        "lead_time_basis": "estimate",
+        "confidence": "auto_sourced"
+      },
+      {
+        "name": "Hygiene requirements (A49)",
+        "tier": 1,
+        "detail": "UNCTAD TRAINS: A49: Persons who intend to conduct business of importing and selling imported food undergo shall undergo education on the sanitation control (SPECIAL ACT ON IMPORTED FOOD SAFETY MANAGEMENT)",
+        "source": "https://trainsonline.unctad.org/detailedSearch?imposingCountryCodes=KOR&affectedCountryCodes=CAN&productCodes=170220",
+        "lead_time_weeks": 0,
+        "lead_time_basis": "estimate",
+        "confidence": "auto_sourced"
+      },
+      {
+        "name": "Labelling, marking and packaging rules (A31, A32, B31, B32)",
+        "tier": 1,
+        "detail": "UNCTAD TRAINS: A31: A person who develops, produces, or imports living modified organisms shall identify the matters prescribed by Presidential Decree such as the types of living m (Transboundary Movement, ETC. of Living Modified Organisms Act) | A32: A person who develops, produces, or imports living modified organisms shall identify the matters prescribed by Presidential Decree such as the types of living m (Transboundary Movement, ETC. of Living Modified Organisms Act) | B31: Importers shall put a separate discharge mark on such products and packing materials. (GUIDELINES FOR SEPERATE DISC…",
+        "source": "https://trainsonline.unctad.org/detailedSearch?imposingCountryCodes=KOR&affectedCountryCodes=CAN&productCodes=170220",
+        "lead_time_weeks": 2,
+        "lead_time_basis": "estimate",
+        "confidence": "auto_sourced"
+      },
+      {
+        "name": "Production and processing requirements (A64, B49)",
+        "tier": 1,
+        "detail": "UNCTAD TRAINS: A64: Persons who intend to conduct business of importing and selling imported food shall have facilities satisfying the sanitation standards (ENFORCEMENT RULE OF THE SPECIAL ACT ON IMPORTED FOOD SAFETY CONTROL) | A64: (1) When exporters, importers, etc. of living modified organisms handle or manage living modified organisms, they shall comply with the standards for handling a (Transboundary Movement, ETC. of Living Modified Organisms Act) | B49: Importers shall collect and recycle wastes which is generated by their products and packing materials. Importers shall achive mandator…",
+        "source": "https://trainsonline.unctad.org/detailedSearch?imposingCountryCodes=KOR&affectedCountryCodes=CAN&productCodes=170220",
+        "lead_time_weeks": 0,
+        "lead_time_basis": "estimate",
+        "confidence": "auto_sourced"
+      },
+      {
+        "name": "Traceability records (A851, A853, A859, B853, B859)",
+        "tier": 1,
+        "detail": "UNCTAD TRAINS: A851: Persons who intend to conduct business of importing shall keep records of transaction details thereof for two years, and trasation details of foods which 2 year (ENFORCEMENT RULE OF THE SPECIAL ACT ON IMPORTED FOOD SAFETY CONTROL) | A853: Persons who intend to conduct business of importing shall keep records of transaction details there of for two years, and trasation details of foods which 2 yea (ENFORCEMENT RULE OF THE SPECIAL ACT ON IMPORTED FOOD SAFETY CONTROL) | A859: Persons who intend to conduct business of importing shall observe each of the following matters; 1.…",
+        "source": "https://trainsonline.unctad.org/detailedSearch?imposingCountryCodes=KOR&affectedCountryCodes=CAN&productCodes=170220",
+        "lead_time_weeks": 0,
+        "lead_time_basis": "estimate",
+        "confidence": "auto_sourced"
+      }
+    ],
     "tax_burden": 0.0,
     "tax_note": "Tax treatment copied from the honey row (country level: import VAT is paid by the Korean importer); not checked for maple syrup.",
     "notes": [
       "CFIA's export requirements library has no maple syrup entry for Korea (checked 2026-09-26).",
-      "UNCTAD TRAINS has no NTM data for this market; requirements come from the national source listed only.",
+      "Rows 1-39 of 39.",
+      "UNCTAD TRAINS also lists measures that apply only to GMO / living modified organism products (A14, A82, A84, B82, E1); not counted here.",
       "Auto-sourced: pulled from official structured data, not checked by a person for maple syrup. Confirm with the Trade Commissioner Service before the first shipment."
     ],
     "sources": [
+      "https://trainsonline.unctad.org/detailedSearch?imposingCountryCodes=KOR&affectedCountryCodes=CAN&productCodes=170220",
       "https://wits.worldbank.org/tariff/trains/en/country/KOR/partner/CAN/product/170220",
       "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library",
       "https://data.worldbank.org/indicator/LP.LPI.CUST.XQ",
@@ -320,7 +560,7 @@
     "tax_note": "Tax treatment copied from the honey row (no federal VAT; sold through a US importer); not checked for maple syrup.",
     "notes": [
       "CFIA's export requirements library has no maple syrup entry for the US (checked 2026-09-26).",
-      "UNCTAD TRAINS has no NTM data for this market; requirements come from the national source listed only.",
+      "UNCTAD TRAINS: Not fetched: TRAINS rate-limited our requests (Cloudflare 1015). Requirements here come only from the national sources cited.",
       "Auto-sourced: pulled from official structured data, not checked by a person for maple syrup. Confirm with the Trade Commissioner Service before the first shipment."
     ],
     "sources": [
@@ -344,20 +584,40 @@
     "country": "Mexico",
     "status": "open",
     "status_note": "",
-    "compliance_confidence": "unknown",
+    "compliance_confidence": "auto_sourced",
     "tariff_rate": 0.0,
     "mfn_rate": 0.15,
     "tariff_note": "Duty-free under CUSMA; 15% MFN without it (UNCTAD TRAINS via WITS, 2022).",
     "trade_agreement": "CUSMA",
-    "compliance_requirements": [],
+    "compliance_requirements": [
+      {
+        "name": "Certificate requirement (A83)",
+        "tier": 2,
+        "detail": "UNCTAD TRAINS: A83: The authority of the Ministry of Agriculture and Hydraulic Resources to determine the minimum phytosanitary requirements and conditions to which the importation (Law of 20/12/1993. Federal Law on Plant Health. Modified by Decrees DOF 26/07/07; of 04/10/11.)",
+        "source": "https://trainsonline.unctad.org/detailedSearch?imposingCountryCodes=MEX&affectedCountryCodes=CAN&productCodes=170220",
+        "lead_time_weeks": 1,
+        "lead_time_basis": "estimate",
+        "confidence": "auto_sourced"
+      },
+      {
+        "name": "Inspection at the border (A84)",
+        "tier": 2,
+        "detail": "UNCTAD TRAINS: A84: The authority of the Ministry of Agriculture and Hydraulic Resources to determine the minimum phytosanitary requirements and conditions to which the importation (Law of 20/12/1993. Federal Law on Plant Health. Modified by Decrees DOF 26/07/07; of 04/10/11.)",
+        "source": "https://trainsonline.unctad.org/detailedSearch?imposingCountryCodes=MEX&affectedCountryCodes=CAN&productCodes=170220",
+        "lead_time_weeks": 0,
+        "lead_time_basis": "estimate",
+        "confidence": "auto_sourced"
+      }
+    ],
     "tax_burden": 0.0,
     "tax_note": "",
     "notes": [
       "CFIA's export requirements library has no maple syrup entry for Mexico (checked 2026-09-26). Unlike honey, nothing we found closes Mexico to Canadian maple syrup.",
-      "UNCTAD TRAINS has no NTM data for this market; requirements come from the national source listed only.",
+      "UNCTAD TRAINS also lists measures that apply only to organic products (A83, A89); not counted here.",
       "Auto-sourced: pulled from official structured data, not checked by a person for maple syrup. Confirm with the Trade Commissioner Service before the first shipment."
     ],
     "sources": [
+      "https://trainsonline.unctad.org/detailedSearch?imposingCountryCodes=MEX&affectedCountryCodes=CAN&productCodes=170220",
       "https://wits.worldbank.org/tariff/trains/en/country/MEX/partner/CAN/product/170220",
       "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library",
       "https://data.worldbank.org/indicator/LP.LPI.CUST.XQ",

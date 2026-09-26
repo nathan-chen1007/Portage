@@ -14,6 +14,8 @@ Our tiers (see Requirement in app/models.py) measure how much work a step is for
   tier 2  registration / certificate / test    A15/B15 importer registration, A81-A84, A86, A89 and B81-B84,
                                                B89 (product registration, testing, certification, inspection,
                                                quarantine), C1 pre-shipment inspection
+                                               A13 systems approach (a combination of SPS conditions), A19/B19
+                                               other SPS/TBT import restrictions
   tier 3  licence or government approval       A14/B14 special authorization, E1 non-automatic licences,
                                                E2 quotas, other E
   blocked prohibition aimed at Canada          A11/A12/B11/E3: a prohibition that names Canada as the affected
@@ -63,9 +65,11 @@ STEPS: tuple[Step, ...] = (
     Step("quarantine", "Quarantine requirement", 2, 2, ("A86",)),
     Step("conformity_other", "Other conformity assessment", 2, 2, ("A8", "A89", "B8", "B89", "A9", "B9")),
     Step("preshipment", "Pre-shipment inspection", 2, 1, ("C1",)),
-    Step("authorization", "Import authorization (special permit)", 3, 12, ("A14", "B14", "A1", "B1")),
+    Step("systems_approach", "Combined SPS import conditions (systems approach)", 2, 4, ("A13",)),
+    Step("other_restriction", "Other SPS/TBT import restrictions", 2, 2, ("A19", "B19", "A1", "B1")),
+    Step("authorization", "Import authorization (special permit)", 3, 12, ("A14", "B14")),
     Step("licence", "Import licence, quota or other restriction", 3, 12, ("E1", "E2", "E5", "E6", "E9")),
-    Step("prohibition", "Import prohibition", 3, 12, ("A11", "A12", "A13", "B11", "E3")),
+    Step("prohibition", "Import prohibition", 3, 12, ("A11", "A12", "B11", "E3")),
 )
 
 # Codes that, when aimed specifically at Canada, mean no legal route exists today.

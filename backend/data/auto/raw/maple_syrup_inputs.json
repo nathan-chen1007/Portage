@@ -79,6 +79,13 @@
       "notes": [
         "EU TARIC lists no veterinary or plant-health import control for this code; an organic certificate of inspection (C644) applies only if it is sold as organic.",
         "CFIA's export requirements library has no maple syrup entry for the EU (checked 2026-09-26)."
+      ],
+      "trains_overrides": [
+        {
+          "ntmCode": "A14",
+          "reason": "EU TARIC lists no import licence or import-certificate measure for maple syrup (1702 20 90 90) from Canada on 2026-09-26",
+          "source": "https://ec.europa.eu/taxation_customs/dds2/taric/measures.jsp?Lang=en&Taric=1702209090&Area=CA&SimDate=20260926&Expand=true"
+        }
       ]
     },
     "CN": {

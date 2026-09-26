@@ -30,6 +30,7 @@ def client():
 @pytest.mark.parametrize("code,tier", [
     ("A21", 1), ("A31", 1), ("B31", 1), ("A41", 1), ("A85", 1), ("B85", 1), ("C3", 1),
     ("A15", 2), ("A81", 2), ("A82", 2), ("A83", 2), ("B83", 2), ("A84", 2), ("C1", 2), ("A89", 2),
+    ("A13", 2), ("A19", 2), ("A851", 1), ("A64", 1), ("B49", 1),
     ("A14", 3), ("E11", 3), ("E21", 3), ("A11", 3),
 ])
 def test_tier_mapping(code, tier):
@@ -76,6 +77,29 @@ def test_horizontal_measures_are_dropped():
     rows = [dict(_row("B83", "consumer product safety certificate"), hsChapters=84), dict(_row("A31"), hsChapters=20)]
     reqs, _ = build.trains_requirements(rows, "https://x")
     assert [r["step"] for r in reqs] == ["labelling"]
+
+
+def test_feed_organic_and_gmo_measures_become_notes():
+    rows = [dict(_row("A14", "approval to import any living modified organism", reg="LMO Act"), hsChapters=24),
+            dict(_row("A15", "Compulsory registration of all feed business operators"), hsChapters=9),
+            dict(_row("A83", "must be certified by an organic certification body"), hsChapters=19),
+            dict(_row("A21", "contaminant limits incl. inorganic arsenic"), hsChapters=21)]
+    reqs, _ = build.trains_requirements(rows, "https://x")
+    assert [r["step"] for r in reqs] == ["residues"]
+    notes = " ".join(build.conditional_notes(rows))
+    assert "animal feed" in notes and "organic" in notes and "GMO" in notes
+
+
+def test_no_scope_and_overridden_measures_become_notes():
+    rows = [dict(_row("B14", "customs permission", "World", "Customs Act"), hsChapters=0),
+            dict(_row("A13", "biosecurity", "Canada, United States", "Biosecurity Determination"), hsChapters=0),
+            dict(_row("A14", "import certificate may be required"), hsChapters=33),
+            dict(_row("A31", "labels"), hsChapters=21)]
+    override = {"A14": {"ntmCode": "A14", "reason": "TARIC lists no licence", "source": "https://taric"}}
+    reqs, blocked = build.trains_requirements(rows, "https://x", override)
+    assert [r["step"] for r in reqs] == ["labelling"] and blocked is None
+    notes = " ".join(build.trains_notes(rows, override))
+    assert "no product scope" in notes and "names Canada" in notes and "TARIC lists no licence" in notes
 
 
 def test_prohibition_blocks_only_when_it_names_canada():

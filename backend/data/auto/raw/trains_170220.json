@@ -1,24 +1,1097 @@
 {
-  "source": "UNCTAD TRAINS Online, detailed NTM search: HS 170220 (maple sugar and maple syrup), affected market Canada, import and export measures. Fields kept: ntmCode, measureDescription (whitespace collapsed, cut at 300 characters), affectedCountriesNames, regulationTitle, issuingAgency, and hsChapters = number of distinct HS chapters the measure covers (used to drop horizontal measures that apply to nearly all goods).",
-  "fetched_at": "2026-09-26",
-  "markets": {
-    "JP": {
-      "source_url": "https://trainsonline.unctad.org/detailedSearch?imposingCountryCodes=JPN&affectedCountryCodes=CAN&productCodes=170220",
-      "rows": [
-        {"ntmCode": "A21", "measureDescription": "Only import items that conform to food safety standards can be imported. Standards for residual agricultural chemicals, radioactivity, heavy metal, and othe harmful substances.", "affectedCountriesNames": "World [Valid From: 13 Jun 2014]", "regulationTitle": "Standards of food, additives etc.", "issuingAgency": "MHLW", "hsChapters": 21},
-        {"ntmCode": "A22", "measureDescription": "Only import items that conform to food safety standards on additives can be imported.", "affectedCountriesNames": "World [Valid From: 08 Jun 2016]", "regulationTitle": "Standards of food, additives etc.", "issuingAgency": "MHLW", "hsChapters": 21},
-        {"ntmCode": "A31", "measureDescription": "Pursuant to Chapter 2 of the Standards, processed foods must bear a labelling on name, preserving method, consumption date, etc.", "affectedCountriesNames": "World [Valid From: 20 Mar 2015]", "regulationTitle": "Food Labeling Standards", "issuingAgency": "Consumer Affairs Agency, Government of Japan", "hsChapters": 20},
-        {"ntmCode": "A41", "measureDescription": "Only import items that conform to food safety standards on the number of bacteria can be imported.", "affectedCountriesNames": "World [Valid From: 13 Jun 2014]", "regulationTitle": "Standards of food, additives etc.", "issuingAgency": "MHLW", "hsChapters": 27},
-        {"ntmCode": "A42", "measureDescription": "Only food products that comply with manufacturing, processing and preparation standards can be imported.", "affectedCountriesNames": "World [Valid From: 13 Jun 2014]", "regulationTitle": "Standards of food, additives etc.", "issuingAgency": "MHLW", "hsChapters": 21},
-        {"ntmCode": "A42", "measureDescription": "Food or additives which are used for sales (including delivery other than sales to many and unspecified persons; the same shall apply hereinafter) shall be collected, produced, processed, used, cooked, stored, transported, displayed and delivered in a clean and sanitary manner. Apparatus and contain", "affectedCountriesNames": "World [Valid From: 01 Apr 2016]", "regulationTitle": "Food Sanitation Act No. 233 of 1947", "issuingAgency": "Ministry of Health, Labor and Welfare", "hsChapters": 21},
-        {"ntmCode": "A85", "measureDescription": "A person who intends to import food, additives, apparatus or containers and packaging to serve for the purpose of marketing or to use in business shall make a notification to the Minister of Health, Labour and Welfare on a case-by-case basis, pursuant to an Ordinance of the Ministry of Health, Labou", "affectedCountriesNames": "World [Valid From: 01 Apr 2015]", "regulationTitle": "Ordinance for Enforcement of the Food Sanitation Act No. 23 of July 1948", "issuingAgency": "Ministry of Health, Labor and Welfare", "hsChapters": 40},
-        {"ntmCode": "B31", "measureDescription": "Representation of specific quantity of impurities pertaining to imported specific goods", "affectedCountriesNames": "World [Valid From: 01 Apr 2016]", "regulationTitle": "Measurement Act", "issuingAgency": "METI", "hsChapters": 22},
-        {"ntmCode": "B31", "measureDescription": "(Limitation of Sales) Art. 4 Importers and manfacturers of specific products may not sell specified products if there is no label in accordance to Article 13 (Display) Art. 13 Business operators who have met the qualification for conformity under Article 11-2 are able to display the labels as specif", "affectedCountriesNames": "World [Valid From: 01 Apr 2016]", "regulationTitle": "Consumer Product Safety Act", "issuingAgency": "METI", "hsChapters": 84},
-        {"ntmCode": "B31", "measureDescription": "Pursuant to Chapter 2 of the Standards, processed foods must bear a labelling on name, preserving method, consumption date, etc.", "affectedCountriesNames": "World [Valid From: 20 Mar 2015]", "regulationTitle": "Food Labeling Standards", "issuingAgency": "Consumer Affairs Agency, Government of Japan", "hsChapters": 20},
-        {"ntmCode": "B83", "measureDescription": "(Compliance Inspection For Special Specified Products) Article 12 If the products is a special specified product, the notifying operators must have gotten inspected, have received a certificate, and need to save it before selling them. However, there are exceptions in depending on the type of produc", "affectedCountriesNames": "World [Valid From: 01 Apr 2016]", "regulationTitle": "Consumer Product Safety Act", "issuingAgency": "METI", "hsChapters": 84},
-        {"ntmCode": "P33", "measureDescription": "(Export Approval) (1) A person who intends to export goods that fall under any of the following items shall obtain the approval of the Minister of Economy, Trade and Industry in accordance with the procedure specified by the Ordinance of METI (ii) Export of goods under a contract for processing deal", "affectedCountriesNames": "World [Valid From: 31 Jul 2015]", "regulationTitle": "Export Trade Control Order", "issuingAgency": "Cabinet", "hsChapters": 85},
-        {"ntmCode": "P7", "measureDescription": "28391#28390#Export approval (Appended Table 2 Item 44) Specified cargo/destination country. However, ``freight-made goods that have been temporarily landed in Japan and are marked MADE IN JAPAN or similar thereto'' will not actually be approved for export.", "affectedCountriesNames": "World [Valid From: 01 Apr 2016]", "regulationTitle": "Export Trade Control Order", "issuingAgency": "Cabinet", "hsChapters": 0}
-      ]
+ "source": "UNCTAD TRAINS Online, detailed NTM search: HS 170220 (maple sugar and maple syrup), affected market Canada, import and export measures, fetched through api-trains2.unctad.org (the API behind trainsonline.unctad.org). Fields kept: ntmCode, measureDescription (whitespace collapsed and cut short; JP rows at 300 characters, others at 160), affectedCountriesNames ('World' when the measure applies to all origins), regulationTitle, and hsChapters = number of distinct HS chapters the measure covers (0 = TRAINS records no HS scope). For MX, KR, DE and AU, rows in chapters that are not compliance steps (D, F-P), rows covering 60+ chapters, and exact duplicates were not saved.",
+ "fetched_at": "2026-09-26",
+ "markets": {
+  "JP": {
+   "source_url": "https://trainsonline.unctad.org/detailedSearch?imposingCountryCodes=JPN&affectedCountryCodes=CAN&productCodes=170220",
+   "rows": [
+    {
+     "ntmCode": "A21",
+     "measureDescription": "Only import items that conform to food safety standards can be imported. Standards for residual agricultural chemicals, radioactivity, heavy metal, and othe harmful substances.",
+     "affectedCountriesNames": "World [Valid From: 13 Jun 2014]",
+     "regulationTitle": "Standards of food, additives etc.",
+     "issuingAgency": "MHLW",
+     "hsChapters": 21
+    },
+    {
+     "ntmCode": "A22",
+     "measureDescription": "Only import items that conform to food safety standards on additives can be imported.",
+     "affectedCountriesNames": "World [Valid From: 08 Jun 2016]",
+     "regulationTitle": "Standards of food, additives etc.",
+     "issuingAgency": "MHLW",
+     "hsChapters": 21
+    },
+    {
+     "ntmCode": "A31",
+     "measureDescription": "Pursuant to Chapter 2 of the Standards, processed foods must bear a labelling on name, preserving method, consumption date, etc.",
+     "affectedCountriesNames": "World [Valid From: 20 Mar 2015]",
+     "regulationTitle": "Food Labeling Standards",
+     "issuingAgency": "Consumer Affairs Agency, Government of Japan",
+     "hsChapters": 20
+    },
+    {
+     "ntmCode": "A41",
+     "measureDescription": "Only import items that conform to food safety standards on the number of bacteria can be imported.",
+     "affectedCountriesNames": "World [Valid From: 13 Jun 2014]",
+     "regulationTitle": "Standards of food, additives etc.",
+     "issuingAgency": "MHLW",
+     "hsChapters": 27
+    },
+    {
+     "ntmCode": "A42",
+     "measureDescription": "Only food products that comply with manufacturing, processing and preparation standards can be imported.",
+     "affectedCountriesNames": "World [Valid From: 13 Jun 2014]",
+     "regulationTitle": "Standards of food, additives etc.",
+     "issuingAgency": "MHLW",
+     "hsChapters": 21
+    },
+    {
+     "ntmCode": "A42",
+     "measureDescription": "Food or additives which are used for sales (including delivery other than sales to many and unspecified persons; the same shall apply hereinafter) shall be collected, produced, processed, used, cooked, stored, transported, displayed and delivered in a clean and sanitary manner. Apparatus and contain",
+     "affectedCountriesNames": "World [Valid From: 01 Apr 2016]",
+     "regulationTitle": "Food Sanitation Act No. 233 of 1947",
+     "issuingAgency": "Ministry of Health, Labor and Welfare",
+     "hsChapters": 21
+    },
+    {
+     "ntmCode": "A85",
+     "measureDescription": "A person who intends to import food, additives, apparatus or containers and packaging to serve for the purpose of marketing or to use in business shall make a notification to the Minister of Health, Labour and Welfare on a case-by-case basis, pursuant to an Ordinance of the Ministry of Health, Labou",
+     "affectedCountriesNames": "World [Valid From: 01 Apr 2015]",
+     "regulationTitle": "Ordinance for Enforcement of the Food Sanitation Act No. 23 of July 1948",
+     "issuingAgency": "Ministry of Health, Labor and Welfare",
+     "hsChapters": 40
+    },
+    {
+     "ntmCode": "B31",
+     "measureDescription": "Representation of specific quantity of impurities pertaining to imported specific goods",
+     "affectedCountriesNames": "World [Valid From: 01 Apr 2016]",
+     "regulationTitle": "Measurement Act",
+     "issuingAgency": "METI",
+     "hsChapters": 22
+    },
+    {
+     "ntmCode": "B31",
+     "measureDescription": "(Limitation of Sales) Art. 4 Importers and manfacturers of specific products may not sell specified products if there is no label in accordance to Article 13 (Display) Art. 13 Business operators who have met the qualification for conformity under Article 11-2 are able to display the labels as specif",
+     "affectedCountriesNames": "World [Valid From: 01 Apr 2016]",
+     "regulationTitle": "Consumer Product Safety Act",
+     "issuingAgency": "METI",
+     "hsChapters": 84
+    },
+    {
+     "ntmCode": "B31",
+     "measureDescription": "Pursuant to Chapter 2 of the Standards, processed foods must bear a labelling on name, preserving method, consumption date, etc.",
+     "affectedCountriesNames": "World [Valid From: 20 Mar 2015]",
+     "regulationTitle": "Food Labeling Standards",
+     "issuingAgency": "Consumer Affairs Agency, Government of Japan",
+     "hsChapters": 20
+    },
+    {
+     "ntmCode": "B83",
+     "measureDescription": "(Compliance Inspection For Special Specified Products) Article 12 If the products is a special specified product, the notifying operators must have gotten inspected, have received a certificate, and need to save it before selling them. However, there are exceptions in depending on the type of produc",
+     "affectedCountriesNames": "World [Valid From: 01 Apr 2016]",
+     "regulationTitle": "Consumer Product Safety Act",
+     "issuingAgency": "METI",
+     "hsChapters": 84
+    },
+    {
+     "ntmCode": "P33",
+     "measureDescription": "(Export Approval) (1) A person who intends to export goods that fall under any of the following items shall obtain the approval of the Minister of Economy, Trade and Industry in accordance with the procedure specified by the Ordinance of METI (ii) Export of goods under a contract for processing deal",
+     "affectedCountriesNames": "World [Valid From: 31 Jul 2015]",
+     "regulationTitle": "Export Trade Control Order",
+     "issuingAgency": "Cabinet",
+     "hsChapters": 85
+    },
+    {
+     "ntmCode": "P7",
+     "measureDescription": "28391#28390#Export approval (Appended Table 2 Item 44) Specified cargo/destination country. However, ``freight-made goods that have been temporarily landed in Japan and are marked MADE IN JAPAN or similar thereto'' will not actually be approved for export.",
+     "affectedCountriesNames": "World [Valid From: 01 Apr 2016]",
+     "regulationTitle": "Export Trade Control Order",
+     "issuingAgency": "Cabinet",
+     "hsChapters": 0
     }
+   ]
+  },
+  "AU": {
+   "source_url": "https://trainsonline.unctad.org/detailedSearch?imposingCountryCodes=AUS&affectedCountryCodes=CAN&productCodes=170220",
+   "rows": [
+    {
+     "ntmCode": "A13",
+     "measureDescription": "56.2. Goods included in a class of goods to which this section applies must not be brought or imported into Australian territory unless: (a) the goods: (i) have",
+     "affectedCountriesNames": "Albania, Andorra, Armenia, Austria, Azerbaijan, Belgium, Bosnia and Herzegovina, Bulgaria, Canada, Croatia, Czech Republic, France, Georgia, Germany, Greece, Hungary, Italy, Kazakhstan, Kosovo (under UNSCR 1244), Luxembourg, Moldova, Montenegro, Netherlands, North Macedonia, Poland, Portugal, Romania, Russia, Serbia, Slovakia, Slovenia, Spain, Switzerland, Türkiye, Ukraine, United States, Uzbekistan [Valid From: 20 Mar 2021]",
+     "regulationTitle": "Biosecurity (Conditionally Non-prohibited Goods) Determination 2021",
+     "hsChapters": 0
+    },
+    {
+     "ntmCode": "A14",
+     "measureDescription": "55.1 Goods that are included in a class of goods to which a section of this Division applies, and that are the subject of an import declaration, must not be bro",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Biosecurity (Conditionally Non-prohibited Goods) Determination 2021",
+     "hsChapters": 0
+    },
+    {
+     "ntmCode": "A15",
+     "measureDescription": "9. Offences relating to dealing with examinable food Dealing with food where no food control certificate (1) A person commits an offence if: (a) the person deal",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Imported Food Control Act 1992",
+     "hsChapters": 22
+    },
+    {
+     "ntmCode": "A19",
+     "measureDescription": "Prohibition on sale of food after its use-by date",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Australia New Zealand Food Standards Code – Standard 1.2.5 – Information requirements – date marking",
+     "hsChapters": 21
+    },
+    {
+     "ntmCode": "A21",
+     "measureDescription": "Levels of contaminants and natural toxicants in food",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Australia New Zealand Food Standards Code – Standard 1.4.1 – Contaminants and natural toxicants",
+     "hsChapters": 21
+    },
+    {
+     "ntmCode": "A21",
+     "measureDescription": "The measure is MRL of metal, non-metal, and mercury contaminants allowed in food and food products S19—4 Maximum levels of metal contaminants Note For mean leve",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Australia New Zealand Food Standards Code – Schedule 19 – Maximum levels of contaminants and natural",
+     "hsChapters": 21
+    },
+    {
+     "ntmCode": "A21",
+     "measureDescription": "Maximum residue limit (MRL) means the maximum concentration of a residue resulting from the registered use of an agricultural or veterinary chemical which is le",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Agricultural and Veterinary Chemicals (MRL Standard for Residues of Chemical Products) Instrument 20",
+     "hsChapters": 24
+    },
+    {
+     "ntmCode": "A22",
+     "measureDescription": "Permitted processing aids used for processing foods",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Australia New Zealand Food Standards Code – Standard 1.3.3 – Processing aids",
+     "hsChapters": 21
+    },
+    {
+     "ntmCode": "A22",
+     "measureDescription": "Permitted levels of food additives in foods",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Australia New Zealand Food Standards Code – Standard 1.3.1 – Food Additives, Compilation No. 3",
+     "hsChapters": 21
+    },
+    {
+     "ntmCode": "A22",
+     "measureDescription": "Forms and amounts of vitamins and minerals permitted in food",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Australia New Zealand Food Standards Code – Standard 1.3.2 – Vitamins and minerals",
+     "hsChapters": 21
+    },
+    {
+     "ntmCode": "A22",
+     "measureDescription": "MRL for food S18-3 Permitted processing aids for certain purposes For section 1.3.3—5, the substances, foods and maximum permitted levels are: Permitted process",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Australia New Zealand Food Standards Code – Schedule 18 – Processing aids",
+     "hsChapters": 21
+    },
+    {
+     "ntmCode": "A22",
+     "measureDescription": "S24-2 Restricted plants and fungi Species name Common name Natural toxicant Artemisia absinthium Common wormwood Thujone, santonin Artemisia cina Berg Levant wo",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Australia New Zealand Food Standards Code – Schedule 24 – Restricted plants and fungi",
+     "hsChapters": 21
+    },
+    {
+     "ntmCode": "A22",
+     "measureDescription": "S3—5 Specifications for advantame For advantame, the specifications are: (a) purity, using the analytical methodology indicated: (i) assay: (A) specification—no",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Australia New Zealand Food Standards Code – Schedule 3 – Identity and purity",
+     "hsChapters": 21
+    },
+    {
+     "ntmCode": "A22",
+     "measureDescription": "S23—2 Prohibited plants and fungi For paragraph (a) of the definition of prohibited plant or fungus in section 1.1.2—3, the plants and fungi are: Prohibited pla",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Australia New Zealand Food Standards Code – Schedule 23 – Prohibited plants and fungi",
+     "hsChapters": 21
+    },
+    {
+     "ntmCode": "A22",
+     "measureDescription": "Prohibition on mixing formulated caffeinated beverages: A food for sale (other than a formulated caffeinated beverage) must not be a mixture of a non-alcoholic ",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Australia New Zealand Food Standards Code – Standard 2.6.4 – Formulated caffeinated beverages",
+     "hsChapters": 21
+    },
+    {
+     "ntmCode": "A22",
+     "measureDescription": "Permissable substances used as food additive S15—2 Permissions to use substances as food additives For each class of food identified by a numbered heading in th",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Australia New Zealand Food Standards Code – Schedule 15 – Substances that may be used as food additi",
+     "hsChapters": 21
+    },
+    {
+     "ntmCode": "A22",
+     "measureDescription": "Clause 2.9.6-4: 2.9.6-4 Composition A special purpose food may contain any of the vitamins and minerals specified in Column 1 of the table to section S29—12 or ",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Australia New Zealand Food Standards Code – – Transitional standard for special purpose foods (inclu",
+     "hsChapters": 21
+    },
+    {
+     "ntmCode": "A31",
+     "measureDescription": "Sets out when a food for sale is required to *bear a label or have other information provided with it, and sets out the information that is to be provided.",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Australia New Zealand Food Standards Code – Standard 1.2.1 – Requirements to have labels or otherwis",
+     "hsChapters": 21
+    },
+    {
+     "ntmCode": "A31",
+     "measureDescription": "Clause 2.9.6-5: 2.9.6-5 Labelling of special purpose foods For the labelling provisions, the required information for special purpose foods is a statement of th",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Australia New Zealand Food Standards Code – – Transitional standard for special purpose foods (inclu",
+     "hsChapters": 21
+    },
+    {
+     "ntmCode": "A31",
+     "measureDescription": "8A. Labelling offence (1) A person commits an offence if: (a) food is imported into Australia; and (b) this Act applies to the food; and (c) the person deals wi",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Imported Food Control Act 1992",
+     "hsChapters": 21
+    },
+    {
+     "ntmCode": "A31",
+     "measureDescription": "Clause 15, 16, 17, 26: 15 Packaged food, other than fresh fruit and vegetables in transparent packaging (1) This section applies in relation to food for sale (w",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Country of Origin Food Labelling Information Standard 2016",
+     "hsChapters": 21
+    },
+    {
+     "ntmCode": "A31",
+     "measureDescription": "Information requirements – date marking of food for sale",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Australia New Zealand Food Standards Code – Standard 1.2.5 – Information requirements – date marking",
+     "hsChapters": 21
+    },
+    {
+     "ntmCode": "A31",
+     "measureDescription": "Information requirements relating to the statement of ingredients, and contains provisions relating to, among other things, substances used as food additives.",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Australia New Zealand Food Standards Code – Standard 1.2.4 – Information requirements – statement of",
+     "hsChapters": 22
+    },
+    {
+     "ntmCode": "A31",
+     "measureDescription": "Information requirements relating to warning statements, advisory statements, and declarations.",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Australia New Zealand Food Standards Code – Standard 1.2.3 – Information requirements – warning stat",
+     "hsChapters": 21
+    },
+    {
+     "ntmCode": "A31",
+     "measureDescription": "Information requirements – directions for use and storage",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Australia New Zealand Food Standards Code – Standard 1.2.6 – Information requirements – directions f",
+     "hsChapters": 21
+    },
+    {
+     "ntmCode": "A63",
+     "measureDescription": "26.1 The goods: The goods have been processed so that they are not viable and there is no risk of contamination or infection from a disease or plant pathogen",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Biosecurity (Conditionally Non-prohibited Goods) Determination 2021",
+     "hsChapters": 14
+    },
+    {
+     "ntmCode": "A63",
+     "measureDescription": "36 (2) For paragraph 12(1)(b), alternative conditions for bringing or importing the goods into Australian territory are: (a) the goods are not intended for: (i)",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Biosecurity (Conditionally Non-prohibited Goods) Determination 2021",
+     "hsChapters": 18
+    },
+    {
+     "ntmCode": "A69",
+     "measureDescription": "Sources and conditions for irradiation of food",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Australia New Zealand Food Standards Code - Standard 1.5.3 - Irradiation of Food",
+     "hsChapters": 21
+    },
+    {
+     "ntmCode": "A69",
+     "measureDescription": "36 (2) For paragraph 12(1)(b), alternative conditions for bringing or importing the goods into Australian territory are: (a) the goods are not intended for: (i)",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Biosecurity (Conditionally Non-prohibited Goods) Determination 2021",
+     "hsChapters": 18
+    },
+    {
+     "ntmCode": "A83",
+     "measureDescription": "8. Application for food control certificate 1. For the purposes of paragraph 11(1)(a) of the Act, an application for a food control certificate must be in a for",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Imported Food Control Regulations 2019",
+     "hsChapters": 22
+    },
+    {
+     "ntmCode": "A83",
+     "measureDescription": "9. Offences relating to dealing with examinable food Dealing with food where no food control certificate (1) A person commits an offence if: (a) the person deal",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Imported Food Control Act 1992",
+     "hsChapters": 22
+    },
+    {
+     "ntmCode": "A85",
+     "measureDescription": "Recording keeping requirement",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Australia New Zealand Food Standards Code - Standard 1.5.3 - Irradiation of Food",
+     "hsChapters": 21
+    },
+    {
+     "ntmCode": "A85",
+     "measureDescription": "28. Keeping and retaining records Keeping of records (1) If food to which this Act applies is imported into Australia, the owner of the food at the time of the ",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Imported Food Control Act 1992",
+     "hsChapters": 22
+    },
+    {
+     "ntmCode": "A851",
+     "measureDescription": "5. Information that must be contained in records (1) If food to which the Act applies is imported into Australia, the owner of the food at the time of importati",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Imported Food Control (Record-keeping) Determination 2019",
+     "hsChapters": 22
+    },
+    {
+     "ntmCode": "A851",
+     "measureDescription": "Notice of goods imported",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Biosecurity Regulation 2016",
+     "hsChapters": 0
+    },
+    {
+     "ntmCode": "A853",
+     "measureDescription": "5. Information that must be contained in records (1) If food to which the Act applies is imported into Australia, the owner of the food at the time of importati",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Imported Food Control (Record-keeping) Determination 2019",
+     "hsChapters": 22
+    },
+    {
+     "ntmCode": "A859",
+     "measureDescription": "5. Information that must be contained in records (1) If food to which the Act applies is imported into Australia, the owner of the food at the time of importati",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Imported Food Control (Record-keeping) Determination 2019",
+     "hsChapters": 22
+    },
+    {
+     "ntmCode": "A859",
+     "measureDescription": "Lot identification and name and address of supplier",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Australia New Zealand Food Standards Code – Standard 1.2.2 – Information requirements – food identif",
+     "hsChapters": 21
+    },
+    {
+     "ntmCode": "B14",
+     "measureDescription": "69 Like customable goods and excise‑equivalent goods (1A) This section does not apply to tobacco products. (1) A person may apply to the Collector for permissio",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Customs Act 1901",
+     "hsChapters": 0
+    },
+    {
+     "ntmCode": "B14",
+     "measureDescription": "70 Special clearance goods 2) A person who has imported or proposes to import goods referred to in paragraph (a) of the definition of special clearance goods ma",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Customs Act 1901",
+     "hsChapters": 17
+    },
+    {
+     "ntmCode": "B15",
+     "measureDescription": "4V. Importation of Anzac goods 2. In this regulation, a reference to the word ‘Anzac’ includes a reference to a word so nearly resembling the word ‘Anzac’ as to",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Customs (Prohibited Imports) Regulations, 1956",
+     "hsChapters": 0
+    },
+    {
+     "ntmCode": "B19",
+     "measureDescription": "68 Entry of imported goods (2) The owner of goods to which this section applies may enter the goods for home consumption or, for goods other than tobacco produc",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Customs Act 1901",
+     "hsChapters": 0
+    },
+    {
+     "ntmCode": "B21",
+     "measureDescription": "Part 2.1: Table 1 — MRLs in Food Commodities (1) Table 1 lists residues of substances which may occur in food commodities and for which a MRL or an ERL applies.",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Agricultural and Veterinary Chemicals Code Instrument No. 4 (MRL Standard) 2012",
+     "hsChapters": 18
+    },
+    {
+     "ntmCode": "B31",
+     "measureDescription": "18JB Package must be marked with required package information—importer (1) A person commits an offence if: (a) the person imports into Australia an article; and",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "National Measurement Act 1960",
+     "hsChapters": 19
+    },
+    {
+     "ntmCode": "B31",
+     "measureDescription": "18JT Shortfall offence—importer Offence requiring fault element (1) A person commits an offence if: (a) the person imports into Australia an article; and (b) th",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "National Measurement Act 1960",
+     "hsChapters": 19
+    },
+    {
+     "ntmCode": "B31",
+     "measureDescription": "Information requirements relating to warning statements, advisory statements, and declarations.",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Australia New Zealand Food Standards Code – Standard 1.2.3 – Information requirements – warning stat",
+     "hsChapters": 21
+    },
+    {
+     "ntmCode": "B31",
+     "measureDescription": "Nutrition information requirements of foods required to be labelled",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Australia New Zealand Food Standards Code – Standard 1.2.8 – Nutrition information requirements",
+     "hsChapters": 21
+    },
+    {
+     "ntmCode": "B31",
+     "measureDescription": "Labelling provisions for the name of a food",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Australia New Zealand Food Standards Code – Standard 1.2.2 – Information requirements – food identif",
+     "hsChapters": 21
+    },
+    {
+     "ntmCode": "B31",
+     "measureDescription": "Part 2—Trade descriptions of goods imported Division 1—Prohibition of imports without trade descriptions 8. Prohibition of certain imports unless trade descript",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Commerce (Trade Descriptions) Regulation, 2016, Compilation No. 2",
+     "hsChapters": 59
+    },
+    {
+     "ntmCode": "B31",
+     "measureDescription": "Sets out when a food for sale is required to *bear a label or have other information provided with it, and sets out the information that is to be provided.",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Australia New Zealand Food Standards Code – Standard 1.2.1 – Requirements to have labels or otherwis",
+     "hsChapters": 21
+    },
+    {
+     "ntmCode": "B31",
+     "measureDescription": "Information requirements – characterising ingredients and components of food",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Australia New Zealand Food Standards Code – Standard 1.2.10 – Information requirements – characteris",
+     "hsChapters": 21
+    },
+    {
+     "ntmCode": "B31",
+     "measureDescription": "Labelling requirement for irradiated food",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Australia New Zealand Food Standards Code - Standard 1.5.3 - Irradiation of Food",
+     "hsChapters": 21
+    },
+    {
+     "ntmCode": "B31",
+     "measureDescription": "Labelling requirements for nutrition, health and related claims on foods",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Australia New Zealand Food Standards Code – Standard 1.2.7 – Nutrition, health and related claims",
+     "hsChapters": 21
+    },
+    {
+     "ntmCode": "B31",
+     "measureDescription": "Information requirements relating to the statement of ingredients, and contains provisions relating to, among other things, substances used as food additives.",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Australia New Zealand Food Standards Code – Standard 1.2.4 – Information requirements – statement of",
+     "hsChapters": 21
+    },
+    {
+     "ntmCode": "B31",
+     "measureDescription": "Information requirements – date marking of food for sale",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Australia New Zealand Food Standards Code – Standard 1.2.5 – Information requirements – date marking",
+     "hsChapters": 21
+    },
+    {
+     "ntmCode": "B31",
+     "measureDescription": "Information requirements – directions for use and storage",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Australia New Zealand Food Standards Code – Standard 1.2.6 – Information requirements – directions f",
+     "hsChapters": 21
+    },
+    {
+     "ntmCode": "B6",
+     "measureDescription": "Food identity requirements",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Australia New Zealand Food Standards Code – Standard 1.1.2 – Definitions used throughout the Code",
+     "hsChapters": 21
+    },
+    {
+     "ntmCode": "B7",
+     "measureDescription": "Conditions for use of permitted novel foods",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Australia New Zealand Food Standards Code - Standard 1.5.1 - Novel Foods",
+     "hsChapters": 27
+    },
+    {
+     "ntmCode": "B7",
+     "measureDescription": "18JT Shortfall offence—importer Offence requiring fault element (1) A person commits an offence if: (a) the person imports into Australia an article; and (b) th",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "National Measurement Act 1960",
+     "hsChapters": 19
+    },
+    {
+     "ntmCode": "B81",
+     "measureDescription": "18JX Permits for certain packed articles (1) The Secretary may, in writing, issue a permit for the importation of an article packed in advance ready for sale if",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "National Measurement Act 1960",
+     "hsChapters": 19
+    }
+   ],
+   "note": "Partial: rows 1-60 of 85 (TRAINS rate-limited the remaining pages)."
+  },
+  "DE": {
+   "source_url": "https://trainsonline.unctad.org/detailedSearch?imposingCountryCodes=DEU&affectedCountryCodes=CAN&productCodes=170220",
+   "rows": [
+    {
+     "ntmCode": "A13",
+     "measureDescription": "•General obligation on the operator to monitor the feed safety of products and processes under his responsibility; •Hygiene provisions for primary production an",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Health control of feedingstuffs of non-animal origin",
+     "hsChapters": 9
+    },
+    {
+     "ntmCode": "A13",
+     "measureDescription": ". General foodstuffs hygiene rules The relevant hygiene rules of food which need to be respected by food business operators in third countries are contained in ",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Health control of foodstuffs of non-animal origin",
+     "hsChapters": 22
+    },
+    {
+     "ntmCode": "A14",
+     "measureDescription": "Imports into the EU of certain agricultural products may be subject to the presentation of an import certificate, issued by the competent authorities of the EU ",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "European Union - Overview of Import Procedures",
+     "hsChapters": 33
+    },
+    {
+     "ntmCode": "A15",
+     "measureDescription": "Special provisions on Genetically Modified (GM) food and novel food . On the basis of the opinion of EFSA, the Commission drafts a proposal for granting or refu",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Health control of foodstuffs of non-animal origin",
+     "hsChapters": 22
+    },
+    {
+     "ntmCode": "A15",
+     "measureDescription": "•Compulsory registration of all feed business operators;",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Health control of feedingstuffs of non-animal origin",
+     "hsChapters": 9
+    },
+    {
+     "ntmCode": "A19",
+     "measureDescription": "EU legislation establishes the lists of materials and ingredients whose circulation or use in animal nutrition is prohibited and the positive lists of the inten",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Health control of feedingstuffs of non-animal origin",
+     "hsChapters": 9
+    },
+    {
+     "ntmCode": "A19",
+     "measureDescription": "Organic pet food shall be placed on the market when complying with provisions of Regulation (EU) 2018/848 (CELEX 32018R0848): Chapter VII \"Trade with Third coun",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Health control of feedingstuffs of non-animal origin",
+     "hsChapters": 9
+    },
+    {
+     "ntmCode": "A22",
+     "measureDescription": "Organic pet food shall be placed on the market when complying with provisions of Regulation (EU) 2018/848 (CELEX 32018R0848): Article 11: Prohibition of the use",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Health control of feedingstuffs of non-animal origin",
+     "hsChapters": 9
+    },
+    {
+     "ntmCode": "A22",
+     "measureDescription": "Feed materials (raw or processed materials intended for use as animal feed or for manufacturing compound feedingstuffs), compound feedingstuffs (mixtures of fee",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Health control of feedingstuffs of non-animal origin",
+     "hsChapters": 9
+    },
+    {
+     "ntmCode": "A22",
+     "measureDescription": "General conditions concerning contaminants in food Contaminant substances may be present in food as a result of the various stages of its production and marketi",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Health control of foodstuffs of non-animal origin",
+     "hsChapters": 22
+    },
+    {
+     "ntmCode": "A31",
+     "measureDescription": "Food or feed, which is placed or is likely to be placed on the market in the EU, shall also be adequately labelled or identified to facilitate its traceability,",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Traceability, compliance and responsibility in food and feed",
+     "hsChapters": 21
+    },
+    {
+     "ntmCode": "A31",
+     "measureDescription": "Specific provisions for certain groups of products and for foodstuffs for particular nutritional purposes. Companies that want to place a novel food on the EU m",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Health control of foodstuffs of non-animal origin",
+     "hsChapters": 22
+    },
+    {
+     "ntmCode": "A31",
+     "measureDescription": "Health control of feedingstuffs of non-animal origin. ImportThe products must also comply with specific labelling, packaging and marking provisions, such as: li",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Health control of feedingstuffs of non-animal origin",
+     "hsChapters": 9
+    },
+    {
+     "ntmCode": "A31",
+     "measureDescription": "Organic pet food shall be placed on the market when complying with provisions of Regulation (EU) 2018/848 (CELEX 32018R0848) and specific rules on labelling lai",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Health control of feedingstuffs of non-animal origin",
+     "hsChapters": 9
+    },
+    {
+     "ntmCode": "A31",
+     "measureDescription": "General rules on food labelling The following table shows the new provisions regarding the mandatory food information which must accompany any food intended for",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Labelling for foodstuffs",
+     "hsChapters": 21
+    },
+    {
+     "ntmCode": "A32",
+     "measureDescription": "Health control of feedingstuffs of non-animal origin. ImportThe products must also comply with specific labelling, packaging and marking provisions, such as: li",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Health control of feedingstuffs of non-animal origin",
+     "hsChapters": 9
+    },
+    {
+     "ntmCode": "A33",
+     "measureDescription": "Materials intended to come into contact with foodstuffs Materials and articles intended to come into contact with foodstuffs must be manufactured so that they d",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Health control of foodstuffs of non-animal origin",
+     "hsChapters": 22
+    },
+    {
+     "ntmCode": "A33",
+     "measureDescription": "The products must also comply with specific labelling, packaging and marking provisions, such as: list of materials and ingredients and their designations that ",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Health control of feedingstuffs of non-animal origin",
+     "hsChapters": 9
+    },
+    {
+     "ntmCode": "A41",
+     "measureDescription": "Microbiological criteria for certain products which are established in Commission Regulation (EC) No 2073/2005 (OJ L-338 22/12/2005) (CELEX 32005R2073);",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Health control of foodstuffs of non-animal origin",
+     "hsChapters": 22
+    },
+    {
+     "ntmCode": "A41",
+     "measureDescription": "Hygiene provisions for primary production and detailed requirements for all stages of production, processing and distribution of food; •Microbiological criteria",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Health control of feedingstuffs of non-animal origin",
+     "hsChapters": 9
+    },
+    {
+     "ntmCode": "A42",
+     "measureDescription": "General requirements for feed hygiene: Regulation (EC) No 183/2005 of the European Parliament and of the Council (OJ L-35 08/02/2005) (CELEX 32005R0183) establi",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Health control of feedingstuffs of non-animal origin",
+     "hsChapters": 9
+    },
+    {
+     "ntmCode": "A42",
+     "measureDescription": "General foodstuffs hygiene rules: The relevant hygiene rules of food which need to be respected by food business operators in third countries are contained in R",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Health control of foodstuffs of non-animal origin",
+     "hsChapters": 22
+    },
+    {
+     "ntmCode": "A63",
+     "measureDescription": "This Regulation includes among others the following elements: •General obligation on the operator to monitor the feed safety of products and processes under his",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Health control of feedingstuffs of non-animal origin",
+     "hsChapters": 9
+    },
+    {
+     "ntmCode": "A63",
+     "measureDescription": "General hygiene provisions for primary production and detailed requirements for all stages of production, processing and distribution of food; Special provision",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Health control of foodstuffs of non-animal origin",
+     "hsChapters": 22
+    },
+    {
+     "ntmCode": "A63",
+     "measureDescription": "Organic pet food shall be placed on the market when complying with provisions of Regulation (EU) 2018/848 (CELEX 32018R0848): Chapter III \"Production rules\": 1.",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Health control of feedingstuffs of non-animal origin",
+     "hsChapters": 9
+    },
+    {
+     "ntmCode": "A83",
+     "measureDescription": "Organic pet food shall be placed on the market when complying with provisions of Regulation (EU) 2018/848 (CELEX 32018R0848): Article 35: Prior to placing any p",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Health control of feedingstuffs of non-animal origin",
+     "hsChapters": 9
+    },
+    {
+     "ntmCode": "A85",
+     "measureDescription": "Traceability The EU Law defines traceability as the ability to trace and follow any food, feed, food-producing animal or substance that will be used for consump",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Traceability, compliance and responsibility in food and feed",
+     "hsChapters": 21
+    },
+    {
+     "ntmCode": "A851",
+     "measureDescription": "Regulation (EC) No 178/2002 of the European Parliament and of the Council (OJ L-31 01/02/2002) (CELEX 32002R0178) lays down the general principles and requireme",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "European Union - Overview of Import Procedures",
+     "hsChapters": 21
+    },
+    {
+     "ntmCode": "A851",
+     "measureDescription": "Novel foods (i.e. foods and food ingredients that have not been used for human consumption to a significant degree within the EU before 15 May 1997) must also u",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Health control of foodstuffs of non-animal origin",
+     "hsChapters": 22
+    },
+    {
+     "ntmCode": "A852",
+     "measureDescription": "General foodstuffs hygiene rules The relevant hygiene rules of food which need to be respected by food business operators in third countries are contained in Re",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Health control of foodstuffs of non-animal origin",
+     "hsChapters": 22
+    },
+    {
+     "ntmCode": "A852",
+     "measureDescription": "This Regulation includes among others the following elements: •General obligation on the operator to monitor the feed safety of products and processes under his",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Health control of feedingstuffs of non-animal origin",
+     "hsChapters": 9
+    },
+    {
+     "ntmCode": "A853",
+     "measureDescription": "General foodstuffs hygiene rules: The relevant hygiene rules of food which need to be respected by food business operators in third countries are contained in R",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Health control of foodstuffs of non-animal origin",
+     "hsChapters": 22
+    },
+    {
+     "ntmCode": "B31",
+     "measureDescription": "Labelling of spirit drinks Spirit drinks placed on the Union market shall comply with the presentation and labelling requirements set out in Regulation (EU) 116",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Labelling for foodstuffs",
+     "hsChapters": 21
+    },
+    {
+     "ntmCode": "B31",
+     "measureDescription": "Organic products from third countries may only be placed on the EU market when they are labelled as products with indications referring to organic production, i",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Products from organic production",
+     "hsChapters": 32
+    },
+    {
+     "ntmCode": "B31",
+     "measureDescription": "General rules on food labelling The following table shows the new provisions regarding the mandatory food information which must accompany any food intended for",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Labelling for foodstuffs",
+     "hsChapters": 21
+    },
+    {
+     "ntmCode": "B31",
+     "measureDescription": "Organic pet food shall be placed on the market when complying with provisions of Regulation (EU) 2018/848 (CELEX 32018R0848) and specific rules on labelling lai",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Health control of feedingstuffs of non-animal origin",
+     "hsChapters": 9
+    },
+    {
+     "ntmCode": "B31",
+     "measureDescription": "Health control of feedingstuffs of non-animal origin. ImportThe products must also comply with specific labelling, packaging and marking provisions, such as: li",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Health control of feedingstuffs of non-animal origin",
+     "hsChapters": 9
+    },
+    {
+     "ntmCode": "B31",
+     "measureDescription": "Labelling of foodstuffs for specific groups In addition to the rules applicable to foodstuffs in general, specific provisions (e.g. declaration of the energy va",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Labelling for foodstuffs",
+     "hsChapters": 21
+    },
+    {
+     "ntmCode": "B31",
+     "measureDescription": "Specific provisions for certain groups of products and for foodstuffs for particular nutritional purposes. Companies that want to place a novel food on the EU m",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Health control of foodstuffs of non-animal origin",
+     "hsChapters": 22
+    },
+    {
+     "ntmCode": "B31",
+     "measureDescription": "Labelling of Genetically Modified (GM) food and novel food Products consisting of or containing Genetically Modified Organisms (GMOs) and food products obtained",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Labelling for foodstuffs",
+     "hsChapters": 21
+    },
+    {
+     "ntmCode": "B31",
+     "measureDescription": "Labelling of food additives and flavourings Additives and flavourings must always be labelled on the packaging of food products by their category (anti-oxidant,",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Labelling for foodstuffs",
+     "hsChapters": 21
+    },
+    {
+     "ntmCode": "B84",
+     "measureDescription": "Certificate of inspection Imported consignments must be covered by documents issued by the competent authority or body in the third country, attesting that the ",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Products from organic production",
+     "hsChapters": 32
+    },
+    {
+     "ntmCode": "E1",
+     "measureDescription": "Imports from third countries Products from third countries labelled with EU organic logo may only import in the EU in the following cases: Compliance with EU st",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Products from organic production",
+     "hsChapters": 32
+    },
+    {
+     "ntmCode": "E125",
+     "measureDescription": "Special provisions on Genetically Modified (GM) food EU legislation provides a single authorisation procedure, which is valid throughout the EU, for the placing",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Health control of Genetically Modified (GM) food and novel food",
+     "hsChapters": 23
+    }
+   ],
+   "note": "Germany applies the EU's measures: queried Germany and the European Union together (TRAINS ids 84 and 279)."
+  },
+  "KR": {
+   "source_url": "https://trainsonline.unctad.org/detailedSearch?imposingCountryCodes=KOR&affectedCountryCodes=CAN&productCodes=170220",
+   "rows": [
+    {
+     "ntmCode": "A14",
+     "measureDescription": "A person intending to import any living modified organism shall obtain approval from the head of the relevant central administrative agency, as prescribed by Pr",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Transboundary Movement, ETC. of Living Modified Organisms Act",
+     "hsChapters": 24
+    },
+    {
+     "ntmCode": "A15",
+     "measureDescription": "Persons who intend to conduct business of importing and selling imported food shall register his/her business with the Minister of Food and Drug Safety.",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "SPECIAL ACT ON IMPORTED FOOD SAFETY MANAGEMENT",
+     "hsChapters": 52
+    },
+    {
+     "ntmCode": "A15",
+     "measureDescription": "Any person who establishes and operates a foreign establishment shall file an application for registration with the Minister of Food and Drug Safety via the gov",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "SPECIAL ACT ON IMPORTED FOOD SAFETY MANAGEMENT",
+     "hsChapters": 52
+    },
+    {
+     "ntmCode": "A31",
+     "measureDescription": "A person who develops, produces, or imports living modified organisms shall identify the matters prescribed by Presidential Decree such as the types of living m",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Transboundary Movement, ETC. of Living Modified Organisms Act",
+     "hsChapters": 24
+    },
+    {
+     "ntmCode": "A32",
+     "measureDescription": "A person who develops, produces, or imports living modified organisms shall identify the matters prescribed by Presidential Decree such as the types of living m",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Transboundary Movement, ETC. of Living Modified Organisms Act",
+     "hsChapters": 24
+    },
+    {
+     "ntmCode": "A49",
+     "measureDescription": "Persons who intend to conduct business of importing and selling imported food undergo shall undergo education on the sanitation control",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "SPECIAL ACT ON IMPORTED FOOD SAFETY MANAGEMENT",
+     "hsChapters": 52
+    },
+    {
+     "ntmCode": "A64",
+     "measureDescription": "Persons who intend to conduct business of importing and selling imported food shall have facilities satisfying the sanitation standards",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "ENFORCEMENT RULE OF THE SPECIAL ACT ON IMPORTED FOOD SAFETY CONTROL",
+     "hsChapters": 52
+    },
+    {
+     "ntmCode": "A64",
+     "measureDescription": "(1) When exporters, importers, etc. of living modified organisms handle or manage living modified organisms, they shall comply with the standards for handling a",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Transboundary Movement, ETC. of Living Modified Organisms Act",
+     "hsChapters": 24
+    },
+    {
+     "ntmCode": "A82",
+     "measureDescription": "Persons who intend to import a new living modified organism pursuant to Article 8 shall, prior to obtaining approval under Articles 8, 12, and 22-4, respectivel",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Transboundary Movement, ETC. of Living Modified Organisms Act",
+     "hsChapters": 24
+    },
+    {
+     "ntmCode": "A82",
+     "measureDescription": "Imported food shall require a relevant inspection before customs clearance formalities.",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "ENFORCEMENT RULE OF THE SPECIAL ACT ON IMPORTED FOOD SAFETY CONTROL",
+     "hsChapters": 52
+    },
+    {
+     "ntmCode": "A84",
+     "measureDescription": "Any person who receives an import license shall submit an import inspection application of living modified organisms for marine and fisheries in order to import",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Consolidated notice of transboundary movements of living modified organisms",
+     "hsChapters": 24
+    },
+    {
+     "ntmCode": "A84",
+     "measureDescription": "Any person who intends to import living modified organism for agriculture, forestry, and livestock industry shall request a inspection by submitting an applicat",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Consolidated notice of transboundary movements of living modified organisms",
+     "hsChapters": 24
+    },
+    {
+     "ntmCode": "A851",
+     "measureDescription": "Persons who intend to conduct business of importing shall keep records of transaction details thereof for two years, and trasation details of foods which 2 year",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "ENFORCEMENT RULE OF THE SPECIAL ACT ON IMPORTED FOOD SAFETY CONTROL",
+     "hsChapters": 52
+    },
+    {
+     "ntmCode": "A853",
+     "measureDescription": "Persons who intend to conduct business of importing shall keep records of transaction details there of for two years, and trasation details of foods which 2 yea",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "ENFORCEMENT RULE OF THE SPECIAL ACT ON IMPORTED FOOD SAFETY CONTROL",
+     "hsChapters": 52
+    },
+    {
+     "ntmCode": "A859",
+     "measureDescription": "Persons who intend to conduct business of importing shall observe each of the following matters; 1. Certificate of registration for business shall furnish in pl",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "ENFORCEMENT RULE OF THE SPECIAL ACT ON IMPORTED FOOD SAFETY CONTROL",
+     "hsChapters": 52
+    },
+    {
+     "ntmCode": "B31",
+     "measureDescription": "Importers shall put a separate discharge mark on such products and packing materials.",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "GUIDELINES FOR SEPERATE DISCHARGE MARK",
+     "hsChapters": 44
+    },
+    {
+     "ntmCode": "B31",
+     "measureDescription": "Importers of fixed quantity-indicated products shall indicate fixed quantity, company name, and others on products. Method of indicating fixed-quatity is under ",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "MEASURES ACT",
+     "hsChapters": 22
+    },
+    {
+     "ntmCode": "B31",
+     "measureDescription": "A person who develops, produces, or imports living modified organisms shall identify the matters prescribed by Presidential Decree such as the types of living m",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Transboundary Movement, ETC. of Living Modified Organisms Act",
+     "hsChapters": 24
+    },
+    {
+     "ntmCode": "B32",
+     "measureDescription": "A person who develops, produces, or imports living modified organisms shall identify the matters prescribed by Presidential Decree such as the types of living m",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Transboundary Movement, ETC. of Living Modified Organisms Act",
+     "hsChapters": 24
+    },
+    {
+     "ntmCode": "B49",
+     "measureDescription": "Importers shall collect and recycle wastes which is generated by their products and packing materials. Importers shall achive mandatory recycling ratio when the",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "ENFORCEMENT DECREE OF ACT ON THE PROMOTION OF SAVING AND RECYCLING OF RESOURCES",
+     "hsChapters": 44
+    },
+    {
+     "ntmCode": "B82",
+     "measureDescription": "Persons who intend to import a new living modified organism pursuant to Article 8 shall, prior to obtaining approval under Articles 8, 12, and 22-4, respectivel",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Transboundary Movement, ETC. of Living Modified Organisms Act",
+     "hsChapters": 24
+    },
+    {
+     "ntmCode": "B853",
+     "measureDescription": "Exporters, importers, etc. of living modified organisms shall prepare and keep the records of export, import, etc. of living modified organisms and the records ",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Transboundary Movement, ETC. of Living Modified Organisms Act",
+     "hsChapters": 24
+    },
+    {
+     "ntmCode": "B859",
+     "measureDescription": "A person referred to in paragraph (1) 3, 5 through 10, 13 and 14 shall keep account books and keep records and preserve them, as prescribed by Ordinance of the ",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "ACT ON THE PROMOTION OF SAVING AND RECYCLING OF RESOURCES",
+     "hsChapters": 58
+    },
+    {
+     "ntmCode": "C4",
+     "measureDescription": "Any person who import / export living modified organisms shall report the performance of production, importation and sale of living modified organisms for food ",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Consolidated notice of transboundary movements of living modified organisms",
+     "hsChapters": 24
+    },
+    {
+     "ntmCode": "C4",
+     "measureDescription": "Any person who has been approved for the import / export of living modified organisms for environment purification, shall report the results of import / export ",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Consolidated notice of transboundary movements of living modified organisms",
+     "hsChapters": 24
+    },
+    {
+     "ntmCode": "C4",
+     "measureDescription": "Any person who imports and produces the approved living modified organisms for marine and fisheries, shall report to the Director of the National Institute of F",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Consolidated notice of transboundary movements of living modified organisms",
+     "hsChapters": 24
+    },
+    {
+     "ntmCode": "C4",
+     "measureDescription": "Where a business entity intends to import food, he/she shall file an import declaration of the relevant imported food, etc. with the Minister of Food and Drug S",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "ENFORCEMENT RULE OF THE SPECIAL ACT ON IMPORTED FOOD SAFETY CONTROL",
+     "hsChapters": 52
+    },
+    {
+     "ntmCode": "E1",
+     "measureDescription": "A person intending to import any living modified organism shall obtain approval from the head of the relevant central administrative agency, as prescribed by Pr",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Transboundary Movement, ETC. of Living Modified Organisms Act",
+     "hsChapters": 24
+    }
+   ],
+   "note": "Rows 1-39 of 39."
+  },
+  "MX": {
+   "source_url": "https://trainsonline.unctad.org/detailedSearch?imposingCountryCodes=MEX&affectedCountryCodes=CAN&productCodes=170220",
+   "rows": [
+    {
+     "ntmCode": "A83",
+     "measureDescription": "The countries of origin must have regulations and control systems equivalent to those existing in the United Mexican States, or failing that, such products must",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Decree of 8/XII/2005. Law on Organic Products.",
+     "hsChapters": 19
+    },
+    {
+     "ntmCode": "A83",
+     "measureDescription": "The authority of the Ministry of Agriculture and Hydraulic Resources to determine the minimum phytosanitary requirements and conditions to which the importation",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Law of 20/12/1993. Federal Law on Plant Health. Modified by Decrees DOF 26/07/07; of 04/10/11.",
+     "hsChapters": 15
+    },
+    {
+     "ntmCode": "A84",
+     "measureDescription": "The authority of the Ministry of Agriculture and Hydraulic Resources to determine the minimum phytosanitary requirements and conditions to which the importation",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Law of 20/12/1993. Federal Law on Plant Health. Modified by Decrees DOF 26/07/07; of 04/10/11.",
+     "hsChapters": 15
+    },
+    {
+     "ntmCode": "A89",
+     "measureDescription": "The countries of origin must have regulations and control systems equivalent to those existing in the United Mexican States, or failing that, such products must",
+     "affectedCountriesNames": "World",
+     "regulationTitle": "Decree of 8/XII/2005. Law on Organic Products.",
+     "hsChapters": 19
+    }
+   ]
   }
+ },
+ "not_covered": {
+  "GB": "The UK is not among TRAINS's imposing countries; the UK Trade Tariff API is used instead."
+ },
+ "not_fetched": {
+  "CN": "Not fetched: TRAINS rate-limited our requests (Cloudflare 1015).",
+  "US": "Not fetched: TRAINS rate-limited our requests (Cloudflare 1015)."
+ }
 }
