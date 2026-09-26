@@ -9,6 +9,12 @@ from pydantic import AliasChoices, BaseModel, Field, field_validator, model_vali
 
 Component = Literal["tariff", "compliance", "logistics", "risk", "tax"]
 Basis = Literal["official", "estimate"]
+# How much to trust a compliance requirement:
+#   verified      a person read the official source for this product and country (curated data)
+#   auto_sourced  pulled from an official structured source (UNCTAD NTM data, UK Trade Tariff API, EU Access2Markets)
+#                 but not checked by a person for this product
+#   unknown       no data: say so and route the founder to the Trade Commissioner Service
+Confidence = Literal["verified", "auto_sourced", "unknown"]
 MarketStatus = Literal["open", "blocked"]
 
 
@@ -37,6 +43,7 @@ class Requirement(BaseModel):
     source: str
     lead_time_weeks: float = Field(0, ge=0, le=104, description="Weeks this step adds before the FIRST shipment can leave (0 = done per shipment, no wait)")
     lead_time_basis: Basis = Field("estimate", description="'official' = a stated deadline or service standard in the source; 'estimate' = our judgment, flagged in the UI")
+    confidence: Confidence = Field("verified", description="verified | auto_sourced | unknown — shown as a badge next to the requirement")
 
 
 class MarketEntry(BaseModel):
@@ -48,6 +55,7 @@ class MarketEntry(BaseModel):
     language: str = Field(description="ISO 639-1 code of the main business language, used for the voice note")
     status: MarketStatus = Field("open", description="'blocked' = no legal way to export this product there right now")
     status_note: str = Field("", description="Why the market is blocked (shown instead of a score)")
+    compliance_confidence: Confidence = Field("verified", description="Lowest confidence among this market's requirements; 'unknown' when we have no compliance data at all")
     tariff_rate: float = Field(ge=0, le=5, description="Applied tariff for a Canadian exporter, as a fraction (0.5 = 50%)")
     mfn_rate: float = Field(0.0, ge=0, le=5, description="Rate without any trade agreement, for the 'what the FTA saves you' line")
     tariff_note: str = ""

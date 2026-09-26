@@ -33,6 +33,7 @@ from app.services import documents, llm, voice  # noqa: E402
 log = logging.getLogger("portage")
 
 DATA_DIR = Path(__file__).resolve().parent.parent / "data"
+EXPERIMENTAL = os.getenv("EXPERIMENTAL") == "1"
 catalog = load_catalog(DATA_DIR)  # validated once at startup: bad data stops the server immediately
 
 app = FastAPI(title="Portage API", version="0.1.0")
@@ -42,6 +43,11 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+if EXPERIMENTAL:  # lab features (claude/afhacks-lab-B.md, -C.md); off on stage unless they're ready
+    from app.explore import router as explore_router
+
+    app.include_router(explore_router)
 
 
 def _category(category_id: str) -> Category:
