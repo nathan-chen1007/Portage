@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { MarketList } from "../components/MarketList.jsx";
-import { FrictionBar } from "../components/FrictionBar.jsx";
+import { FrictionBar, PrizeBar } from "../components/FrictionBar.jsx";
 import { MARKETS } from "./fixtures.js";
 
 describe("FrictionBar", () => {
@@ -67,11 +67,12 @@ describe("MarketList", () => {
     expect(screen.getByText("CUSMA does not exempt Section 338 tariffs")).toBeInTheDocument();
   });
 
-  it("drops an unavailable input and re-weights the rest, saying so", () => {
+  it("the opportunity bar drops an unavailable input and re-weights the rest, saying so", () => {
     const markets = [
       { ...MARKETS[0], overall: 70, opportunity: 64.7, opportunity_components: { demand: 1, price: null, growth: 0.2, foothold: 0 } },
     ];
-    render(<MarketList markets={markets} kind="goods" selected={null} onSelect={() => {}} view="opportunity" />);
+    // The cards no longer draw bars (simplified UI); the opportunity bar lives in the factor detail.
+    render(<PrizeBar market={markets[0]} />);
     expect(parseFloat(screen.getByTestId("prize-demand").style.width)).toBeCloseTo((100 * 0.35) / 0.75, 3);
     expect(screen.queryByTestId("prize-price")).not.toBeInTheDocument();
     expect(screen.getByTestId("prize-unavailable")).toHaveTextContent("price data unavailable");
