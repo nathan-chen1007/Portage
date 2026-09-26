@@ -3,6 +3,7 @@
 import base64
 import logging
 import os
+import re
 from pathlib import Path
 
 from dotenv import load_dotenv
@@ -140,12 +141,14 @@ def outreach(req: OutreachRequest) -> OutreachDraft:
 def make_voice(req: VoiceRequest) -> VoiceResponse:
     """Only called on the founder's approved text: translate to a short spoken script in the partner's
     language (LLM), then speak it in the founder's cloned voice (ElevenLabs)."""
+    language = req.language
     try:
         script = llm.voice_script(req.text, req.language)
-    except Exception as e:
-        raise HTTPException(502, f"Script translation failed: {e}")
+    except Exception as e:  # LLM down: still produce a voice note, in English
+        log.warning("voice script translation failed, speaking the English text: %s", e)
+        script, language = re.sub(r"\[[^\]]*\]", "", req.text).strip(), "en"
     try:
         audio = voice.synthesize(script)
     except Exception as e:
         raise HTTPException(502, f"Voice generation failed: {e}")
-    return VoiceResponse(script=script, language=req.language, audio_base64=base64.b64encode(audio).decode())
+    return VoiceResponse(script=script, language=language, audio_base64=base64.b64encode(audio).decode())
