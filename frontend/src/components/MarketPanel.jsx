@@ -4,11 +4,12 @@ import { OutreachPanel } from "./OutreachPanel.jsx";
 import { ShipTogether } from "./ShipTogether.jsx";
 import { ConfidenceBadge } from "./Confidence.jsx";
 import { UNITY_RED, sampleCohort } from "../lib/together.js";
-import { Badge, CountryMark, ExternalLink, Icon, Meter, ScoreRing, Segmented } from "./ui.jsx";
+import { Badge, CountryMark, ExternalLink, Icon, Meter, Segmented } from "./ui.jsx";
 import {
   COMPONENTS,
   EASE_COLOR,
   PRIZE_COLOR,
+  agreementLine,
   agreementShort,
   earned,
   ease,
@@ -61,33 +62,27 @@ export function MarketPanel({ market, profile, kind, weights, openFactor, onOpen
                   `Rank #${market.rank}`,
                   e.trade_agreement && agreementShort(e.trade_agreement),
                   LANGUAGE_NAMES[e.language] ?? e.language,
-                  market.lead_time_weeks != null &&
-                    (market.lead_time_weeks === 0
-                      ? "Can ship now"
-                      : `${weeks(market.lead_time_weeks)} to first shipment${market.lead_time_estimated ? " (est.)" : ""}`),
                 ]
                   .filter(Boolean)
                   .join(" · ")}
               </p>
-              <div className="mt-3 flex flex-wrap items-center gap-1.5">
-                <ConfidenceBadge level={e.compliance_confidence ?? "verified"} />
-                {!anyProduct && <TogetherChip market={market} kind={kind} onOpen={() => setTab("together")} />}
-              </div>
+              {((e.compliance_confidence ?? "verified") !== "verified" || !anyProduct) && (
+                <div className="mt-3 flex flex-wrap items-center gap-1.5">
+                  {(e.compliance_confidence ?? "verified") !== "verified" && <ConfidenceBadge level={e.compliance_confidence} />}
+                  {!anyProduct && <TogetherChip market={market} kind={kind} onOpen={() => setTab("together")} />}
+                </div>
+              )}
             </>
           )}
         </div>
-        {!blocked && !unscored && (
-          <div className="flex gap-3">
-            {market.overall != null && market.opportunity != null && (
-              <ScoreRing value={market.overall} label="Overall" size={56} color="#171717" hint="Opportunity and ease combined. Higher is better." />
-            )}
-            {market.opportunity != null && (
-              <ScoreRing value={market.opportunity} label="Opportunity" size={56} color={PRIZE_COLOR} hint="How much the market is worth. Higher is better." />
-            )}
-            <ScoreRing value={ease(market)} label="Ease" size={56} color={EASE_COLOR} hint="How clear the path in is (100 minus friction). Higher is better." />
-          </div>
-        )}
+        {!blocked && !unscored && <HeadlineScore market={market} />}
       </header>
+
+      {!blocked && !unscored && (
+        <p className="mt-4 text-[15px] leading-relaxed text-neutral-800" data-testid="why-line">
+          {whyLine(market, kind).text}
+        </p>
+      )}
 
       {unscored ? (
         <div className="mt-6 rounded-xl border border-neutral-200 bg-neutral-50 p-4">
@@ -215,6 +210,54 @@ function Overview({ market, kind, weights, openFactor, onOpenFactor, onExploreFa
       <Sources entry={market.entry} />
     </div>
   );
+}
+
+/** One big number (Overall, or Ease when there's no opportunity data) with the parts in small text. */
+function HeadlineScore({ market }) {
+  const ez = ease(market);
+  const hasOverall = market.overall != null && market.opportunity != null;
+  const main = hasOverall ? market.overall : ez;
+  return (
+    <div className="shrink-0 text-right" title={hasOverall ? "Opportunity and ease combined. Higher is better." : "How clear the path in is. Higher is better."}>
+      <div className="text-4xl font-semibold leading-none tabular-nums tracking-tight">{Math.round(main)}</div>
+      <div className="mt-1.5 text-xs font-medium text-neutral-500">{hasOverall ? "Overall score" : "Ease score"}</div>
+      {hasOverall && (
+        <div className="mt-0.5 text-xs tabular-nums text-neutral-400">
+          Opportunity {Math.round(market.opportunity)} · Ease {Math.round(ez)}
+        </div>
+      )}
+    </div>
+  );
+}
+
+/** The first clause of a market note, if it's short enough to sit in the "why" line. */
+function noteClause(note) {
+  if (!note) return null;
+  const clause = note.split(/:|\(| — |\.\s/)[0].trim().replace(/\.$/, "");
+  return clause.length <= 70 ? clause : null;
+}
+
+/** One "why" sentence from the data: tariff and deal · the market note · time to the first shipment. */
+export function whyLine(market, kind) {
+  const e = market.entry;
+  const parts = [];
+  if (kind === "goods") {
+    const deal = agreementShort(e.trade_agreement || "");
+    if ((e.tariff_rate ?? 0) === 0) parts.push(deal ? `0% tariff under ${deal}` : "No tariff");
+    else parts.push(`${pct(e.tariff_rate)} tariff (${agreementLine(e)})`);
+  } else if (e.trade_agreement) {
+    parts.push(`Covered by ${agreementShort(e.trade_agreement)}`);
+  }
+  const clause = noteClause(e.notes?.[0]);
+  if (clause) parts.push(clause);
+  if (market.lead_time_weeks != null) {
+    parts.push(
+      market.lead_time_weeks === 0
+        ? "you could ship once the paperwork is done"
+        : `about ${weeks(market.lead_time_weeks)} to your first shipment`,
+    );
+  }
+  return { text: parts.join(" · "), usedNote: Boolean(clause) };
 }
 
 /** Market-specific detail for one factor. */
@@ -423,7 +466,7 @@ function TogetherChip({ market, kind, onOpen }) {
           <span key={i} className="h-2.5 w-2.5 rounded-full border border-white" style={{ background: UNITY_RED, opacity: 1 - i * 0.25 }} />
         ))}
       </span>
-      {n} Canadian {kind === "goods" ? "producers" : "companies"} heading here
+      {n} Canadian {kind === "goods" ? "producers" : "companies"} heading here (sample)
     </button>
   );
 }
