@@ -149,6 +149,24 @@ def test_never_verified_never_eased(net):
     assert "not a recommendation" in resp.scale_note
 
 
+def test_market_without_import_weight_serializes(net, client, monkeypatch):
+    real = net.__call__
+
+    def no_weight(url, timeout=None):  # France reports value but no weight (as UN Comtrade does for 2024)
+        doc = real(url, timeout)
+        if "reporterCode=251" in url and "period=2024" in url:
+            for row in doc["data"]:
+                row["netWgt"] = 0
+        return doc
+
+    monkeypatch.setattr(sources, "http_get_json", no_weight)
+    r = client.get("/api/more-markets", params={"category": "honey"})
+    assert r.status_code == 200
+    fr = next(m for m in r.json()["markets"] if m["country_code"] == "FR")
+    assert fr["opportunity"] is not None and fr["opportunity_components"]["price"] is None
+    assert "no price per kg" in fr["opportunity_note"]
+
+
 def test_degraded_market(net, client):
     net.fail_wits.add("356")  # India's tariff source fails
     body = client.get("/api/more-markets", params={"category": "honey"}).json()

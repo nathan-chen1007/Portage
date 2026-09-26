@@ -207,8 +207,8 @@ def _market(hs6: str, cc: str, m: ExtraMarket, got: dict, ca_world: dict | None,
     if not base_world["value_usd"]:
         caveats.append(f"No {trade.BASE_YEAR} figure reported: growth counts as flat.")
     if world["kg"] <= 0:
-        caveats.append(f"{m.country} reported no import weight for {year}, so the price component counts as 0 "
-                       "(the opportunity score is understated).")
+        caveats.append(f"{m.country} reported no import weight for {year}, so there's no price per kg: the price "
+                       "component is left out of the opportunity score.")
     mt = MarketTrade(country_code=cc, import_value_usd=world["value_usd"], import_volume_kg=max(world["kg"], 0.0),
                      import_value_base_usd=base_world["value_usd"], canada_value_usd=from_ca["value_usd"],
                      note=" ".join(caveats), sources=trade_srcs)

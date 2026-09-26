@@ -28,7 +28,7 @@ class MoreMarket(BaseModel):
     tariff: MoreTariff
     tariff_barrier: float | None = None  # the engine's normalize_tariff (0 = no tariff, 1 = 50%+), for context only
     opportunity: float | None = None   # engine's score_opportunity, 0-100
-    opportunity_components: dict[str, float] = {}
+    opportunity_components: dict[str, float | None] = {}  # None = input unavailable (engine drops it)
     opportunity_facts: OpportunityFacts | None = None
     opportunity_status: Literal["ok", "pending", "unavailable"] = "unavailable"
     opportunity_note: str = ""
