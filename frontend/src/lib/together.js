@@ -114,7 +114,6 @@ export function sharedCosts(market, kind) {
   }
   const rows = [
     { label: "Customs broker", solo: 450 },
-    { label: "Export certificate and inspection", solo: 300 },
   ];
   const text = market.entry.compliance_requirements.map((r) => r.name).join(" ").toLowerCase();
   if (/list|registration|register/.test(text)) rows.push({ label: "Registration paperwork (consultant)", solo: 1200 });

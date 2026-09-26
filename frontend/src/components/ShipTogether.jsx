@@ -58,11 +58,11 @@ export function ShipTogether({ market, kind, profile }) {
           </span>
         </div>
         <h3 className="mt-3 text-2xl font-semibold tracking-tight">
-          <span style={{ color: UNITY_RED }}>Canada</span> is stronger together.
+          Growing <span style={{ color: UNITY_RED }}>Canada</span>, together.
         </h3>
         <p className="mt-1 max-w-xl text-sm text-neutral-600">
           {goods
-            ? `One small producer can't fill a container. ${withMe} Canadian producers heading to ${country} can, and they split the broker, the certificates and the freight.`
+            ? `One small producer can't fill a container. ${withMe} Canadian producers heading to ${country} can, and they split the broker and the freight.`
             : `One startup can't justify a local office in ${country}. ${withMe} Canadian software companies selling there can share one, and split the legal and compliance costs.`}
         </p>
 
@@ -384,7 +384,7 @@ function FreightQuote({ market, cohort, myKg, myProvince, category }) {
           </ul>
           <p className="mt-2 text-xs text-neutral-500">{fw.confirm_note}</p>
           <p className="mt-1 text-[11px] text-neutral-400">
-            Listed from the CIFFA 2024 membership directory, as of {fw.as_of}. Public company pages only. Portage isn't paid by these forwarders.
+            Listed from the CIFFA 2024 membership directory, as of {fw.as_of}. Public company pages only. Portage isn't paid to list these forwarders.
           </p>
         </div>
       )}
