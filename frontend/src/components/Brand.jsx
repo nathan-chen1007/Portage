@@ -31,7 +31,7 @@ export function Arrow({ className = "h-4 w-4" }) {
   );
 }
 
-/** Small mono eyebrow label above section titles. */
-export function Eyebrow({ children, className = "text-accent" }) {
-  return <p className={`font-mono text-[11px] font-medium uppercase tracking-[0.2em] ${className}`}>{children}</p>;
+/** Small uppercase label above section titles. */
+export function Eyebrow({ children, className = "text-neutral-500" }) {
+  return <p className={`text-xs font-semibold uppercase tracking-wider ${className}`}>{children}</p>;
 }

@@ -4,10 +4,6 @@
   --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   --color-accent: #b45309;
   --color-accent-soft: #fef3c7;
-  --font-display: "Instrument Serif", ui-serif, Georgia, serif;
-  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
-  --color-paper: #fbfaf7;
-  --color-canada: #d52b1e;
 }
 
 html {
@@ -249,64 +245,24 @@ body {
 }
 
 /* ---------- marketing site ---------- */
-.hero-glow {
-  background:
-    radial-gradient(38rem 26rem at 8% 0%, rgba(245, 158, 11, 0.16), transparent 62%),
-    radial-gradient(34rem 24rem at 92% 12%, rgba(213, 43, 30, 0.1), transparent 60%),
-    radial-gradient(40rem 28rem at 60% 100%, rgba(42, 120, 214, 0.08), transparent 62%);
-  mask-image: linear-gradient(to bottom, #000 55%, transparent);
-}
-.dot-grid {
-  background-image: radial-gradient(rgba(23, 23, 23, 0.08) 1px, transparent 1px);
-  background-size: 22px 22px;
-  mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 30%, transparent 75%);
+.grid-bg {
+  background-image:
+    linear-gradient(to right, rgba(23, 23, 23, 0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(23, 23, 23, 0.045) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse 80% 70% at 50% 0%, #000 40%, transparent 85%);
 }
 .band-glow {
-  background:
-    radial-gradient(30rem 20rem at 100% 0%, rgba(245, 158, 11, 0.28), transparent 60%),
-    radial-gradient(26rem 18rem at 0% 100%, rgba(213, 43, 30, 0.25), transparent 60%);
+  background: radial-gradient(34rem 22rem at 100% 0%, rgba(213, 43, 30, 0.22), transparent 60%);
 }
-.text-sheen {
-  background: linear-gradient(100deg, #b45309 0%, #d52b1e 55%, #b45309 100%);
-  background-size: 200% 100%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  animation: sheen 6s ease-in-out infinite;
+.card-hover {
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
 }
-@keyframes sheen {
-  0%, 100% { background-position: 0% 0; }
-  50% { background-position: 100% 0; }
-}
-.lift {
-  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s ease;
-}
-.lift:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 22px 44px -22px rgba(15, 23, 42, 0.28);
-}
-.float-slow {
-  animation: float-slow 7s ease-in-out infinite;
-}
-@keyframes float-slow {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
-}
-.pulse-ring {
-  animation: pulse-ring 2.4s ease-out infinite;
-  transform-box: fill-box;
-  transform-origin: center;
-}
-@keyframes pulse-ring {
-  0% { transform: scale(0.8); opacity: 0.35; }
-  100% { transform: scale(1.8); opacity: 0; }
+.card-hover:hover {
+  box-shadow: 0 10px 30px -14px rgba(0, 0, 0, 0.2);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .text-sheen,
-  .float-slow,
-  .pulse-ring,
-  .lift,
   .reveal,
   .reveal-left,
   .reveal-panel,
