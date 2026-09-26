@@ -48,7 +48,7 @@ const ICEWINE_KINDS = ["Estate winery", "Family winery", "Icewine producer", "Cr
 // Goods sample groups per curated category (honey keeps its original seed, so its cohort is unchanged).
 const GOODS = {
   honey: { places: GOODS_PLACES, kinds: GOODS_KINDS, seed: "goods", kgBase: 1, kgSpan: 3.5, me: "Your apiary" },
-  icewine: { places: ICEWINE_PLACES, kinds: ICEWINE_KINDS, seed: "icewine", kgBase: 0.4, kgSpan: 1.6, me: "Your winery" },
+  icewine: { places: ICEWINE_PLACES, kinds: ICEWINE_KINDS, seed: "icewine", kgBase: 1, kgSpan: 3, me: "Your winery" },
 };
 
 /** Name for the founder's own business in the sample group. */
@@ -88,7 +88,7 @@ export function sampleCohort(market, kind, category = "honey") {
       name: kinds[Math.floor(rnd() * kinds.length)],
       town,
       prov,
-      kg: goods ? Math.round((g.kgBase + rnd() * g.kgSpan) * 10) * 100 : null, // honey 1-4.5 t, icewine 0.4-2 t
+      kg: goods ? Math.round((g.kgBase + rnd() * g.kgSpan) * 10) * 100 : null, // honey 1-4.5 t, icewine 1-4 t (cased)
       joinedDaysAgo: 1 + Math.floor(rnd() * 20),
     });
   }

@@ -83,12 +83,16 @@ export function ShipTogether({ market, kind, profile }) {
               label="Freight per kg"
               value={`$${pooledPerKg.toFixed(2)}`}
               sub={
-                <>
-                  <span className="line-through">${f.solo.toFixed(2)} alone</span> ·{" "}
-                  <span className="font-semibold" style={{ color: UNITY_RED }}>
-                    −{Math.round(saving * 100)}%
-                  </span>
-                </>
+                saving > 0 ? (
+                  <>
+                    <span className="line-through">${f.solo.toFixed(2)} alone</span> ·{" "}
+                    <span className="font-semibold" style={{ color: UNITY_RED }}>
+                      −{Math.round(saving * 100)}%
+                    </span>
+                  </>
+                ) : (
+                  <>${f.solo.toFixed(2)} alone · no saving until the container fills up</>
+                )
               }
             />
           </>
