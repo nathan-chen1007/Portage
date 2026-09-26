@@ -72,6 +72,7 @@ describe("App", () => {
     render(<App />);
     await openHoney();
     expect(screen.queryByText("CUKTCA origin declaration")).not.toBeInTheDocument();
+    await userEvent.click(screen.getByRole("button", { name: "See how the score is calculated" }));
     await userEvent.click(screen.getByRole("button", { name: /Compliance/, expanded: false }));
     expect(await screen.findByText("CUKTCA origin declaration")).toBeInTheDocument();
   });

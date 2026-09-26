@@ -127,6 +127,11 @@ export function MarketPanel({ market, profile, kind, weights, openFactor, onOpen
 }
 
 function Overview({ market, kind, weights, openFactor, onOpenFactor, onExploreFactor }) {
+  // The plain answer first; the six-factor breakdown sits behind "See how the score is calculated".
+  const [showCalc, setShowCalc] = useState(Boolean(openFactor));
+  useEffect(() => {
+    if (openFactor) setShowCalc(true);
+  }, [openFactor]);
   // Each factor shows the ease points it earns out of its weight: a full bar means no barrier there.
   const tiles = [
     ...COMPONENTS.map((c) => {
@@ -146,13 +151,37 @@ function Overview({ market, kind, weights, openFactor, onOpenFactor, onExploreFa
     tiles.push({ key: "opportunity", label: "Opportunity", color: PRIZE_COLOR, value: (market.opportunity ?? 0) / 100, points: market.opportunity ?? 0, max: 100 });
   }
 
+  const { usedNote } = whyLine(market, kind);
+  const notes = usedNote ? market.entry.notes.slice(1) : market.entry.notes;
+
   return (
     <div className="space-y-4">
-      <p
-        className="text-[11px] font-medium uppercase tracking-wide text-neutral-400"
-        title="Each factor earns up to its share of the ease score. A full bar means no barrier. Click a factor for details."
+      <PlainRows market={market} kind={kind} />
+
+      {notes.length > 0 && !showCalc && (
+        <div className="grid gap-3 sm:grid-cols-2">
+          {notes.map((n) => (
+            <p key={n} className="rounded-xl bg-neutral-50 p-3 text-sm text-neutral-600">
+              {n}
+            </p>
+          ))}
+        </div>
+      )}
+
+      <button
+        type="button"
+        onClick={() => setShowCalc((o) => !o)}
+        aria-expanded={showCalc}
+        className="flex items-center gap-1 text-sm font-medium text-neutral-600 hover:text-neutral-900"
       >
-        Score breakdown · click a factor for details
+        {showCalc ? "Hide how the score is calculated" : "See how the score is calculated"}
+        <Icon name="chevron" className={`h-3.5 w-3.5 transition-transform ${showCalc ? "-rotate-90" : "rotate-90"}`} />
+      </button>
+
+      {showCalc && (
+      <div className="fade-up space-y-4">
+      <p className="text-xs text-neutral-500">
+        Each factor earns up to its share of the ease score; a full bar means no barrier there. Click one to see what's behind it.
       </p>
       <div className={`grid grid-cols-2 gap-2 sm:grid-cols-3 ${tiles.length > 5 ? "xl:grid-cols-6" : "xl:grid-cols-5"}`}>
         {tiles.map((t) => {
@@ -176,14 +205,6 @@ function Overview({ market, kind, weights, openFactor, onOpenFactor, onExploreFa
                 {Math.round(t.points)}
                 <span className="ml-1 text-[11px] font-normal text-neutral-400">/ {Math.round(t.max)}</span>
               </span>
-              {t.blocker && (
-                <span
-                  className="absolute -top-2 right-2 rounded-full bg-neutral-900 px-2 py-0.5 text-[10px] font-semibold uppercase leading-none tracking-wide text-white shadow-sm"
-                  title="Costs this market the most points"
-                >
-                  Worst
-                </span>
-              )}
               <Meter value={t.value} color={t.color} className="mt-2" />
             </button>
           );
@@ -198,17 +219,63 @@ function Overview({ market, kind, weights, openFactor, onOpenFactor, onExploreFa
         </div>
       </div>
 
-      {!openFactor && (
-        <div className="grid gap-3 sm:grid-cols-2">
-          {market.entry.notes.map((n) => (
-            <p key={n} className="rounded-xl bg-neutral-50 p-3 text-sm text-neutral-600">
-              {n}
-            </p>
-          ))}
-        </div>
+      </div>
       )}
       <Sources entry={market.entry} />
     </div>
+  );
+}
+
+const pctClean = (x) => pct(x, Math.round(x * 1000) % 10 === 0 ? 0 : 1);
+
+/** Tariff, paperwork and shipping in one line each, with the official source. */
+function PlainRows({ market, kind }) {
+  const e = market.entry;
+  const reqs = e.compliance_requirements ?? [];
+  const lead = market.lead_time_weeks;
+  const goods = kind === "goods";
+  const rows = [
+    {
+      label: "Tariff",
+      value: goods
+        ? `${pctClean(e.tariff_rate ?? 0)}${e.mfn_rate != null && e.mfn_rate > (e.tariff_rate ?? 0) ? ` (${pctClean(e.mfn_rate)} without the trade deal)` : ""}`
+        : "None: software isn't charged duty",
+      extra: agreementLine(e),
+      source: e.sources?.[0],
+    },
+    {
+      label: "Paperwork",
+      value:
+        reqs.length === 0
+          ? "Nothing to file"
+          : `${reqs.length} step${reqs.length === 1 ? "" : "s"}${lead == null ? "" : lead === 0 ? ", ready now" : `, about ${weeks(lead)}`}`,
+      source: reqs.find((r) => r.source)?.source,
+    },
+    {
+      label: "Shipping",
+      value: goods ? e.shipping_route || "–" : "Delivered online",
+      source: goods ? e.shipping_source : null,
+    },
+  ];
+  return (
+    <dl className="divide-y divide-neutral-100 rounded-xl border border-neutral-200">
+      {rows.map((r) => (
+        <div key={r.label} className="flex flex-wrap items-baseline gap-x-4 gap-y-1 px-4 py-3">
+          <dt className="w-24 shrink-0 text-sm text-neutral-500">{r.label}</dt>
+          <dd className="min-w-0 flex-1 text-sm font-medium text-neutral-900">
+            {r.value}
+            {r.extra && <span className="font-normal text-neutral-500"> · {r.extra}</span>}
+          </dd>
+          {r.source && (
+            <dd className="text-xs">
+              <ExternalLink href={r.source} className="text-neutral-400">
+                {hostname(r.source)}
+              </ExternalLink>
+            </dd>
+          )}
+        </div>
+      ))}
+    </dl>
   );
 }
 
