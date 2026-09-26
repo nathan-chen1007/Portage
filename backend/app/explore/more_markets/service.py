@@ -14,9 +14,9 @@ from app.engine.opportunity import score_opportunity
 from app.engine.scoring import normalize_tariff
 from app.explore.lookup import hs, sources, tariffs, trade
 from app.explore.lookup.markets import CANADA_COMTRADE, CANADA_WITS
-from app.explore.more_markets import eu_rules, fetch
+from app.explore.more_markets import fetch
 from app.explore.more_markets.markets import EXTRA_MARKETS, ExtraMarket
-from app.explore.more_markets.schemas import VERIFIED, MoreMarket, MoreMarketsResponse, MoreTariff
+from app.explore.more_markets.schemas import MoreMarket, MoreMarketsResponse, MoreTariff
 from app.models import CategoryTrade, MarketEntry, MarketTrade
 
 log = logging.getLogger("portage.explore.more_markets")
@@ -24,8 +24,6 @@ log = logging.getLogger("portage.explore.more_markets")
 TCS_URL = "https://www.tradecommissioner.gc.ca/"
 EASE_NOTE = ("No ease score: compliance, shipping and country risk aren't verified for this market, and a score "
              "built on missing data would look easier than it is. Confirm with the Trade Commissioner Service.")
-EASE_NOTE_EU = ("No ease score: the requirements are verified (EU rules, same as Germany), but shipping and country "
-                "risk aren't, and this section is not part of the Recommended ranking.")
 FALLBACK_YEAR = trade.YEAR - 1  # some markets (e.g. Vietnam, UAE) haven't reported the latest year to UN Comtrade yet
 SCALE_NOTE = ("Tariffs and trade data only. The opportunity score (0-100) measures market size, price after tariff, "
               "growth and Canada's current share (UN Comtrade). It is not a recommendation and can't be compared "
@@ -227,6 +225,15 @@ def _market(hs6: str, cc: str, m: ExtraMarket, got: dict, ca_world: dict | None,
     return out
 
 
+def main_ranking_codes(hs6: str) -> set[str]:
+    """Markets already in the main (verified) ranking for a curated product with this HS code: never repeated here."""
+    from app.explore.lookup.service import base_catalog
+
+    cat = base_catalog()
+    ids = {c.id for c in cat.categories.values() if c.kind == "goods" and c.hs_code and hs.normalize(c.hs_code) == hs6}
+    return {m.country_code for m in cat.markets if m.category in ids}
+
+
 def _degraded(cc: str, m: ExtraMarket, why: str) -> MoreMarket:
     return MoreMarket(country_code=cc, country=m.country, agreement_in_force=m.agreement,
                       tariff=MoreTariff(status="unavailable", note=f"Tariff unavailable: {why}"),
@@ -250,16 +257,12 @@ def more_markets(hs6: str, category: str | None = None, timeout: float | None = 
         ca_world = None
 
     rows: list[MoreMarket] = []
+    in_main = main_ranking_codes(hs6)  # e.g. FR/NL/IT are fully scored in the honey and icewine rankings
     for cc, m in EXTRA_MARKETS.items():
+        if cc in in_main:
+            continue
         try:
-            row = _market(hs6, cc, m, got, ca_world, ca_origin, today)
-            reqs = eu_rules.requirements_for(hs6, cc)  # FR/NL/IT on a curated product: EU rules, same as Germany
-            if reqs:
-                row.requirements, row.compliance_confidence, row.verified = reqs, "verified", True
-                row.badge, row.compliance_note = VERIFIED, eu_rules.EU_NOTE
-                row.ease_note = EASE_NOTE_EU
-                row.sources += [r.source for r in reqs if r.source not in row.sources]
-            rows.append(row)
+            rows.append(_market(hs6, cc, m, got, ca_world, ca_origin, today))
         except Exception as e:  # one broken market never breaks the section
             log.exception("more-markets: %s/%s failed", hs6, cc)
             rows.append(_degraded(cc, m, f"market data could not be assembled ({type(e).__name__})."))

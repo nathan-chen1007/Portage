@@ -94,20 +94,20 @@ def by_code(resp) -> dict:
 
 
 def test_cache_miss_then_hit(net):
-    first = service.more_markets("040900", timeout=10)
+    first = service.more_markets("170220", timeout=10)
     assert {m.tariff.origin for m in first.markets} == {"live"}
-    assert net.calls > 0 and service.cache_complete("040900")
-    assert any(fetch.CACHE_DIR.glob("tariff-040900-918-mfn.json"))
+    assert net.calls > 0 and service.cache_complete("170220")
+    assert any(fetch.CACHE_DIR.glob("tariff-170220-918-mfn.json"))
     net.down = True  # a second request must not need the network
     calls = net.calls
-    second = service.more_markets("040900", timeout=10)
+    second = service.more_markets("170220", timeout=10)
     assert net.calls == calls
     assert {m.tariff.origin for m in second.markets} == {"cache"}
     assert [m.opportunity for m in second.markets] == [m.opportunity for m in first.markets]
 
 
 def test_eu_preference_and_mfn_only(net):
-    r = by_code(service.more_markets("040900", timeout=10))
+    r = by_code(service.more_markets("170220", timeout=10))
     for cc in ("FR", "NL", "IT"):  # one EU call serves all three
         assert r[cc].tariff.applied == 0.0 and r[cc].tariff.mfn == pytest.approx(0.173)
         assert r[cc].tariff.agreement == "CETA" and r[cc].tariff.year == 2021
@@ -120,7 +120,7 @@ def test_eu_preference_and_mfn_only(net):
 
 def test_latest_year_missing_falls_back_one_year(net):
     net.no_2024.add("704")  # Vietnam
-    r = by_code(service.more_markets("040900", timeout=10))
+    r = by_code(service.more_markets("170220", timeout=10))
     assert r["VN"].opportunity is not None and r["VN"].opportunity_facts.year == 2023
     assert "2023 figures are used" in r["VN"].opportunity_note
     assert any("period=2023" in s for s in r["VN"].sources)
@@ -129,7 +129,7 @@ def test_latest_year_missing_falls_back_one_year(net):
 
 def test_old_percentage_superseded_by_specific_duty_is_unavailable(net):
     net.specific.add("784")  # UAE: 0% in 2014, specific duty only since 2021
-    r = by_code(service.more_markets("040900", timeout=10))
+    r = by_code(service.more_markets("170220", timeout=10))
     ae = r["AE"]
     assert ae.tariff.status == "unavailable" and ae.tariff.applied is None
     assert "since 2021" in ae.tariff.note and "0%, 2014" in ae.tariff.note
@@ -137,16 +137,11 @@ def test_old_percentage_superseded_by_specific_duty_is_unavailable(net):
     assert r["FR"].tariff.status == "ok"
 
 
-def test_never_eased_and_only_eu_markets_of_curated_products_verified(net):
-    resp = service.more_markets("040900", timeout=10)
+def test_never_verified_never_eased(net):
+    resp = service.more_markets("170220", timeout=10)
     assert [m.country_code for m in resp.markets] != [] and len(resp.markets) == 8
     for m in resp.markets:
-        if m.country_code in ("FR", "NL", "IT"):  # honey is curated: EU rules, same as Germany
-            assert m.compliance_confidence == "verified" and m.verified is True and m.badge == "Verified"
-            assert m.compliance_note == "EU rules, same as Germany" and m.requirements
-        else:
-            assert m.compliance_confidence == "unknown" and m.verified is False and m.badge == NOT_VERIFIED
-            assert m.requirements == []
+        assert m.compliance_confidence == "unknown" and m.verified is False and m.badge == NOT_VERIFIED
         assert m.ease is None and m.overall is None and "No ease score" in m.ease_note
         assert 0 <= m.opportunity <= 100 and set(m.opportunity_components) == {"demand", "price", "growth", "foothold"}
     opps = [m.opportunity for m in resp.markets]
@@ -165,7 +160,7 @@ def test_market_without_import_weight_serializes(net, client, monkeypatch):
         return doc
 
     monkeypatch.setattr(sources, "http_get_json", no_weight)
-    r = client.get("/api/more-markets", params={"category": "honey"})
+    r = client.get("/api/more-markets", params={"hs6": "170220"})
     assert r.status_code == 200
     fr = next(m for m in r.json()["markets"] if m["country_code"] == "FR")
     assert fr["opportunity"] is not None and fr["opportunity_components"]["price"] is None
@@ -174,19 +169,19 @@ def test_market_without_import_weight_serializes(net, client, monkeypatch):
 
 def test_degraded_market(net, client):
     net.fail_wits.add("356")  # India's tariff source fails
-    body = client.get("/api/more-markets", params={"category": "honey"}).json()
+    body = client.get("/api/more-markets", params={"hs6": "170220"}).json()
     rows = {m["country_code"]: m for m in body["markets"]}
     assert len(rows) == 8
     assert rows["IN"]["tariff"]["status"] == "unavailable" and rows["IN"]["tariff"]["note"].startswith("Tariff unavailable")
     assert rows["IN"]["opportunity"] is None and rows["IN"]["opportunity_status"] == "unavailable"
     assert body["markets"][-1]["country_code"] == "IN"  # unscored markets go last
     assert rows["FR"]["tariff"]["status"] == "ok" and rows["FR"]["opportunity"] is not None
-    assert not any(fetch.CACHE_DIR.glob("tariff-040900-356-*.json"))  # errors are never cached
+    assert not any(fetch.CACHE_DIR.glob("tariff-170220-356-*.json"))  # errors are never cached
 
 
 def test_everything_down_still_answers(net, client):
     net.down = True
-    r = client.get("/api/more-markets", params={"hs6": "0409.00"})
+    r = client.get("/api/more-markets", params={"hs6": "1702.20"})
     assert r.status_code == 200
     assert {m["tariff"]["status"] for m in r.json()["markets"]} <= {"unavailable", "pending"}
 
@@ -200,7 +195,7 @@ def test_one_market_crash_degrades_only_that_market(net, monkeypatch):
         return real(hs6, cc, *a)
 
     monkeypatch.setattr(service, "_market", boom)
-    r = by_code(service.more_markets("040900", timeout=10))
+    r = by_code(service.more_markets("170220", timeout=10))
     assert r["SG"].tariff.status == "unavailable" and r["FR"].tariff.status == "ok"
 
 
@@ -212,7 +207,7 @@ def test_bad_input_is_422(client):
 
 def test_no_effect_on_curated_paths_or_main_markets(net, client):
     before = curated_build()
-    assert client.get("/api/more-markets", params={"category": "honey"}).status_code == 200
+    assert client.get("/api/more-markets", params={"hs6": "170220"}).status_code == 200
     assert curated_build() == before
     assert set(lookup_markets.MARKETS) == {"GB", "JP", "AU", "DE", "CN", "KR", "US", "MX"}
     assert not set(EXTRA_MARKETS) & set(lookup_markets.MARKETS)
@@ -225,26 +220,19 @@ def test_committed_cache_serves_demo_products_offline():
         assert service.cache_complete(code), f"HS {code} cache incomplete: run the prewarm"
         resp = service.more_markets(code, timeout=0.5)
         assert {m.tariff.origin for m in resp.markets} == {"cache"}
-        assert len(resp.markets) == 8
-        assert sum(m.tariff.status in ("ok", "mfn_only") for m in resp.markets) >= 6
+        n = 5 if code in CATEGORY_HS6.values() else 8  # FR/NL/IT are in the main honey and icewine rankings
+        assert len(resp.markets) == n
+        assert sum(m.tariff.status in ("ok", "mfn_only") for m in resp.markets) >= n - 2
 
 
 @pytest.mark.parametrize("hs6,category", [("040900", "honey"), ("220421", "icewine")])
-def test_eu_markets_reuse_germanys_verified_rules_plus_national_language(net, hs6, category):
-    from app.explore.more_markets import eu_rules
-    from app.explore.lookup.service import base_catalog
-
-    de = base_catalog().market(category, "DE")
-    r = by_code(service.more_markets(hs6, category=category, timeout=10))
-    for cc, lang in (("FR", "French"), ("NL", "Dutch"), ("IT", "Italian")):
-        reqs = r[cc].requirements
-        assert [q.name for q in reqs[:-1]] == [q.name for q in de.compliance_requirements]
-        assert reqs[-1].name == f"{lang}-language labelling" and reqs[-1].source.startswith("https://")
-        assert all(q.confidence == "verified" for q in reqs)
-        assert "German-language" not in " ".join(q.detail for q in reqs)
-        assert r[cc].ease is None and r[cc].overall is None
-    for cc in ("VN", "SG", "NZ", "IN", "AE"):
-        assert r[cc].verified is False and r[cc].requirements == []
+def test_markets_in_the_main_ranking_are_not_repeated(net, client, hs6, category):
+    """France, the Netherlands and Italy are fully scored in the honey and icewine rankings, so they leave this section."""
+    body = client.get("/api/more-markets", params={"category": category}).json()
+    codes = [m["country_code"] for m in body["markets"]]
+    assert sorted(codes) == ["AE", "IN", "NZ", "SG", "VN"]
+    assert all(m["compliance_confidence"] == "unknown" and m["badge"] == NOT_VERIFIED for m in body["markets"])
+    assert all(m["ease"] is None and m["overall"] is None for m in body["markets"])
 
 
 def test_non_curated_products_stay_unverified_everywhere(net):
