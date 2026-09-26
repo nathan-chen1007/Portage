@@ -92,6 +92,53 @@ class CountryFacts(BaseModel):
     as_of: str
 
 
+class MarketTrade(BaseModel):
+    """One market's imports of the category's product (UN Comtrade), for the opportunity score."""
+
+    country_code: str = Field(min_length=2, max_length=2)
+    import_value_usd: float = Field(ge=0)
+    import_volume_kg: float = Field(ge=0)
+    import_value_base_usd: float = Field(ge=0, description="Imports in the base year, for the growth trend")
+    canada_value_usd: float = Field(0, ge=0, description="Imports from Canada in the latest year")
+    note: str = ""
+    sources: list[str] = Field(min_length=1)
+
+
+class CategoryTrade(BaseModel):
+    """Trade data for one goods category (data/opportunity.json)."""
+
+    category: str
+    hs_code: str
+    year: int
+    base_year: int
+    canada_export_value_usd: float = Field(gt=0)
+    canada_export_volume_kg: float = Field(gt=0)
+    canada_export_source: str
+    description: str = ""
+    as_of: str
+    markets: list[MarketTrade]
+
+    @property
+    def canada_unit_value(self) -> float:
+        return self.canada_export_value_usd / self.canada_export_volume_kg
+
+
+class OpportunityFacts(BaseModel):
+    """The numbers behind a market's opportunity score, ready to display."""
+
+    year: int
+    import_value_usd: float
+    import_volume_kg: float
+    unit_value_usd_kg: float = Field(description="Average price the market pays for imports, USD/kg")
+    net_unit_value_usd_kg: float = Field(description="That price after the tariff a Canadian exporter pays")
+    canada_unit_value_usd_kg: float = Field(description="Canada's average export price, USD/kg")
+    growth_rate: float = Field(description="Compound annual growth of imports over the period (0.05 = 5%/yr)")
+    growth_years: str = Field(description="e.g. '2019–2024'")
+    canada_share: float = Field(description="Canada's share of the market's imports (0.12 = 12%)")
+    note: str = ""
+    sources: list[str]
+
+
 class Middleman(BaseModel):
     """A real company (or government service) that can get the product into the market."""
 
@@ -126,17 +173,24 @@ class Weights(BaseModel):
     tax: float = Field(0.10, ge=0)
 
 
+SortBy = Literal["overall", "friction", "opportunity"]
+
+
 class ScoredMarket(BaseModel):
     country: str
     country_code: str
     status: MarketStatus
     status_note: str = ""
     score: float | None = Field(description="Friction 0-100, lower = easier. null when the market is blocked")
-    rank: int = Field(description="1 = easiest. Blocked markets come after every open market")
+    opportunity: float | None = Field(None, description="Opportunity 0-100, higher = more worth entering. null when blocked or no trade data (services)")
+    overall: float | None = Field(None, description="Recommendation 0-100, higher = go here first: opportunity^a x ease^(1-a), ease = 100 - friction. Equals ease when opportunity is unavailable. null when blocked")
+    rank: int = Field(description="1 = best under the requested sort. Blocked markets come after every open market")
     components: dict[Component, float] = Field(description="Each blocker normalized to 0-1, before weighting. Empty if blocked")
     factors: dict[str, float] = Field(default_factory=dict, description="The sub-scores (0-1) behind each component, for the 'why this score' view. Empty if blocked")
     breakdown: dict[Component, float] = Field(description="Each blocker's weighted points (sums to score). Empty if blocked")
     top_blocker: Component | None = Field(description="The component contributing most, or null if the score is ~0 or blocked")
+    opportunity_components: dict[str, float] = Field(default_factory=dict, description="demand, price, growth, foothold, each 0-1. Empty when unavailable")
+    opportunity_facts: OpportunityFacts | None = None
     lead_time_weeks: float = Field(0, description="Weeks before the first legal shipment (longest single step; steps run in parallel)")
     lead_time_estimated: bool = Field(False, description="True if that longest step is our estimate rather than an official figure")
     entry: MarketEntry
@@ -171,12 +225,15 @@ class AnalyzeResponse(BaseModel):
     profile: BusinessProfile
     category: Category | None
     markets: list[ScoredMarket]
+    opportunity_available: bool = Field(False, description="False for categories without trade data (services): overall = ease")
     mode: Literal["llm", "offline"] = Field(description="'offline' = keyword fallback because no LLM key is set")
 
 
 class RankRequest(BaseModel):
     category: str
     weights: Weights | None = None
+    sort_by: SortBy = "overall"
+    prize_weight: float = Field(0.5, ge=0, le=1, description="0 = quick wins (ease only), 1 = biggest prize (opportunity only)")
 
 
 class DocumentRequest(BaseModel):

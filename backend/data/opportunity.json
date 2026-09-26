@@ -1,0 +1,106 @@
+[
+  {
+    "category": "honey",
+    "hs_code": "0409",
+    "year": 2024,
+    "base_year": 2019,
+    "canada_export_value_usd": 45324698,
+    "canada_export_volume_kg": 11205680,
+    "canada_export_source": "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=124&period=2024&cmdCode=0409&flowCode=X&partnerCode=0",
+    "description": "UN Comtrade annual imports of natural honey (HS 0409), all partners and from Canada, in US dollars as reported by each importing country.",
+    "as_of": "2026-09-26",
+    "markets": [
+      {
+        "country_code": "GB",
+        "import_value_usd": 123067204,
+        "import_volume_kg": 60306599,
+        "import_value_base_usd": 111099825,
+        "canada_value_usd": 1391,
+        "note": "Canada's 2024 share is near zero: the UK is an open market, not an existing one.",
+        "sources": [
+          "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=826&period=2024&cmdCode=0409&flowCode=M&partnerCode=0",
+          "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=826&period=2019&cmdCode=0409&flowCode=M&partnerCode=0",
+          "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=826&period=2024&cmdCode=0409&flowCode=M&partnerCode=124"
+        ]
+      },
+      {
+        "country_code": "JP",
+        "import_value_usd": 136822667,
+        "import_volume_kg": 45415770,
+        "import_value_base_usd": 144505969,
+        "canada_value_usd": 16432085,
+        "note": "Canada already supplies about 12% of Japan's honey imports.",
+        "sources": [
+          "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=392&period=2024&cmdCode=0409&flowCode=M&partnerCode=0",
+          "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=392&period=2019&cmdCode=0409&flowCode=M&partnerCode=0",
+          "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=392&period=2024&cmdCode=0409&flowCode=M&partnerCode=124"
+        ]
+      },
+      {
+        "country_code": "AU",
+        "import_value_usd": 34049681,
+        "import_volume_kg": 9015801,
+        "import_value_base_usd": 36620599,
+        "canada_value_usd": 0,
+        "note": "Australia is a large honey producer and exporter itself; imports are small relative to its own supply.",
+        "sources": [
+          "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=36&period=2024&cmdCode=0409&flowCode=M&partnerCode=0",
+          "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=36&period=2019&cmdCode=0409&flowCode=M&partnerCode=0",
+          "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=36&period=2024&cmdCode=0409&flowCode=M&partnerCode=124"
+        ]
+      },
+      {
+        "country_code": "DE",
+        "import_value_usd": 233972106,
+        "import_volume_kg": 78654929,
+        "import_value_base_usd": 230510438,
+        "canada_value_usd": 12310,
+        "note": "Europe's largest honey importer; most arrives in bulk drums for blending and packing.",
+        "sources": [
+          "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=276&period=2024&cmdCode=0409&flowCode=M&partnerCode=0",
+          "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=276&period=2019&cmdCode=0409&flowCode=M&partnerCode=0",
+          "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=276&period=2024&cmdCode=0409&flowCode=M&partnerCode=124"
+        ]
+      },
+      {
+        "country_code": "CN",
+        "import_value_usd": 48297196,
+        "import_volume_kg": 3172212,
+        "import_value_base_usd": 84850365,
+        "canada_value_usd": 162925,
+        "note": "China's average import price is inflated by premium New Zealand manuka honey, so the price signal overstates what Canadian clover honey would fetch.",
+        "sources": [
+          "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=156&period=2024&cmdCode=0409&flowCode=M&partnerCode=0",
+          "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=156&period=2019&cmdCode=0409&flowCode=M&partnerCode=0",
+          "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=156&period=2024&cmdCode=0409&flowCode=M&partnerCode=124"
+        ]
+      },
+      {
+        "country_code": "KR",
+        "import_value_usd": 17176396,
+        "import_volume_kg": 2137510,
+        "import_value_base_usd": 10127173,
+        "canada_value_usd": 1002479,
+        "note": "Imports are growing fast but are a premium niche; the 243% tariff eats the price premium.",
+        "sources": [
+          "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=410&period=2024&cmdCode=0409&flowCode=M&partnerCode=0",
+          "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=410&period=2019&cmdCode=0409&flowCode=M&partnerCode=0",
+          "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=410&period=2024&cmdCode=0409&flowCode=M&partnerCode=124"
+        ]
+      },
+      {
+        "country_code": "US",
+        "import_value_usd": 650242175,
+        "import_volume_kg": 254927208,
+        "import_value_base_usd": 430080445,
+        "canada_value_usd": 27483897,
+        "note": "2024 data, before the 50% Section 338 tariff took effect (Aug 2026).",
+        "sources": [
+          "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=842&period=2024&cmdCode=0409&flowCode=M&partnerCode=0",
+          "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=842&period=2019&cmdCode=0409&flowCode=M&partnerCode=0",
+          "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=842&period=2024&cmdCode=0409&flowCode=M&partnerCode=124"
+        ]
+      }
+    ]
+  }
+]
