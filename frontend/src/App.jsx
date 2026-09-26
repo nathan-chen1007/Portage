@@ -220,7 +220,7 @@ export default function App() {
   const factorOpen = panel !== "market" && COMPONENTS.some((c) => c.key === panel);
 
   return (
-    <div key={revealKey} className="reveal flex min-h-screen flex-col bg-white text-neutral-900 lg:h-screen lg:overflow-hidden">
+    <div key={revealKey} className="reveal app-bg flex min-h-screen flex-col text-neutral-900 lg:h-screen lg:overflow-hidden">
       {overlay}
       <TopBar
         health={health}
@@ -242,7 +242,7 @@ export default function App() {
 
       <div className="grid min-h-0 flex-1 lg:grid-cols-[27rem_1fr]">
         {/* ---------- left: controls + ranked list ---------- */}
-        <aside className="reveal-left flex min-h-0 flex-col border-neutral-200 lg:border-r">
+        <aside className="reveal-left glass flex min-h-0 flex-col border-neutral-900/[0.06] lg:border-r">
           <div className="border-b border-neutral-100 p-3">
             {result.opportunity_available ? (
               <Segmented
@@ -315,8 +315,8 @@ export default function App() {
         </aside>
 
         {/* ---------- right: market or factor panel ---------- */}
-        <main ref={panelRef} className="scroll-thin min-h-0 overflow-y-auto bg-neutral-50/70 p-4 sm:p-6">
-          <div className="reveal-panel mx-auto max-w-4xl rounded-2xl border border-neutral-200 bg-white p-5 shadow-[0_1px_3px_rgba(0,0,0,0.04)] sm:p-7">
+        <main ref={panelRef} className="scroll-thin min-h-0 overflow-y-auto p-4 sm:p-6">
+          <div className="reveal-panel glass mx-auto max-w-4xl rounded-2xl border border-white/70 p-5 shadow-[0_1px_2px_rgba(15,23,42,0.04),0_12px_40px_-18px_rgba(47,100,224,0.25)] ring-1 ring-neutral-900/[0.05] sm:p-7">
             {factorOpen ? (
               <FactorPanel
                 key={panel}
@@ -352,7 +352,7 @@ export default function App() {
 function TopBar({ health, result, description, setDescription, onAnalyze, onReset, loading }) {
   const { profile, category, mode } = result;
   return (
-    <header className="flex flex-wrap items-center gap-3 border-b border-neutral-200 bg-white/90 px-4 py-2.5 backdrop-blur sm:px-5">
+    <header className="glass flex flex-wrap items-center gap-3 border-b border-neutral-900/[0.06] px-4 py-2.5 sm:px-5">
       <button type="button" onClick={onReset} className="shrink-0" aria-label="New search">
         <Logo />
       </button>

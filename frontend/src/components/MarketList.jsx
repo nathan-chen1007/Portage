@@ -22,12 +22,12 @@ export function MarketList({ markets, kind, selected, onSelect, view = "friction
               aria-pressed={isSel}
               className={`group relative w-full rounded-xl border px-3.5 py-3 text-left transition-all duration-150 ${
                 isSel
-                  ? "border-neutral-900 bg-white shadow-[0_2px_8px_rgba(0,0,0,0.06)]"
-                  : "border-neutral-200/80 bg-white hover:border-neutral-300 hover:shadow-sm"
+                  ? "border-brand/50 bg-brand-50/80 shadow-[0_4px_16px_-8px_rgba(47,100,224,0.45)] ring-1 ring-brand/20"
+                  : "border-neutral-900/[0.07] bg-white/80 hover:border-brand/30 hover:bg-white hover:shadow-sm"
               } ${blocked ? "bg-neutral-50/60" : ""}`}
             >
               <div className="flex items-center gap-3">
-                <span className={`w-5 text-center text-xs tabular-nums ${isSel ? "text-neutral-900" : "text-neutral-400"}`}>
+                <span className={`w-5 text-center text-xs tabular-nums ${isSel ? "font-semibold text-brand" : "text-neutral-400"}`}>
                   {blocked ? "–" : m.rank}
                 </span>
                 <CountryMark code={m.country_code} muted={blocked} />
@@ -37,7 +37,7 @@ export function MarketList({ markets, kind, selected, onSelect, view = "friction
                     {blocked ? <Badge tone="danger">Not accessible</Badge> : <TariffLine entry={m.entry} kind={kind} />}
                   </span>
                 </span>
-                <span className="shrink-0 text-xl font-semibold leading-none tabular-nums tracking-tight">{score == null ? "—" : score.toFixed(0)}</span>
+                <span className={`shrink-0 text-xl font-semibold leading-none tabular-nums tracking-tight ${isSel ? "text-brand" : ""}`}>{score == null ? "—" : score.toFixed(0)}</span>
               </div>
               {blocked ? (
                 <p className="mt-2 line-clamp-2 pl-[4.25rem] text-xs text-neutral-500">{m.status_note}</p>

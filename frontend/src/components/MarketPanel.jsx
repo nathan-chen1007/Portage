@@ -79,7 +79,7 @@ export function MarketPanel({ market, profile, kind, weights, openFactor, onOpen
       </header>
 
       {!blocked && !unscored && (
-        <p className="mt-4 text-[15px] leading-relaxed text-neutral-800" data-testid="why-line">
+        <p className="mt-4 rounded-xl border border-brand/15 bg-brand-50/70 px-4 py-3 text-[15px] leading-relaxed text-neutral-800" data-testid="why-line">
           {whyLine(market, kind).text}
         </p>
       )}
@@ -172,7 +172,7 @@ function Overview({ market, kind, weights, openFactor, onOpenFactor, onExploreFa
         type="button"
         onClick={() => setShowCalc((o) => !o)}
         aria-expanded={showCalc}
-        className="flex items-center gap-1 text-sm font-medium text-neutral-600 hover:text-neutral-900"
+        className="flex items-center gap-1 text-sm font-medium text-brand hover:text-brand-600"
       >
         {showCalc ? "Hide how the score is calculated" : "See how the score is calculated"}
         <Icon name="chevron" className={`h-3.5 w-3.5 transition-transform ${showCalc ? "-rotate-90" : "rotate-90"}`} />
@@ -237,6 +237,7 @@ function PlainRows({ market, kind }) {
   const rows = [
     {
       label: "Tariff",
+      color: "#2a78d6",
       value: goods
         ? `${pctClean(e.tariff_rate ?? 0)}${e.mfn_rate != null && e.mfn_rate > (e.tariff_rate ?? 0) ? ` (${pctClean(e.mfn_rate)} without the trade deal)` : ""}`
         : "None: software isn't charged duty",
@@ -245,6 +246,7 @@ function PlainRows({ market, kind }) {
     },
     {
       label: "Paperwork",
+      color: "#eb6834",
       value:
         reqs.length === 0
           ? "Nothing to file"
@@ -253,15 +255,19 @@ function PlainRows({ market, kind }) {
     },
     {
       label: "Shipping",
+      color: "#1baf7a",
       value: goods ? e.shipping_route || "–" : "Delivered online",
       source: goods ? e.shipping_source : null,
     },
   ];
   return (
-    <dl className="divide-y divide-neutral-100 rounded-xl border border-neutral-200">
+    <dl className="divide-y divide-neutral-900/[0.05] overflow-hidden rounded-xl border border-neutral-900/[0.07] bg-white/70">
       {rows.map((r) => (
         <div key={r.label} className="flex flex-wrap items-baseline gap-x-4 gap-y-1 px-4 py-3">
-          <dt className="w-24 shrink-0 text-sm text-neutral-500">{r.label}</dt>
+          <dt className="flex w-24 shrink-0 items-center gap-2 text-sm text-neutral-500">
+            <span className="h-2 w-2 rounded-full" style={{ background: r.color, boxShadow: `0 0 0 3px ${r.color}22` }} />
+            {r.label}
+          </dt>
           <dd className="min-w-0 flex-1 text-sm font-medium text-neutral-900">
             {r.value}
             {r.extra && <span className="font-normal text-neutral-500"> · {r.extra}</span>}
@@ -286,11 +292,20 @@ function HeadlineScore({ market }) {
   const main = hasOverall ? market.overall : ez;
   return (
     <div className="shrink-0 text-right" title={hasOverall ? "Opportunity and ease combined. Higher is better." : "How clear the path in is. Higher is better."}>
-      <div className="text-4xl font-semibold leading-none tabular-nums tracking-tight">{Math.round(main)}</div>
+      <div className="bg-gradient-to-br from-brand to-teal-600 bg-clip-text text-4xl font-semibold leading-none tabular-nums tracking-tight text-transparent">
+        {Math.round(main)}
+      </div>
       <div className="mt-1.5 text-xs font-medium text-neutral-500">{hasOverall ? "Overall score" : "Ease score"}</div>
       {hasOverall && (
-        <div className="mt-0.5 text-xs tabular-nums text-neutral-400">
-          Opportunity {Math.round(market.opportunity)} · Ease {Math.round(ez)}
+        <div className="mt-1 flex items-center justify-end gap-2.5 text-xs tabular-nums text-neutral-500">
+          <span className="inline-flex items-center gap-1">
+            <span className="h-1.5 w-1.5 rounded-full" style={{ background: PRIZE_COLOR }} />
+            Opportunity {Math.round(market.opportunity)}
+          </span>
+          <span className="inline-flex items-center gap-1">
+            <span className="h-1.5 w-1.5 rounded-full bg-brand" />
+            Ease {Math.round(ez)}
+          </span>
         </div>
       )}
     </div>

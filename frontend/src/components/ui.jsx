@@ -13,10 +13,10 @@ function useGrowIn(value) {
 
 export function Button({ variant = "primary", size = "md", className = "", ...props }) {
   const base =
-    "inline-flex select-none items-center justify-center gap-2 rounded-lg font-medium transition-all duration-150 active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-900 disabled:pointer-events-none disabled:opacity-40";
+    "inline-flex select-none items-center justify-center gap-2 rounded-lg font-medium transition-all duration-150 active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand disabled:pointer-events-none disabled:opacity-40";
   const variants = {
     primary:
-      "bg-neutral-900 text-white shadow-[0_1px_2px_rgba(0,0,0,0.2),inset_0_1px_0_rgba(255,255,255,0.12)] hover:bg-neutral-800",
+      "bg-brand text-white shadow-[0_1px_2px_rgba(37,83,196,0.35),0_4px_14px_-6px_rgba(47,100,224,0.6),inset_0_1px_0_rgba(255,255,255,0.18)] hover:bg-brand-600",
     outline: "border border-neutral-200 bg-white text-neutral-900 shadow-sm hover:border-neutral-300 hover:bg-neutral-50",
     ghost: "text-neutral-600 hover:bg-neutral-100 hover:text-neutral-900",
     soft: "bg-neutral-100 text-neutral-900 hover:bg-neutral-200/70",
@@ -44,7 +44,7 @@ export function Badge({ tone = "neutral", className = "", children }) {
 export function Segmented({ options, value, onChange, label, size = "md", role = "radiogroup", itemRole = "radio", stretch = false }) {
   const pad = size === "sm" ? "px-2.5 py-1 text-xs" : "px-3 py-1.5 text-sm";
   return (
-    <div role={role} aria-label={label} className={`${stretch ? "flex w-full" : "inline-flex"} rounded-lg bg-neutral-100 p-0.5 ring-1 ring-inset ring-neutral-200/60`}>
+    <div role={role} aria-label={label} className={`${stretch ? "flex w-full" : "inline-flex"} rounded-lg bg-neutral-900/[0.04] p-0.5 ring-1 ring-inset ring-neutral-900/[0.06]`}>
       {options.map((o) => {
         const active = value === o.key;
         return (
@@ -57,7 +57,7 @@ export function Segmented({ options, value, onChange, label, size = "md", role =
             title={o.title}
             onClick={() => onChange(o.key)}
             className={`rounded-md font-medium whitespace-nowrap transition-all duration-150 ${stretch ? "flex-1" : ""} ${pad} ${
-              active ? "bg-white text-neutral-900 shadow-[0_1px_2px_rgba(0,0,0,0.08),0_0_0_1px_rgba(0,0,0,0.04)]" : "text-neutral-500 hover:text-neutral-900"
+              active ? "bg-white text-brand shadow-[0_1px_2px_rgba(47,100,224,0.15),0_0_0_1px_rgba(47,100,224,0.12)]" : "text-neutral-500 hover:text-neutral-900"
             }`}
           >
             {o.label}

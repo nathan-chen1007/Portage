@@ -6,6 +6,7 @@ import { Arrow, Eyebrow } from "./Brand.jsx";
 function PageHero({ eyebrow, title, lead }) {
   return (
     <section className="relative overflow-hidden border-b border-neutral-200">
+      <div className="hero-wash pointer-events-none absolute inset-0" aria-hidden />
       <div className="grid-bg pointer-events-none absolute inset-0" aria-hidden />
       <div className="relative mx-auto max-w-4xl px-4 pb-16 pt-16 sm:px-6 sm:pt-20">
         <Eyebrow>{eyebrow}</Eyebrow>
@@ -48,7 +49,7 @@ function CtaBand({ onStart, title = "See which markets fit your business." }) {
         <button
           type="button"
           onClick={onStart}
-          className="inline-flex h-11 items-center gap-2 rounded-xl bg-neutral-900 px-5 text-[15px] font-medium text-white transition-colors hover:bg-neutral-800"
+          className="inline-flex h-11 items-center gap-2 rounded-xl bg-brand px-5 text-[15px] font-medium text-white transition-colors hover:bg-brand-600"
         >
           Find my markets <Arrow className="h-4 w-4" />
         </button>
