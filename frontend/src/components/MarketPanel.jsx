@@ -153,26 +153,27 @@ function Overview({ market, kind, weights, openFactor, onOpenFactor, onExploreFa
               type="button"
               aria-expanded={open}
               onClick={() => onOpenFactor(open ? null : t.key)}
-              className={`rounded-xl border p-3 text-left transition-all duration-150 ${
+              className={`relative rounded-xl border p-3 text-left transition-all duration-150 ${
                 open ? "bg-white shadow-[0_2px_10px_rgba(0,0,0,0.07)]" : "border-neutral-200 bg-white hover:border-neutral-300 hover:shadow-sm"
               }`}
               style={open ? { borderColor: t.color } : undefined}
             >
-              <span className="flex items-center justify-between gap-1 text-xs text-neutral-500">
-                <span className="flex items-center gap-1.5">
-                  <span className="h-2 w-2 rounded-full" style={{ background: t.color }} />
-                  {t.label}
-                </span>
-                {t.blocker && (
-                  <span className="rounded bg-neutral-900 px-1 text-[9px] font-semibold uppercase text-white" title="Costs this market the most points">
-                    Worst
-                  </span>
-                )}
+              <span className="flex items-center gap-1.5 text-xs text-neutral-500">
+                <span className="h-2 w-2 shrink-0 rounded-full" style={{ background: t.color }} />
+                <span className="truncate">{t.label}</span>
               </span>
               <span className="mt-1.5 block text-xl font-semibold tabular-nums">
                 {Math.round(t.points)}
                 <span className="ml-1 text-[11px] font-normal text-neutral-400">/ {Math.round(t.max)}</span>
               </span>
+              {t.blocker && (
+                <span
+                  className="absolute -top-2 right-2 rounded-full bg-neutral-900 px-2 py-0.5 text-[10px] font-semibold uppercase leading-none tracking-wide text-white shadow-sm"
+                  title="Costs this market the most points"
+                >
+                  Worst
+                </span>
+              )}
               <Meter value={t.value} color={t.color} className="mt-2" />
             </button>
           );
