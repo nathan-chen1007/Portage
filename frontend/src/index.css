@@ -9,6 +9,7 @@
 html {
   -webkit-font-smoothing: antialiased;
   background: #fff;
+  font-feature-settings: "cv11", "ss01";
 }
 
 body {
@@ -21,6 +22,76 @@ body {
   margin-left: 2px;
 }
 
+/* ---------- range slider ---------- */
+.slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 20px;
+  background: transparent;
+  cursor: pointer;
+}
+.slider:focus {
+  outline: none;
+}
+.slider::-webkit-slider-runnable-track {
+  height: 6px;
+  border-radius: 999px;
+  background: linear-gradient(to right, var(--c) 0 var(--fill), #e8e8e8 var(--fill) 100%);
+}
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  margin-top: -6px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid var(--c);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.18);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.slider:hover::-webkit-slider-thumb,
+.slider:focus-visible::-webkit-slider-thumb {
+  transform: scale(1.12);
+  box-shadow: 0 0 0 6px color-mix(in srgb, var(--c) 16%, transparent), 0 1px 3px rgba(0, 0, 0, 0.18);
+}
+.slider:active::-webkit-slider-thumb {
+  transform: scale(1.2);
+}
+.slider::-moz-range-track {
+  height: 6px;
+  border-radius: 999px;
+  background: #e8e8e8;
+}
+.slider::-moz-range-progress {
+  height: 6px;
+  border-radius: 999px;
+  background: var(--c);
+}
+.slider::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid var(--c);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.18);
+}
+
+/* ---------- scroll areas ---------- */
+.scroll-thin {
+  scrollbar-width: thin;
+  scrollbar-color: #d4d4d4 transparent;
+}
+.scroll-thin::-webkit-scrollbar {
+  width: 8px;
+}
+.scroll-thin::-webkit-scrollbar-thumb {
+  background: #d4d4d4;
+  border-radius: 8px;
+  border: 2px solid #fff;
+}
+
+/* ---------- motion ---------- */
 @keyframes fade-up {
   from {
     opacity: 0;
@@ -31,12 +102,57 @@ body {
     transform: none;
   }
 }
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes pop {
+  from {
+    opacity: 0;
+    transform: translateY(-4px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
 .fade-up {
   animation: fade-up 0.35s ease-out both;
 }
+.slide-in {
+  animation: slide-in 0.28s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+.pop {
+  animation: pop 0.16s ease-out both;
+  transform-origin: top right;
+}
+
+/* Expand/collapse via grid rows (smooth height without measuring). */
+.expand {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.28s ease;
+}
+.expand[data-open="true"] {
+  grid-template-rows: 1fr;
+}
+.expand > div {
+  overflow: hidden;
+}
 
 @media (prefers-reduced-motion: reduce) {
-  .fade-up {
+  .fade-up,
+  .slide-in,
+  .pop {
     animation: none;
+  }
+  .expand {
+    transition: none;
   }
 }

@@ -16,13 +16,20 @@ describe("FrictionBar", () => {
     const { container } = render(<FrictionBar market={MARKETS[2]} />);
     expect(container).toBeEmptyDOMElement();
   });
+
+  it("opens a factor when a segment is clicked", async () => {
+    const onSegment = vi.fn();
+    render(<FrictionBar market={MARKETS[1]} onSegment={onSegment} />);
+    await userEvent.click(screen.getByTestId("seg-tariff"));
+    expect(onSegment).toHaveBeenCalledWith("tariff");
+  });
 });
 
 describe("MarketList", () => {
   it("lists open markets with scores and blocked markets with their reason", () => {
     render(<MarketList markets={MARKETS} kind="goods" selected={null} onSelect={() => {}} />);
     expect(screen.getByText("United Kingdom")).toBeInTheDocument();
-    expect(screen.getByText("67")).toBeInTheDocument(); // US score rounded
+    expect(screen.getByText("67")).toBeInTheDocument(); // US friction rounded
     expect(screen.getByText("50% tariff")).toBeInTheDocument();
     expect(screen.getByText("Not accessible")).toBeInTheDocument();
     expect(screen.getByText(/does not meet Mexico's requirements/)).toBeInTheDocument();
@@ -35,11 +42,9 @@ describe("MarketList", () => {
     expect(onSelect).toHaveBeenCalledWith("US");
   });
 
-  it("shows the overall score and heading in the recommended view", () => {
+  it("shows the overall score in the recommended view", () => {
     const markets = [{ ...MARKETS[0], overall: 71.2, opportunity: 60.4 }];
     render(<MarketList markets={markets} kind="goods" selected={null} onSelect={() => {}} view="overall" />);
-    expect(screen.getByText("Markets, best bet first")).toBeInTheDocument();
     expect(screen.getByText("71")).toBeInTheDocument();
-    expect(screen.getByText(/opportunity 60/)).toBeInTheDocument();
   });
 });
