@@ -166,15 +166,15 @@ def draft_outreach(profile: BusinessProfile, entry: MarketEntry, middleman: Midd
         "trade_agreement": entry.trade_agreement,
         "tariff_for_canadian_exporter": f"{entry.tariff_rate:.0%}",
         "tariff_without_agreement": f"{entry.mfn_rate:.1%}",
-        "key_requirements": [r.name for r in entry.compliance_requirements],
+        "origin_paperwork_we_can_provide": (f"{entry.trade_agreement.split(' (')[0]} origin declaration"
+                                            if entry.trade_agreement and entry.mfn_rate > entry.tariff_rate else None),
         "recipient": middleman.model_dump(exclude={"source"}),
     }
     system = (
         "You write short, specific cold outreach emails from a small Canadian company to a potential "
         "importer, distributor or partner abroad. Rules: use ONLY the facts in the JSON provided; never "
-        "invent numbers, certifications, customers or prices, and never claim the sender already meets a "
-        "requirement (key_requirements is background only; you may offer to provide the origin paperwork); "
-        "if something useful is missing, write a "
+        "invent numbers, certifications, customers, prices, volumes or capabilities (never claim the sender "
+        "already meets import requirements or can supply consistent volumes); if something useful is missing, write a "
         "placeholder like [your annual volume]. Under 170 words, warm and concrete, one clear ask (a "
         "20-minute call or a sample shipment). Mention the trade-agreement advantage if the tariff is 0%. "
         "If the recipient is a government service or association, ask for introductions to buyers instead. "
