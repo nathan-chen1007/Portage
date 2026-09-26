@@ -8,6 +8,8 @@ if not exist .venv\Scripts\python.exe (
   python -m venv .venv || (echo Python not found on PATH & pause & exit /b 1)
 )
 if not exist .env copy .env.example .env >nul
+set PORT=8000
+for /f "tokens=2 delims==" %%a in ('findstr /b "API_PORT=" .env') do set PORT=%%a
 
 echo Installing requirements...
 .venv\Scripts\python.exe -m pip install -q -r requirements.txt > logs\install.log 2>&1
@@ -18,5 +20,5 @@ echo Running tests...
 type logs\tests.log
 
 echo.
-echo Starting API on http://localhost:8000  (Ctrl+C to stop; auto-reloads on code changes)
-.venv\Scripts\python.exe -m uvicorn app.main:app --port 8000 --reload > logs\server.log 2>&1
+echo Starting API on http://localhost:%PORT%  (Ctrl+C to stop; auto-reloads on code changes)
+.venv\Scripts\python.exe -m uvicorn app.main:app --port %PORT% --reload --timeout-graceful-shutdown 3 > logs\server.log 2>&1
