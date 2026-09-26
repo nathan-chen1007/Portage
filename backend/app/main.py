@@ -1,5 +1,6 @@
 """Portage API."""
 
+import base64
 import logging
 import os
 from pathlib import Path
@@ -23,8 +24,10 @@ from app.models import (  # noqa: E402
     OutreachRequest,
     RankRequest,
     ScoredMarket,
+    VoiceRequest,
+    VoiceResponse,
 )
-from app.services import documents, llm  # noqa: E402
+from app.services import documents, llm, voice  # noqa: E402
 
 log = logging.getLogger("portage")
 
@@ -58,7 +61,13 @@ def _open_market(category_id: str, country_code: str) -> MarketEntry:
 
 @app.get("/health")
 def health() -> dict:
-    return {"status": "ok", "markets": len(catalog.markets), "categories": list(catalog.categories)}
+    return {
+        "status": "ok",
+        "markets": len(catalog.markets),
+        "categories": list(catalog.categories),
+        "llm": llm.is_configured(),
+        "voice": voice.is_configured(),
+    }
 
 
 @app.get("/api/categories", response_model=list[Category])
@@ -125,3 +134,18 @@ def outreach(req: OutreachRequest) -> OutreachDraft:
     except Exception as e:
         log.warning("outreach drafting fell back to the template: %s", e)
         return llm.fallback_outreach(req.profile, entry, mm)
+
+
+@app.post("/api/voice", response_model=VoiceResponse)
+def make_voice(req: VoiceRequest) -> VoiceResponse:
+    """Only called on the founder's approved text: translate to a short spoken script in the partner's
+    language (LLM), then speak it in the founder's cloned voice (ElevenLabs)."""
+    try:
+        script = llm.voice_script(req.text, req.language)
+    except Exception as e:
+        raise HTTPException(502, f"Script translation failed: {e}")
+    try:
+        audio = voice.synthesize(script)
+    except Exception as e:
+        raise HTTPException(502, f"Voice generation failed: {e}")
+    return VoiceResponse(script=script, language=req.language, audio_base64=base64.b64encode(audio).decode())
