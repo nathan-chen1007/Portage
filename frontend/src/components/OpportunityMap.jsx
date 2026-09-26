@@ -37,7 +37,7 @@ export function OpportunityMap({ markets, selected, onSelect }) {
         <span className="text-xs text-neutral-500">Top-right: worth it and easy to enter</span>
       </figcaption>
       <div className="relative">
-        <svg viewBox={`0 0 ${W} ${H}`} className="h-auto w-full" role="img" aria-label="Markets by ease and prize">
+        <svg viewBox={`0 0 ${W} ${H}`} className="h-auto w-full" role="img" aria-label="Markets by ease and opportunity">
           {/* quadrant backdrop and labels */}
           <rect x={x(50)} y={y(100)} width={x(100) - x(50)} height={y(50) - y(100)} fill="#10b981" opacity="0.06" />
           <line x1={x(50)} x2={x(50)} y1={y(0)} y2={y(100)} stroke="#e5e5e5" />
@@ -66,7 +66,7 @@ export function OpportunityMap({ markets, selected, onSelect }) {
           </text>
           <text x={12} y={(y(0) + y(100)) / 2} textAnchor="middle" fontSize="11" className="fill-neutral-500"
             transform={`rotate(-90 12 ${(y(0) + y(100)) / 2})`}>
-            Prize →
+            Opportunity →
           </text>
           {/* points */}
           {pts.map((m) => {

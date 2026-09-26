@@ -14,7 +14,7 @@ import { COMPONENTS, VIEWS } from "./lib/format.js";
 
 export { EXAMPLES } from "./components/Landing.jsx";
 
-const HEADINGS = { overall: "Best bet first", friction: "Easiest first", opportunity: "Biggest prize first" };
+const HEADINGS = { overall: "Best bet first", friction: "Easiest first", opportunity: "Biggest opportunity first" };
 
 export default function App() {
   const [health, setHealth] = useState("checking"); // checking | ok | down

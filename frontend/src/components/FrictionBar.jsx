@@ -56,7 +56,7 @@ export function PrizeBar({ market, thin = false }) {
   const parts = PRIZE_PARTS.map((p) => ({ ...p, points: 100 * p.weight * (oc[p.key] ?? 0), max: 100 * p.weight }));
   const summary = parts.map((p) => `${p.label} ${p.points.toFixed(0)} of ${p.max.toFixed(0)}`).join(", ");
   return (
-    <div className="w-full" aria-label={`Prize ${market.opportunity.toFixed(0)} of 100: ${summary}`}>
+    <div className="w-full" aria-label={`Opportunity ${market.opportunity.toFixed(0)} of 100: ${summary}`}>
       <Track thin={thin}>
         {parts
           .filter((p) => p.points > 0.05)

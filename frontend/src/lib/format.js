@@ -108,7 +108,7 @@ export function componentLabel(key) {
 export const VIEWS = [
   { key: "overall", label: "Recommended", title: "Where to go first", help: "Opportunity and ease combined. Higher is better." },
   { key: "friction", label: "Easiest", title: "Easiest to enter", help: "Ease 0–100: how clear the path in is. Higher means fewer barriers." },
-  { key: "opportunity", label: "Biggest prize", title: "Most worth entering", help: "Import demand, price after tariff, growth and Canada's foothold. Higher is better." },
+  { key: "opportunity", label: "Biggest opportunity", title: "Most worth entering", help: "Import demand, price after tariff, growth and Canada's foothold. Higher is better." },
 ];
 
 /** The number a market shows under a view. Every view reads "higher is better"; falls back to ease when a score isn't available. */

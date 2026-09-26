@@ -14,7 +14,7 @@ function samePreset(a, b) {
   return COMPONENTS.every((c) => Math.abs((a[c.key] ?? 0) - (b[c.key] ?? 0)) < 1e-6);
 }
 
-/** "Tune" button with a popover: presets, per-factor weights, and the quick-wins ↔ biggest-prize balance. */
+/** "Tune" button with a popover: presets, per-factor weights, and the quick-wins ↔ biggest-opportunity balance. */
 export function TunePanel({ weights, onWeights, prize, onPrize, showPrize, busy }) {
   const [open, setOpen] = useState(false);
   const ref = useDismiss(open, () => setOpen(false));
@@ -84,9 +84,9 @@ export function TunePanel({ weights, onWeights, prize, onPrize, showPrize, busy 
             <div className="mt-4 border-t border-neutral-100 pt-4">
               <div className="flex justify-between text-xs font-medium text-neutral-700">
                 <span>Quick wins</span>
-                <span>Biggest prize</span>
+                <span>Biggest opportunity</span>
               </div>
-              <Slider value={prize} onChange={onPrize} step={0.1} label="Quick wins versus biggest prize" className="mt-1" />
+              <Slider value={prize} onChange={onPrize} step={0.1} label="Quick wins versus biggest opportunity" className="mt-1" />
               <p className="text-[11px] text-neutral-400">Balances ease of entry against market size in the Recommended view.</p>
             </div>
           )}

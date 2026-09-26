@@ -79,10 +79,10 @@ export function MarketPanel({ market, profile, kind, weights, openFactor, onOpen
         {!blocked && !unscored && (
           <div className="flex gap-3">
             {market.overall != null && market.opportunity != null && (
-              <ScoreRing value={market.overall} label="Overall" size={56} color="#171717" hint="Prize and ease combined. Higher is better." />
+              <ScoreRing value={market.overall} label="Overall" size={56} color="#171717" hint="Opportunity and ease combined. Higher is better." />
             )}
             {market.opportunity != null && (
-              <ScoreRing value={market.opportunity} label="Prize" size={56} color={PRIZE_COLOR} hint="How much the market is worth. Higher is better." />
+              <ScoreRing value={market.opportunity} label="Opportunity" size={56} color={PRIZE_COLOR} hint="How much the market is worth. Higher is better." />
             )}
             <ScoreRing value={ease(market)} label="Ease" size={56} color={EASE_COLOR} hint="How clear the path in is (100 minus friction). Higher is better." />
           </div>
@@ -148,7 +148,7 @@ function Overview({ market, kind, weights, openFactor, onOpenFactor, onExploreFa
     }),
   ];
   if (market.opportunity_facts) {
-    tiles.push({ key: "opportunity", label: "Prize", color: PRIZE_COLOR, value: (market.opportunity ?? 0) / 100, points: market.opportunity ?? 0, max: 100 });
+    tiles.push({ key: "opportunity", label: "Opportunity", color: PRIZE_COLOR, value: (market.opportunity ?? 0) / 100, points: market.opportunity ?? 0, max: 100 });
   }
 
   return (
@@ -228,7 +228,7 @@ function FactorDetail({ market, kind, factorKey, onExplore }) {
       <div className="mb-3 flex items-center justify-between gap-3">
         <h3 className="flex items-center gap-2 text-sm font-semibold">
           <span className="h-2.5 w-2.5 rounded-full" style={{ background: color }} />
-          {c?.label ?? "Prize"} in {e.country}
+          {c?.label ?? "Opportunity"} in {e.country}
         </h3>
         {c && (
           <button type="button" onClick={onExplore} className="flex items-center gap-1 text-xs font-medium text-neutral-500 hover:text-neutral-900">
