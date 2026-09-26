@@ -1,0 +1,59 @@
+{
+ "hs6": "170220",
+ "country_code": "GB",
+ "fetched_at": "2026-09-26T21:12:23+00:00",
+ "commodities": [
+  "1702201010",
+  "1702201090",
+  "1702209010",
+  "1702209090"
+ ],
+ "requirements": [
+  {
+   "name": "Import control of organic products (UK Trade Tariff)",
+   "tier": 1,
+   "detail": "UK Trade Tariff: 'Import control of organic products'. Only if your goods are covered, present C644: Other certificates: Certificate of Inspection for Organic Products as referred to in Article 33(1)(d) of Regulation (EC) No 834/2007 as retained in UK law.. Otherwise the importer declares the exemption Y929: Particular provisions: Goods not covered by Regulation (EC) No 834/2007 (e.g. non organic goods) as retained in UK Law..",
+   "source": "https://www.trade-tariff.service.gov.uk/api/v2/commodities/1702201010",
+   "lead_time_weeks": 0.0,
+   "lead_time_basis": "estimate",
+   "confidence": "auto_sourced"
+  },
+  {
+   "name": "Proof of origin to claim the preferential tariff (UK Trade Tariff)",
+   "tier": 1,
+   "detail": "UK Trade Tariff rules of origin for UK-Canada Trade Continuity Agreement: accepted proof: Origin declaration.",
+   "source": "https://www.trade-tariff.service.gov.uk/api/v2/rules_of_origin_schemes/170220/CA",
+   "lead_time_weeks": 0.0,
+   "lead_time_basis": "estimate",
+   "confidence": "auto_sourced"
+  }
+ ],
+ "blocked": false,
+ "blocked_note": "",
+ "duties": {
+  "1702201010": {
+   "mfn": "0.30 GBP / 100 kg/net/%sacchar.",
+   "canada": "0.00 %"
+  },
+  "1702201090": {
+   "mfn": "0.30 GBP / 100 kg/net/%sacchar.",
+   "canada": "0.00 %"
+  },
+  "1702209010": {
+   "mfn": "8.00 %",
+   "canada": "0.00 %"
+  },
+  "1702209090": {
+   "mfn": "8.00 %",
+   "canada": "0.00 %"
+  }
+ },
+ "sources": [
+  "https://www.trade-tariff.service.gov.uk/api/v2/headings/1702",
+  "https://www.trade-tariff.service.gov.uk/api/v2/commodities/1702201010",
+  "https://www.trade-tariff.service.gov.uk/api/v2/commodities/1702201090",
+  "https://www.trade-tariff.service.gov.uk/api/v2/commodities/1702209010",
+  "https://www.trade-tariff.service.gov.uk/api/v2/commodities/1702209090",
+  "https://www.trade-tariff.service.gov.uk/api/v2/rules_of_origin_schemes/170220/CA"
+ ]
+}

@@ -3,6 +3,7 @@
 GET /api/explore/compliance/                         products with auto-sourced data
 GET /api/explore/compliance/{hs6}/rank               every market for the product, scored by the curated engine
 GET /api/explore/compliance/{hs6}/{country_code}     one market's requirements, each badged with its confidence
+                                                     (GB: live from the UK Trade Tariff API for any HS6)
 """
 
 from typing import Literal
@@ -12,7 +13,7 @@ from pydantic import BaseModel, Field
 
 from app.engine.opportunity import overall_score
 from app.engine.scoring import score_market
-from app.explore.compliance import service
+from app.explore.compliance import live_uk, service
 from app.models import Confidence, MarketEntry, Requirement, ScoredMarket
 
 router = APIRouter()
@@ -38,10 +39,14 @@ class MarketCompliance(BaseModel):
     country_code: str
     confidence: Confidence = Field(description="auto_sourced when we have data, unknown otherwise")
     status: Literal["open", "blocked", "unknown"]
+    method: Literal["live", "live_cached", "saved", "none"] = Field(
+        "none", description="live = fetched from the official API just now; live_cached = from our cache of it")
+    fetched_at: str | None = None
     status_note: str = ""
     requirements: list[Requirement]
     sources: list[str]
     next_step: str = Field("", description="What the founder should do when we have no data")
+    tariff_note: str = Field("", description="Live markets: the duty the official API lists for goods from Canada")
     market: MarketEntry | None = None
 
 
@@ -81,6 +86,13 @@ def market_compliance(hs6: str, country_code: str) -> MarketCompliance:
     except ValueError as e:
         raise HTTPException(422, str(e)) from e
     cc = country_code.upper()
+    live = service.live_result(hs, cc)
+    if live is not None:
+        return MarketCompliance(
+            hs6=hs, country_code=cc, confidence="auto_sourced", status="blocked" if live.blocked else "open",
+            status_note=live.blocked_note, requirements=live.requirements, sources=live.sources,
+            method="live_cached" if live.from_cache else "live", fetched_at=live.fetched_at,
+            tariff_note=live_uk.tariff_note(live))
     entry = service.auto_market(hs, cc)
     if entry is None:
         return MarketCompliance(
@@ -89,4 +101,4 @@ def market_compliance(hs6: str, country_code: str) -> MarketCompliance:
                       "Commissioner Service (free) before you ship.")
     return MarketCompliance(hs6=hs, country_code=cc, confidence=entry.compliance_confidence, status=entry.status,
                             status_note=entry.status_note, requirements=entry.compliance_requirements,
-                            sources=entry.sources, market=entry)
+                            sources=entry.sources, market=entry, method="saved")

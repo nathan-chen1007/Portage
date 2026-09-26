@@ -1,9 +1,15 @@
-"""Read the saved auto-sourced compliance files (data/auto/*.json). No network calls at request time.
+"""Auto-sourced compliance: LIVE for the UK (any HS6, UK Trade Tariff API, see live_uk.py), saved files for the rest.
+
+Sources, in order:
+  GB      live UK Trade Tariff lookup (cached in data/auto/live/, ~8 s budget); if that fails, the saved row if any
+  others  the saved files (data/auto/index.json + <product>.json, built offline by build.py); no network calls
+Anything else is "no data" (callers show "unknown" and route the founder to the Trade Commissioner Service).
 
 Public API (session C calls these; keep the signatures stable):
 
     auto_requirements(hs6, country_code) -> list[Requirement]
         Every requirement we auto-sourced for that product and market, each with confidence "auto_sourced".
+        For GB this may make live HTTP calls (up to ~8 s the first time, then cached).
         [] when we have no data: use has_auto_data() to tell "no data" (-> show "unknown", route to the
         Trade Commissioner Service) from "sourced, and nothing applies".
     has_auto_data(hs6, country_code) -> bool
@@ -106,12 +112,32 @@ def auto_market(hs6: str, country_code: str) -> MarketEntry | None:
         return None
 
 
+LIVE_MARKETS = ("GB",)
+
+
+def live_result(hs6: str, country_code: str):
+    """The live lookup result (live_uk.LiveResult) for markets with a live official API, else None. Never raises."""
+    if (country_code or "").upper() not in LIVE_MARKETS:
+        return None
+    try:
+        hs = normalize_hs6(hs6)
+        from app.explore.compliance import live_uk
+
+        return live_uk.uk_requirements(hs)
+    except Exception:
+        log.warning("live lookup failed for %s/%s", hs6, country_code, exc_info=True)
+        return None
+
+
 def has_auto_data(hs6: str, country_code: str) -> bool:
-    return auto_market(hs6, country_code) is not None
+    return live_result(hs6, country_code) is not None or auto_market(hs6, country_code) is not None
 
 
 def auto_requirements(hs6: str, country_code: str) -> list[Requirement]:
     """Auto-sourced requirements for one product (HS6) and market (ISO alpha-2). [] when we have no data."""
+    live = live_result(hs6, country_code)
+    if live is not None:
+        return [r.model_copy() for r in live.requirements]
     entry = auto_market(hs6, country_code)
     if entry is None:
         return []
