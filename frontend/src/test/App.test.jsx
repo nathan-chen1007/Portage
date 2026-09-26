@@ -94,7 +94,7 @@ describe("App", () => {
     render(<App />);
     await openHoney();
     await userEvent.click(screen.getByRole("tab", { name: "Ship together" }));
-    expect(screen.getByText(/Stronger together/)).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: /Canada is stronger together/ })).toBeInTheDocument();
     expect(screen.getByText("Preview · sample producers")).toBeInTheDocument();
     await userEvent.click(screen.getByRole("button", { name: "Join this shipment" }));
     expect(await screen.findByText("You're in.")).toBeInTheDocument();

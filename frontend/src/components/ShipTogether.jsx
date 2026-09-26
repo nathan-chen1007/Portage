@@ -56,7 +56,7 @@ export function ShipTogether({ market, kind, profile }) {
           </span>
         </div>
         <h3 className="mt-3 text-2xl font-semibold tracking-tight">
-          Stronger together<span style={{ color: UNITY_RED }}>.</span>
+          <span style={{ color: UNITY_RED }}>Canada</span> is stronger together.
         </h3>
         <p className="mt-1 max-w-xl text-sm text-neutral-600">
           {goods
@@ -164,6 +164,9 @@ export function ShipTogether({ market, kind, profile }) {
                 </svg>
               </div>
               <p className="mt-2 text-sm font-semibold">You're in.</p>
+              <p className="text-xs font-medium" style={{ color: UNITY_RED }}>
+                Canada is stronger together.
+              </p>
               <p className="text-xs text-neutral-500">
                 {withMe} {goods ? "producers" : "companies"} from {new Set([...provinces, profile?.province].filter(Boolean)).size} provinces, one{" "}
                 {goods ? "shipment" : "team"} to {country}.

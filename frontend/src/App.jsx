@@ -423,7 +423,7 @@ function Landing({ health, categories, description, setDescription, onAnalyze, o
                   <span key={i} className="h-3 w-3 rounded-full border-2 border-white" style={{ background: "#d52b1e", opacity: 1 - i * 0.25 }} />
                 ))}
               </span>
-              Stronger together
+              Canada is stronger together
             </p>
             <p className="mt-1 text-sm text-neutral-600">
               Pool a shipment with other Canadian producers heading to the same market, and split the costs no one should carry alone.
