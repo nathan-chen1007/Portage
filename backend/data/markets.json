@@ -342,5 +342,288 @@
       "https://wits.worldbank.org/tariff/trains/en/country/MEX/partner/CAN/product/040900"
     ],
     "as_of": "2026-09-26"
+  },
+  {
+    "category": "b2b_saas",
+    "country": "United States",
+    "country_code": "US",
+    "language": "en",
+    "status": "open",
+    "status_note": "",
+    "tariff_rate": 0.0,
+    "mfn_rate": 0.0,
+    "tariff_note": "Tariffs apply to goods, not software delivered as a service. Section 338 does not reach SaaS.",
+    "trade_agreement": "CUSMA (digital trade chapter bans customs duties on electronic transmissions)",
+    "compliance_requirements": [
+      {
+        "name": "State privacy laws (e.g. CCPA/CPRA)",
+        "tier": 1,
+        "detail": "No single federal privacy law. California and other states impose obligations once revenue or data-volume thresholds are met.",
+        "source": "https://oag.ca.gov/privacy/ccpa"
+      }
+    ],
+    "lpi_customs_score": null,
+    "tax_burden": 0.5,
+    "tax_note": "Many US states tax SaaS. After South Dakota v. Wayfair (2018), a remote seller must register and collect in a state once it crosses that state's economic-nexus threshold.",
+    "notes": [
+      "Enterprise buyers often ask for a SOC 2 report. That's a buyer expectation, not a legal requirement, so it isn't scored here."
+    ],
+    "sources": [
+      "https://oag.ca.gov/privacy/ccpa",
+      "https://www.supremecourt.gov/opinions/17pdf/17-494_j4el.pdf"
+    ],
+    "as_of": "2026-09-26"
+  },
+  {
+    "category": "b2b_saas",
+    "country": "Germany (EU)",
+    "country_code": "DE",
+    "language": "de",
+    "status": "open",
+    "status_note": "",
+    "tariff_rate": 0.0,
+    "mfn_rate": 0.0,
+    "tariff_note": "No tariffs on SaaS.",
+    "trade_agreement": "CETA",
+    "compliance_requirements": [
+      {
+        "name": "GDPR Art. 27 EU representative",
+        "tier": 2,
+        "detail": "A company with no EU establishment that offers services to people in the EU or monitors them must appoint a representative in the EU.",
+        "source": "https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng"
+      },
+      {
+        "name": "GDPR Art. 28 data processing agreement",
+        "tier": 1,
+        "detail": "As a processor for EU business customers, you must sign a data processing agreement containing the Art. 28(3) terms.",
+        "source": "https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng"
+      },
+      {
+        "name": "GDPR Art. 30 records of processing",
+        "tier": 1,
+        "detail": "Keep written records of processing activities.",
+        "source": "https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng"
+      }
+    ],
+    "lpi_customs_score": null,
+    "tax_burden": 0.0,
+    "tax_note": "B2B digital services fall under the EU reverse charge: the German customer accounts for VAT, so no registration is needed.",
+    "notes": [
+      "Advantage for Canada: the EU's adequacy decision for Canada lets personal data flow from the EU to Canadian commercial organizations without Standard Contractual Clauses."
+    ],
+    "sources": [
+      "https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng",
+      "https://commission.europa.eu/law/law-topic/data-protection/international-dimension-data-protection/adequacy-decisions_en"
+    ],
+    "as_of": "2026-09-26"
+  },
+  {
+    "category": "b2b_saas",
+    "country": "United Kingdom",
+    "country_code": "GB",
+    "language": "en",
+    "status": "open",
+    "status_note": "",
+    "tariff_rate": 0.0,
+    "mfn_rate": 0.0,
+    "tariff_note": "No tariffs on SaaS.",
+    "trade_agreement": "Canada-UK Trade Continuity Agreement (CUKTCA)",
+    "compliance_requirements": [
+      {
+        "name": "UK GDPR Art. 27 UK representative",
+        "tier": 2,
+        "detail": "A non-UK company that offers services to people in the UK must appoint a UK representative.",
+        "source": "https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/"
+      },
+      {
+        "name": "UK GDPR Art. 28 processor contract",
+        "tier": 1,
+        "detail": "Processor terms with each UK business customer.",
+        "source": "https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/"
+      },
+      {
+        "name": "UK GDPR records of processing",
+        "tier": 1,
+        "detail": "Keep records of processing activities.",
+        "source": "https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/"
+      }
+    ],
+    "lpi_customs_score": null,
+    "tax_burden": 0.0,
+    "tax_note": "B2B services fall under the UK reverse charge, so no UK VAT registration is needed.",
+    "notes": [
+      "The UK recognizes Canada as adequate for data transfers."
+    ],
+    "sources": [
+      "https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/"
+    ],
+    "as_of": "2026-09-26"
+  },
+  {
+    "category": "b2b_saas",
+    "country": "Japan",
+    "country_code": "JP",
+    "language": "ja",
+    "status": "open",
+    "status_note": "",
+    "tariff_rate": 0.0,
+    "mfn_rate": 0.0,
+    "tariff_note": "No tariffs on SaaS.",
+    "trade_agreement": "CPTPP (electronic commerce chapter)",
+    "compliance_requirements": [
+      {
+        "name": "Act on the Protection of Personal Information (APPI)",
+        "tier": 1,
+        "detail": "Handling rules for personal information, including a breach-reporting duty.",
+        "source": "https://www.ppc.go.jp/en/legal/"
+      },
+      {
+        "name": "APPI cross-border transfer rules",
+        "tier": 1,
+        "detail": "Transferring personal data to Canada requires either customer consent or equivalent protective measures, plus disclosures.",
+        "source": "https://www.ppc.go.jp/en/legal/"
+      }
+    ],
+    "lpi_customs_score": null,
+    "tax_burden": 0.0,
+    "tax_note": "B2B electronic services from foreign providers fall under Japan's reverse charge.",
+    "notes": [],
+    "sources": [
+      "https://www.ppc.go.jp/en/legal/"
+    ],
+    "as_of": "2026-09-26"
+  },
+  {
+    "category": "b2b_saas",
+    "country": "Australia",
+    "country_code": "AU",
+    "language": "en",
+    "status": "open",
+    "status_note": "",
+    "tariff_rate": 0.0,
+    "mfn_rate": 0.0,
+    "tariff_note": "No tariffs on SaaS.",
+    "trade_agreement": "CPTPP (electronic commerce chapter)",
+    "compliance_requirements": [
+      {
+        "name": "Privacy Act 1988 (Australian Privacy Principles)",
+        "tier": 1,
+        "detail": "Applies to organizations carrying on business in Australia (small businesses under AUD 3M turnover are generally exempt). APP 8 covers cross-border disclosure.",
+        "source": "https://www.oaic.gov.au/privacy/privacy-guidance-for-organisations-and-government-agencies/organisations/small-business"
+      }
+    ],
+    "lpi_customs_score": null,
+    "tax_burden": 0.0,
+    "tax_note": "No GST registration is needed when selling only to GST-registered Australian businesses.",
+    "notes": [],
+    "sources": [
+      "https://www.oaic.gov.au/privacy/privacy-guidance-for-organisations-and-government-agencies/organisations/small-business"
+    ],
+    "as_of": "2026-09-26"
+  },
+  {
+    "category": "b2b_saas",
+    "country": "South Korea",
+    "country_code": "KR",
+    "language": "ko",
+    "status": "open",
+    "status_note": "",
+    "tariff_rate": 0.0,
+    "mfn_rate": 0.0,
+    "tariff_note": "No tariffs on SaaS.",
+    "trade_agreement": "Canada-Korea FTA (CKFTA)",
+    "compliance_requirements": [
+      {
+        "name": "Personal Information Protection Act (PIPA)",
+        "tier": 1,
+        "detail": "Korea's comprehensive privacy law, covering consent and notice.",
+        "source": "https://www.pipc.go.kr/eng/user/lgp/law/lawsRegulations.do"
+      },
+      {
+        "name": "PIPA overseas transfer requirements",
+        "tier": 1,
+        "detail": "Transfers of personal data abroad need consent or another legal basis, plus disclosure of the destination country.",
+        "source": "https://www.pipc.go.kr/eng/user/lgp/law/lawsRegulations.do"
+      }
+    ],
+    "lpi_customs_score": null,
+    "tax_burden": 0.0,
+    "tax_note": "B2B services: the Korean business customer handles VAT.",
+    "notes": [
+      "Large foreign companies above PIPA thresholds must also designate a domestic agent."
+    ],
+    "sources": [
+      "https://www.pipc.go.kr/eng/user/lgp/law/lawsRegulations.do"
+    ],
+    "as_of": "2026-09-26"
+  },
+  {
+    "category": "b2b_saas",
+    "country": "Mexico",
+    "country_code": "MX",
+    "language": "es",
+    "status": "open",
+    "status_note": "",
+    "tariff_rate": 0.0,
+    "mfn_rate": 0.0,
+    "tariff_note": "No tariffs on SaaS.",
+    "trade_agreement": "CUSMA (digital trade chapter)",
+    "compliance_requirements": [
+      {
+        "name": "Federal personal data protection law (LFPDPPP, replaced March 2025)",
+        "tier": 1,
+        "detail": "Privacy notice and data-subject rights under Mexico's new 2025 private-sector data protection law.",
+        "source": "https://www.whitecase.com/insight-alert/mexico-enacts-new-data-protection-regime"
+      }
+    ],
+    "lpi_customs_score": null,
+    "tax_burden": 0.0,
+    "tax_note": "Mexico's registration regime for foreign digital services targets B2C sales; B2B customers self-assess.",
+    "notes": [],
+    "sources": [
+      "https://www.whitecase.com/insight-alert/mexico-enacts-new-data-protection-regime"
+    ],
+    "as_of": "2026-09-26"
+  },
+  {
+    "category": "b2b_saas",
+    "country": "China",
+    "country_code": "CN",
+    "language": "zh",
+    "status": "open",
+    "status_note": "",
+    "tariff_rate": 0.0,
+    "mfn_rate": 0.0,
+    "tariff_note": "No tariffs on SaaS, but the licensing barriers below are heavy.",
+    "trade_agreement": null,
+    "compliance_requirements": [
+      {
+        "name": "Personal Information Protection Law (PIPL)",
+        "tier": 2,
+        "detail": "Comprehensive privacy law; foreign processors of data about people in China must designate a representative in China.",
+        "source": "https://digichina.stanford.edu/work/translation-personal-information-protection-law-of-the-peoples-republic-of-china-effective-nov-1-2021/"
+      },
+      {
+        "name": "Cross-border data transfer approval",
+        "tier": 3,
+        "detail": "Exporting personal data needs a CAC security assessment, standard contract filing or certification, depending on volume.",
+        "source": "https://digichina.stanford.edu/work/translation-personal-information-protection-law-of-the-peoples-republic-of-china-effective-nov-1-2021/"
+      },
+      {
+        "name": "ICP licence and mainland hosting",
+        "tier": 3,
+        "detail": "Commercial online services need an ICP licence (B25) and mainland-hosted servers. Historically capped at 50% foreign ownership, with a 2024 pilot lifting the cap in a few regions. Takes 2-6 months.",
+        "source": "https://www.china-briefing.com/news/china-internet-business-licenses-foreign-companies/"
+      }
+    ],
+    "lpi_customs_score": null,
+    "tax_burden": 1.0,
+    "tax_note": "Payments from Chinese customers to a foreign provider typically carry VAT and income tax withholding at source.",
+    "notes": [],
+    "sources": [
+      "https://digichina.stanford.edu/work/translation-personal-information-protection-law-of-the-peoples-republic-of-china-effective-nov-1-2021/",
+      "https://www.china-briefing.com/news/china-internet-business-licenses-foreign-companies/"
+    ],
+    "as_of": "2026-09-26"
   }
 ]
