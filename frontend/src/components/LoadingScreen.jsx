@@ -11,6 +11,7 @@ export const STEPS = [
   { label: "Measuring shipping lanes and customs", ms: 600 },
   { label: "Assessing currency and country risk", ms: 500 },
   { label: "Sizing each market's opportunity", ms: 600 },
+  { label: "Finding Canadian exporters heading your way", ms: 650 },
   { label: "Ranking your markets", ms: 550 },
 ];
 

@@ -89,6 +89,17 @@ describe("App", () => {
     });
   });
 
+  it("lets you join a pooled shipment in the Ship together preview", async () => {
+    vi.stubGlobal("fetch", backend());
+    render(<App />);
+    await openHoney();
+    await userEvent.click(screen.getByRole("tab", { name: "Ship together" }));
+    expect(screen.getByText(/Stronger together/)).toBeInTheDocument();
+    expect(screen.getByText("Preview · sample producers")).toBeInTheDocument();
+    await userEvent.click(screen.getByRole("button", { name: "Join this shipment" }));
+    expect(await screen.findByText("You're in.")).toBeInTheDocument();
+  });
+
   it("shows a blocked market's reason instead of tabs", async () => {
     vi.stubGlobal("fetch", backend());
     render(<App />);

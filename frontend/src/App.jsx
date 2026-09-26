@@ -405,7 +405,7 @@ function Landing({ health, categories, description, setDescription, onAnalyze, o
           </div>
         )}
 
-        <div className="mt-16 grid gap-4 text-left sm:grid-cols-3">
+        <div className="mt-16 grid gap-4 text-left sm:grid-cols-2 lg:grid-cols-4">
           {[
             ["Ranked, not listed", "Every market scored on tariffs, rules, shipping, risk and tax, with the source behind each number."],
             ["Paperwork, drafted", "Origin declarations and data agreements filled from what you told us."],
@@ -416,6 +416,19 @@ function Landing({ health, categories, description, setDescription, onAnalyze, o
               <p className="mt-1 text-sm text-neutral-500">{d}</p>
             </div>
           ))}
+          <div className="rounded-2xl border p-4" style={{ borderColor: "#d52b1e33", background: "linear-gradient(135deg, #fff, #fdf2f1)" }}>
+            <p className="flex items-center gap-2 text-sm font-semibold">
+              <span className="flex -space-x-1" aria-hidden>
+                {[0, 1, 2].map((i) => (
+                  <span key={i} className="h-3 w-3 rounded-full border-2 border-white" style={{ background: "#d52b1e", opacity: 1 - i * 0.25 }} />
+                ))}
+              </span>
+              Stronger together
+            </p>
+            <p className="mt-1 text-sm text-neutral-600">
+              Pool a shipment with other Canadian producers heading to the same market, and split the costs no one should carry alone.
+            </p>
+          </div>
         </div>
       </main>
 

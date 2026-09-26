@@ -17,7 +17,7 @@ body {
   color: #0a0a0a;
 }
 
-/* Score-bar segments get a 2px surface gap between fills. */
+/* Friction-bar segments get a 2px surface gap between fills. */
 .seg + .seg {
   margin-left: 2px;
 }
@@ -204,6 +204,24 @@ body {
   to { transform: scale(1); opacity: 1; }
 }
 
+/* ---------- ship together ---------- */
+.flow {
+  stroke-dasharray: 5 14;
+  animation: flow 1.6s linear infinite;
+  opacity: 0.55;
+}
+@keyframes flow {
+  to { stroke-dashoffset: -38; }
+}
+.node-pop {
+  animation: tick-pop 0.35s cubic-bezier(0.3, 1.6, 0.5, 1) both;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.fill-grow {
+  transition: width 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
 /* ---------- reveal after loading ---------- */
 .reveal {
   animation: fade-in 0.4s ease-out both;
@@ -236,6 +254,8 @@ body {
   .loader-arc,
   .loader-dot,
   .tick,
+  .flow,
+  .node-pop,
   .fade-up,
   .slide-in,
   .pop {

@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { DocumentsPanel } from "./DocumentsPanel.jsx";
 import { OutreachPanel } from "./OutreachPanel.jsx";
+import { ShipTogether } from "./ShipTogether.jsx";
+import { UNITY_RED, sampleCohort } from "../lib/together.js";
 import { Badge, CountryMark, ExternalLink, Icon, Meter, ScoreRing, Segmented } from "./ui.jsx";
 import {
   COMPONENTS,
@@ -25,6 +27,7 @@ const TABS = [
   { key: "why", label: "Overview" },
   { key: "docs", label: "Paperwork" },
   { key: "partners", label: "Partners & outreach" },
+  { key: "together", label: "Ship together" },
 ];
 
 /** Right-hand panel for one market: scores, clickable factor tiles that expand in place, and the action tabs. */
@@ -52,6 +55,7 @@ export function MarketPanel({ market, profile, kind, weights, openFactor, onOpen
                 {e.trade_agreement && <Badge tone="outline">{agreementShort(e.trade_agreement)}</Badge>}
                 <Badge tone="outline">{LANGUAGE_NAMES[e.language] ?? e.language}</Badge>
                 <ConfidenceBadge level={e.compliance_confidence ?? "verified"} />
+                <TogetherChip market={market} kind={kind} onOpen={() => setTab("together")} />
                 {market.lead_time_weeks != null && (
                   <Badge tone="outline">
                     <Icon name="clock" className="h-3 w-3" />
@@ -83,8 +87,15 @@ export function MarketPanel({ market, profile, kind, weights, openFactor, onOpen
         </div>
       ) : (
         <>
-          <div className="mt-6">
-            <Segmented options={TABS} value={tab} onChange={setTab} label="Market sections" role="tablist" itemRole="tab" />
+          <div className="scroll-thin -mx-1 mt-6 overflow-x-auto px-1 pb-1">
+            <Segmented
+              options={TABS.map((t) => (t.key === "together" && kind !== "goods" ? { ...t, label: "Team up" } : t))}
+              value={tab}
+              onChange={setTab}
+              label="Market sections"
+              role="tablist"
+              itemRole="tab"
+            />
           </div>
           <div className="mt-5">
             {tab === "why" && (
@@ -92,6 +103,7 @@ export function MarketPanel({ market, profile, kind, weights, openFactor, onOpen
             )}
             {tab === "docs" && <DocumentsPanel profile={profile} countryCode={e.country_code} />}
             {tab === "partners" && <OutreachPanel profile={profile} market={market} />}
+            {tab === "together" && <ShipTogether market={market} kind={kind} profile={profile} />}
           </div>
         </>
       )}
@@ -385,5 +397,26 @@ function ConfidenceBadge({ level }) {
     <Badge tone={c.tone}>
       <span title={c.title}>{c.label}</span>
     </Badge>
+  );
+}
+
+/** Header chip: how many Canadian businesses are heading to the same market (preview data). Opens the Ship together tab. */
+function TogetherChip({ market, kind, onOpen }) {
+  const n = sampleCohort(market, kind).length;
+  return (
+    <button
+      type="button"
+      onClick={onOpen}
+      title="Preview: sample producers"
+      className="inline-flex items-center gap-1.5 rounded-full border px-2 py-0.5 text-[11px] font-medium transition-colors hover:bg-red-50"
+      style={{ borderColor: `${UNITY_RED}55`, color: UNITY_RED }}
+    >
+      <span className="flex -space-x-1" aria-hidden>
+        {[0, 1, 2].map((i) => (
+          <span key={i} className="h-2.5 w-2.5 rounded-full border border-white" style={{ background: UNITY_RED, opacity: 1 - i * 0.25 }} />
+        ))}
+      </span>
+      {n} Canadian {kind === "goods" ? "producers" : "companies"} heading here
+    </button>
   );
 }
