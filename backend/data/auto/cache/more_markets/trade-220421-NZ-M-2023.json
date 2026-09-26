@@ -1,0 +1,16 @@
+{
+ "v": 2,
+ "key": "trade-220421-NZ-M-2023",
+ "fetched_at": "2026-09-26T22:38:03+00:00",
+ "url": "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=554&period=2023&cmdCode=220421&flowCode=M&partnerCode=0,124",
+ "payload": {
+  "0": {
+   "value_usd": 83002702.755,
+   "kg": 18707171.28
+  },
+  "124": {
+   "value_usd": 54471.372,
+   "kg": 11916
+  }
+ }
+}

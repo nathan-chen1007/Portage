@@ -1,0 +1,12 @@
+{
+ "v": 2,
+ "key": "trade-040900-VN-M-2023",
+ "fetched_at": "2026-09-26T22:37:29+00:00",
+ "url": "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=704&period=2023&cmdCode=040900&flowCode=M&partnerCode=0,124",
+ "payload": {
+  "0": {
+   "value_usd": 884100.336,
+   "kg": 245923.155
+  }
+ }
+}
