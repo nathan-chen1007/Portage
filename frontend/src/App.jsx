@@ -5,6 +5,7 @@ import { FactorPanel } from "./components/FactorPanel.jsx";
 import { LoadingScreen } from "./components/LoadingScreen.jsx";
 import { MarketList } from "./components/MarketList.jsx";
 import { MarketPanel } from "./components/MarketPanel.jsx";
+import { MoreMarkets } from "./components/MoreMarkets.jsx";
 import { OpportunityMap } from "./components/OpportunityMap.jsx";
 import { TunePanel } from "./components/TunePanel.jsx";
 import { HealthPill, Logo } from "./components/Brand.jsx";
@@ -325,6 +326,7 @@ export default function App() {
                 weights={weights}
               />
             )}
+            {result.category.kind === "goods" && <MoreMarkets hsCode={result.lookup?.product?.hs6 ?? result.category.hs_code} category={result.category.id} />}
           </div>
         </aside>
 
