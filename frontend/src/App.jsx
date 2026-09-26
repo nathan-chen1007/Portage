@@ -303,6 +303,41 @@ export default function App() {
 
 /* ---------------------------------------------------------------- */
 
+// Landing feature cards: each gets its own colour and icon, matching the Ship together card.
+const FEATURES = [
+  {
+    title: "Ranked, not listed",
+    desc: "Every market scored on tariffs, rules, shipping, risk and tax, with the source behind each number.",
+    color: "#2a78d6",
+    tint: "#eef4fc",
+    icon: <path d="M4 16V11M10 16V5M16 16V8" />,
+  },
+  {
+    title: "Paperwork, drafted",
+    desc: "Origin declarations and data agreements filled from what you told us.",
+    color: "#eb6834",
+    tint: "#fdf1ec",
+    icon: (
+      <>
+        <path d="M5 2.5h6.5L15 6v11.5H5z" />
+        <path d="M11.5 2.5V6H15M7.5 10h5M7.5 13h5" />
+      </>
+    ),
+  },
+  {
+    title: "A foot in the door",
+    desc: "A first email to a real importer, plus a voice note in their language.",
+    color: "#1baf7a",
+    tint: "#ecf8f3",
+    icon: (
+      <>
+        <rect x="2.5" y="4.5" width="15" height="11" rx="2" />
+        <path d="M3 5.5l7 5.5 7-5.5" />
+      </>
+    ),
+  },
+];
+
 function Landing({ health, categories, description, setDescription, onAnalyze, onPickCategory, loading, error, unsupported }) {
   const canSubmit = description.trim().length >= 10 && !loading;
   return (
@@ -406,14 +441,15 @@ function Landing({ health, categories, description, setDescription, onAnalyze, o
         )}
 
         <div className="mt-16 grid gap-4 text-left sm:grid-cols-2 lg:grid-cols-4">
-          {[
-            ["Ranked, not listed", "Every market scored on tariffs, rules, shipping, risk and tax, with the source behind each number."],
-            ["Paperwork, drafted", "Origin declarations and data agreements filled from what you told us."],
-            ["A foot in the door", "A first email to a real importer, plus a voice note in their language."],
-          ].map(([t, d]) => (
-            <div key={t} className="rounded-2xl border border-neutral-100 bg-neutral-50/60 p-4">
-              <p className="text-sm font-semibold">{t}</p>
-              <p className="mt-1 text-sm text-neutral-500">{d}</p>
+          {FEATURES.map((f) => (
+            <div key={f.title} className="rounded-2xl border p-4" style={{ borderColor: `${f.color}33`, background: `linear-gradient(135deg, #fff, ${f.tint})` }}>
+              <p className="flex items-center gap-2 text-sm font-semibold">
+                <svg viewBox="0 0 20 20" className="h-4 w-4 shrink-0" fill="none" stroke={f.color} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                  {f.icon}
+                </svg>
+                {f.title}
+              </p>
+              <p className="mt-1 text-sm text-neutral-600">{f.desc}</p>
             </div>
           ))}
           <div className="rounded-2xl border p-4" style={{ borderColor: "#d52b1e33", background: "linear-gradient(135deg, #fff, #fdf2f1)" }}>
