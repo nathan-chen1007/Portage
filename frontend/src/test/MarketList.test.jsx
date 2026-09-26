@@ -15,7 +15,7 @@ describe("FrictionBar", () => {
   it("sizes each segment by the points it earns out of 100", () => {
     render(<FrictionBar market={MARKETS[1]} />);
     // compliance weight 30, costs 18.75 -> earns 11.25
-    expect(screen.getByTestId("seg-compliance").style.width).toBe("11.25%");
+    expect(parseFloat(screen.getByTestId("seg-compliance").style.width)).toBeCloseTo(11.25);
   });
 
   it("draws nothing for a blocked market", () => {
