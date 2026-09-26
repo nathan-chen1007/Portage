@@ -1,0 +1,42 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --color-accent: #b45309;
+  --color-accent-soft: #fef3c7;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  background: #fff;
+}
+
+body {
+  background: #fff;
+  color: #0a0a0a;
+}
+
+/* Friction-bar segments get a 2px surface gap between fills. */
+.seg + .seg {
+  margin-left: 2px;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.fade-up {
+  animation: fade-up 0.35s ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fade-up {
+    animation: none;
+  }
+}
