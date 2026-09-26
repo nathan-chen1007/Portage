@@ -7,10 +7,10 @@ honey markets (UK 3, US 5, China 5, Korea 6, EU 7 tier points). They carry confi
 UI badges the market "Compliance not verified — confirm with the Trade Commissioner Service".
 """
 
-import importlib
 import logging
 
-from app.models import Confidence, Requirement
+from app.explore.compliance import auto_requirements
+from app.models import Confidence, MarketEntry, Requirement
 
 log = logging.getLogger("portage.explore.lookup")
 
@@ -30,25 +30,21 @@ PLACEHOLDERS = [
 _RANK = {"verified": 0, "auto_sourced": 1, "unknown": 2}
 
 
-def _auto_requirements():
-    try:
-        mod = importlib.import_module("app.explore.compliance")
-    except Exception:  # session B's module missing or broken: never break the lookup
-        log.exception("app.explore.compliance failed to import")
-        return None
-    return getattr(mod, "auto_requirements", None)
+def requirements_for(hs6: str, country_code: str, verified: MarketEntry | None = None
+                     ) -> tuple[list[Requirement], Confidence, str]:
+    """(requirements, lowest confidence, source label: 'curated' | 'auto_requirements' | 'none').
 
-
-def requirements_for(hs6: str, country_code: str) -> tuple[list[Requirement], Confidence, str]:
-    """(requirements, lowest confidence, source label: 'auto_requirements' | 'none')."""
-    fn = _auto_requirements()
+    Precedence: verified (curated data for this product and market) > auto_sourced (auto_requirements: live UK
+    or saved files) > unknown (labelled placeholders). Curated data is never overridden or mixed.
+    """
+    if verified is not None:
+        return [r.model_copy() for r in verified.compliance_requirements], "verified", "curated"
     reqs: list[Requirement] = []
-    if fn is not None:
-        try:
-            reqs = [r if isinstance(r, Requirement) else Requirement.model_validate(r) for r in (fn(hs6, country_code) or [])]
-        except Exception as e:
-            log.warning("auto_requirements(%s, %s) failed: %s", hs6, country_code, e)
-            reqs = []
+    try:
+        reqs = [r if isinstance(r, Requirement) else Requirement.model_validate(r) for r in (auto_requirements(hs6, country_code) or [])]
+    except Exception as e:  # a failing lookup degrades this market to "unknown", never a 500
+        log.warning("auto_requirements(%s, %s) failed: %s", hs6, country_code, e)
+        reqs = []
     if not reqs:
         return [r.model_copy() for r in PLACEHOLDERS], "unknown", "none"
     worst = max((r.confidence for r in reqs), key=lambda c: _RANK.get(c, 2))

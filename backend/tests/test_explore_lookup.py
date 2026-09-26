@@ -74,7 +74,7 @@ def net(tmp_path, monkeypatch):
     monkeypatch.setattr(sources, "CACHE_DIR", tmp_path)
     fake = FakeNet()
     monkeypatch.setattr(sources, "http_get_json", fake)
-    monkeypatch.setattr(compliance, "_auto_requirements", lambda: None)  # session B absent unless a test says so
+    monkeypatch.setattr(compliance, "auto_requirements", lambda hs6, cc: [])  # no auto-sourced data unless a test says so
     hs.reset()
     yield fake
     if fake.gate is not None:
@@ -234,7 +234,7 @@ def test_auto_sourced_requirements_are_used_when_session_b_provides_them(net, mo
             return []
         return [Requirement(name="UK labelling", tier=1, detail="d", source="https://www.gov.uk/x", confidence="auto_sourced")]
 
-    monkeypatch.setattr(compliance, "_auto_requirements", lambda: auto)
+    monkeypatch.setattr(compliance, "auto_requirements", auto)
     r = service.rank(req("170220"), timeout=5)
     gb = next(m for m in r.markets if m.country_code == "GB")
     assert gb.entry.compliance_confidence == "auto_sourced" and [q.name for q in gb.entry.compliance_requirements] == ["UK labelling"]
@@ -245,7 +245,7 @@ def test_broken_session_b_falls_back_to_unknown(net, monkeypatch):
     def boom(hs6, cc):
         raise RuntimeError("bad data")
 
-    monkeypatch.setattr(compliance, "_auto_requirements", lambda: boom)
+    monkeypatch.setattr(compliance, "auto_requirements", boom)
     r = service.rank(req("170220"), timeout=5)
     assert all(s.compliance_confidence == "unknown" for s in r.data_status)
 
@@ -318,3 +318,20 @@ def test_curated_closed_market_stays_closed(net):
     assert not status(r, "MX").scored
     assert any("verified data for natural honey" in n for n in r.notes)
     assert all(m.status == "open" for m in service.rank(req("170220"), timeout=5).markets)
+
+
+def test_curated_requirements_outrank_auto_sourced(net, monkeypatch):
+    """Precedence: verified (curated honey data) > auto_sourced > unknown. Curated data is never overridden."""
+    monkeypatch.setattr(compliance, "auto_requirements",
+                        lambda hs6, cc: [Requirement(name="AUTO", tier=1, detail="d", source="https://x.gov/", confidence="auto_sourced")])
+    r = service.rank(req("040900"), timeout=5)
+    base = service.base_catalog()
+    for m in r.markets:
+        curated = base.market("honey", m.country_code)
+        if curated.status == "blocked":
+            assert m.status == "blocked"
+            continue
+        assert m.entry.compliance_confidence == "verified"
+        assert [q.name for q in m.entry.compliance_requirements] == [q.name for q in curated.compliance_requirements]
+    reqs, conf, src = compliance.requirements_for("950699", "GB")
+    assert (conf, src, reqs[0].name) == ("auto_sourced", "auto_requirements", "AUTO")

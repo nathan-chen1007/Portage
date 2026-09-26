@@ -1,38 +1,29 @@
-"""EXPERIMENTAL: auto-sourced compliance (session B) and any-product lookup (session C).
+"""Any-product mode, promoted into the main app (Sat Sept 26, ~8:30 PM).
 
-Mounted only when EXPERIMENTAL=1 in backend/.env. Nothing here may change the behaviour of the curated
-honey/SaaS paths (/api/analyze, /api/rank, ...): those are the demo, and their tests must stay green.
+  compliance  auto-sourced compliance (lab B): live UK Trade Tariff lookup + saved files, `auto_requirements()`
+  lookup      any-product lookup (lab C): HS classification, live tariffs and trade data with cache
 
-Each sub-package exposes an optional `routes.py` with `router = APIRouter()`; routes are mounted under
-/api/explore/<name>. Adding a routes.py is all a session needs to do — no edits to main.py.
+Routes are ALWAYS mounted under /api/explore/<name> (no EXPERIMENTAL flag any more). Imports are strict: a
+broken module fails the test suite and the server start, it is never silently skipped. The curated honey and
+SaaS paths don't call anything here; tests/test_curated_unchanged.py proves their outputs are unchanged.
 """
 
-import importlib
 import logging
 
 from fastapi import APIRouter
 
+from app.explore.compliance.routes import router as compliance_router
+from app.explore.lookup.routes import router as lookup_router
+
 log = logging.getLogger("portage.explore")
 
-router = APIRouter(prefix="/api/explore", tags=["experimental"])
+MODULES = ("compliance", "lookup")
+
+router = APIRouter(prefix="/api/explore", tags=["any-product"])
+router.include_router(compliance_router, prefix="/compliance")
+router.include_router(lookup_router, prefix="/lookup")
 
 
 @router.get("/health")
 def explore_health() -> dict:
-    return {"experimental": True, "modules": sorted(_loaded)}
-
-
-_loaded: set[str] = set()
-for _name in ("compliance", "lookup"):
-    try:
-        _mod = importlib.import_module(f"app.explore.{_name}.routes")
-    except ModuleNotFoundError as e:
-        if e.name != f"app.explore.{_name}.routes":
-            log.exception("experimental module %s failed to import", _name)
-        continue
-    except Exception:  # a broken experiment must never take down the demo API
-        log.exception("experimental module %s failed to import", _name)
-        continue
-    if getattr(_mod, "router", None) is not None:
-        router.include_router(_mod.router, prefix=f"/{_name}")
-        _loaded.add(_name)
+    return {"modules": list(MODULES)}

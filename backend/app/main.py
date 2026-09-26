@@ -36,7 +36,7 @@ from app.services import documents, group_quote, llm, voice  # noqa: E402
 log = logging.getLogger("portage")
 
 DATA_DIR = Path(__file__).resolve().parent.parent / "data"
-EXPERIMENTAL = os.getenv("EXPERIMENTAL") == "1"
+LOOKUP_TIMEOUT = float(os.getenv("LOOKUP_TIMEOUT", "8"))  # seconds the any-product path waits for live sources
 catalog = load_catalog(DATA_DIR)  # validated once at startup: bad data stops the server immediately
 FORWARDERS = ForwarderList.model_validate_json((DATA_DIR / "forwarders.json").read_text(encoding="utf-8"))
 
@@ -48,10 +48,12 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-if EXPERIMENTAL:  # lab features (claude/afhacks-lab-B.md, -C.md); off on stage unless they're ready
-    from app.explore import router as explore_router
+# Any-product mode (promoted from labs B and C): always mounted, strict imports.
+from app.explore import router as explore_router  # noqa: E402
+from app.explore.lookup import service as lookup_service  # noqa: E402
+from app.explore.lookup.schemas import AnalyzeWithLookup  # noqa: E402
 
-    app.include_router(explore_router)
+app.include_router(explore_router)
 
 
 def _category(category_id: str) -> Category:
@@ -97,11 +99,14 @@ def rank(req: RankRequest) -> list[ScoredMarket]:
         raise HTTPException(422, str(e))
 
 
-@app.post("/api/analyze", response_model=AnalyzeResponse)
-def analyze(req: AnalyzeRequest) -> AnalyzeResponse:
+@app.post("/api/analyze", response_model=AnalyzeWithLookup)
+def analyze(req: AnalyzeRequest) -> AnalyzeWithLookup:
     """Founder's description -> structured profile (LLM) -> ranked markets with partners (engine).
 
-    If the LLM isn't configured or fails, falls back to keyword matching so the demo never dead-ends.
+    Curated products (honey, B2B SaaS) use the verified data exactly as before. Anything else goes to the
+    any-product lookup: HS classification, then tariffs, trade data and compliance by confidence
+    (verified > auto-sourced > unknown). If the LLM isn't configured or fails, keyword matching keeps the
+    demo going, and every live source degrades to cache, then "unknown", never a 500.
     """
     cats = list(catalog.categories.values())
     mode = "llm"
@@ -111,9 +116,18 @@ def analyze(req: AnalyzeRequest) -> AnalyzeResponse:
         log.warning("profile extraction fell back to offline mode: %s", e)
         profile, mode = llm.fallback_profile(req.description, cats), "offline"
     cat = catalog.categories.get(profile.category)
+    if cat is None:  # not a curated product: any-product lookup
+        curated_id, any_cat, any_markets, lookup = lookup_service.analyze(req.description, timeout=LOOKUP_TIMEOUT)
+        if curated_id:  # the HS code says it's a curated product after all (e.g. honey): use the verified path
+            profile.category, cat = curated_id, catalog.categories[curated_id]
+        elif any_cat is not None:
+            profile.category = any_cat.id
+            return AnalyzeWithLookup(profile=profile, category=any_cat, markets=any_markets, mode=mode,
+                                     opportunity_available=lookup.product is not None and any(
+                                         m.opportunity is not None for m in any_markets), lookup=lookup)
     markets = rank_markets(cat.id, catalog) if cat else []
-    return AnalyzeResponse(profile=profile, category=cat, markets=markets, mode=mode,
-                           opportunity_available=bool(cat and cat.id in catalog.trade))
+    return AnalyzeWithLookup(profile=profile, category=cat, markets=markets, mode=mode,
+                             opportunity_available=bool(cat and cat.id in catalog.trade))
 
 
 @app.post("/api/documents", response_model=list[DocumentDraft])

@@ -8,7 +8,14 @@ from pathlib import Path
 from app.engine.scoring import Catalog, load_catalog, rank_markets
 from app.explore.lookup import compliance, hs, sources, tariffs, trade
 from app.explore.lookup.markets import MARKETS
-from app.explore.lookup.schemas import LookupRankRequest, LookupRankResponse, MarketDataStatus, ProductBlock
+from app.explore.lookup.schemas import (
+    HSCandidate,
+    LookupAnalyze,
+    LookupRankRequest,
+    LookupRankResponse,
+    MarketDataStatus,
+    ProductBlock,
+)
 from app.models import Category, MarketEntry, ScoredMarket
 
 log = logging.getLogger("portage.explore.lookup")
@@ -98,9 +105,9 @@ def rank(req: LookupRankRequest, timeout: float | None = None, refresh: bool = F
         lane = base.market(LANE_CATEGORY, cc)
         tr = tariff_results[cc]
         try:
-            reqs, conf, _ = compliance.requirements_for(hs6, cc)
             verified = base.market(curated.id, cc) if curated else None
             block = verified if verified is not None and verified.status == "blocked" else None
+            reqs, conf, _ = compliance.requirements_for(hs6, cc, verified if block is None else None)
             entry = _entry(hs6, cc, lane, tr, reqs, conf, today, block)
         except Exception as e:  # one broken market never breaks the ranking
             log.exception("lookup: building %s/%s failed", hs6, cc)
@@ -160,3 +167,39 @@ def cached_products() -> list[dict]:
         out.append({"hs6": code, "description": hs.describe(code) or f"HS {code}", "complete": needed <= have,
                     "cached": len(have), "needed": len(needed)})
     return out
+
+
+def category_for(hs6: str, description: str) -> Category:
+    """The synthetic goods category the any-product ranking uses (not in the curated catalog)."""
+    hs6 = hs.normalize(hs6)
+    return Category(id=category_id(hs6), label=description[:120], kind="goods", hs_code=f"{hs6[:4]}.{hs6[4:]}",
+                    description=description)
+
+
+def analyze(description: str, timeout: float | None = None) -> tuple[str | None, Category | None, list[ScoredMarket], LookupAnalyze | None]:
+    """/api/analyze for a product outside the curated categories.
+
+    Returns (curated_category_id, category, markets, lookup):
+      - the top HS candidate is a curated product (honey 0409.00) -> (its id, None, [], None): use the curated path
+      - no candidate (a service, or nothing matched)               -> (None, None, [], None): "unsupported"
+      - otherwise the any-product ranking with its lookup block
+    Never raises: a failure degrades to "unsupported" rather than a 500.
+    """
+    from app.explore.lookup import classify as classifier
+
+    try:
+        candidates, cmode = classifier.classify(description)
+        if not candidates:
+            return None, None, [], None
+        top = candidates[0]
+        curated = curated_category(top["hs6"], base_catalog())
+        if curated:
+            return curated.id, None, [], None
+        resp = rank(LookupRankRequest(hs6=top["hs6"], description=description, classified_by=top["source"]),
+                    timeout=timeout)
+    except Exception:
+        log.exception("any-product analyze failed")
+        return None, None, [], None
+    lookup = LookupAnalyze(product=resp.product, candidates=[HSCandidate(**c) for c in candidates], classify_mode=cmode,
+                           data_status=resp.data_status, notes=resp.notes)
+    return None, category_for(resp.product.hs6, resp.product.description), resp.markets, lookup

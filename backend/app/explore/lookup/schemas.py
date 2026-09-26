@@ -4,7 +4,7 @@ from typing import Literal
 
 from pydantic import BaseModel, Field
 
-from app.models import Confidence, ScoredMarket, SortBy, Weights
+from app.models import AnalyzeResponse, Confidence, ScoredMarket, SortBy, Weights
 
 ClassifiedBy = Literal["llm", "keyword", "user"]
 
@@ -68,3 +68,18 @@ class LookupRankResponse(BaseModel):
     data_status: list[MarketDataStatus]
     opportunity_available: bool
     notes: list[str] = Field(default_factory=list)
+
+
+class LookupAnalyze(BaseModel):
+    """What /api/analyze adds when the product isn't a curated category: the HS code it picked (and the
+    alternatives the founder can switch to), per-market data status and notes."""
+
+    product: ProductBlock
+    candidates: list[HSCandidate]
+    classify_mode: Literal["llm", "offline"]
+    data_status: list[MarketDataStatus]
+    notes: list[str] = Field(default_factory=list)
+
+
+class AnalyzeWithLookup(AnalyzeResponse):
+    lookup: LookupAnalyze | None = Field(None, description="Set only for the any-product path; null for curated products")
