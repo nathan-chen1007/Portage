@@ -39,9 +39,13 @@ def test_analyze_honey_offline(client):
     assert body["markets"][-1]["status"] == "blocked" and body["markets"][-1]["score"] is None
 
 
-def test_analyze_unsupported(client):
-    body = client.post("/api/analyze", json={"description": "We make hand-poured soy candles"}).json()
-    assert body["category"] is None and body["markets"] == []
+def test_analyze_other_goods_go_to_the_any_product_lookup(client):
+    """Candles aren't a curated product: since the promotion they get the HS lookup ranking, not 'unsupported'."""
+    r = client.post("/api/analyze", json={"description": "We make hand-poured soy candles"})
+    assert r.status_code == 200
+    body = r.json()
+    assert body["lookup"]["product"]["hs6"] == "340600" and body["category"]["id"] == "hs340600"
+    assert all(m["entry"]["compliance_confidence"] in {"verified", "auto_sourced", "unknown"} for m in body["markets"])
 
 
 def test_rank_with_weights_and_errors(client):
