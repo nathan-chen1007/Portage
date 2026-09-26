@@ -23,6 +23,16 @@ LANGUAGE_NAMES = {
     "es": "Spanish", "zh": "Simplified Chinese", "fr": "French",
 }
 
+# Offline fallback: how to name the product when the founder didn't.
+PRODUCT_NOUNS = {"honey": "Canadian honey", "b2b_saas": "B2B software"}
+
+
+def _pct(x: float) -> str:
+    """25.5% stays 25.5%, 16.0% becomes 16%."""
+    s = f"{x * 100:.1f}".rstrip("0").rstrip(".")
+    return f"{s}%"
+
+
 # Offline fallback: category keywords (lowercase substrings).
 CATEGORY_KEYWORDS = {
     "honey": ["honey", "beekeep", "apiar", "apicult", "hive", " bees", "miel"],
@@ -127,8 +137,10 @@ def fallback_profile(description: str, categories: list[Category]) -> BusinessPr
     ids = {c.id for c in categories}
     category = next((cid for cid, kws in CATEGORY_KEYWORDS.items() if cid in ids and any(k in text for k in kws)), "unsupported")
     email = re.search(r"[\w.+-]+@[\w-]+\.[\w.-]+", description)
+    company = re.search(r"\b(?:We're|We are|I'm with|I run)\s+((?:[A-Z][\w&'.-]*\s?){1,5})", description)
     site = re.search(r"\b(?:https?://)?(?:www\.)?[\w-]+\.(?:ca|com|co|io|org)\b(?!@)", description)
     return BusinessProfile(
+        company_name=company.group(1).strip() if company else "",
         product_summary=description.strip()[:200],
         category=category,
         category_reason="keyword match (offline mode)",
@@ -174,12 +186,12 @@ def draft_outreach(profile: BusinessProfile, entry: MarketEntry, middleman: Midd
 def fallback_outreach(profile: BusinessProfile, entry: MarketEntry, middleman: Middleman) -> OutreachDraft:
     """Offline template with the same facts and placeholders the LLM version would use."""
     company = profile.company_name or "[your company]"
-    product = profile.product_name or profile.product_summary or "[your product]"
+    product = profile.product_name or PRODUCT_NOUNS.get(profile.category, "[your product]")
     where = ", ".join(x for x in [profile.city, profile.province] if x) or "[your city, province]"
     fta = ""
     if entry.tariff_rate == 0 and entry.trade_agreement and entry.mfn_rate > 0:
         fta = (f" Under {entry.trade_agreement.split(' (')[0]}, our product enters {entry.country} duty-free "
-               f"(instead of {entry.mfn_rate:.0%}).")
+               f"(instead of {_pct(entry.mfn_rate)}).")
     ask = ("Could you introduce us to buyers you work with?" if "association" in middleman.type or "government" in middleman.type
            else "Would you be open to a 20-minute call, or should we send a sample?")
     body = (
@@ -190,7 +202,8 @@ def fallback_outreach(profile: BusinessProfile, entry: MarketEntry, middleman: M
         f"{ask}\n\nBest regards,\n{profile.contact_name or '[your name]'}\n{company}"
         + (f"\n{profile.contact_email}" if profile.contact_email else "")
     )
-    return OutreachDraft(subject=f"Canadian {product[:60]} for {entry.country}", body=body, language="en")
+    subject = f"{product[0].upper()}{product[1:]} from {company if company != '[your company]' else 'Canada'} for {entry.country}"
+    return OutreachDraft(subject=subject, body=body, language="en")
 
 
 # ---------- 3. spoken script ----------
