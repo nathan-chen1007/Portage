@@ -436,7 +436,7 @@ function Home({ categories, description, setDescription, onAnalyze, onPickCatego
                 onClick={onStart}
                 className="inline-flex h-11 items-center gap-2 rounded-xl bg-white px-5 text-[15px] font-medium text-neutral-900 transition-colors hover:bg-neutral-200"
               >
-                Find my markets <Arrow className="h-4 w-4" />
+                Get started <Arrow className="h-4 w-4" />
               </button>
               <button
                 type="button"
