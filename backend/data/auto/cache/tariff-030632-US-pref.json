@@ -1,0 +1,7 @@
+{
+ "v": 2,
+ "key": "tariff-030632-US-pref",
+ "fetched_at": "2026-09-26T19:23:10+00:00",
+ "url": "https://wits.worldbank.org/API/V1/SDMX/V21/datasource/TRN/reporter/840/partner/124/product/030632/year/ALL/datatype/aveestimated?format=JSON",
+ "payload": null
+}

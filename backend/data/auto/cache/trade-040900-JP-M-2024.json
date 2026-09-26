@@ -1,0 +1,16 @@
+{
+ "v": 2,
+ "key": "trade-040900-JP-M-2024",
+ "fetched_at": "2026-09-26T19:22:08+00:00",
+ "url": "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=392&period=2024&cmdCode=040900&flowCode=M&partnerCode=0,124",
+ "payload": {
+  "0": {
+   "value_usd": 136822667.32,
+   "kg": 45415770.0
+  },
+  "124": {
+   "value_usd": 16432084.743,
+   "kg": 2918440.0
+  }
+ }
+}

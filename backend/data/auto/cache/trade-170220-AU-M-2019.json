@@ -1,0 +1,12 @@
+{
+ "v": 2,
+ "key": "trade-170220-AU-M-2019",
+ "fetched_at": "2026-09-26T19:20:05+00:00",
+ "url": "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=36&period=2019&cmdCode=170220&flowCode=M&partnerCode=0",
+ "payload": {
+  "0": {
+   "value_usd": 16635338.418,
+   "kg": 2492858.63
+  }
+ }
+}

@@ -1,0 +1,12 @@
+{
+ "v": 2,
+ "key": "trade-151411-JP-M-2019",
+ "fetched_at": "2026-09-26T19:20:41+00:00",
+ "url": "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=392&period=2019&cmdCode=151411&flowCode=M&partnerCode=0",
+ "payload": {
+  "0": {
+   "value_usd": 23464674.798,
+   "kg": 28571520.0
+  }
+ }
+}

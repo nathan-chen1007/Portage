@@ -1,0 +1,11 @@
+{
+ "v": 2,
+ "key": "tariff-151411-US-mfn",
+ "fetched_at": "2026-09-26T19:21:22+00:00",
+ "url": "https://wits.worldbank.org/API/V1/SDMX/V21/datasource/TRN/reporter/840/partner/000/product/151411/year/ALL/datatype/aveestimated?format=JSON",
+ "payload": {
+  "rate": 0.064,
+  "year": 2023,
+  "type": "MFN"
+ }
+}

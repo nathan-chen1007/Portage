@@ -1,0 +1,16 @@
+{
+ "v": 2,
+ "key": "trade-030632-GB-M-2024",
+ "fetched_at": "2026-09-26T19:21:17+00:00",
+ "url": "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=826&period=2024&cmdCode=030632&flowCode=M&partnerCode=0,124",
+ "payload": {
+  "0": {
+   "value_usd": 13668368.904,
+   "kg": 526985.0
+  },
+  "124": {
+   "value_usd": 12120577.438,
+   "kg": 457485.0
+  }
+ }
+}

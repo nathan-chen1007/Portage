@@ -1,0 +1,11 @@
+{
+ "v": 2,
+ "key": "tariff-030632-DE-mfn",
+ "fetched_at": "2026-09-26T19:22:14+00:00",
+ "url": "https://wits.worldbank.org/API/V1/SDMX/V21/datasource/TRN/reporter/918/partner/000/product/030632/year/ALL/datatype/aveestimated?format=JSON",
+ "payload": {
+  "rate": 0.06,
+  "year": 2023,
+  "type": "MFN"
+ }
+}

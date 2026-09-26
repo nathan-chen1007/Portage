@@ -1,0 +1,11 @@
+{
+ "v": 2,
+ "key": "tariff-040900-DE-pref",
+ "fetched_at": "2026-09-26T19:22:47+00:00",
+ "url": "https://wits.worldbank.org/API/V1/SDMX/V21/datasource/TRN/reporter/918/partner/124/product/040900/year/ALL/datatype/reported?format=JSON",
+ "payload": {
+  "rate": 0.0,
+  "year": 2021,
+  "type": "PREF"
+ }
+}

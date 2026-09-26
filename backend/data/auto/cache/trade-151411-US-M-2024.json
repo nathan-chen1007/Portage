@@ -1,0 +1,16 @@
+{
+ "v": 2,
+ "key": "trade-151411-US-M-2024",
+ "fetched_at": "2026-09-26T19:21:05+00:00",
+ "url": "https://comtradeapi.un.org/public/v1/preview/C/A/HS?reporterCode=842&period=2024&cmdCode=151411&flowCode=M&partnerCode=0,124",
+ "payload": {
+  "0": {
+   "value_usd": 1556717937.0,
+   "kg": 1408372486.0
+  },
+  "124": {
+   "value_usd": 1546737748.0,
+   "kg": 1399934060.0
+  }
+ }
+}

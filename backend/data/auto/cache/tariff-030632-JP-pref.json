@@ -1,0 +1,11 @@
+{
+ "v": 2,
+ "key": "tariff-030632-JP-pref",
+ "fetched_at": "2026-09-26T19:21:36+00:00",
+ "url": "https://wits.worldbank.org/API/V1/SDMX/V21/datasource/TRN/reporter/392/partner/124/product/030632/year/ALL/datatype/reported?format=JSON",
+ "payload": {
+  "rate": 0.0,
+  "year": 2021,
+  "type": "PREF"
+ }
+}
