@@ -15,7 +15,7 @@ function samePreset(a, b) {
 }
 
 /** "Tune" button with a popover: presets, per-factor weights, and the quick-wins ↔ biggest-opportunity balance. */
-export function TunePanel({ weights, onWeights, prize, onPrize, showPrize, busy }) {
+export function TunePanel({ weights, onWeights, prize, onPrize, showPrize, busy, extra = null }) {
   const [open, setOpen] = useState(false);
   const ref = useDismiss(open, () => setOpen(false));
   const total = Object.values(weights).reduce((a, b) => a + b, 0) || 1;
@@ -33,7 +33,7 @@ export function TunePanel({ weights, onWeights, prize, onPrize, showPrize, busy 
         <div
           role="dialog"
           aria-label="Tune the ranking"
-          className="pop absolute right-0 z-30 mt-2 w-[22rem] rounded-2xl border border-neutral-200 bg-white p-4 shadow-[0_12px_40px_rgba(0,0,0,0.12)]"
+          className="pop scroll-thin absolute right-0 z-30 mt-2 max-h-[80vh] w-[22rem] overflow-y-auto rounded-2xl border border-neutral-200 bg-white p-4 shadow-[0_12px_40px_rgba(0,0,0,0.12)]"
         >
           <div className="flex items-center justify-between">
             <h3 className="text-sm font-semibold">What matters most to you?</h3>
@@ -41,6 +41,8 @@ export function TunePanel({ weights, onWeights, prize, onPrize, showPrize, busy 
               <Icon name="close" className="h-4 w-4" />
             </button>
           </div>
+
+          {extra && <div className="mt-3 border-b border-neutral-100 pb-4">{extra}</div>}
 
           <div className="mt-3 grid grid-cols-2 gap-1.5">
             {PRESETS.map((p) => {

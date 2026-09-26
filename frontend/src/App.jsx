@@ -264,18 +264,6 @@ export default function App() {
               <span className="ml-1.5 font-normal text-neutral-400">{result.markets.length}</span>
             </h2>
             <div className="flex items-center gap-1.5">
-              {result.opportunity_available && (
-                <Segmented
-                  size="sm"
-                  label="Layout"
-                  value={layout}
-                  onChange={setLayout}
-                  options={[
-                    { key: "list", label: <Icon name="list" className="h-3.5 w-3.5" />, title: "List" },
-                    { key: "map", label: <Icon name="map" className="h-3.5 w-3.5" />, title: "Opportunity map" },
-                  ]}
-                />
-              )}
               <TunePanel
                 weights={weights}
                 onWeights={changeWeights}
@@ -283,6 +271,29 @@ export default function App() {
                 onPrize={changePrize}
                 showPrize={result.opportunity_available && view === "overall"}
                 busy={reranking}
+                extra={
+                  <div className="space-y-3">
+                    <div>
+                      <p className="mb-1.5 text-xs font-medium text-neutral-700">Compare all markets by</p>
+                      <FactorChips active={factorOpen ? panel : null} onPick={openFactorPanel} />
+                    </div>
+                    {result.opportunity_available && (
+                      <div className="flex items-center justify-between">
+                        <p className="text-xs font-medium text-neutral-700">Show as</p>
+                        <Segmented
+                          size="sm"
+                          label="Layout"
+                          value={layout}
+                          onChange={setLayout}
+                          options={[
+                            { key: "list", label: "List", title: "List" },
+                            { key: "map", label: "Map", title: "Opportunity map" },
+                          ]}
+                        />
+                      </div>
+                    )}
+                  </div>
+                }
               />
             </div>
           </div>
@@ -305,10 +316,6 @@ export default function App() {
 
         {/* ---------- right: market or factor panel ---------- */}
         <main ref={panelRef} className="scroll-thin min-h-0 overflow-y-auto bg-neutral-50/70 p-4 sm:p-6">
-          <div className="mx-auto mb-3 flex max-w-4xl flex-wrap items-center gap-2">
-            <span className="text-xs text-neutral-500">Compare all markets by</span>
-            <FactorChips active={factorOpen ? panel : null} onPick={openFactorPanel} />
-          </div>
           <div className="reveal-panel mx-auto max-w-4xl rounded-2xl border border-neutral-200 bg-white p-5 shadow-[0_1px_3px_rgba(0,0,0,0.04)] sm:p-7">
             {factorOpen ? (
               <FactorPanel

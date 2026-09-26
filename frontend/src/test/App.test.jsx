@@ -80,6 +80,7 @@ describe("App", () => {
     vi.stubGlobal("fetch", backend());
     render(<App />);
     await openHoney();
+    await userEvent.click(screen.getByRole("button", { name: /Tune/ }));
     const chips = screen.getByRole("group", { name: "Explore a factor" });
     await userEvent.click(within(chips).getByRole("button", { name: "Tariffs" }));
     expect(await screen.findByText("How it's measured")).toBeInTheDocument();
