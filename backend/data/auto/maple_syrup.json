@@ -1,0 +1,331 @@
+[
+  {
+    "category": "maple_syrup",
+    "country_code": "GB",
+    "lpi_customs_score": 3.5,
+    "sea_distance_nm": 3047,
+    "weekly_sailings": 1.5,
+    "shipping_route": "Montreal → Liverpool, ~13 days, direct sailings 1-2×/week",
+    "shipping_source": "https://www.fluentcargo.com/routes/montreal-ca/liverpool-gb",
+    "language": "en",
+    "country": "United Kingdom",
+    "status": "open",
+    "status_note": "",
+    "compliance_confidence": "auto_sourced",
+    "tariff_rate": 0.0,
+    "mfn_rate": 0.08,
+    "tariff_note": "UK Trade Tariff (commodity 1702209090, maple syrup): 0% tariff preference for Canada under the UK-Canada Trade Continuity Agreement; 8% third-country duty without it.",
+    "trade_agreement": "Canada-UK Trade Continuity Agreement (CUKTCA)",
+    "compliance_requirements": [
+      {
+        "name": "CUKTCA origin declaration on the invoice",
+        "tier": 1,
+        "detail": "To claim the 0% preference, the exporter provides an origin declaration on the invoice or another commercial document that describes the product (UK Trade Tariff rules of origin, UK-Canada TCA).",
+        "source": "https://www.trade-tariff.service.gov.uk/api/v2/rules_of_origin_schemes/170220/CA",
+        "lead_time_weeks": 0,
+        "lead_time_basis": "estimate",
+        "confidence": "auto_sourced"
+      }
+    ],
+    "tax_burden": 0.0,
+    "tax_note": "UK Trade Tariff lists 0% VAT on this commodity.",
+    "notes": [
+      "UK Trade Tariff lists no sanitary or phytosanitary import control for maple syrup from Canada. An organic certificate of inspection (C644) is needed only if the product is sold as organic.",
+      "CFIA's export requirements library has no maple syrup entry for the UK (checked 2026-09-26).",
+      "UNCTAD TRAINS has no NTM data for this market; requirements come from the national source listed only.",
+      "Auto-sourced: pulled from official structured data, not checked by a person for maple syrup. Confirm with the Trade Commissioner Service before the first shipment."
+    ],
+    "sources": [
+      "https://www.trade-tariff.service.gov.uk/api/v2/commodities/1702209090",
+      "https://www.trade-tariff.service.gov.uk/api/v2/rules_of_origin_schemes/170220/CA",
+      "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library",
+      "https://data.worldbank.org/indicator/LP.LPI.CUST.XQ",
+      "https://www.fluentcargo.com/routes/montreal-ca/liverpool-gb"
+    ],
+    "as_of": "2026-09-26"
+  },
+  {
+    "category": "maple_syrup",
+    "country_code": "JP",
+    "lpi_customs_score": 3.9,
+    "sea_distance_nm": 4349,
+    "weekly_sailings": 1.5,
+    "shipping_route": "Vancouver → Yokohama, ~11 days, direct sailings 1-2×/week",
+    "shipping_source": "https://www.fluentcargo.com/routes/vancouver-ca/tokyo-jp",
+    "language": "ja",
+    "country": "Japan",
+    "status": "open",
+    "status_note": "",
+    "compliance_confidence": "unknown",
+    "tariff_rate": 0.0,
+    "mfn_rate": 0.175,
+    "tariff_note": "Japan Customs tariff schedule (Aug 8, 2026), 1702.20 item 200 maple syrup: free under CPTPP; WTO rate 17.5% or 13.50 yen/kg, whichever is greater.",
+    "trade_agreement": "CPTPP",
+    "compliance_requirements": [],
+    "tax_burden": 0.0,
+    "tax_note": "Tax treatment copied from the honey row (country level: consumption tax is paid by the Japanese importer); not checked for maple syrup.",
+    "notes": [
+      "CFIA's export requirements library has no maple syrup entry for Japan (checked 2026-09-26).",
+      "UNCTAD TRAINS has no NTM data for this market; requirements come from the national source listed only.",
+      "Auto-sourced: pulled from official structured data, not checked by a person for maple syrup. Confirm with the Trade Commissioner Service before the first shipment."
+    ],
+    "sources": [
+      "https://www.customs.go.jp/english/tariff/2026_08_08/data/e_17.htm",
+      "https://wits.worldbank.org/tariff/trains/en/country/JPN/partner/CAN/product/170220",
+      "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library",
+      "https://data.worldbank.org/indicator/LP.LPI.CUST.XQ",
+      "https://www.fluentcargo.com/routes/vancouver-ca/tokyo-jp"
+    ],
+    "as_of": "2026-09-26"
+  },
+  {
+    "category": "maple_syrup",
+    "country_code": "AU",
+    "lpi_customs_score": 3.7,
+    "sea_distance_nm": 10054,
+    "weekly_sailings": 0.75,
+    "shipping_route": "Vancouver → Sydney, ~33 days, sailings every 1-2 weeks",
+    "shipping_source": "https://www.fluentcargo.com/routes/vancouver-ca/sydney-au",
+    "language": "en",
+    "country": "Australia",
+    "status": "open",
+    "status_note": "",
+    "compliance_confidence": "unknown",
+    "tariff_rate": 0.0,
+    "mfn_rate": 0.0,
+    "tariff_note": "Australian Border Force working tariff, 1702.20.00: general rate Free (WITS/TRAINS 2022 still shows a 5% MFN rate, since removed).",
+    "trade_agreement": "CPTPP",
+    "compliance_requirements": [],
+    "tax_burden": 0.0,
+    "tax_note": "Tax treatment copied from the honey row (country level: any import GST is handled by the importer); not checked for maple syrup.",
+    "notes": [
+      "CFIA's export requirements library has no maple syrup entry for Australia (checked 2026-09-26).",
+      "UNCTAD TRAINS has no NTM data for this market; requirements come from the national source listed only.",
+      "Auto-sourced: pulled from official structured data, not checked by a person for maple syrup. Confirm with the Trade Commissioner Service before the first shipment."
+    ],
+    "sources": [
+      "https://www.abf.gov.au/importing-exporting-and-manufacturing/tariff-classification/current-tariff/schedule-3/section-iv/chapter-17",
+      "https://wits.worldbank.org/tariff/trains/en/country/AUS/partner/CAN/product/170220",
+      "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library",
+      "https://data.worldbank.org/indicator/LP.LPI.CUST.XQ",
+      "https://www.fluentcargo.com/routes/vancouver-ca/sydney-au"
+    ],
+    "as_of": "2026-09-26"
+  },
+  {
+    "category": "maple_syrup",
+    "country_code": "DE",
+    "lpi_customs_score": 3.9,
+    "sea_distance_nm": 3502,
+    "weekly_sailings": 0.75,
+    "shipping_route": "Halifax → Hamburg, ~10 days, direct sailings every 1-2 weeks",
+    "shipping_source": "https://www.fluentcargo.com/routes/halifax-ca/hamburg-de",
+    "language": "de",
+    "country": "Germany (EU)",
+    "status": "open",
+    "status_note": "",
+    "compliance_confidence": "unknown",
+    "tariff_rate": 0.0,
+    "mfn_rate": 0.08,
+    "tariff_note": "EU TARIC (1702 20 90 90, reference date 2026-09-26): 0% tariff preference for Canada under CETA; 8% third-country duty without it.",
+    "trade_agreement": "CETA",
+    "compliance_requirements": [],
+    "tax_burden": 0.0,
+    "tax_note": "Tax treatment copied from the honey row (country level: import VAT is paid and recovered by the German importer); not checked for maple syrup.",
+    "notes": [
+      "EU TARIC lists no veterinary or plant-health import control for this code; an organic certificate of inspection (C644) applies only if it is sold as organic.",
+      "CFIA's export requirements library has no maple syrup entry for the EU (checked 2026-09-26).",
+      "UNCTAD TRAINS has no NTM data for this market; requirements come from the national source listed only.",
+      "Auto-sourced: pulled from official structured data, not checked by a person for maple syrup. Confirm with the Trade Commissioner Service before the first shipment."
+    ],
+    "sources": [
+      "https://ec.europa.eu/taxation_customs/dds2/taric/measures.jsp?Lang=en&Taric=1702209090&Area=CA&SimDate=20260926&Expand=true",
+      "https://wits.worldbank.org/tariff/trains/en/country/EUN/partner/CAN/product/170220",
+      "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library",
+      "https://data.worldbank.org/indicator/LP.LPI.CUST.XQ",
+      "https://www.fluentcargo.com/routes/halifax-ca/hamburg-de"
+    ],
+    "as_of": "2026-09-26"
+  },
+  {
+    "category": "maple_syrup",
+    "country_code": "CN",
+    "lpi_customs_score": 3.3,
+    "sea_distance_nm": 5344,
+    "weekly_sailings": 3,
+    "shipping_route": "Vancouver → Shanghai, ~20 days, 2-4 sailings/week",
+    "shipping_source": "https://www.fluentcargo.com/routes/vancouver-ca/shanghai-cn",
+    "language": "zh",
+    "country": "China",
+    "status": "open",
+    "status_note": "",
+    "compliance_confidence": "auto_sourced",
+    "tariff_rate": 0.3,
+    "mfn_rate": 0.3,
+    "tariff_note": "No Canada-China FTA: 30% MFN tariff on HS 170220 (UNCTAD TRAINS via WITS, 2022, latest year available). Check for newer Chinese measures on Canadian goods.",
+    "trade_agreement": null,
+    "compliance_requirements": [
+      {
+        "name": "CIFER establishment and product registration (self-registration)",
+        "tier": 2,
+        "detail": "CFIA: low-risk food establishments must create a profile in China's CIFER system and apply for product registration themselves (CFIA is not involved); products made before the registration approval date may not be exported. GACC's review time is unpredictable.",
+        "source": "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/china-peoples-republic-low-risk-foods",
+        "lead_time_weeks": 8,
+        "lead_time_basis": "estimate",
+        "confidence": "auto_sourced"
+      },
+      {
+        "name": "China registration number on packaging",
+        "tier": 1,
+        "detail": "CFIA: the GACC-issued China registration number or the CFIA-issued establishment number must appear on inner and outer packaging.",
+        "source": "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/china-peoples-republic-low-risk-foods",
+        "lead_time_weeks": 2,
+        "lead_time_basis": "estimate",
+        "confidence": "auto_sourced"
+      }
+    ],
+    "tax_burden": 0.0,
+    "tax_note": "Tax treatment copied from the honey row (country level: import VAT is paid by the Chinese importer); not checked for maple syrup.",
+    "notes": [
+      "CFIA: ask the Chinese importer whether a CFIA export certificate is required.",
+      "UNCTAD TRAINS has no NTM data for this market; requirements come from the national source listed only.",
+      "Auto-sourced: pulled from official structured data, not checked by a person for maple syrup. Confirm with the Trade Commissioner Service before the first shipment."
+    ],
+    "sources": [
+      "https://wits.worldbank.org/tariff/trains/en/country/CHN/partner/CAN/product/170220",
+      "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library/china-peoples-republic-low-risk-foods",
+      "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library",
+      "https://data.worldbank.org/indicator/LP.LPI.CUST.XQ",
+      "https://www.fluentcargo.com/routes/vancouver-ca/shanghai-cn"
+    ],
+    "as_of": "2026-09-26"
+  },
+  {
+    "category": "maple_syrup",
+    "country_code": "KR",
+    "lpi_customs_score": 3.9,
+    "sea_distance_nm": 4764,
+    "weekly_sailings": 4,
+    "shipping_route": "Vancouver → Busan, ~13 days, departures every 1-2 days",
+    "shipping_source": "https://www.fluentcargo.com/routes/vancouver-ca/busan-kr",
+    "language": "ko",
+    "country": "South Korea",
+    "status": "open",
+    "status_note": "",
+    "compliance_confidence": "unknown",
+    "tariff_rate": 0.0,
+    "mfn_rate": 0.08,
+    "tariff_note": "Duty-free under the Canada-Korea FTA; 8% MFN without it (UNCTAD TRAINS via WITS, 2022).",
+    "trade_agreement": "Canada-Korea FTA (CKFTA)",
+    "compliance_requirements": [],
+    "tax_burden": 0.0,
+    "tax_note": "Tax treatment copied from the honey row (country level: import VAT is paid by the Korean importer); not checked for maple syrup.",
+    "notes": [
+      "CFIA's export requirements library has no maple syrup entry for Korea (checked 2026-09-26).",
+      "UNCTAD TRAINS has no NTM data for this market; requirements come from the national source listed only.",
+      "Auto-sourced: pulled from official structured data, not checked by a person for maple syrup. Confirm with the Trade Commissioner Service before the first shipment."
+    ],
+    "sources": [
+      "https://wits.worldbank.org/tariff/trains/en/country/KOR/partner/CAN/product/170220",
+      "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library",
+      "https://data.worldbank.org/indicator/LP.LPI.CUST.XQ",
+      "https://www.fluentcargo.com/routes/vancouver-ca/busan-kr"
+    ],
+    "as_of": "2026-09-26"
+  },
+  {
+    "category": "maple_syrup",
+    "country_code": "US",
+    "lpi_customs_score": 3.7,
+    "sea_distance_nm": 0,
+    "weekly_sailings": 7,
+    "shipping_route": "Land border: truck or rail, no ocean leg",
+    "shipping_source": null,
+    "language": "en",
+    "country": "United States",
+    "status": "open",
+    "status_note": "",
+    "compliance_confidence": "auto_sourced",
+    "tariff_rate": 0.0,
+    "mfn_rate": 0.0,
+    "tariff_note": "US HTS 1702.20.40 (maple syrup, other): general rate Free. Maple syrup is not on CBP's August 2026 Section 338 list for Canada, unlike honey.",
+    "trade_agreement": "CUSMA",
+    "compliance_requirements": [
+      {
+        "name": "FDA food facility registration",
+        "tier": 2,
+        "detail": "FDA: facilities that produce, store, or otherwise handle imported food must be registered with FDA.",
+        "source": "https://www.fda.gov/food/food-imports-exports/importing-food-products-united-states",
+        "lead_time_weeks": 1,
+        "lead_time_basis": "estimate",
+        "confidence": "auto_sourced"
+      },
+      {
+        "name": "FDA Prior Notice for each shipment",
+        "tier": 1,
+        "detail": "FDA: prior notice of incoming shipments must be provided to FDA; imported food is subject to FDA inspection at the port of entry.",
+        "source": "https://www.fda.gov/food/food-imports-exports/importing-food-products-united-states",
+        "lead_time_weeks": 0,
+        "lead_time_basis": "estimate",
+        "confidence": "auto_sourced"
+      },
+      {
+        "name": "Foreign Supplier Verification Program (US importer)",
+        "tier": 1,
+        "detail": "FDA: the US importer must verify its foreign suppliers under the Foreign Supplier Verification Programs (FSVP) rule; expect them to ask for your food-safety records.",
+        "source": "https://www.fda.gov/food/food-imports-exports/importing-food-products-united-states",
+        "lead_time_weeks": 2,
+        "lead_time_basis": "estimate",
+        "confidence": "auto_sourced"
+      }
+    ],
+    "tax_burden": 0.0,
+    "tax_note": "Tax treatment copied from the honey row (no federal VAT; sold through a US importer); not checked for maple syrup.",
+    "notes": [
+      "CFIA's export requirements library has no maple syrup entry for the US (checked 2026-09-26).",
+      "UNCTAD TRAINS has no NTM data for this market; requirements come from the national source listed only.",
+      "Auto-sourced: pulled from official structured data, not checked by a person for maple syrup. Confirm with the Trade Commissioner Service before the first shipment."
+    ],
+    "sources": [
+      "https://hts.usitc.gov/reststop/search?keyword=1702.20",
+      "https://content.govdelivery.com/attachments/USDHSCBP/2026/08/21/file_attachments/3754630/Section%20338%20Canada%20HTS%20LIST%20Final.pdf",
+      "https://www.fda.gov/food/food-imports-exports/importing-food-products-united-states",
+      "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library",
+      "https://data.worldbank.org/indicator/LP.LPI.CUST.XQ"
+    ],
+    "as_of": "2026-09-26"
+  },
+  {
+    "category": "maple_syrup",
+    "country_code": "MX",
+    "lpi_customs_score": 2.5,
+    "sea_distance_nm": 10400,
+    "weekly_sailings": 0.75,
+    "shipping_route": "Vancouver → Manzanillo, ~32 days, transshipment only",
+    "shipping_source": "https://www.fluentcargo.com/routes/vancouver-ca/manzanillo-mx",
+    "language": "es",
+    "country": "Mexico",
+    "status": "open",
+    "status_note": "",
+    "compliance_confidence": "unknown",
+    "tariff_rate": 0.0,
+    "mfn_rate": 0.15,
+    "tariff_note": "Duty-free under CUSMA; 15% MFN without it (UNCTAD TRAINS via WITS, 2022).",
+    "trade_agreement": "CUSMA",
+    "compliance_requirements": [],
+    "tax_burden": 0.0,
+    "tax_note": "",
+    "notes": [
+      "CFIA's export requirements library has no maple syrup entry for Mexico (checked 2026-09-26). Unlike honey, nothing we found closes Mexico to Canadian maple syrup.",
+      "UNCTAD TRAINS has no NTM data for this market; requirements come from the national source listed only.",
+      "Auto-sourced: pulled from official structured data, not checked by a person for maple syrup. Confirm with the Trade Commissioner Service before the first shipment."
+    ],
+    "sources": [
+      "https://wits.worldbank.org/tariff/trains/en/country/MEX/partner/CAN/product/170220",
+      "https://inspection.canada.ca/en/exporting-food-plants-animals/food-exports/requirements-library",
+      "https://data.worldbank.org/indicator/LP.LPI.CUST.XQ",
+      "https://www.fluentcargo.com/routes/vancouver-ca/manzanillo-mx"
+    ],
+    "as_of": "2026-09-26"
+  }
+]

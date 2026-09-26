@@ -1,0 +1,9 @@
+{
+  "170220": {
+    "label": "Maple syrup",
+    "category": "maple_syrup",
+    "file": "maple_syrup.json",
+    "as_of": "2026-09-26",
+    "method": "Auto-sourced from official structured data: UNCTAD TRAINS non-tariff measures (HS 170220, imports from Canada), national tariff schedules (UK Trade Tariff API, EU TARIC, Japan Customs, Australian Border Force, US HTS) and WITS/TRAINS applied tariffs, plus the FDA and CFIA pages cited per requirement. Not checked by a person for this product."
+  }
+}
