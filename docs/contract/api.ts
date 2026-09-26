@@ -3,10 +3,19 @@
 
 export const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
 
-export type Component = "tariff" | "compliance" | "customs" | "tax";
+export type Component = "tariff" | "compliance" | "logistics" | "risk" | "tax";
+// Sub-scores (0-1) behind the components: compliance = tiers + lead_time; logistics = distance + sailings + customs; risk = fx + country_risk.
+export type Factor = "tiers" | "lead_time" | "distance" | "sailings" | "customs" | "fx" | "country_risk";
 export type MarketStatus = "open" | "blocked";
 
-export type Requirement = { name: string; tier: 1 | 2 | 3; detail: string; source: string };
+export type Requirement = {
+  name: string;
+  tier: 1 | 2 | 3;
+  detail: string;
+  source: string;
+  lead_time_weeks: number; // weeks this step adds before the first shipment
+  lead_time_basis: "official" | "estimate"; // show "estimate" honestly in the UI
+};
 
 export type MarketEntry = {
   category: string;
@@ -23,6 +32,10 @@ export type MarketEntry = {
   lpi_customs_score: number | null;
   tax_burden: number;
   tax_note: string;
+  sea_distance_nm: number | null; // null for services; 0 = land border
+  weekly_sailings: number | null;
+  shipping_route: string; // e.g. "Vancouver → Yokohama, ~11 days, direct sailings 1-2×/week"
+  shipping_source: string | null;
   notes: string[];
   sources: string[];
   as_of: string;
@@ -40,6 +53,17 @@ export type Middleman = {
   source: string;
 };
 
+export type CountryFacts = {
+  country_code: string;
+  currency: string;
+  fx_volatility: number; // fraction, 0.06 = 6% a year vs CAD
+  fx_note: string;
+  fx_source: string;
+  country_risk: number; // OECD 0-7
+  country_risk_source: string;
+  as_of: string;
+};
+
 export type ScoredMarket = {
   country: string;
   country_code: string;
@@ -48,9 +72,13 @@ export type ScoredMarket = {
   score: number | null; // 0-100, lower = easier; null when blocked
   rank: number;
   components: Partial<Record<Component, number>>; // 0-1 each; {} when blocked
+  factors: Partial<Record<Factor, number>>; // 0-1 each; {} when blocked
   breakdown: Partial<Record<Component, number>>; // points, sums to score; {} when blocked
   top_blocker: Component | null;
+  lead_time_weeks: number; // weeks before the first legal shipment
+  lead_time_estimated: boolean;
   entry: MarketEntry;
+  country_facts: CountryFacts | null;
   middlemen: Middleman[];
 };
 
@@ -78,7 +106,8 @@ export type BusinessProfile = {
   business_number: string;
 };
 
-export type Weights = { tariff: number; compliance: number; customs: number; tax: number };
+export type Weights = { tariff: number; compliance: number; logistics: number; risk: number; tax: number };
+export const DEFAULT_WEIGHTS: Weights = { tariff: 0.35, compliance: 0.3, logistics: 0.15, risk: 0.1, tax: 0.1 };
 
 export type AnalyzeResponse = {
   profile: BusinessProfile;
