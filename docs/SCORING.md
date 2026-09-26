@@ -1,6 +1,16 @@
-# How the friction score works
+# How Portage scores markets
 
 What you need to defend the numbers when a judge pushes on them.
+
+Every market gets three scores:
+
+- **Friction** (0–100, lower is easier): how hard it is to get in. Sections below.
+- **Opportunity** (0–100, higher is better): how much the market is worth entering. [Jump](#opportunity).
+- **Overall** (0–100, higher is better): the recommendation that blends the two. [Jump](#overall-recommendation).
+
+The UI can rank by any of the three; the default is overall.
+
+# Friction
 
 ## The formula
 
@@ -67,10 +77,66 @@ Story: open the UK, grow Japan. Australia shows why logistics matters: easy on p
 
 **B2B SaaS.** No tariffs or shipping, so the ranking is compliance plus risk: Australia leads; Korea and Japan are close; Mexico's peso volatility (8% a year vs CAD) and OECD risk 3 now count against it; Germany and the UK carry GDPR representative duties; China is last (ICP licence ~4 months, data-export approval, withholding tax).
 
+## Opportunity
+
+```
+opportunity = 100 × (0.35·demand + 0.25·price + 0.15·growth + 0.25·foothold)
+```
+
+All four come from one dataset: UN Comtrade annual imports of natural honey (HS 0409) reported by each market, 2024 vs 2019, in US dollars.
+
+| Factor | How it's computed | Why |
+|---|---|---|
+| **Demand** | annual imports on a log scale: $1M → 0, $1B → 1 | A bigger import market has more buyers. Log scale so the US doesn't swamp everything |
+| **Price** | the market's average import price per kg **after the tariff a Canadian exporter pays**, ÷ Canada's own average export price, ÷ 1.5 (capped at 1) | Premium markets pay more per kg, but a tariff eats that premium. Korea pays $8.04/kg; after 243% duty that's $2.34, below Canada's $4.04 |
+| **Growth** | compound annual growth of imports 2019–2024: −10%/yr → 0, +10%/yr → 1 | Growing markets have room for new suppliers |
+| **Foothold** | Canada's share of the market's imports: 10% or more → 1 | Buyers, routes and reputation already exist, so it's less risky for a newcomer |
+
+**Honey numbers (2024):**
+
+| Market | Imports | Price paid / after tariff | Growth 2019–24 | Canada's share | Opportunity |
+|---|---|---|---|---|---|
+| Japan | $137M | $3.01 / $3.01 | −1.1%/yr | 12.0% | **69.0** |
+| United States | $650M | $2.55 / $1.70 | +8.6%/yr | 4.2% | 64.4 |
+| South Korea | $17M | $8.04 / $2.34 | +11.1%/yr | 5.8% | 53.7 |
+| Germany | $234M | $2.97 / $2.97 | +0.3%/yr | ~0% | 47.6 |
+| China | $48M | $15.23 / $13.24 | −10.7%/yr | 0.3% | 45.5 |
+| United Kingdom | $123M | $2.04 / $2.04 | +2.1%/yr | ~0% | 41.9 |
+| Australia | $34M | $3.78 / $3.78 | −1.5%/yr | 0% | 39.9 |
+
+Canada's own export price: $4.04/kg (11,206 t, $45.3M, 2024).
+
+**Caveats to say out loud.** China's average price is inflated by premium New Zealand manuka honey, so its price factor overstates what Canadian clover honey would fetch. The US figures are from 2024, before the 50% tariff. Import averages mix bulk and retail honey, so price is a relative signal, not a quote. Services don't cross customs, so there's no equivalent trade data for SaaS: its opportunity is shown as unavailable rather than guessed.
+
+## Overall recommendation
+
+```
+overall = opportunity^a × ease^(1−a),   ease = 100 − friction,   a = 0.5 by default
+```
+
+A geometric mean, not an average: a near-zero on either side drags the result down. A big market behind a prohibitive barrier isn't a good bet, and neither is an easy market nobody buys in. An average would let Korea's growth and foothold hide its 243% tariff.
+
+`a` is the one slider a founder needs: 0 = **quick wins** (ease only), 1 = **biggest prize** (opportunity only). A cash-tight beekeeper slides left; a well-funded packer slides right. It also answers "your weights are arbitrary": the founder chooses.
+
+**Honey, default a = 0.5:**
+
+| Rank | Market | Overall | Friction | Opportunity | The one-line story |
+|---|---|---|---|---|---|
+| 1 | Japan | **75.2** | 18.1 | 69.0 | Already a Canadian honey market, 0% under CPTPP, paperwork only. Go here first |
+| 2 | United Kingdom | 59.4 | 15.7 | 41.9 | Easiest market to enter, but Canada has no foothold yet |
+| 3 | Germany | 57.7 | 30.2 | 47.6 | Europe's biggest importer, behind 12 weeks of EU listing |
+| 4 | United States | 56.3 | 50.7 | 64.4 | Still the biggest market, but the 50% tariff costs a third of the price |
+| 5 | Australia | 55.8 | 21.8 | 39.9 | Easy paperwork, a month at sea, and it produces its own honey |
+| 6 | China | 52.7 | 38.9 | 45.5 | Shrinking imports, 15% tariff, months of registration |
+| 7 | South Korea | 47.8 | 57.4 | 53.7 | Growing and premium, but the tariff wipes out the premium |
+| — | Mexico | — | blocked | — | No CFIA export certificate for honey |
+
+Slider at quick wins (a = 0): UK first. Slider at biggest prize (a = 1): Japan first, US second.
+
 ## Known limits (say these before a judge does)
 
 - The data is a curated snapshot (as of Sept 26, 2026), not live. Each row carries `as_of` and its sources.
 - Distances are port to port from the best Canadian gateway; the inland leg (e.g. Alberta to Vancouver by rail) isn't counted yet, so the score is the same wherever in Canada you are.
 - Some lead times are estimates (flagged); LPI customs scores are country-wide, not product-specific.
-- The score measures how hard a market is, not how big or lucrative it is. Market size and price are the next thing to add.
+- Opportunity uses 2024 trade data (latest complete year) and exists for goods only.
 - Documents are drafts for the founder to review. Portage never files anything itself.

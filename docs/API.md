@@ -7,7 +7,7 @@ Base URL: `http://localhost:8000` (interactive docs at `/docs`). Types: `backend
 | GET | `/health` | | `{status, markets, categories}` |
 | GET | `/api/categories` | | `Category[]` |
 | POST | `/api/analyze` | `{description}` | `AnalyzeResponse` (profile + ranked markets) |
-| POST | `/api/rank` | `{category, weights?}` | `ScoredMarket[]`, easiest first, blocked last |
+| POST | `/api/rank` | `{category, weights?, sort_by?, prize_weight?}` | `ScoredMarket[]`, best first under `sort_by` (`overall` default, `friction`, `opportunity`), blocked last |
 | POST | `/api/documents` | `{profile, country_code}` | `DocumentDraft[]` |
 | POST | `/api/documents/{id}/pdf` | `{profile, country_code}` | `application/pdf` |
 | POST | `/api/outreach` | `{profile, country_code, middleman_id}` | `OutreachDraft` (English) |
@@ -23,3 +23,11 @@ Some markets are closed to a product (Mexico doesn't accept Canadian honey). Tho
 
 - `honey` (goods, HS 0409.00)
 - `b2b_saas` (services)
+
+## Three scores per market
+
+- `score`: **friction** 0–100, lower = easier to get into.
+- `opportunity`: 0–100, higher = more worth entering (import demand, post-tariff price, growth, Canada's foothold). Goods only; `null` for SaaS.
+- `overall`: the recommendation, `opportunity^a × (100 − friction)^(1−a)` with `a = prize_weight` (default 0.5). For SaaS it equals `100 − friction`.
+
+`/api/analyze` ranks by `overall` with the default `prize_weight`. Use `/api/rank` with `sort_by` for the toggle and `prize_weight` for the "quick wins ↔ biggest prize" slider. See docs/SCORING.md.

@@ -64,17 +64,37 @@ export type CountryFacts = {
   as_of: string;
 };
 
+export type OpportunityFacts = {
+  year: number;
+  import_value_usd: number;
+  import_volume_kg: number;
+  unit_value_usd_kg: number; // what the market pays per kg
+  net_unit_value_usd_kg: number; // ...after the tariff a Canadian exporter pays
+  canada_unit_value_usd_kg: number; // Canada's own export price
+  growth_rate: number; // CAGR, 0.05 = 5%/yr
+  growth_years: string; // "2019–2024"
+  canada_share: number; // 0.12 = 12% of the market's imports already come from Canada
+  note: string;
+  sources: string[];
+};
+
+export type SortBy = "overall" | "friction" | "opportunity";
+
 export type ScoredMarket = {
   country: string;
   country_code: string;
   status: MarketStatus; // "blocked": show last, greyed, with status_note instead of a score
   status_note: string;
-  score: number | null; // 0-100, lower = easier; null when blocked
-  rank: number;
+  score: number | null; // FRICTION 0-100, lower = easier; null when blocked
+  opportunity: number | null; // 0-100, higher = more worth it; null when blocked or no trade data (SaaS)
+  overall: number | null; // 0-100, higher = go here first; = 100 - friction when opportunity is null; null when blocked
+  rank: number; // position under the requested sort_by (default "overall")
   components: Partial<Record<Component, number>>; // 0-1 each; {} when blocked
   factors: Partial<Record<Factor, number>>; // 0-1 each; {} when blocked
   breakdown: Partial<Record<Component, number>>; // points, sums to score; {} when blocked
   top_blocker: Component | null;
+  opportunity_components: Partial<Record<"demand" | "price" | "growth" | "foothold", number>>; // 0-1 each
+  opportunity_facts: OpportunityFacts | null;
   lead_time_weeks: number; // weeks before the first legal shipment
   lead_time_estimated: boolean;
   entry: MarketEntry;
@@ -114,6 +134,7 @@ export type AnalyzeResponse = {
   category: Category | null; // null => unsupported product; show a friendly message
   markets: ScoredMarket[];
   mode: "llm" | "offline";
+  opportunity_available: boolean; // false for SaaS: show "opportunity not available for services"
 };
 
 export type DocumentDraft = {
@@ -147,7 +168,9 @@ async function request<T>(path: string, body?: unknown): Promise<T> {
 export const api = {
   categories: () => request<Category[]>("/api/categories"),
   analyze: (description: string) => request<AnalyzeResponse>("/api/analyze", { description }),
-  rank: (category: string, weights?: Weights) => request<ScoredMarket[]>("/api/rank", { category, weights }),
+  // sort_by: which of the three views to rank by; prize_weight: 0 = quick wins (ease only) … 1 = biggest prize (opportunity only).
+  rank: (category: string, opts: { weights?: Weights; sort_by?: SortBy; prize_weight?: number } = {}) =>
+    request<ScoredMarket[]>("/api/rank", { category, ...opts }),
   documents: (profile: BusinessProfile, country_code: string) =>
     request<DocumentDraft[]>("/api/documents", { profile, country_code }),
   outreach: (profile: BusinessProfile, country_code: string, middleman_id: string) =>
