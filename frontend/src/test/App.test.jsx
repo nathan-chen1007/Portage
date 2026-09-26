@@ -9,6 +9,17 @@ function backend(extra = {}) {
     "/api/categories": [HONEY],
     "/api/analyze": { profile: PROFILE, category: HONEY, markets: MARKETS, mode: "llm", opportunity_available: false },
     "/api/rank": MARKETS,
+    "/api/forwarders": {
+      as_of: "2026-09-26",
+      note: "",
+      source: "https://www.ciffa.com/",
+      route: "Vancouver → United Kingdom",
+      confirm_note: "Confirm the route (Vancouver → United Kingdom) and food handling when you request a quote.",
+      forwarders: [
+        { id: "yusen-canada", name: "Yusen Logistics (Canada) Inc.", why: "CIFFA member", lcl_url: "https://example.com/lcl", contact_url: "https://example.com/quote" },
+      ],
+    },
+    "/api/group-quote": { subject: "Group quote request", body: "natural honey, HS 0409.00", sample: true },
     ...extra,
   });
 }
@@ -95,14 +106,15 @@ describe("App", () => {
     await openHoney();
     await userEvent.click(screen.getByRole("tab", { name: "Ship together" }));
     expect(screen.getByRole("heading", { name: /Canada is stronger together/ })).toBeInTheDocument();
-    expect(screen.getByText("Preview · sample producers")).toBeInTheDocument();
+    expect(screen.getAllByText("Preview: sample group").length).toBeGreaterThan(0);
     await userEvent.click(screen.getByRole("button", { name: "Join the group" }));
     expect(await screen.findByText("You're in the group.")).toBeInTheDocument();
-    // Joining reveals the drafted forwarder quote request: sample data, never sent, no real company named.
+    // Joining reveals one drafted group quote request and real forwarders: sample data, never sent.
     expect(screen.getByRole("heading", { name: "Request freight quotes for the group" })).toBeInTheDocument();
     expect(screen.getByText("Draft: nothing is sent")).toBeInTheDocument();
-    expect(screen.getByText("Preview: sample group")).toBeInTheDocument();
-    expect(screen.getByText(/CIFFA-certified freight forwarder/)).toBeInTheDocument();
+    expect(await screen.findByText("Yusen Logistics (Canada) Inc.")).toBeInTheDocument();
+    expect(screen.getByText(/HS 0409.00/)).toBeInTheDocument();
+    expect(screen.getByText(/Confirm the route/)).toBeInTheDocument();
     expect(screen.queryByRole("button", { name: /send/i })).not.toBeInTheDocument();
   });
 

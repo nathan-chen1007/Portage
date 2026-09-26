@@ -1,6 +1,7 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { api } from "../lib/api.js";
 import { Badge, Button, Slider } from "./ui.jsx";
-import { CONTAINER_KG, UNITY_RED, cad, freightEstimate, freightQuoteEmail, sampleCohort, sharedCosts } from "../lib/together.js";
+import { CONTAINER_KG, UNITY_RED, cad, freightEstimate, sampleCohort, sharedCosts } from "../lib/together.js";
 
 /**
  * "Ship together" (PREVIEW, sample data): small Canadian exporters heading to the same market pool one
@@ -50,7 +51,7 @@ export function ShipTogether({ market, kind, profile }) {
       {/* ---------- headline ---------- */}
       <div className="relative overflow-hidden rounded-2xl border border-neutral-200 bg-gradient-to-br from-white to-neutral-50 p-5">
         <div className="flex flex-wrap items-center gap-2">
-          <Badge tone="accent">Preview · sample producers</Badge>
+          <Badge tone="accent">Preview: sample group</Badge>
           <span className="text-xs text-neutral-500">
             {provinces.length} provinces · {others} {goods ? "producers" : "companies"} heading to {country}
           </span>
@@ -281,14 +282,40 @@ function n_label(me, joined, y) {
   );
 }
 
-/** After joining: a drafted quote request to a generic freight forwarder. Fixed template; copy only, never sent. */
+/**
+ * After joining: ONE drafted quote request for the whole group (fixed template on the backend, never sent)
+ * plus three real CIFFA-member forwarders to send it to. Portage makes the match; the forwarder ships.
+ */
 function FreightQuote({ market, cohort, myKg, myProvince }) {
   const [copied, setCopied] = useState(false);
-  const q = freightQuoteEmail({ market, cohort, myKg, myProvince: provinceCode(myProvince) });
+  const [draft, setDraft] = useState(null);
+  const [fw, setFw] = useState(null);
+  const [error, setError] = useState(null);
+  const code = market.entry.country_code;
+  const producers = cohort.length + 1;
+  const combinedKg = cohort.reduce((a, m) => a + (m.kg ?? 0), 0) + myKg;
+  const provinces = [...cohort.map((m) => m.prov), provinceCode(myProvince)].filter(Boolean);
+  const provKey = provinces.join(",");
+
+  useEffect(() => {
+    let live = true;
+    setError(null);
+    Promise.all([
+      api.groupQuote({ country_code: code, producers, combined_kg: combinedKg, provinces }),
+      api.forwarders(code),
+    ])
+      .then(([d, f]) => live && (setDraft(d), setFw(f)))
+      .catch((e) => live && setError(e.message));
+    return () => {
+      live = false;
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [code, producers, combinedKg, provKey]);
 
   async function copy() {
+    if (!draft) return;
     try {
-      await navigator.clipboard.writeText(`To: ${q.recipient}\nSubject: ${q.subject}\n\n${q.body}`);
+      await navigator.clipboard.writeText(`Subject: ${draft.subject}\n\n${draft.body}`);
       setCopied(true);
       setTimeout(() => setCopied(false), 1500);
     } catch {
@@ -308,27 +335,54 @@ function FreightQuote({ market, cohort, myKg, myProvince }) {
         </span>
       </div>
       <p className="mt-1 text-xs text-neutral-500">
-        Portage writes to a forwarder on behalf of all {q.producers} producers ({(q.kg / 1000).toFixed(1)} t combined). The forwarder ships; Portage only
-        makes the match.
+        One request for all {producers} producers ({(combinedKg / 1000).toFixed(1)} t combined), from your group coordinator. The forwarder ships;
+        Portage only makes the match.
       </p>
-      <dl className="mt-3 space-y-1 text-sm">
-        <div className="flex gap-2">
-          <dt className="w-16 shrink-0 text-neutral-500">To</dt>
-          <dd className="font-medium">{q.recipient}</dd>
+
+      {error && <p className="mt-3 text-sm text-red-700">Couldn't load the draft: {error}</p>}
+
+      {draft && (
+        <>
+          <p className="mt-3 text-sm">
+            <span className="text-neutral-500">Subject </span>
+            {draft.subject}
+          </p>
+          <pre className="mt-2 max-h-72 overflow-auto whitespace-pre-wrap rounded-lg bg-neutral-50 p-3 font-sans text-sm leading-relaxed text-neutral-800">
+            {draft.body}
+          </pre>
+          <div className="mt-2 flex justify-end">
+            <Button variant="outline" size="sm" onClick={copy}>
+              {copied ? "Copied" : "Copy email"}
+            </Button>
+          </div>
+        </>
+      )}
+
+      {fw && (
+        <div className="mt-4">
+          <h5 className="text-sm font-semibold">Send it to a CIFFA-member forwarder</h5>
+          <ul className="mt-2 divide-y divide-neutral-100 rounded-lg border border-neutral-200">
+            {fw.forwarders.map((f) => (
+              <li key={f.id} className="px-3 py-2.5">
+                <div className="text-sm font-medium">{f.name}</div>
+                <div className="text-xs text-neutral-500">{f.why}</div>
+                <div className="mt-1 flex flex-wrap gap-3 text-xs">
+                  <a href={f.lcl_url} target="_blank" rel="noreferrer" className="underline underline-offset-2 hover:text-neutral-900">
+                    Shared-container (LCL) service
+                  </a>
+                  <a href={f.contact_url} target="_blank" rel="noreferrer" className="underline underline-offset-2 hover:text-neutral-900">
+                    Request a quote
+                  </a>
+                </div>
+              </li>
+            ))}
+          </ul>
+          <p className="mt-2 text-xs text-neutral-500">{fw.confirm_note}</p>
+          <p className="mt-1 text-[11px] text-neutral-400">
+            Listed from the CIFFA 2024 membership directory, as of {fw.as_of}. Public company pages only. Portage isn't paid by these forwarders.
+          </p>
         </div>
-        <div className="flex gap-2">
-          <dt className="w-16 shrink-0 text-neutral-500">Subject</dt>
-          <dd>{q.subject}</dd>
-        </div>
-      </dl>
-      <pre className="mt-3 max-h-72 overflow-auto whitespace-pre-wrap rounded-lg bg-neutral-50 p-3 font-sans text-sm leading-relaxed text-neutral-800">
-        {q.body}
-      </pre>
-      <div className="mt-3 flex justify-end">
-        <Button variant="outline" size="sm" onClick={copy}>
-          {copied ? "Copied" : "Copy email"}
-        </Button>
-      </div>
+      )}
     </section>
   );
 }

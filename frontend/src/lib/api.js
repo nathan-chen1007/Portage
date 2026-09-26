@@ -52,6 +52,9 @@ export const api = {
   documents: (profile, country_code) => request("/api/documents", { profile, country_code }),
   outreach: (profile, country_code, middleman_id) => request("/api/outreach", { profile, country_code, middleman_id }),
   voice: (text, language) => request("/api/voice", { text, language }),
+  // Ship together (preview): real CIFFA-member forwarders + one drafted group quote request (fixed template).
+  forwarders: (market) => request(`/api/forwarders?market=${encodeURIComponent(market)}`),
+  groupQuote: (body) => request("/api/group-quote", body),
   async pdf(profile, country_code, docId) {
     const res = await fetch(`${API_URL}/api/documents/${docId}/pdf`, {
       method: "POST",

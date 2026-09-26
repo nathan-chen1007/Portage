@@ -15,17 +15,18 @@ function seeded(str) {
   };
 }
 
+// Mostly Prairie towns: the Prairies ship about 77% of Canada's honey exports (AAFC 2024).
 const GOODS_PLACES = [
   ["Peace River", "AB"],
   ["Falher", "AB"],
+  ["Grande Prairie", "AB"],
   ["Tisdale", "SK"],
   ["Nipawin", "SK"],
+  ["Melfort", "SK"],
   ["Dauphin", "MB"],
   ["Swan River", "MB"],
   ["Vernon", "BC"],
   ["Guelph", "ON"],
-  ["Lac-Mégantic", "QC"],
-  ["Charlottetown", "PE"],
 ];
 const GOODS_KINDS = ["Family apiary", "Beekeeping co-op", "Honey packer", "Apiary", "Meadery"];
 
@@ -96,72 +97,4 @@ export function sharedCosts(market, kind) {
 
 export function cad(n) {
   return `$${Math.round(n).toLocaleString()}`;
-}
-
-// ---------- freight quote request (PREVIEW: fixed template, never sent) ----------
-
-const DEST_PORT = {
-  JP: "Port of Tokyo / Yokohama",
-  GB: "Liverpool or Felixstowe",
-  DE: "Hamburg",
-  AU: "Sydney",
-  KR: "Busan",
-  CN: "Shanghai",
-};
-const PRAIRIES = new Set(["AB", "SK", "MB"]);
-
-/**
- * Deterministic quote-request email from Portage, on behalf of the group, to a generic CIFFA-certified
- * forwarder. No LLM, no real company named, nothing sent: the UI only offers a Copy button.
- */
-export function freightQuoteEmail({ market, cohort, myKg, myProvince }) {
-  const e = market.entry;
-  const country = e.country.replace(" (EU)", "");
-  const land = (e.sea_distance_nm ?? 1) === 0;
-  const gateway = (e.shipping_route || "").split("→")[0].trim() || "Vancouver";
-  const dest = DEST_PORT[e.country_code] ?? country;
-  const producers = cohort.length + 1;
-  const kg = cohort.reduce((a, m) => a + (m.kg ?? 0), 0) + myKg;
-  const provs = [...new Set([...cohort.map((m) => m.prov), myProvince].filter(Boolean))];
-  const prairieKg = cohort.filter((m) => PRAIRIES.has(m.prov)).reduce((a, m) => a + m.kg, 0) + (PRAIRIES.has(myProvince) ? myKg : 0);
-  const fill = Math.round((Math.min(kg, CONTAINER_KG) / CONTAINER_KG) * 100);
-
-  const route = land ? `the Prairies → ${country} by truck` : `${gateway} → ${dest}, ${country}`;
-  const service = land
-    ? "LTL consolidation (combining the producers' loads on one truck)"
-    : "LCL consolidation (combining the producers' small loads into one container)";
-  const recipient = land
-    ? `CIFFA-certified freight forwarder, Prairies → ${country}`
-    : `CIFFA-certified freight forwarder, ${gateway} → ${country}`;
-
-  const subject = `Quote request: ${land ? "LTL" : "LCL"} consolidation, natural honey (HS 0409.00), ${route} — ${producers} Canadian producers`;
-  const body = [
-    "Hello,",
-    "",
-    `I'm writing from Portage on behalf of a group of ${producers} small Canadian honey producers who want to ship to ${country} together. Portage matches exporters heading to the same market; we don't book or ship cargo ourselves, so we're looking for a forwarder to handle the group's shipment.`,
-    "",
-    "Shipment details",
-    "- Product: natural honey, HS 0409.00 (food grade, in drums and retail cases)",
-    `- Combined volume: about ${(kg / 1000).toFixed(1)} t (${kg.toLocaleString()} kg) from ${producers} producers${land ? "" : `, roughly ${fill}% of a 20 ft container`}`,
-    `- Origin: producers in ${provs.join(", ")}${prairieKg > kg / 2 ? ", most of the volume from the Prairies" : ""}; pickup or delivery to a consolidation point to be agreed`,
-    `- Route: ${route}`,
-    `- Service: ${service}`,
-    "- Paperwork: each producer holds its own CFIA export certificate for its lot",
-    "",
-    "Could you quote:",
-    "1. Price (per kg or per shipment), and how it's split across the shippers",
-    "2. Transit time and sailing (or departure) schedule",
-    "3. Cargo insurance options",
-    "4. Document handling: commercial invoices, packing lists, origin declarations, certificates, and customs clearance at destination",
-    "",
-    "We're planning a first shipment in [month]. Happy to set up a call.",
-    "",
-    "Thank you,",
-    `Portage, on behalf of the ${country} honey group`,
-    "[contact email]",
-    "",
-    "Growing Canada, together.",
-  ].join("\n");
-
-  return { recipient, subject, body, producers, kg };
 }
