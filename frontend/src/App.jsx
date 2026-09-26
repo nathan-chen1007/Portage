@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { API_URL, DEFAULT_PRIZE_WEIGHT, DEFAULT_WEIGHTS, api, emptyProfile } from "./lib/api.js";
+import { DEFAULT_PRIZE_WEIGHT, DEFAULT_WEIGHTS, api, emptyProfile } from "./lib/api.js";
 import { FactorChips } from "./components/FrictionBar.jsx";
 import { FactorPanel } from "./components/FactorPanel.jsx";
 import { LoadingScreen } from "./components/LoadingScreen.jsx";
@@ -7,19 +7,12 @@ import { MarketList } from "./components/MarketList.jsx";
 import { MarketPanel } from "./components/MarketPanel.jsx";
 import { OpportunityMap } from "./components/OpportunityMap.jsx";
 import { TunePanel } from "./components/TunePanel.jsx";
-import { Badge, Button, ErrorNote, Icon, Segmented, Spinner } from "./components/ui.jsx";
+import { HealthPill, Logo } from "./components/Brand.jsx";
+import { Landing } from "./components/Landing.jsx";
+import { Badge, Button, Icon, Segmented, Spinner } from "./components/ui.jsx";
 import { COMPONENTS, VIEWS } from "./lib/format.js";
 
-export const EXAMPLES = [
-  {
-    label: "Honey producer, Alberta",
-    text: "We're Prairie Gold Apiaries, a family beekeeping operation near Falher, Alberta. We sell raw creamed clover honey in 500 g jars and 20 kg pails. Most of our sales used to go to the US. Contact: Dana Morin, dana@prairiegold.ca",
-  },
-  {
-    label: "HR software, Waterloo",
-    text: "Northwind HR is a Waterloo startup selling cloud HR analytics software to mid-size companies. We store employee records, performance reviews and payroll data for our customers. Contact: Sam Lee, sam@northwindhr.com",
-  },
-];
+export { EXAMPLES } from "./components/Landing.jsx";
 
 const HEADINGS = { overall: "Best bet first", friction: "Easiest first", opportunity: "Biggest prize first" };
 
@@ -301,180 +294,6 @@ export default function App() {
   );
 }
 
-/* ---------------------------------------------------------------- */
-
-// Landing feature cards: each gets its own colour and icon, matching the Ship together card.
-const FEATURES = [
-  {
-    title: "Ranked, not listed",
-    desc: "Every market scored on tariffs, rules, shipping, risk and tax, with the source behind each number.",
-    color: "#2a78d6",
-    tint: "#eef4fc",
-    icon: <path d="M4 16V11M10 16V5M16 16V8" />,
-  },
-  {
-    title: "Paperwork, drafted",
-    desc: "Origin declarations and data agreements filled from what you told us.",
-    color: "#eb6834",
-    tint: "#fdf1ec",
-    icon: (
-      <>
-        <path d="M5 2.5h6.5L15 6v11.5H5z" />
-        <path d="M11.5 2.5V6H15M7.5 10h5M7.5 13h5" />
-      </>
-    ),
-  },
-  {
-    title: "A foot in the door",
-    desc: "A first email to a real importer, plus a voice note in their language.",
-    color: "#1baf7a",
-    tint: "#ecf8f3",
-    icon: (
-      <>
-        <rect x="2.5" y="4.5" width="15" height="11" rx="2" />
-        <path d="M3 5.5l7 5.5 7-5.5" />
-      </>
-    ),
-  },
-];
-
-function Landing({ health, categories, description, setDescription, onAnalyze, onPickCategory, loading, error, unsupported }) {
-  const canSubmit = description.trim().length >= 10 && !loading;
-  return (
-    <div className="min-h-screen bg-white text-neutral-900">
-      <header className="mx-auto flex max-w-5xl items-center justify-between px-4 py-5 sm:px-6">
-        <Logo />
-        <HealthPill health={health} />
-      </header>
-
-      {health === "down" && (
-        <div className="mx-auto max-w-3xl px-4 sm:px-6">
-          <ErrorNote>
-            Can't reach the backend{API_URL ? ` at ${API_URL}` : ""}. Start it with <code>backend\run.bat</code>, then refresh this page.
-          </ErrorNote>
-        </div>
-      )}
-
-      <main className="mx-auto max-w-3xl px-4 pb-16 pt-14 text-center sm:px-6 sm:pt-24">
-        <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-neutral-200 px-3 py-1 text-xs text-neutral-600">
-          <span className="h-1.5 w-1.5 rounded-full bg-accent" /> Built for Canadian exporters
-        </p>
-        <h1 className="text-4xl font-semibold tracking-tight sm:text-6xl">Find your next market.</h1>
-        <p className="mx-auto mt-5 max-w-xl text-lg text-neutral-500">
-          Describe what you sell. Portage ranks every market by how much it buys and how hard it is to enter, then drafts the paperwork and your
-          first message to a real importer.
-        </p>
-
-        <form
-          className="mt-10 text-left"
-          onSubmit={(e) => {
-            e.preventDefault();
-            if (canSubmit) onAnalyze();
-          }}
-        >
-          <div className="rounded-2xl border border-neutral-200 bg-white p-2 shadow-[0_2px_12px_rgba(0,0,0,0.05)] transition-shadow focus-within:border-neutral-300 focus-within:shadow-[0_4px_20px_rgba(0,0,0,0.08)]">
-            <label htmlFor="description" className="sr-only">
-              Describe your business
-            </label>
-            <textarea
-              id="description"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              onKeyDown={(e) => {
-                if (e.key === "Enter" && (e.metaKey || e.ctrlKey) && canSubmit) onAnalyze();
-              }}
-              placeholder="What does your company sell, and where are you based?"
-              rows={4}
-              className="w-full resize-none rounded-xl p-3 text-base outline-none placeholder:text-neutral-400"
-            />
-            <div className="flex flex-wrap items-center justify-between gap-3 px-1 pb-1">
-              <div className="flex flex-wrap gap-2">
-                {EXAMPLES.map((ex) => (
-                  <button
-                    type="button"
-                    key={ex.label}
-                    onClick={() => setDescription(ex.text)}
-                    className="rounded-full border border-neutral-200 px-3 py-1 text-xs text-neutral-600 transition-all hover:border-neutral-300 hover:bg-neutral-50 hover:text-neutral-900"
-                  >
-                    {ex.label}
-                  </button>
-                ))}
-              </div>
-              <Button type="submit" size="lg" disabled={!canSubmit}>
-                {loading ? (
-                  <>
-                    <Spinner /> Analyzing
-                  </>
-                ) : (
-                  "Find my markets"
-                )}
-              </Button>
-            </div>
-          </div>
-
-          {categories.length > 0 && (
-            <p className="mt-4 text-center text-xs text-neutral-500">
-              Or browse a category:{" "}
-              {categories.map((c, i) => (
-                <span key={c.id}>
-                  {i > 0 && " · "}
-                  <button type="button" onClick={() => onPickCategory(c)} className="font-medium text-neutral-700 underline underline-offset-2 hover:text-neutral-900">
-                    {c.label}
-                  </button>
-                </span>
-              ))}
-            </p>
-          )}
-          <div className="mt-4">
-            <ErrorNote>{error}</ErrorNote>
-          </div>
-        </form>
-
-        {unsupported && !loading && (
-          <div className="fade-up mt-10 rounded-2xl border border-neutral-200 p-6">
-            <p className="font-medium">We don't have verified data for that product yet.</p>
-            <p className="mt-1 text-sm text-neutral-500">
-              We only show sourced tariff and regulatory data, never guesses. Supported today:{" "}
-              {categories.map((c) => c.label).join(" and ") || "honey and B2B software"}.
-            </p>
-          </div>
-        )}
-
-        <div className="mt-16 grid gap-4 text-left sm:grid-cols-2 lg:grid-cols-4">
-          {FEATURES.map((f) => (
-            <div key={f.title} className="rounded-2xl border p-4" style={{ borderColor: `${f.color}33`, background: `linear-gradient(135deg, #fff, ${f.tint})` }}>
-              <p className="flex items-center gap-2 text-sm font-semibold">
-                <svg viewBox="0 0 20 20" className="h-4 w-4 shrink-0" fill="none" stroke={f.color} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-                  {f.icon}
-                </svg>
-                {f.title}
-              </p>
-              <p className="mt-1 text-sm text-neutral-600">{f.desc}</p>
-            </div>
-          ))}
-          <div className="rounded-2xl border p-4" style={{ borderColor: "#d52b1e33", background: "linear-gradient(135deg, #fff, #fdf2f1)" }}>
-            <p className="flex items-center gap-2 text-sm font-semibold">
-              <span className="flex -space-x-1" aria-hidden>
-                {[0, 1, 2].map((i) => (
-                  <span key={i} className="h-3 w-3 rounded-full border-2 border-white" style={{ background: "#d52b1e", opacity: 1 - i * 0.25 }} />
-                ))}
-              </span>
-              Canada is stronger together
-            </p>
-            <p className="mt-1 text-sm text-neutral-600">
-              Pool a shipment with other Canadian producers heading to the same market, and split the costs no one should carry alone.
-            </p>
-          </div>
-        </div>
-      </main>
-
-      <footer className="border-t border-neutral-100 py-6 text-center text-xs text-neutral-400">
-        Portage · AF Hacks: Growing Canada 2026 · Every figure links to its source.
-      </footer>
-    </div>
-  );
-}
-
 function TopBar({ health, result, description, setDescription, onAnalyze, onReset, loading }) {
   const { profile, category, mode } = result;
   return (
@@ -518,24 +337,5 @@ function TopBar({ health, result, description, setDescription, onAnalyze, onRese
         </span>
       </div>
     </header>
-  );
-}
-
-function Logo() {
-  return (
-    <span className="flex items-center gap-2 font-semibold tracking-tight">
-      <img src="/favicon.svg" alt="" className="h-6 w-6" />
-      Portage
-    </span>
-  );
-}
-
-function HealthPill({ health }) {
-  if (health === "checking") return <span className="text-xs text-neutral-400">Connecting…</span>;
-  return (
-    <span className="inline-flex items-center gap-1.5 text-xs text-neutral-500">
-      <span className={`h-1.5 w-1.5 rounded-full ${health === "ok" ? "bg-emerald-500" : "bg-red-500"}`} />
-      {health === "ok" ? "Live data" : "Backend offline"}
-    </span>
   );
 }
