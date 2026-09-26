@@ -3,7 +3,7 @@ import { API_URL } from "../lib/api.js";
 import { UNITY_RED } from "../lib/together.js";
 import { Arrow, Eyebrow, HealthPill, Logo } from "./Brand.jsx";
 import { AboutPage, FaqPage, MissionPage } from "./SitePages.jsx";
-import { Button, ErrorNote, Spinner, useDismiss } from "./ui.jsx";
+import { Button, ErrorNote, Spinner } from "./ui.jsx";
 
 export const EXAMPLES = [
   {
@@ -106,8 +106,6 @@ export function Landing(props) {
 
 function SiteNav({ page, go, onHow, onStart, health }) {
   const [menu, setMenu] = useState(false);
-  const [signin, setSignin] = useState(false);
-  const signRef = useDismiss(signin, () => setSignin(false));
 
   const links = [
     { key: "how", label: "How it works", onClick: onHow },
@@ -143,27 +141,6 @@ function SiteNav({ page, go, onHow, onStart, health }) {
           <span className="mr-2 hidden lg:inline-flex">
             <HealthPill health={health} />
           </span>
-          <div ref={signRef} className="relative hidden sm:block">
-            <Button variant="ghost" size="sm" onClick={() => setSignin((o) => !o)} aria-expanded={signin}>
-              Sign in
-            </Button>
-            {signin && (
-              <div className="pop absolute right-0 top-11 w-72 rounded-xl border border-neutral-200 bg-white p-4 text-sm shadow-lg">
-                <p className="font-semibold">Accounts aren't available yet</p>
-                <p className="mt-1 text-neutral-600">You can use Portage without one.</p>
-                <button
-                  type="button"
-                  onClick={() => {
-                    setSignin(false);
-                    onStart();
-                  }}
-                  className="mt-3 inline-flex items-center gap-1 font-medium text-neutral-900 hover:underline"
-                >
-                  Start without an account <Arrow className="h-3.5 w-3.5" />
-                </button>
-              </div>
-            )}
-          </div>
           <Button size="sm" onClick={onStart}>
             Get started <Arrow className="h-3.5 w-3.5" />
           </Button>
@@ -207,13 +184,13 @@ function SiteNav({ page, go, onHow, onStart, health }) {
 const FEATURES = [
   {
     title: "Market ranking",
-    desc: "Scores each market on tariffs, compliance, logistics, risk and tax, and sizes how much of your product it buys. Every figure links to its official source.",
+    desc: "Ranks markets by tariffs, rules, shipping, risk and tax, and by how much they buy. Every figure has a source.",
     color: "#2a78d6",
     icon: <path d="M4 16V11M10 16V5M16 16V8" />,
   },
   {
     title: "Paperwork drafts",
-    desc: "Lists the documents each market requires and pre-fills them from your description, such as certificates of origin for goods or data processing agreements for software.",
+    desc: "Pre-fills the documents each market requires, using what you told us.",
     color: "#eb6834",
     icon: (
       <>
@@ -224,7 +201,7 @@ const FEATURES = [
   },
   {
     title: "Importer outreach",
-    desc: "Finds importers in the market and drafts a first email to them, plus a voice note in the buyer's language. Nothing is sent until you send it.",
+    desc: "Finds importers and drafts a first email and a voice note in their language.",
     color: "#1baf7a",
     icon: (
       <>
@@ -235,7 +212,7 @@ const FEATURES = [
   },
   {
     title: "Ship together",
-    desc: "Shows other Canadian businesses heading to the same market, so you can share a container, split customs broker fees and meet larger order minimums.",
+    desc: "Groups Canadian businesses heading to the same market so they can share shipping costs.",
     color: UNITY_RED,
     preview: true,
     icon: (
@@ -249,16 +226,11 @@ const FEATURES = [
 ];
 
 const STEPS = [
-  { n: "1", title: "Describe your business", body: "Write a few sentences about what you sell and where you're based. Portage identifies your product and its trade classification." },
-  { n: "2", title: "Compare markets", body: "See markets ranked by ease of entry and market size. Change how much each factor counts and the ranking updates." },
-  { n: "3", title: "Take the next step", body: "Open a market to get its paperwork, importer contacts and a group of Canadian businesses to ship with." },
+  { n: "1", title: "Describe your business", body: "A few sentences on what you sell and where you're based." },
+  { n: "2", title: "Compare markets", body: "See every market ranked, and adjust what matters most to you." },
+  { n: "3", title: "Act on the best one", body: "Open a market for its paperwork, importers and shipping group." },
 ];
 
-const FACTS = [
-  ["8", "export markets compared"],
-  ["5", "entry factors scored"],
-  ["1", "search to compare them all"],
-];
 
 function Home({ categories, description, setDescription, onAnalyze, onPickCategory, loading, error, unsupported, inputRef, go, onStart }) {
   const canSubmit = description.trim().length >= 10 && !loading;
@@ -267,15 +239,11 @@ function Home({ categories, description, setDescription, onAnalyze, onPickCatego
       {/* ---------- hero ---------- */}
       <section className="relative overflow-hidden border-b border-neutral-200">
         <div className="grid-bg pointer-events-none absolute inset-0" aria-hidden />
-        <div className="relative mx-auto grid max-w-6xl items-center gap-12 px-4 pb-20 pt-14 sm:px-6 sm:pt-20 lg:grid-cols-[1.05fr_0.95fr]">
+        <div className="relative mx-auto grid max-w-6xl items-center gap-12 px-4 pb-20 pt-16 sm:px-6 sm:pt-24 lg:grid-cols-[1.2fr_0.8fr]">
           <div>
-            <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-neutral-200 bg-white px-3 py-1 text-xs font-medium text-neutral-600">
-              <span className="h-1.5 w-1.5 rounded-full" style={{ background: UNITY_RED }} /> For Canadian exporters
-            </p>
             <h1 className="text-4xl font-semibold leading-[1.08] tracking-tight sm:text-[3.5rem]">Find the right export market for your business.</h1>
             <p className="mt-5 max-w-xl text-lg leading-relaxed text-neutral-600">
-              Describe what you sell. Portage ranks international markets by how easy they are to enter and how much they buy, drafts the paperwork, and connects you
-              with other Canadian businesses shipping to the same place.
+              Describe what you sell. Portage ranks export markets, drafts the paperwork, and connects you with Canadian businesses shipping the same way.
             </p>
 
             <form
@@ -302,20 +270,7 @@ function Home({ categories, description, setDescription, onAnalyze, onPickCatego
                   rows={4}
                   className="w-full resize-none rounded-xl bg-transparent p-3 text-base outline-none placeholder:text-neutral-400"
                 />
-                <div className="flex flex-wrap items-center justify-between gap-3 px-1 pb-1">
-                  <div className="flex flex-wrap gap-2">
-                    {EXAMPLES.map((ex) => (
-                      <button
-                        type="button"
-                        key={ex.label}
-                        onClick={() => setDescription(ex.text)}
-                        className="inline-flex items-center gap-1.5 rounded-full border border-neutral-200 bg-white px-3 py-1 text-xs text-neutral-600 transition-colors hover:border-neutral-300 hover:bg-neutral-50 hover:text-neutral-900"
-                      >
-                        <span className="h-1.5 w-1.5 rounded-full" style={{ background: ex.color }} aria-hidden />
-                        {ex.label}
-                      </button>
-                    ))}
-                  </div>
+                <div className="flex justify-end px-1 pb-1">
                   <Button type="submit" size="lg" disabled={!canSubmit} className="rounded-xl">
                     {loading ? (
                       <>
@@ -331,8 +286,23 @@ function Home({ categories, description, setDescription, onAnalyze, onPickCatego
                 </div>
               </div>
 
+              <div className="mt-4 flex flex-wrap items-center gap-2 text-sm text-neutral-500">
+                <span>Try an example:</span>
+                {EXAMPLES.map((ex) => (
+                  <button
+                    type="button"
+                    key={ex.label}
+                    onClick={() => setDescription(ex.text)}
+                    className="inline-flex items-center gap-1.5 rounded-full border border-neutral-200 bg-white px-3 py-1 text-xs text-neutral-700 transition-colors hover:border-neutral-300 hover:bg-neutral-50"
+                  >
+                    <span className="h-1.5 w-1.5 rounded-full" style={{ background: ex.color }} aria-hidden />
+                    {ex.label}
+                  </button>
+                ))}
+              </div>
+
               {categories.length > 0 && (
-                <p className="mt-4 text-sm text-neutral-500">
+                <p className="mt-2 text-sm text-neutral-500">
                   Or browse a category:{" "}
                   {categories.map((c, i) => (
                     <span key={c.id}>
@@ -364,104 +334,47 @@ function Home({ categories, description, setDescription, onAnalyze, onPickCatego
         </div>
       </section>
 
-      {/* ---------- key facts ---------- */}
-      <section className="border-b border-neutral-200 bg-neutral-50">
-        <dl className="mx-auto grid max-w-6xl grid-cols-1 divide-y divide-neutral-200 px-4 sm:grid-cols-3 sm:divide-x sm:divide-y-0 sm:px-6">
-          {FACTS.map(([v, l]) => (
-            <div key={l} className="flex items-baseline gap-3 py-6 sm:justify-center">
-              <dt className="text-3xl font-semibold tracking-tight">{v}</dt>
-              <dd className="text-sm text-neutral-600">{l}</dd>
-            </div>
-          ))}
-        </dl>
-      </section>
-
       {/* ---------- features ---------- */}
-      <section className="mx-auto max-w-6xl px-4 py-24 sm:px-6">
-        <div className="max-w-2xl">
-          <Eyebrow>What Portage does</Eyebrow>
-          <h2 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">From choosing a market to your first shipment.</h2>
-        </div>
-        <div className="mt-12 grid gap-5 sm:grid-cols-2">
+      <section className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+        <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">What Portage does</h2>
+        <div className="mt-10 grid gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
           {FEATURES.map((f) => (
-            <div key={f.title} className="card-hover rounded-2xl border bg-white p-6" style={{ borderColor: `${f.color}40` }}>
-              <div className="flex items-center justify-between">
-                <span className="grid h-10 w-10 place-items-center rounded-xl" style={{ background: `${f.color}14` }}>
-                  <svg viewBox="0 0 20 20" className="h-5 w-5" fill="none" stroke={f.color} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-                    {f.icon}
-                  </svg>
-                </span>
-                {f.preview && <span className="rounded-full bg-neutral-100 px-2 py-0.5 text-[11px] font-medium text-neutral-600">Preview</span>}
-              </div>
-              <h3 className="mt-5 text-lg font-semibold tracking-tight">{f.title}</h3>
-              <p className="mt-2 leading-relaxed text-neutral-600">{f.desc}</p>
+            <div key={f.title}>
+              <span className="grid h-9 w-9 place-items-center rounded-lg" style={{ background: `${f.color}14` }}>
+                <svg viewBox="0 0 20 20" className="h-[18px] w-[18px]" fill="none" stroke={f.color} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                  {f.icon}
+                </svg>
+              </span>
+              <h3 className="mt-4 flex items-center gap-2 font-semibold">
+                {f.title}
+                {f.preview && <span className="rounded-full bg-neutral-100 px-1.5 py-0.5 text-[10px] font-medium text-neutral-500">Preview</span>}
+              </h3>
+              <p className="mt-1.5 text-sm leading-relaxed text-neutral-600">{f.desc}</p>
             </div>
           ))}
         </div>
       </section>
 
       {/* ---------- how it works ---------- */}
-      <section id="how" className="scroll-mt-16 border-y border-neutral-200 bg-neutral-50">
-        <div className="mx-auto max-w-6xl px-4 py-24 sm:px-6">
-          <div className="max-w-2xl">
-            <Eyebrow>How it works</Eyebrow>
-            <h2 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">Three steps. A few minutes.</h2>
-          </div>
-          <ol className="mt-12 grid gap-5 md:grid-cols-3">
+      <section id="how" className="scroll-mt-16 border-t border-neutral-200 bg-neutral-50">
+        <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+          <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">How it works</h2>
+          <ol className="mt-10 grid gap-8 md:grid-cols-3">
             {STEPS.map((s) => (
-              <li key={s.n} className="rounded-2xl border border-neutral-200 bg-white p-6">
-                <span className="grid h-8 w-8 place-items-center rounded-lg bg-neutral-900 text-sm font-semibold text-white">{s.n}</span>
-                <h3 className="mt-5 text-lg font-semibold tracking-tight">{s.title}</h3>
-                <p className="mt-2 leading-relaxed text-neutral-600">{s.body}</p>
+              <li key={s.n} className="flex gap-4">
+                <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-neutral-900 text-xs font-semibold text-white">{s.n}</span>
+                <div>
+                  <h3 className="font-semibold">{s.title}</h3>
+                  <p className="mt-1 text-sm leading-relaxed text-neutral-600">{s.body}</p>
+                </div>
               </li>
             ))}
           </ol>
-        </div>
-      </section>
-
-      {/* ---------- together band ---------- */}
-      <section className="px-4 py-24 sm:px-6">
-        <div className="relative mx-auto grid max-w-6xl gap-10 overflow-hidden rounded-3xl bg-neutral-950 px-6 py-14 text-white sm:px-12 lg:grid-cols-[1.2fr_1fr] lg:items-center">
-          <div className="band-glow pointer-events-none absolute inset-0" aria-hidden />
-          <div className="relative">
-            <Eyebrow className="text-neutral-400">Ship together</Eyebrow>
-            <h2 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">Canadian businesses are stronger together.</h2>
-            <p className="mt-5 max-w-xl text-lg leading-relaxed text-neutral-300">
-              Most small producers can't fill a shipping container or meet an importer's minimum order alone. Portage groups businesses heading to the same market so they
-              can share the cost. Each business keeps its own paperwork and pays its own share.
-            </p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <button
-                type="button"
-                onClick={onStart}
-                className="inline-flex h-11 items-center gap-2 rounded-xl bg-white px-5 text-[15px] font-medium text-neutral-900 transition-colors hover:bg-neutral-200"
-              >
-                Get started <Arrow className="h-4 w-4" />
-              </button>
-              <button
-                type="button"
-                onClick={() => go("mission")}
-                className="inline-flex h-11 items-center rounded-xl border border-white/20 px-5 text-[15px] font-medium text-white transition-colors hover:bg-white/10"
-              >
-                Read our mission
-              </button>
-            </div>
+          <div className="mt-12">
+            <Button size="lg" onClick={onStart} className="rounded-xl">
+              Get started <Arrow className="h-4 w-4" />
+            </Button>
           </div>
-          <ul className="relative space-y-3">
-            {[
-              ["Shared freight", "Fill one container instead of paying for part of one."],
-              ["Shared customs broker", "Split the broker and forwarding fees across the group."],
-              ["Combined volume", "Meet the minimum order an importer needs, together."],
-            ].map(([t, d]) => (
-              <li key={t} className="flex gap-3 rounded-xl border border-white/10 bg-white/5 p-4">
-                <span className="mt-1.5 h-2 w-2 shrink-0 rounded-full" style={{ background: UNITY_RED }} />
-                <span>
-                  <span className="block font-semibold">{t}</span>
-                  <span className="text-sm text-neutral-400">{d}</span>
-                </span>
-              </li>
-            ))}
-          </ul>
         </div>
       </section>
     </main>
@@ -477,9 +390,9 @@ function NetworkDiagram() {
   const hub = { x: 214, y: 180 };
   const mY = (i) => 54 + i * 36;
   return (
-    <div className="mx-auto w-full max-w-md rounded-2xl border border-neutral-200 bg-white p-5 shadow-[0_12px_40px_-16px_rgba(0,0,0,0.18)] lg:max-w-none" aria-hidden>
+    <div className="mx-auto w-full max-w-md rounded-2xl border border-neutral-200 bg-white p-5 lg:max-w-none" aria-hidden>
       <div className="grid grid-cols-3 text-[11px] font-medium uppercase tracking-wider text-neutral-400">
-        <span>Canadian businesses</span>
+        <span>Businesses</span>
         <span className="text-center">Portage</span>
         <span className="text-right">Markets</span>
       </div>
@@ -510,7 +423,7 @@ function NetworkDiagram() {
         ))}
       </svg>
       <p className="mt-2 border-t border-neutral-100 pt-4 text-sm text-neutral-600">
-        One search compares every market. Businesses heading to the same one can ship together.
+        Businesses heading to the same market can ship together.
       </p>
     </div>
   );
@@ -518,45 +431,25 @@ function NetworkDiagram() {
 
 /* ---------------- footer ---------------- */
 
-function SiteFooter({ go, onHow, onStart }) {
-  const col = (title, items) => (
-    <div>
-      <p className="text-xs font-semibold uppercase tracking-wider text-neutral-500">{title}</p>
-      <ul className="mt-4 space-y-2.5">
-        {items.map(([label, fn]) => (
-          <li key={label}>
-            <button type="button" onClick={fn} className="text-sm text-neutral-600 transition-colors hover:text-neutral-900">
+function SiteFooter({ go, onHow }) {
+  const links = [
+    ["How it works", onHow],
+    ["Mission", () => go("mission")],
+    ["About us", () => go("about")],
+    ["FAQ", () => go("faq")],
+  ];
+  return (
+    <footer className="border-t border-neutral-200">
+      <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-4 py-8 sm:px-6">
+        <Logo />
+        <nav aria-label="Footer" className="flex flex-wrap gap-x-5 gap-y-2">
+          {links.map(([label, fn]) => (
+            <button key={label} type="button" onClick={fn} className="text-sm text-neutral-500 transition-colors hover:text-neutral-900">
               {label}
             </button>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-  return (
-    <footer className="border-t border-neutral-200 bg-neutral-50">
-      <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-[1.6fr_1fr_1fr]">
-        <div>
-          <Logo />
-          <p className="mt-4 max-w-xs text-sm leading-relaxed text-neutral-600">
-            Export market research, paperwork and shared shipping for Canadian small businesses.
-          </p>
-        </div>
-        {col("Product", [
-          ["How it works", onHow],
-          ["Get started", onStart],
-        ])}
-        {col("Company", [
-          ["Mission", () => go("mission")],
-          ["About us", () => go("about")],
-          ["FAQ", () => go("faq")],
-        ])}
-      </div>
-      <div className="border-t border-neutral-200">
-        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-4 py-5 text-xs text-neutral-500 sm:px-6">
-          <span>© 2026 Portage · Built at AF Hacks: Growing Canada, Waterloo</span>
-          <span>Every figure links to its official source.</span>
-        </div>
+          ))}
+        </nav>
+        <span className="text-xs text-neutral-400">© 2026 Portage · AF Hacks: Growing Canada</span>
       </div>
     </footer>
   );

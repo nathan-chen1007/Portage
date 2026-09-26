@@ -1,8 +1,6 @@
 import { FrictionBar, PrizeBar } from "./FrictionBar.jsx";
 import { Badge, CountryMark } from "./ui.jsx";
-import { EASE_COLOR, PRIZE_COLOR, PRIZE_PARTS, agreementShort, component, ease, pct, viewScore } from "../lib/format.js";
-
-const SCORE_LABEL = { overall: "score", friction: "ease", opportunity: "prize" };
+import { EASE_COLOR, PRIZE_COLOR, agreementShort, ease, pct, viewScore } from "../lib/format.js";
 
 /**
  * Compact ranked list. Every number reads "higher is better", and the bar under each row shows where
@@ -23,7 +21,7 @@ export function MarketList({ markets, kind, selected, onSelect, onFactor, view =
               type="button"
               onClick={() => onSelect(m.country_code)}
               aria-pressed={isSel}
-              className={`group relative w-full rounded-xl border px-3.5 py-3 text-left transition-all duration-150 ${
+              className={`group relative w-full rounded-xl border px-3.5 py-2.5 text-left transition-all duration-150 ${
                 isSel
                   ? "border-neutral-900 bg-white shadow-[0_2px_8px_rgba(0,0,0,0.06)]"
                   : "border-neutral-200/80 bg-white hover:border-neutral-300 hover:shadow-sm"
@@ -58,7 +56,6 @@ export function MarketList({ markets, kind, selected, onSelect, onFactor, view =
                   <span className="block text-xl font-semibold leading-none tabular-nums tracking-tight">
                     {score == null ? "—" : score.toFixed(0)}
                   </span>
-                  {!blocked && <span className="text-[10px] uppercase tracking-wide text-neutral-400">{SCORE_LABEL[view] ?? "score"}</span>}
                 </span>
               </div>
               {blocked ? (
@@ -85,24 +82,15 @@ function ScoreBreakdown({ market, view, weights, onFactor }) {
     );
   }
   if (view === "opportunity" && market.opportunity != null) {
-    const oc = market.opportunity_components ?? {};
-    const best = [...PRIZE_PARTS].sort((x, y) => y.weight * (oc[y.key] ?? 0) - x.weight * (oc[x.key] ?? 0))[0];
     return (
       <div className="mt-2.5 flex items-center gap-2 pl-[4.25rem]">
         <PrizeBar market={market} thin />
-        <span className="w-24 shrink-0 truncate text-right text-[11px] text-neutral-400" title="The part earning this market the most prize points">
-          {best ? `best: ${best.short}` : ""}
-        </span>
       </div>
     );
   }
-  const drag = component(market.top_blocker);
   return (
     <div className="mt-2.5 flex items-center gap-2 pl-[4.25rem]">
       <FrictionBar market={market} weights={weights} thin onSegment={onFactor} />
-      <span className="w-24 shrink-0 truncate text-right text-[11px] text-neutral-400" title="The factor costing this market the most points">
-        {drag ? `worst: ${drag.label.toLowerCase()}` : "no big barriers"}
-      </span>
     </div>
   );
 }

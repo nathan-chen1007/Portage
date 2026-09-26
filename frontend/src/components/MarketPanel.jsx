@@ -46,36 +46,41 @@ export function MarketPanel({ market, profile, kind, weights, openFactor, onOpen
             <CountryMark code={e.country_code} size="lg" />
             {e.country}
           </h2>
-          <div className="mt-2 flex flex-wrap items-center gap-1.5">
-            {blocked ? (
+          {blocked ? (
+            <div className="mt-2">
               <Badge tone="danger">Not currently accessible</Badge>
-            ) : (
-              <>
-                <Badge>Rank #{market.rank}</Badge>
-                {e.trade_agreement && <Badge tone="outline">{agreementShort(e.trade_agreement)}</Badge>}
-                <Badge tone="outline">{LANGUAGE_NAMES[e.language] ?? e.language}</Badge>
+            </div>
+          ) : (
+            <>
+              <p className="mt-1.5 text-sm text-neutral-500">
+                {[
+                  `Rank #${market.rank}`,
+                  e.trade_agreement && agreementShort(e.trade_agreement),
+                  LANGUAGE_NAMES[e.language] ?? e.language,
+                  market.lead_time_weeks != null &&
+                    (market.lead_time_weeks === 0
+                      ? "Can ship now"
+                      : `${weeks(market.lead_time_weeks)} to first shipment${market.lead_time_estimated ? " (est.)" : ""}`),
+                ]
+                  .filter(Boolean)
+                  .join(" · ")}
+              </p>
+              <div className="mt-3 flex flex-wrap items-center gap-1.5">
                 <ConfidenceBadge level={e.compliance_confidence ?? "verified"} />
                 <TogetherChip market={market} kind={kind} onOpen={() => setTab("together")} />
-                {market.lead_time_weeks != null && (
-                  <Badge tone="outline">
-                    <Icon name="clock" className="h-3 w-3" />
-                    {market.lead_time_weeks === 0 ? "Can ship now" : `${weeks(market.lead_time_weeks)} to first shipment`}
-                    {market.lead_time_estimated && market.lead_time_weeks > 0 && " (est.)"}
-                  </Badge>
-                )}
-              </>
-            )}
-          </div>
+              </div>
+            </>
+          )}
         </div>
         {!blocked && (
-          <div className="flex gap-4">
+          <div className="flex gap-3">
             {market.overall != null && market.opportunity != null && (
-              <ScoreRing value={market.overall} label="Overall" color="#171717" hint="Prize and ease combined. Higher is better." />
+              <ScoreRing value={market.overall} label="Overall" size={56} color="#171717" hint="Prize and ease combined. Higher is better." />
             )}
             {market.opportunity != null && (
-              <ScoreRing value={market.opportunity} label="Prize" color={PRIZE_COLOR} hint="How much the market is worth. Higher is better." />
+              <ScoreRing value={market.opportunity} label="Prize" size={56} color={PRIZE_COLOR} hint="How much the market is worth. Higher is better." />
             )}
-            <ScoreRing value={ease(market)} label="Ease" color={EASE_COLOR} hint="How clear the path in is (100 minus friction). Higher is better." />
+            <ScoreRing value={ease(market)} label="Ease" size={56} color={EASE_COLOR} hint="How clear the path in is (100 minus friction). Higher is better." />
           </div>
         )}
       </header>
@@ -133,8 +138,11 @@ function Overview({ market, kind, weights, openFactor, onOpenFactor, onExploreFa
 
   return (
     <div className="space-y-4">
-      <p className="text-xs text-neutral-500">
-        Each factor earns up to its share of the ease score; a full bar means no barrier there. Click one to see what's behind it.
+      <p
+        className="text-[11px] font-medium uppercase tracking-wide text-neutral-400"
+        title="Each factor earns up to its share of the ease score. A full bar means no barrier. Click a factor for details."
+      >
+        Score breakdown · click a factor for details
       </p>
       <div className={`grid grid-cols-2 gap-2 sm:grid-cols-3 ${tiles.length > 5 ? "xl:grid-cols-6" : "xl:grid-cols-5"}`}>
         {tiles.map((t) => {

@@ -42,14 +42,13 @@ function Card({ title, color, children }) {
 
 function CtaBand({ onStart, title = "See which markets fit your business." }) {
   return (
-    <section className="px-4 pb-24 pt-4 sm:px-6">
-      <div className="relative mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-6 overflow-hidden rounded-3xl bg-neutral-950 px-6 py-12 text-white sm:px-12">
-        <div className="band-glow pointer-events-none absolute inset-0" aria-hidden />
-        <p className="relative max-w-xl text-2xl font-semibold tracking-tight sm:text-3xl">{title}</p>
+    <section className="border-t border-neutral-200">
+      <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-6 px-4 py-14 sm:px-6">
+        <p className="text-xl font-semibold tracking-tight sm:text-2xl">{title}</p>
         <button
           type="button"
           onClick={onStart}
-          className="relative inline-flex h-11 items-center gap-2 rounded-xl bg-white px-5 text-[15px] font-medium text-neutral-900 transition-colors hover:bg-neutral-200"
+          className="inline-flex h-11 items-center gap-2 rounded-xl bg-neutral-900 px-5 text-[15px] font-medium text-white transition-colors hover:bg-neutral-800"
         >
           Find my markets <Arrow className="h-4 w-4" />
         </button>

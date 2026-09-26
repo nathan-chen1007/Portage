@@ -194,7 +194,7 @@ export default function App() {
       <div className="grid min-h-0 flex-1 lg:grid-cols-[27rem_1fr]">
         {/* ---------- left: controls + ranked list ---------- */}
         <aside className="reveal-left flex min-h-0 flex-col border-neutral-200 lg:border-r">
-          <div className="space-y-3 border-b border-neutral-100 p-4">
+          <div className="border-b border-neutral-100 p-3">
             {result.opportunity_available ? (
               <Segmented
                 stretch
@@ -205,21 +205,15 @@ export default function App() {
                 options={VIEWS.map((v) => ({ key: v.key, label: v.label, title: v.help }))}
               />
             ) : (
-              <p className="text-xs text-neutral-500">
-                Ranked by ease of entry. Opportunity needs customs trade data, which doesn't exist for software.
-              </p>
+              <p className="px-1 text-xs text-neutral-500">Ranked by ease of entry.</p>
             )}
-            <div>
-              <p className="mb-1.5 text-[11px] font-medium uppercase tracking-wide text-neutral-400">Explore a factor</p>
-              <FactorChips active={factorOpen ? panel : null} onPick={openFactorPanel} />
-            </div>
           </div>
 
           <div className="flex items-center justify-between gap-2 px-4 pb-1 pt-3">
-            <div>
-              <h2 className="text-sm font-semibold">{HEADINGS[activeView]}</h2>
-              <span className="text-[11px] text-neutral-400">{result.markets.length} markets</span>
-            </div>
+            <h2 className="text-sm font-semibold">
+              {HEADINGS[activeView]}
+              <span className="ml-1.5 font-normal text-neutral-400">{result.markets.length}</span>
+            </h2>
             <div className="flex items-center gap-1.5">
               {result.opportunity_available && (
                 <Segmented
@@ -262,6 +256,10 @@ export default function App() {
 
         {/* ---------- right: market or factor panel ---------- */}
         <main ref={panelRef} className="scroll-thin min-h-0 overflow-y-auto bg-neutral-50/70 p-4 sm:p-6">
+          <div className="mx-auto mb-3 flex max-w-4xl flex-wrap items-center gap-2">
+            <span className="text-xs text-neutral-500">Compare all markets by</span>
+            <FactorChips active={factorOpen ? panel : null} onPick={openFactorPanel} />
+          </div>
           <div className="reveal-panel mx-auto max-w-4xl rounded-2xl border border-neutral-200 bg-white p-5 shadow-[0_1px_3px_rgba(0,0,0,0.04)] sm:p-7">
             {factorOpen ? (
               <FactorPanel
