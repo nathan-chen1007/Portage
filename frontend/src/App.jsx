@@ -347,6 +347,7 @@ export default function App() {
               <MarketPanel
                 key={market.country_code}
                 market={market}
+                markets={result.markets}
                 profile={result.profile}
                 kind={result.category.kind}
                 weights={weights}

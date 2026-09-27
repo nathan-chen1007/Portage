@@ -205,9 +205,20 @@ export function agreementLine(entry) {
  * Muted red -> amber -> green for a 0-100 "higher is better" score, so the colour says how good it is.
  * Returns a readable text colour and a pastel background from the same hue.
  */
-export function scoreTone(v) {
-  // Real scores sit between roughly 25 and 85, so that band spans the full scale (clamped outside it).
-  const x = Math.max(0, Math.min(1, ((v ?? 0) - 25) / 60));
-  const hue = Math.round(6 + x * 136); // 6 = soft red, ~45 = amber, 142 = green
-  return { color: `hsl(${hue} 52% 38%)`, background: `hsl(${hue} 70% 94%)`, ring: `hsl(${hue} 55% 82%)` };
+export function scoreTone(v, lo = 25, hi = 85) {
+  // Relative to this product's own range: its lowest score is the reddest, its highest the greenest.
+  const x = hi > lo ? Math.max(0, Math.min(1, ((v ?? 0) - lo) / (hi - lo))) : 1;
+  const hue = Math.round(4 + x * 138); // 4 = soft red, ~45 = amber, 142 = green
+  return {
+    color: `hsl(${hue} 58% 36%)`,
+    background: `hsl(${hue} 78% 93%)`,
+    ring: `hsl(${hue} 62% 74%)`,
+    glow: `hsl(${hue} 60% 45% / 0.35)`,
+  };
+}
+
+/** Lowest and highest score among a product's scored markets, for scoreTone's range. */
+export function scoreBounds(markets, pick) {
+  const vals = (markets ?? []).filter((m) => m.status !== "blocked" && m.score != null).map(pick).filter((v) => v != null);
+  return vals.length ? [Math.min(...vals), Math.max(...vals)] : [25, 85];
 }

@@ -1,12 +1,13 @@
 import { Badge, CountryMark } from "./ui.jsx";
 import { ConfidenceBadge } from "./Confidence.jsx";
-import { HIGH_TARIFF, agreementLine, pct, scoreTone, viewScore } from "../lib/format.js";
+import { HIGH_TARIFF, agreementLine, pct, scoreBounds, scoreTone, viewScore } from "../lib/format.js";
 
 /**
  * Slim ranked list: rank, country, one score (the one the list is sorted by) and one line on the tariff and
  * trade deal. High tariffs read red with the reason. The compliance badge only shows when the data isn't verified.
  */
 export function MarketList({ markets, kind, selected, onSelect, view = "friction" }) {
+  const [lo, hi] = scoreBounds(markets, (m) => viewScore(m, view));
   return (
     <ul className="space-y-1.5" aria-label="Ranked markets">
       {markets.map((m, i) => {
@@ -14,6 +15,7 @@ export function MarketList({ markets, kind, selected, onSelect, view = "friction
         const isSel = selected === m.country_code;
         const score = blocked || m.score == null ? null : viewScore(m, view);
         const conf = m.entry.compliance_confidence ?? "verified";
+        const tone = score == null ? null : scoreTone(score, lo, hi);
         return (
           <li key={m.country_code} className="rise" style={{ animationDelay: `${180 + i * 70}ms` }}>
             <button
@@ -22,12 +24,22 @@ export function MarketList({ markets, kind, selected, onSelect, view = "friction
               aria-pressed={isSel}
               className={`group relative w-full rounded-xl border px-3.5 py-3 text-left transition-all duration-150 ${
                 isSel
-                  ? "border-brand/50 bg-brand-50/80 shadow-[0_4px_16px_-8px_rgba(213,43,30,0.45)] ring-1 ring-brand/20"
-                  : "border-neutral-900/[0.07] bg-white/80 hover:border-brand/30 hover:bg-white hover:shadow-sm"
+                  ? tone
+                    ? "ring-1"
+                    : "border-neutral-400 bg-white ring-1 ring-neutral-300"
+                  : "border-neutral-900/[0.07] bg-white/80 hover:border-neutral-900/20 hover:bg-white hover:shadow-sm"
               } ${blocked ? "bg-neutral-50/60" : ""}`}
+              style={
+                isSel && tone
+                  ? { borderColor: tone.ring, background: tone.background, "--tw-ring-color": tone.ring, boxShadow: `0 4px 16px -8px ${tone.glow}` }
+                  : undefined
+              }
             >
               <div className="flex items-center gap-3">
-                <span className={`w-5 text-center text-xs tabular-nums ${isSel ? "font-semibold text-brand" : "text-neutral-400"}`}>
+                <span
+                  className={`w-5 text-center text-xs tabular-nums ${isSel ? "font-semibold text-neutral-900" : "text-neutral-400"}`}
+                  style={isSel && tone ? { color: tone.color } : undefined}
+                >
                   {blocked ? "–" : m.rank}
                 </span>
                 <CountryMark code={m.country_code} muted={blocked} />
@@ -42,7 +54,7 @@ export function MarketList({ markets, kind, selected, onSelect, view = "friction
                 ) : (
                   <span
                     className="shrink-0 rounded-lg px-2 py-1 text-xl font-semibold leading-none tabular-nums tracking-tight ring-1 ring-inset"
-                    style={{ color: scoreTone(score).color, background: scoreTone(score).background, "--tw-ring-color": scoreTone(score).ring }}
+                    style={{ color: tone.color, background: isSel ? "rgba(255,255,255,0.7)" : tone.background, "--tw-ring-color": tone.ring }}
                   >
                     {score.toFixed(0)}
                   </span>

@@ -12,6 +12,7 @@ import {
   PRIZE_COLOR,
   agreementLine,
   agreementShort,
+  scoreBounds,
   scoreTone,
   earned,
   ease,
@@ -36,7 +37,7 @@ const TABS = [
 ];
 
 /** Right-hand panel for one market: scores, clickable factor tiles that expand in place, and the action tabs. */
-export function MarketPanel({ market, profile, kind, weights, openFactor, onOpenFactor, onExploreFactor, anyProduct = false }) {
+export function MarketPanel({ market, markets = [], profile, kind, weights, openFactor, onOpenFactor, onExploreFactor, anyProduct = false }) {
   // Paperwork, outreach and Ship together use verified data; for any-product results only the overview applies.
   const tabs = anyProduct ? TABS.filter((t) => t.key === "why") : TABS;
   const [tab, setTab] = useState("why");
@@ -78,7 +79,7 @@ export function MarketPanel({ market, profile, kind, weights, openFactor, onOpen
             </>
           )}
         </div>
-        {!blocked && !unscored && <HeadlineScore market={market} />}
+        {!blocked && !unscored && <HeadlineScore market={market} markets={markets} />}
       </header>
 
       {!blocked && !unscored && (
@@ -290,15 +291,18 @@ function PlainRows({ market, kind }) {
 }
 
 /** One big number (Overall, or Ease when there's no opportunity data) with the parts in small text. */
-function HeadlineScore({ market }) {
+function HeadlineScore({ market, markets }) {
   const ez = ease(market);
   const hasOverall = market.overall != null && market.opportunity != null;
   const main = hasOverall ? market.overall : ez;
+  // Coloured against the same product's other markets on the same measure (the list does the same).
+  const [lo, hi] = scoreBounds(markets.length ? markets : [market], (m) => (hasOverall ? m.overall : ease(m)));
+  const tone = scoreTone(main, lo, hi);
   return (
     <div className="shrink-0 text-right" title={hasOverall ? "Opportunity and ease combined. Higher is better." : "How clear the path in is. Higher is better."}>
       <div
         className="inline-block rounded-xl px-3 py-1.5 text-4xl font-semibold leading-none tabular-nums tracking-tight ring-1 ring-inset"
-        style={{ color: scoreTone(main).color, background: scoreTone(main).background, "--tw-ring-color": scoreTone(main).ring }}
+        style={{ color: tone.color, background: tone.background, "--tw-ring-color": tone.ring }}
       >
         {Math.round(main)}
       </div>
