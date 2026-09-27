@@ -3,6 +3,10 @@ import { api } from "../lib/api.js";
 import { Badge, Button, Slider } from "./ui.jsx";
 import { CONTAINER_KG, UNITY_RED, cad, freightEstimate, ownLabel, sampleCohort, sharedCosts } from "../lib/together.js";
 
+// Inside a market panel the theme is that market's score colour (set as --color-brand by MarketPanel).
+// Only the word "Canada" in the headline stays Canada red.
+const THEME = "var(--color-brand)";
+
 /**
  * "Ship together" (PREVIEW, sample data): small Canadian exporters heading to the same market pool one
  * shipment and split the fixed costs. Theme: strength through unity.
@@ -86,7 +90,7 @@ export function ShipTogether({ market, kind, profile }) {
                 saving > 0 ? (
                   <>
                     <span className="line-through">${f.solo.toFixed(2)} alone</span> ·{" "}
-                    <span className="font-semibold" style={{ color: UNITY_RED }}>
+                    <span className="font-semibold" style={{ color: THEME }}>
                       −{Math.round(saving * 100)}%
                     </span>
                   </>
@@ -117,7 +121,7 @@ export function ShipTogether({ market, kind, profile }) {
           <h4 className="mb-2 text-sm font-semibold">Who's heading to {country}</h4>
           <ul className="grid gap-1.5 sm:grid-cols-2">
             {joined && (
-              <li className="pop flex items-center justify-between gap-2 rounded-lg border px-3 py-2 text-sm" style={{ borderColor: UNITY_RED }}>
+              <li className="pop flex items-center justify-between gap-2 rounded-lg border px-3 py-2 text-sm" style={{ borderColor: THEME }}>
                 <span className="min-w-0">
                   <span className="block truncate font-medium">{me}</span>
                   <span className="text-xs text-neutral-500">{[profile?.city, profile?.province].filter(Boolean).join(", ") || "You"}</span>
@@ -159,18 +163,18 @@ export function ShipTogether({ market, kind, profile }) {
                 <span>Your shipment</span>
                 <span className="font-medium tabular-nums text-neutral-900">{(myKg / 1000).toFixed(1)} t</span>
               </div>
-              <Slider value={myKg} min={500} max={5000} step={100} onChange={setMyKg} color={UNITY_RED} label="Your shipment in kilograms" className="mt-1" />
+              <Slider value={myKg} min={500} max={5000} step={100} onChange={setMyKg} color={THEME} label="Your shipment in kilograms" className="mt-1" />
             </div>
           )}
           {joined ? (
             <div className="pop text-center">
-              <div className="mx-auto grid h-10 w-10 place-items-center rounded-full text-white" style={{ background: UNITY_RED }}>
+              <div className="mx-auto grid h-10 w-10 place-items-center rounded-full text-white" style={{ background: THEME }}>
                 <svg viewBox="0 0 20 20" className="h-5 w-5" aria-hidden>
                   <path d="M5 10.5l3 3L15 7" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </div>
               <p className="mt-2 text-sm font-semibold">You're in the group.</p>
-              <p className="text-xs font-medium" style={{ color: UNITY_RED }}>
+              <p className="text-xs font-medium" style={{ color: THEME }}>
                 Growing Canada, together.
               </p>
               <p className="text-xs text-neutral-500">
@@ -187,7 +191,7 @@ export function ShipTogether({ market, kind, profile }) {
             </div>
           ) : (
             <>
-              <Button size="lg" className="w-full hover:opacity-90" style={{ background: UNITY_RED }} onClick={() => setJoined(true)}>
+              <Button size="lg" className="w-full" onClick={() => setJoined(true)}>
                 Join the group
               </Button>
               <p className="mt-2 text-center text-xs text-neutral-500">Free to join. Portage matches exporters; it never books or ships.</p>
@@ -214,7 +218,7 @@ function StatCard({ label, value, sub, meter }) {
       {sub && <div className="text-[11px] text-neutral-500">{sub}</div>}
       {meter != null && (
         <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-neutral-100">
-          <div className="h-full rounded-full transition-[width] duration-700 ease-out" style={{ width: `${meter * 100}%`, background: UNITY_RED }} />
+          <div className="h-full rounded-full transition-[width] duration-700 ease-out" style={{ width: `${meter * 100}%`, background: THEME }} />
         </div>
       )}
     </div>
@@ -240,9 +244,9 @@ function UnityMap({ cohort, joined, me, country, goods, fill }) {
         const d = `M 112 ${y} C 240 ${y}, 250 ${cy}, ${cx - 52} ${cy}`;
         return (
           <g key={n.key}>
-            <path d={d} fill="none" stroke={n.you ? (joined ? UNITY_RED : "#d4d4d4") : "#e5e5e5"} strokeWidth={n.you && joined ? 2 : 1.5} strokeDasharray={n.you && !joined ? "4 4" : undefined} />
-            {active && <path d={d} fill="none" stroke={n.you ? UNITY_RED : "#404040"} strokeWidth="1.5" className="flow" style={{ animationDelay: `${i * 0.15}s` }} />}
-            <circle cx="100" cy={y} r={n.you ? 13 : 11.5} fill={n.you ? (joined ? UNITY_RED : "#fff") : "#171717"} stroke={n.you ? (joined ? UNITY_RED : "#a3a3a3") : "#171717"} strokeWidth="1.5" strokeDasharray={n.you && !joined ? "3 3" : undefined} className={n.you && joined ? "node-pop" : undefined} />
+            <path d={d} fill="none" stroke={n.you ? (joined ? THEME : "#d4d4d4") : "#e5e5e5"} strokeWidth={n.you && joined ? 2 : 1.5} strokeDasharray={n.you && !joined ? "4 4" : undefined} />
+            {active && <path d={d} fill="none" stroke={n.you ? THEME : "#404040"} strokeWidth="1.5" className="flow" style={{ animationDelay: `${i * 0.15}s` }} />}
+            <circle cx="100" cy={y} r={n.you ? 13 : 11.5} fill={n.you ? (joined ? THEME : "#fff") : "#171717"} stroke={n.you ? (joined ? THEME : "#a3a3a3") : "#171717"} strokeWidth="1.5" strokeDasharray={n.you && !joined ? "3 3" : undefined} className={n.you && joined ? "node-pop" : undefined} />
             <text x="100" y={y + 3.5} textAnchor="middle" fontSize={n.you ? 8.5 : 9.5} fontWeight="600" fill={n.you ? (joined ? "#fff" : "#737373") : "#fff"}>
               {n.label}
             </text>
@@ -257,7 +261,7 @@ function UnityMap({ cohort, joined, me, country, goods, fill }) {
         <clipPath id="fill-clip">
           <rect x={cx - 50} y={cy - 28} width="100" height="56" rx="6" />
         </clipPath>
-        <rect clipPath="url(#fill-clip)" x={cx - 50} y={cy - 28} height="56" fill={UNITY_RED} opacity="0.14" className="fill-grow" style={{ width: 100 * f }} />
+        <rect clipPath="url(#fill-clip)" x={cx - 50} y={cy - 28} height="56" fill={THEME} opacity="0.14" className="fill-grow" style={{ width: 100 * f }} />
         {goods && [0, 1, 2, 3, 4].map((k) => <line key={k} x1={cx - 34 + k * 17} x2={cx - 34 + k * 17} y1={cy - 22} y2={cy + 22} stroke="#e5e5e5" />)}
         <text x={cx} y={cy - 3} textAnchor="middle" fontSize="11" fontWeight="600" fill="#171717">
           {goods ? "One container" : "One shared desk"}
@@ -269,7 +273,7 @@ function UnityMap({ cohort, joined, me, country, goods, fill }) {
 
       {/* to market */}
       <path d={`M ${cx + 52} ${cy} L ${W - 62} ${cy}`} stroke="#171717" strokeWidth="2" fill="none" />
-      <path d={`M ${cx + 52} ${cy} L ${W - 62} ${cy}`} stroke={UNITY_RED} strokeWidth="2" fill="none" className="flow" />
+      <path d={`M ${cx + 52} ${cy} L ${W - 62} ${cy}`} stroke={THEME} strokeWidth="2" fill="none" className="flow" />
       <path d={`M ${W - 70} ${cy - 5} L ${W - 62} ${cy} L ${W - 70} ${cy + 5}`} stroke="#171717" strokeWidth="2" fill="none" strokeLinecap="round" />
       <rect x={W - 56} y={cy - 16} width="46" height="32" rx="7" fill="#171717" />
       <text x={W - 33} y={cy + 4} textAnchor="middle" fontSize="12" fontWeight="700" fill="#fff">
@@ -281,7 +285,7 @@ function UnityMap({ cohort, joined, me, country, goods, fill }) {
 
 function n_label(me, joined, y) {
   return (
-    <text x="82" y={y + 4} textAnchor="end" fontSize="10" fill={joined ? UNITY_RED : "#a3a3a3"} fontWeight={joined ? 600 : 400}>
+    <text x="82" y={y + 4} textAnchor="end" fontSize="10" fill={joined ? THEME : "#a3a3a3"} fontWeight={joined ? 600 : 400}>
       {joined ? me : "your spot"}
     </text>
   );

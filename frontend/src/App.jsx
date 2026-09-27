@@ -332,7 +332,7 @@ export default function App() {
 
         {/* ---------- right: market or factor panel ---------- */}
         <main ref={panelRef} className="scroll-thin min-h-0 overflow-y-auto p-4 sm:p-6">
-          <div className="reveal-panel glass mx-auto max-w-4xl rounded-2xl border border-white/70 p-5 shadow-[0_1px_2px_rgba(15,23,42,0.04),0_12px_40px_-18px_rgba(213,43,30,0.25)] ring-1 ring-neutral-900/[0.05] sm:p-7">
+          <div className="reveal-panel glass mx-auto max-w-4xl rounded-2xl border border-white/70 p-5 shadow-[0_1px_2px_rgba(15,23,42,0.04),0_12px_40px_-18px_rgba(15,23,42,0.18)] ring-1 ring-neutral-900/[0.05] sm:p-7">
             {factorOpen ? (
               <FactorPanel
                 key={panel}

@@ -3,7 +3,7 @@ import { DocumentsPanel } from "./DocumentsPanel.jsx";
 import { OutreachPanel } from "./OutreachPanel.jsx";
 import { ShipTogether } from "./ShipTogether.jsx";
 import { ConfidenceBadge } from "./Confidence.jsx";
-import { UNITY_RED, sampleCohort } from "../lib/together.js";
+import { sampleCohort } from "../lib/together.js";
 import { ProgramsPanel } from "./ProgramsPanel.jsx";
 import { Badge, CountryMark, ExternalLink, Icon, Meter, Segmented } from "./ui.jsx";
 import {
@@ -572,12 +572,11 @@ function TogetherChip({ market, kind, category, onOpen }) {
       type="button"
       onClick={onOpen}
       title="Preview: sample producers"
-      className="inline-flex items-center gap-1.5 rounded-full border px-2 py-0.5 text-[11px] font-medium transition-colors hover:bg-red-50"
-      style={{ borderColor: `${UNITY_RED}55`, color: UNITY_RED }}
+      className="inline-flex items-center gap-1.5 rounded-full border border-brand/35 px-2 py-0.5 text-[11px] font-medium text-brand transition-colors hover:bg-brand-50"
     >
       <span className="flex -space-x-1" aria-hidden>
         {[0, 1, 2].map((i) => (
-          <span key={i} className="h-2.5 w-2.5 rounded-full border border-white" style={{ background: UNITY_RED, opacity: 1 - i * 0.25 }} />
+          <span key={i} className="h-2.5 w-2.5 rounded-full border border-white" style={{ background: "var(--color-brand)", opacity: 1 - i * 0.25 }} />
         ))}
       </span>
       {n} Canadian {kind === "goods" ? "producers" : "companies"} heading here (sample)

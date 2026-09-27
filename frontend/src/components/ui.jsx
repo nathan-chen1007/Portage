@@ -16,7 +16,7 @@ export function Button({ variant = "primary", size = "md", className = "", ...pr
     "inline-flex select-none items-center justify-center gap-2 rounded-lg font-medium transition-all duration-150 active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand disabled:pointer-events-none disabled:opacity-40";
   const variants = {
     primary:
-      "bg-brand text-white shadow-[0_1px_2px_rgba(179,36,26,0.35),0_4px_14px_-6px_rgba(213,43,30,0.6),inset_0_1px_0_rgba(255,255,255,0.18)] hover:bg-brand-600",
+      "bg-brand text-white shadow-[0_1px_2px_color-mix(in_srgb,var(--color-brand)_35%,transparent),0_4px_14px_-6px_color-mix(in_srgb,var(--color-brand)_60%,transparent),inset_0_1px_0_rgba(255,255,255,0.18)] hover:bg-brand-600",
     outline: "border border-neutral-200 bg-white text-neutral-900 shadow-sm hover:border-neutral-300 hover:bg-neutral-50",
     ghost: "text-neutral-600 hover:bg-neutral-100 hover:text-neutral-900",
     soft: "bg-neutral-100 text-neutral-900 hover:bg-neutral-200/70",
@@ -57,7 +57,7 @@ export function Segmented({ options, value, onChange, label, size = "md", role =
             title={o.title}
             onClick={() => onChange(o.key)}
             className={`rounded-md font-medium whitespace-nowrap transition-all duration-150 ${stretch ? "flex-1" : ""} ${pad} ${
-              active ? "bg-white text-brand shadow-[0_1px_2px_rgba(213,43,30,0.15),0_0_0_1px_rgba(213,43,30,0.12)]" : "text-neutral-500 hover:text-neutral-900"
+              active ? "bg-white text-brand shadow-[0_1px_2px_color-mix(in_srgb,var(--color-brand)_15%,transparent),0_0_0_1px_color-mix(in_srgb,var(--color-brand)_14%,transparent)]" : "text-neutral-500 hover:text-neutral-900"
             }`}
           >
             {o.label}
