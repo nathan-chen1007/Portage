@@ -200,3 +200,14 @@ export function agreementLine(entry) {
   const caveat = a.match(/\(([a-z][^)]*)\)/)?.[1];
   return caveat ? `${short} ${caveat}` : short;
 }
+
+/**
+ * Muted red -> amber -> green for a 0-100 "higher is better" score, so the colour says how good it is.
+ * Returns a readable text colour and a pastel background from the same hue.
+ */
+export function scoreTone(v) {
+  // Real scores sit between roughly 25 and 85, so that band spans the full scale (clamped outside it).
+  const x = Math.max(0, Math.min(1, ((v ?? 0) - 25) / 60));
+  const hue = Math.round(6 + x * 136); // 6 = soft red, ~45 = amber, 142 = green
+  return { color: `hsl(${hue} 52% 38%)`, background: `hsl(${hue} 70% 94%)`, ring: `hsl(${hue} 55% 82%)` };
+}

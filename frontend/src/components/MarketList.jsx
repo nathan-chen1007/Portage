@@ -1,6 +1,6 @@
 import { Badge, CountryMark } from "./ui.jsx";
 import { ConfidenceBadge } from "./Confidence.jsx";
-import { HIGH_TARIFF, agreementLine, pct, viewScore } from "../lib/format.js";
+import { HIGH_TARIFF, agreementLine, pct, scoreTone, viewScore } from "../lib/format.js";
 
 /**
  * Slim ranked list: rank, country, one score (the one the list is sorted by) and one line on the tariff and
@@ -37,7 +37,16 @@ export function MarketList({ markets, kind, selected, onSelect, view = "friction
                     {blocked ? <Badge tone="danger">Not accessible</Badge> : <TariffLine entry={m.entry} kind={kind} />}
                   </span>
                 </span>
-                <span className={`shrink-0 text-xl font-semibold leading-none tabular-nums tracking-tight ${isSel ? "text-brand" : ""}`}>{score == null ? "—" : score.toFixed(0)}</span>
+                {score == null ? (
+                  <span className="shrink-0 text-xl font-semibold leading-none text-neutral-400">—</span>
+                ) : (
+                  <span
+                    className="shrink-0 rounded-lg px-2 py-1 text-xl font-semibold leading-none tabular-nums tracking-tight ring-1 ring-inset"
+                    style={{ color: scoreTone(score).color, background: scoreTone(score).background, "--tw-ring-color": scoreTone(score).ring }}
+                  >
+                    {score.toFixed(0)}
+                  </span>
+                )}
               </div>
               {blocked ? (
                 <p className="mt-2 line-clamp-2 pl-[4.25rem] text-xs text-neutral-500">{m.status_note}</p>

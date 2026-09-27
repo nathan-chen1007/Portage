@@ -12,6 +12,7 @@ import {
   PRIZE_COLOR,
   agreementLine,
   agreementShort,
+  scoreTone,
   earned,
   ease,
   FACTOR_LABELS,
@@ -295,7 +296,10 @@ function HeadlineScore({ market }) {
   const main = hasOverall ? market.overall : ez;
   return (
     <div className="shrink-0 text-right" title={hasOverall ? "Opportunity and ease combined. Higher is better." : "How clear the path in is. Higher is better."}>
-      <div className="bg-gradient-to-br from-brand to-[#8f1a12] bg-clip-text text-4xl font-semibold leading-none tabular-nums tracking-tight text-transparent">
+      <div
+        className="inline-block rounded-xl px-3 py-1.5 text-4xl font-semibold leading-none tabular-nums tracking-tight ring-1 ring-inset"
+        style={{ color: scoreTone(main).color, background: scoreTone(main).background, "--tw-ring-color": scoreTone(main).ring }}
+      >
         {Math.round(main)}
       </div>
       <div className="mt-1.5 text-xs font-medium text-neutral-500">{hasOverall ? "Overall score" : "Ease score"}</div>
