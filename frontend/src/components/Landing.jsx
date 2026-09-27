@@ -16,11 +16,6 @@ export const EXAMPLES = [
     color: "#7c3aed",
     text: "We're a small family winery in Niagara-on-the-Lake, Ontario. We make Vidal and Cabernet Franc icewine in 200 ml and 375 ml bottles, about 2,000 cases a year. The US was our biggest export market. Contact: Sam Lee, sam@example.ca",
   },
-  {
-    label: "HR software, Waterloo",
-    color: "#2a78d6",
-    text: "Northwind HR is a Waterloo startup selling cloud HR analytics software to mid-size companies. We store employee records, performance reviews and payroll data for our customers. Contact: Sam Lee, sam@northwindhr.com",
-  },
 ];
 
 /** "Canada" / "Canadian" highlighted in Canada red. */
@@ -244,8 +239,9 @@ const STEPS = [
 ];
 
 
-function Home({ categories, description, setDescription, onAnalyze, onPickCategory, loading, error, unsupported, inputRef, go, onStart }) {
+function Home({ categories: allCategories, description, setDescription, onAnalyze, onPickCategory, loading, error, unsupported, inputRef, go, onStart }) {
   const canSubmit = description.trim().length >= 10 && !loading;
+  const categories = allCategories.filter((c) => c.kind === "goods"); // products only on the landing page
   return (
     <main>
       {/* ---------- hero ---------- */}
@@ -339,7 +335,7 @@ function Home({ categories, description, setDescription, onAnalyze, onPickCatego
                 <p className="font-medium">We don't have verified data for that product yet.</p>
                 <p className="mt-1 text-sm text-neutral-500">
                   We only show sourced tariff and regulatory data, never guesses. Supported today:{" "}
-                  {categories.map((c) => c.label).join(", ") || "honey, icewine and B2B software"}.
+                  {categories.map((c) => c.label).join(", ") || "honey and icewine"}.
                 </p>
               </div>
             )}
