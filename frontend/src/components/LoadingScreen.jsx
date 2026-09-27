@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 
-// Each step shows for its own duration so the run feels like real work. The backend call runs in parallel;
-// the last step holds until the data is in, then the bar completes and onFinished fires.
+// The screen lasts as long as the real backend call, with a 3 s floor. The steps before the last one are
+// paced to reach "Ranking your markets" at ~2.4 s; that step holds until the data is in, then the bar
+// completes and the screen fades out (~0.6 s), so a fast answer still shows for about 3 s in total.
 export const STEPS = [
   { label: "Reading your description", ms: 650 },
   { label: "Classifying your product", ms: 600 },
@@ -16,6 +17,11 @@ export const STEPS = [
 ];
 
 const FAST = import.meta.env?.MODE === "test";
+const MIN_MS = 3000; // floor for the whole screen
+const WRAP_MS = 150; // last step shows done
+const FADE_MS = 450; // fade-out before the reveal
+const LEAD_MS = STEPS.slice(0, -1).reduce((a, s) => a + s.ms, 0);
+const PACE = (MIN_MS - WRAP_MS - FADE_MS) / LEAD_MS; // scales the step durations to fit the floor
 const reducedMotion = () => typeof window !== "undefined" && window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
 
 /** Full-screen progress sequence shown while markets are being found. */
@@ -25,22 +31,22 @@ export function LoadingScreen({ subject, ready, onFinished }) {
   const finished = useRef(false);
   const onFinishedRef = useRef(onFinished);
   onFinishedRef.current = onFinished;
-  const scale = FAST ? 0 : reducedMotion() ? 0.35 : 1;
+  const scale = FAST ? 0 : reducedMotion() ? 0.5 : 1;
 
   // Advance through the steps; the last one waits for the data.
   useEffect(() => {
     if (step >= STEPS.length - 1) return undefined;
-    const t = setTimeout(() => setStep((s) => s + 1), STEPS[step].ms * scale);
+    const t = setTimeout(() => setStep((s) => s + 1), STEPS[step].ms * PACE * scale);
     return () => clearTimeout(t);
   }, [step, scale]);
 
   useEffect(() => {
     if (!ready || step < STEPS.length - 1 || finished.current) return undefined;
-    const t1 = setTimeout(() => setComplete(true), STEPS[step].ms * scale);
+    const t1 = setTimeout(() => setComplete(true), WRAP_MS * scale);
     const t2 = setTimeout(() => {
       finished.current = true;
       onFinishedRef.current();
-    }, (STEPS[step].ms + 650) * scale);
+    }, (WRAP_MS + FADE_MS) * scale);
     return () => {
       clearTimeout(t1);
       clearTimeout(t2);
