@@ -1,0 +1,69 @@
+{
+  "as_of": "2026-09-26",
+  "label": "May qualify: confirm with the program",
+  "note": "Portage never guarantees eligibility. Rules are quoted from each program's official page; the program decides.",
+  "agri_food_rule": "Agri-food = HS chapters 01-24 (live animals, food, beverages including wine, fish and seafood).",
+  "tcs": {
+    "generic": "https://www.tradecommissioner.gc.ca/en/about-us/contact-us/find-trade-commissioner.html",
+    "index": "https://www.tradecommissioner.gc.ca/en/market-industry-info/search-country-region.html",
+    "countries": {
+      "GB": "https://www.tradecommissioner.gc.ca/en/market-industry-info/search-country-region/country/canada-united-kingdom-export.html",
+      "JP": "https://www.tradecommissioner.gc.ca/en/market-industry-info/search-country-region/country/canada-japan-export.html",
+      "AU": "https://www.tradecommissioner.gc.ca/en/market-industry-info/search-country-region/country/canada-australia-export.html",
+      "DE": "https://www.tradecommissioner.gc.ca/en/market-industry-info/search-country-region/country/canada-germany-export.html",
+      "FR": "https://www.tradecommissioner.gc.ca/en/market-industry-info/search-country-region/country/canada-france-export.html",
+      "NL": "https://www.tradecommissioner.gc.ca/en/market-industry-info/search-country-region/country/canada-netherlands-export.html",
+      "IT": "https://www.tradecommissioner.gc.ca/en/market-industry-info/search-country-region/country/canada-italy-export.html",
+      "CN": "https://www.tradecommissioner.gc.ca/en/market-industry-info/search-country-region/country/canada-china-export.html",
+      "KR": "https://www.tradecommissioner.gc.ca/en/market-industry-info/search-country-region/country/canada-republic-korea-export.html",
+      "US": "https://www.tradecommissioner.gc.ca/en/market-industry-info/search-country-region/country/canada-united-states-export.html",
+      "MX": "https://www.tradecommissioner.gc.ca/en/market-industry-info/search-country-region/country/canada-mexico-export.html"
+    },
+    "what": "Canadian trade commissioners in {country} give advice on the market and introductions to local contacts.",
+    "who": "The Trade Commissioner Service says it works \"with Canadian exporters and export-ready companies\".",
+    "sources": [
+      "https://www.tradecommissioner.gc.ca/en/about-us/our-mandate.html"
+    ]
+  },
+  "canexport": {
+    "name": "CanExport SMEs (2026–27)",
+    "what": "Reimburses up to 50% of eligible costs of entering a new international market: $10,000 to $50,000 per project.",
+    "min_revenue": 300000,
+    "max_revenue": 100000000,
+    "min_employees": 3,
+    "max_employees": 500,
+    "rule": "Needs $300,000 to $100 million in annual revenue and 3 to 500 full-time employees; for-profit and incorporated (or an LLP or co-op) in Canada; prior sales in the target market under $100,000 or under 10% of total sales.",
+    "agri_rule": "From 2026–27, agriculture, agri-food and fish and seafood projects go to AAFC's AgriMarketing program instead.",
+    "intake": "The 2026–27 intake closed on August 31, 2026 (12:00 p.m. ET): the rules shown apply to the next intake.",
+    "url": "https://www.tradecommissioner.gc.ca/en/our-solutions/funding-financing-international-business/canexport-smes.html",
+    "sources": [
+      "https://www.tradecommissioner.gc.ca/en/our-solutions/funding-financing-international-business/canexport-smes.html",
+      "https://www.tradecommissioner.gc.ca/en/our-solutions/funding-financing-international-business/canexport-smes/new-2026-2027.html",
+      "https://www.tradecommissioner.gc.ca/en/our-solutions/funding-financing-international-business/canexport-smes/applicants-guide-2026-27.html"
+    ]
+  },
+  "agrimarketing": {
+    "name": "AgriMarketing: Market Diversification for SMEs (AAFC)",
+    "what": "Non-repayable funding for agri-food SMEs entering new markets (market research, missions, in-market promotion, translation): AAFC pays up to 70% of costs, usually under $100,000 per project.",
+    "rule": "For-profit or Indigenous organizations with fewer than 500 full-time-equivalent employees; no minimum revenue is stated. Not for markets you've been active in for 5+ years.",
+    "intake": "Open from February 13, 2026 until September 30, 2030. Sectors hit by tariffs in the past 12 months get priority.",
+    "url": "https://agriculture.canada.ca/en/programs/agrimarketing-market-diversification-small-medium-enterprises",
+    "sources": [
+      "https://agriculture.canada.ca/en/programs/agrimarketing-market-diversification-small-medium-enterprises",
+      "https://agriculture.canada.ca/en/programs/agrimarketing-market-diversification-small-medium-enterprises/eligibility",
+      "https://agriculture.canada.ca/en/programs/agrimarketing-market-diversification-small-medium-enterprises/before-apply"
+    ]
+  },
+  "edc": {
+    "name": "Export Development Canada (EDC)",
+    "what": "Export credit insurance (EDC Select covers single buyers or invoices, typically $5,000–$500,000, for occasional exporters), working-capital guarantees through your bank (Export Guarantee Program), and a free Export Help Hub.",
+    "rule": "EDC says it \"helps Canadian businesses of all sizes and sectors\".",
+    "url": "https://www.edc.ca/en/who-we-support.html",
+    "sources": [
+      "https://www.edc.ca/en/who-we-support.html",
+      "https://www.edc.ca/en/solutions/insurance/credit-insurance.html",
+      "https://www.edc.ca/en/solutions/working-capital-guarantees/export-guarantee-program.html",
+      "https://www.edc.ca/en/tool/export-help-hub.html"
+    ]
+  }
+}
