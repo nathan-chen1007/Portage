@@ -220,14 +220,14 @@ def fallback_outreach(profile: BusinessProfile, entry: MarketEntry, middleman: M
 # ---------- 3. spoken script ----------
 
 def voice_script(text: str, language: str) -> str:
-    """Turn the approved email into a ~40-second spoken message in the target language.
+    """Turn the approved email into a ~20-second spoken message in the target language.
     Offline: the English text itself, minus placeholders."""
     if not is_configured():
         return re.sub(r"\[[^\]]*\]", "", text).strip()
     lang = LANGUAGE_NAMES.get(language, language)
     system = (
         f"Convert the email below into a short spoken voice message in {lang}, as the sender would say it "
-        "when leaving a voice note for a potential business partner. Natural spoken style, about 90 words "
+        "when leaving a voice note for a potential business partner. Natural spoken style, about 50 words "
         "(or the equivalent length), polite register appropriate for business in that culture. Keep company "
         "and product names as written. Do not add any facts that are not in the email. Drop placeholders "
         "in square brackets. Output only the script text, no quotes or notes."
@@ -236,6 +236,7 @@ def voice_script(text: str, language: str) -> str:
         model=_model(),
         messages=[{"role": "system", "content": system}, {"role": "user", "content": text}],
         temperature=0.4,
+        max_tokens=300,
     )
     return (resp.choices[0].message.content or "").strip()
 
