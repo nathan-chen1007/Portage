@@ -135,3 +135,13 @@ test("France, Netherlands and Italy can carry Germany's verified EU rules, with 
   expect(d).toHaveTextContent("French-language labelling");
   expect(within(d).getByRole("link", { name: /economie\.gouv\.fr|DGCCRF|economie/i })).toBeInTheDocument();
 });
+
+
+test("a market closed to the product says Not accessible, with the official reason", async () => {
+  const NZ = { ...IN, country_code: "NZ", country: "New Zealand", status: "blocked", status_note: "Not accessible: New Zealand only admits honey from six Pacific islands (MPI).", opportunity: null };
+  vi.stubGlobal("fetch", mockFetch({ "/api/more-markets": { ...RESPONSE, markets: [FR, NZ] } }));
+  render(<MoreMarkets hsCode="040900" />);
+  await userEvent.click(await screen.findByRole("button", { name: /New Zealand/ }));
+  expect(screen.getByRole("button", { name: /New Zealand/ })).toHaveTextContent("Not accessible");
+  expect(screen.getByTestId("more-details-NZ")).toHaveTextContent("only admits honey from six Pacific islands");
+});

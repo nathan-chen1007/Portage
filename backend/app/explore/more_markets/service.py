@@ -14,7 +14,7 @@ from app.engine.opportunity import score_opportunity
 from app.engine.scoring import normalize_tariff
 from app.explore.lookup import hs, sources, tariffs, trade
 from app.explore.lookup.markets import CANADA_COMTRADE, CANADA_WITS
-from app.explore.more_markets import fetch
+from app.explore.more_markets import fetch, overrides
 from app.explore.more_markets.markets import EXTRA_MARKETS, ExtraMarket
 from app.explore.more_markets.schemas import MoreMarket, MoreMarketsResponse, MoreTariff
 from app.models import CategoryTrade, MarketEntry, MarketTrade
@@ -165,12 +165,22 @@ def _market(hs6: str, cc: str, m: ExtraMarket, got: dict, ca_world: dict | None,
     mfn, o1, f1 = got.get(tariff_key(hs6, m, "mfn"), (None, "error", ""))
     pref, o2, f2 = got.get(tariff_key(hs6, m, "pref"), (None, "error", ""))
     tr = combine_tariff(m, hs6, mfn, pref, (o1, o2), max(f1, f2))
+    fix = overrides.TARIFFS.get((hs6, cc))
+    if fix:  # an official figure replaces the TRAINS one (lab F research)
+        tr = MoreTariff(status="ok", applied=fix["applied"], mfn=fix["mfn"], year=fix["year"], agreement=fix["agreement"],
+                        note=fix["note"], origin="official", fetched=overrides.AS_OF, sources=fix["sources"])
     tr.applied = None if tr.applied is None else min(tr.applied, tariffs.MAX_RATE)
     tr.mfn = None if tr.mfn is None else min(tr.mfn, tariffs.MAX_RATE)
     usable = tr.status in ("ok", "mfn_only")
     out = MoreMarket(country_code=cc, country=m.country, agreement_in_force=m.agreement, tariff=tr,
                      tariff_barrier=round(normalize_tariff(tr.applied), 3) if usable else None,
                      ease_note=EASE_NOTE, sources=[*tr.sources])
+    closed = overrides.CLOSED.get((hs6, cc))
+    if closed:  # closed to Canadian exports: say why, never score it
+        out.status, out.status_note = "blocked", closed["note"]
+        out.opportunity_status, out.opportunity_note = "unavailable", "Not scored: the market is closed to this product from Canada."
+        out.sources = [*closed["sources"], *out.sources]
+        return out
 
     year = trade.YEAR
     now, t1, _ = got.get(trade_key(hs6, cc, year), (None, "error", ""))
@@ -266,7 +276,7 @@ def more_markets(hs6: str, category: str | None = None, timeout: float | None = 
         except Exception as e:  # one broken market never breaks the section
             log.exception("more-markets: %s/%s failed", hs6, cc)
             rows.append(_degraded(cc, m, f"market data could not be assembled ({type(e).__name__})."))
-    rows.sort(key=lambda r: (r.opportunity is None, -(r.opportunity or 0.0), r.country))
+    rows.sort(key=lambda r: (r.status == "blocked", r.opportunity is None, -(r.opportunity or 0.0), r.country))
 
     pending = any(o == "pending" for _, o, _ in got.values())
     if pending:

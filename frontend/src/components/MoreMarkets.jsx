@@ -84,7 +84,7 @@ export function MoreMarkets({ hsCode, category }) {
                 <div className="flex items-baseline justify-between gap-2">
                   <span className="text-sm font-medium text-neutral-800">{m.country}</span>
                   <span className="text-[11px] text-neutral-500">
-                    {m.opportunity == null ? "Opportunity –" : `Opportunity ${Math.round(m.opportunity)}/100`}
+                    {m.status === "blocked" ? "Not accessible" : m.opportunity == null ? "Opportunity –" : `Opportunity ${Math.round(m.opportunity)}/100`}
                   </span>
                 </div>
                 <div className="mt-0.5 text-[11px] text-neutral-600">
@@ -123,6 +123,7 @@ function Details({ m, data }) {
   const f = m.opportunity_facts;
   return (
     <div data-testid={`more-details-${m.country_code}`} className="border-t border-neutral-100 px-2.5 py-2 text-[11px] leading-snug text-neutral-700">
+      {m.status === "blocked" && <p className="mb-1.5 font-medium text-red-700">{m.status_note}</p>}
       <p>
         <span className="font-medium">Tariff: </span>
         {m.tariff.note}

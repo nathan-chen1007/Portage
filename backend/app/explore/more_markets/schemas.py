@@ -36,6 +36,8 @@ class MoreMarket(BaseModel):
     ease: None = None                  # never scored: see ease_note
     overall: None = None
     ease_note: str = ""
+    status: Literal["open", "blocked"] = "open"  # blocked = closed to Canadian exports (official reason in status_note)
+    status_note: str = ""
     compliance_confidence: Literal["verified", "unknown"] = "unknown"
     verified: bool = False             # True only for FR/NL/IT on a curated product (EU rules, same as Germany)
     badge: str = NOT_VERIFIED

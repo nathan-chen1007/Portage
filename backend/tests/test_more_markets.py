@@ -219,7 +219,7 @@ def test_committed_cache_serves_demo_products_offline():
     for code in PREWARM_HS6:
         assert service.cache_complete(code), f"HS {code} cache incomplete: run the prewarm"
         resp = service.more_markets(code, timeout=0.5)
-        assert {m.tariff.origin for m in resp.markets} == {"cache"}
+        assert {m.tariff.origin for m in resp.markets} <= {"cache", "official"}
         n = 5 if code in CATEGORY_HS6.values() else 8  # FR/NL/IT are in the main honey and icewine rankings
         assert len(resp.markets) == n
         assert sum(m.tariff.status in ("ok", "mfn_only") for m in resp.markets) >= n - 2
@@ -238,3 +238,20 @@ def test_markets_in_the_main_ranking_are_not_repeated(net, client, hs6, category
 def test_non_curated_products_stay_unverified_everywhere(net):
     resp = service.more_markets("950699", timeout=10)  # hockey sticks: no curated Germany row
     assert all(m.verified is False and m.badge == NOT_VERIFIED for m in resp.markets)
+
+
+def test_official_corrections_from_lab_f(net, client):
+    """Three values TRAINS gets wrong, replaced by the official sources: NZ is closed to Canadian honey, Vietnam's
+    2026 CPTPP rate on wine is 15%, and the UAE charges 50% on alcohol."""
+    honey = {m["country_code"]: m for m in client.get("/api/more-markets", params={"category": "honey"}).json()["markets"]}
+    nz = honey["NZ"]
+    assert nz["status"] == "blocked" and nz["status_note"].startswith("Not accessible")
+    assert nz["opportunity"] is None and any("mpi.govt.nz" in s for s in nz["sources"])
+    assert list(honey)[-1] == "NZ"  # closed markets go last
+    wine = {m["country_code"]: m for m in client.get("/api/more-markets", params={"category": "icewine"}).json()["markets"]}
+    assert wine["VN"]["tariff"]["applied"] == 0.15 and "Decree 115/2022" in wine["VN"]["tariff"]["note"]
+    assert wine["AE"]["tariff"]["applied"] == 0.5 and wine["AE"]["tariff"]["status"] == "ok"
+    assert any("u.ae" in s for s in wine["AE"]["tariff"]["sources"])
+    assert wine["NZ"]["status"] == "open"  # only honey is closed in New Zealand
+    other = {m["country_code"]: m for m in client.get("/api/more-markets", params={"hs6": "170220"}).json()["markets"]}
+    assert other["NZ"]["status"] == "open" and other["VN"]["tariff"]["origin"] != "official"
