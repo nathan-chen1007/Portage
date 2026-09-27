@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 
-// The screen lasts as long as the real backend call, with a 3 s floor. The steps before the last one are
-// paced to reach "Ranking your markets" at ~2.4 s; that step holds until the data is in, then the bar
-// completes and the screen fades out (~0.6 s), so a fast answer still shows for about 3 s in total.
+// The screen lasts as long as the real backend call, with a 4.5 s floor. The steps before the last one are
+// paced to reach "Ranking your markets" at ~3.9 s; that step holds until the data is in, then the bar
+// completes and the screen fades out (~0.6 s), so a fast answer still shows for about 4.5 s in total.
 export const STEPS = [
   { label: "Reading your description", ms: 650 },
   { label: "Classifying your product", ms: 600 },
@@ -17,7 +17,7 @@ export const STEPS = [
 ];
 
 const FAST = import.meta.env?.MODE === "test";
-const MIN_MS = 3000; // floor for the whole screen
+const MIN_MS = 4500; // floor for the whole screen
 const WRAP_MS = 150; // last step shows done
 const FADE_MS = 450; // fade-out before the reveal
 const LEAD_MS = STEPS.slice(0, -1).reduce((a, s) => a + s.ms, 0);
