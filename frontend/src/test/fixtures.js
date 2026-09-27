@@ -84,7 +84,7 @@ export const MARKETS = [
         category: "*",
         country_code: "*",
         name: "Canadian Trade Commissioner Service",
-        type: "government (free)",
+        type: "government",
         description: "Free help finding vetted partners.",
         website: "https://www.tradecommissioner.gc.ca/",
         contact: "Find a trade commissioner",
