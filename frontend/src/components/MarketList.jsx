@@ -31,7 +31,13 @@ export function MarketList({ markets, kind, selected, onSelect, view = "friction
               } ${blocked ? "bg-neutral-50/60" : ""}`}
               style={
                 isSel && tone
-                  ? { borderColor: tone.ring, background: tone.background, "--tw-ring-color": tone.ring, boxShadow: `0 4px 16px -8px ${tone.glow}` }
+                  ? {
+                      // Fade from the outline inward: strongest at the edge, clear in the middle.
+                      borderColor: tone.edge,
+                      background: "rgba(255,255,255,0.92)",
+                      "--tw-ring-color": "transparent",
+                      boxShadow: `inset 0 0 0 1px ${tone.edge}, inset 0 0 26px -2px ${tone.inner}, 0 4px 16px -10px ${tone.glow}`,
+                    }
                   : undefined
               }
             >
@@ -52,10 +58,7 @@ export function MarketList({ markets, kind, selected, onSelect, view = "friction
                 {score == null ? (
                   <span className="shrink-0 text-xl font-semibold leading-none text-neutral-400">—</span>
                 ) : (
-                  <span
-                    className="shrink-0 rounded-lg px-2 py-1 text-xl font-semibold leading-none tabular-nums tracking-tight ring-1 ring-inset"
-                    style={{ color: tone.color, background: isSel ? "rgba(255,255,255,0.7)" : tone.background, "--tw-ring-color": tone.ring }}
-                  >
+                  <span className="shrink-0 text-xl font-semibold leading-none tabular-nums tracking-tight" style={{ color: tone.color }}>
                     {score.toFixed(0)}
                   </span>
                 )}
@@ -84,11 +87,11 @@ function TariffLine({ entry, kind }) {
   if (kind !== "goods") return deal ? <span>{deal}</span> : null;
   const high = (entry.tariff_rate ?? 0) >= HIGH_TARIFF;
   return (
-    <span className={high ? "text-blue-700" : ""}>
+    <span className={high ? "text-red-800" : ""}>
       <span className={high ? "font-semibold" : ""}>{pct(entry.tariff_rate)} tariff</span>
       {deal && (
         <>
-          <span className={high ? "text-blue-300" : "text-neutral-300"}> · </span>
+          <span className={high ? "text-red-300" : "text-neutral-300"}> · </span>
           <span>{deal}</span>
         </>
       )}

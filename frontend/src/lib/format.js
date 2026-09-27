@@ -214,6 +214,8 @@ export function scoreTone(v, lo = 25, hi = 85) {
     background: `hsl(${hue} 78% 93%)`,
     ring: `hsl(${hue} 62% 74%)`,
     glow: `hsl(${hue} 60% 45% / 0.35)`,
+    edge: `hsl(${hue} 55% 55%)`,
+    inner: `hsl(${hue} 72% 60% / 0.5)`,
   };
 }
 

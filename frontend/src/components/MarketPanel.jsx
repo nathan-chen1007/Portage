@@ -300,10 +300,7 @@ function HeadlineScore({ market, markets }) {
   const tone = scoreTone(main, lo, hi);
   return (
     <div className="shrink-0 text-right" title={hasOverall ? "Opportunity and ease combined. Higher is better." : "How clear the path in is. Higher is better."}>
-      <div
-        className="inline-block rounded-xl px-3 py-1.5 text-4xl font-semibold leading-none tabular-nums tracking-tight ring-1 ring-inset"
-        style={{ color: tone.color, background: tone.background, "--tw-ring-color": tone.ring }}
-      >
+      <div className="text-4xl font-semibold leading-none tabular-nums tracking-tight" style={{ color: tone.color }}>
         {Math.round(main)}
       </div>
       <div className="mt-1.5 text-xs font-medium text-neutral-500">{hasOverall ? "Overall score" : "Ease score"}</div>
