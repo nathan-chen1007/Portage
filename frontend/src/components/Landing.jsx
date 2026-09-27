@@ -23,6 +23,9 @@ export const EXAMPLES = [
   },
 ];
 
+/** "Canada" / "Canadian" highlighted in Canada red. */
+const CA = (word) => <span className="font-medium text-brand">{word}</span>;
+
 /* ---------------- tiny hash router: #/mission, #/about, #/faq ---------------- */
 
 const PAGES = ["mission", "about", "faq"];
@@ -217,7 +220,11 @@ const FEATURES = [
   },
   {
     title: "Ship together",
-    desc: "Groups Canadian businesses heading to the same market so they can share shipping costs.",
+    desc: (
+      <>
+        Groups {CA("Canadian")} businesses heading to the same market so they can share shipping costs.
+      </>
+    ),
     color: UNITY_RED,
     preview: true,
     icon: (
@@ -249,7 +256,7 @@ function Home({ categories, description, setDescription, onAnalyze, onPickCatego
           <div>
             <h1 className="text-4xl font-semibold leading-[1.08] tracking-tight sm:text-[3.5rem]">Find the right export market for your business.</h1>
             <p className="mt-5 max-w-xl text-lg leading-relaxed text-neutral-600">
-              Describe what you sell. Portage ranks export markets, drafts the paperwork, and connects you with Canadian businesses shipping the same way.
+              Describe what you sell. Portage ranks export markets, drafts the paperwork, and connects you with {CA("Canadian")} businesses shipping the same way.
             </p>
 
             <form
@@ -455,7 +462,7 @@ function SiteFooter({ go, onHow }) {
             </button>
           ))}
         </nav>
-        <span className="text-xs text-neutral-400">© 2026 Portage · AF Hacks: Growing Canada</span>
+        <span className="text-xs text-neutral-400">© 2026 Portage · AF Hacks: Growing {CA("Canada")}</span>
       </div>
     </footer>
   );
