@@ -287,6 +287,15 @@ body {
   box-shadow: 0 10px 30px -14px rgba(0, 0, 0, 0.2);
 }
 
+/* ---------- "it's ready" flash: soft accent glow that fades (see useReveal) ---------- */
+@keyframes reveal-flash {
+  0% { box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-brand) 45%, transparent), 0 0 24px 2px color-mix(in srgb, var(--color-brand) 30%, transparent); }
+  100% { box-shadow: 0 0 0 3px transparent, 0 0 24px 2px transparent; }
+}
+.reveal-flash {
+  animation: reveal-flash 1.6s ease-out both;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .reveal,
   .reveal-left,

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { api } from "../lib/api.js";
 import { LANGUAGE_NAMES, hostname } from "../lib/format.js";
-import { Button, ErrorNote, ExternalLink, Spinner } from "./ui.jsx";
+import { Button, ErrorNote, ExternalLink, Spinner, useReveal } from "./ui.jsx";
 
 export function OutreachPanel({ profile, market }) {
   const [partner, setPartner] = useState(null);
@@ -10,6 +10,9 @@ export function OutreachPanel({ profile, market }) {
   const [body, setBody] = useState("");
   const [voice, setVoice] = useState(null);
   const [error, setError] = useState(null);
+  const [draftTick, setDraftTick] = useState(0); // bumps when a draft arrives, to bring it into view
+  const [draftRef, subjectRef] = useReveal(draftTick);
+  const [voiceRef, audioRef] = useReveal(voice);
   const lang = market.entry.language;
   const langName = LANGUAGE_NAMES[lang] ?? lang;
 
@@ -30,6 +33,7 @@ export function OutreachPanel({ profile, market }) {
       setSubject(d.subject);
       setBody(d.body);
       setStage("edit");
+      setDraftTick((t) => t + 1);
     } catch (e) {
       setError(e.message);
       setStage("pick");
@@ -64,8 +68,8 @@ export function OutreachPanel({ profile, market }) {
           {market.middlemen.map((m) => (
             <li
               key={m.id}
-              className={`flex flex-col rounded-lg border p-4 transition-colors ${
-                partner?.id === m.id ? "border-neutral-900" : "border-neutral-200"
+              className={`flex flex-col rounded-lg border p-4 transition-all ${
+                partner?.id === m.id ? "border-brand/60 bg-brand-50/50 ring-2 ring-brand/15" : "border-neutral-200"
               }`}
             >
               <span className="text-sm font-medium">{m.name}</span>
@@ -78,7 +82,7 @@ export function OutreachPanel({ profile, market }) {
                 <Button size="sm" variant={partner?.id === m.id ? "primary" : "outline"} disabled={busy} onClick={() => draft(m)}>
                   {stage === "drafting" && partner?.id === m.id ? (
                     <>
-                      <Spinner /> Drafting
+                      <Spinner /> Drafting…
                     </>
                   ) : (
                     "Draft outreach"
@@ -93,7 +97,7 @@ export function OutreachPanel({ profile, market }) {
       <ErrorNote>{error}</ErrorNote>
 
       {(stage === "edit" || stage === "voicing" || stage === "done") && partner && (
-        <div className="fade-up rounded-lg border border-neutral-200 p-4">
+        <div ref={draftRef} className="fade-up scroll-mt-6 rounded-lg border border-neutral-200 p-4">
           <div className="flex flex-wrap items-center justify-between gap-2">
             <h3 className="text-sm font-medium">Your message to {partner.name}</h3>
             <span className="text-xs text-neutral-400">Edit freely. Nothing is sent.</span>
@@ -102,6 +106,7 @@ export function OutreachPanel({ profile, market }) {
             Subject
           </label>
           <input
+            ref={subjectRef}
             id="outreach-subject"
             value={subject}
             onChange={(ev) => setSubject(ev.target.value)}
@@ -138,13 +143,13 @@ export function OutreachPanel({ profile, market }) {
       )}
 
       {stage === "done" && voice && (
-        <div className="fade-up rounded-lg border border-neutral-200 bg-neutral-50 p-4">
+        <div ref={voiceRef} className="fade-up scroll-mt-6 rounded-lg border border-neutral-200 bg-neutral-50 p-4">
           <h3 className="text-sm font-medium">Voice note in {LANGUAGE_NAMES[voice.language] ?? voice.language}</h3>
           <p className="mt-1 text-xs text-neutral-500">
             An icebreaker to attach to your email. It helps a cold message get a second look; the deal still runs on your
             product, samples and pricing.
           </p>
-          <audio controls className="mt-3 w-full" src={`data:audio/mpeg;base64,${voice.audio_base64}`} />
+          <audio ref={audioRef} controls className="mt-3 w-full" src={`data:audio/mpeg;base64,${voice.audio_base64}`} />
           <p className="mt-3 whitespace-pre-wrap text-sm text-neutral-700">{voice.script}</p>
           <a
             download={`voice-note-${market.country_code}.mp3`}

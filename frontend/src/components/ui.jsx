@@ -210,3 +210,29 @@ export function CountryMark({ code, size = "sm", muted = false }) {
     </span>
   );
 }
+
+/**
+ * When `trigger` changes to a truthy value: scroll the returned `ref` element into view (smoothly, near the
+ * top, with the element's scroll-margin as offset), flash a soft accent-coloured glow that fades, and move
+ * keyboard focus to `focusRef` without another scroll jump. Reduced motion: instant scroll, no glow.
+ */
+export function useReveal(trigger) {
+  const ref = useRef(null);
+  const focusRef = useRef(null);
+  useEffect(() => {
+    const el = ref.current;
+    if (!trigger || !el) return;
+    const reduce = typeof window !== "undefined" && window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+    const id = requestAnimationFrame(() => {
+      el.scrollIntoView?.({ behavior: reduce ? "auto" : "smooth", block: "start" });
+      if (!reduce) {
+        el.classList.remove("reveal-flash");
+        void el.offsetWidth; // restart the animation
+        el.classList.add("reveal-flash");
+      }
+      (focusRef.current ?? el).focus?.({ preventScroll: true });
+    });
+    return () => cancelAnimationFrame(id);
+  }, [trigger]);
+  return [ref, focusRef];
+}

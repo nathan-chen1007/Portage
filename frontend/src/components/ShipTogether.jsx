@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { api } from "../lib/api.js";
-import { Badge, Button, Slider } from "./ui.jsx";
+import { Badge, Button, Slider, useReveal } from "./ui.jsx";
 import { CONTAINER_KG, UNITY_RED, cad, freightEstimate, ownLabel, sampleCohort, sharedCosts } from "../lib/together.js";
 
 // Inside a market panel the theme is that market's score colour (set as --color-brand by MarketPanel).
@@ -300,6 +300,8 @@ function FreightQuote({ market, cohort, myKg, myProvince, category }) {
   const [draft, setDraft] = useState(null);
   const [fw, setFw] = useState(null);
   const [error, setError] = useState(null);
+  const [ready, setReady] = useState(false); // first draft arrived: bring it into view once (not on every slider change)
+  const [quoteRef, titleRef] = useReveal(ready);
   const code = market.entry.country_code;
   const producers = cohort.length + 1;
   const combinedKg = cohort.reduce((a, m) => a + (m.kg ?? 0), 0) + myKg;
@@ -313,7 +315,7 @@ function FreightQuote({ market, cohort, myKg, myProvince, category }) {
       api.groupQuote({ country_code: code, producers, combined_kg: combinedKg, provinces, ...(category && category !== "honey" ? { category } : {}) }),
       api.forwarders(code, category),
     ])
-      .then(([d, f]) => live && (setDraft(d), setFw(f)))
+      .then(([d, f]) => live && (setDraft(d), setFw(f), setReady(true)))
       .catch((e) => live && setError(e.message));
     return () => {
       live = false;
@@ -333,9 +335,9 @@ function FreightQuote({ market, cohort, myKg, myProvince, category }) {
   }
 
   return (
-    <section className="pop rounded-2xl border border-neutral-200 p-4" aria-labelledby="freight-quote-title">
+    <section ref={quoteRef} className="pop scroll-mt-6 rounded-2xl border border-neutral-200 p-4" aria-labelledby="freight-quote-title">
       <div className="flex flex-wrap items-center justify-between gap-2">
-        <h4 id="freight-quote-title" className="text-sm font-semibold">
+        <h4 ref={titleRef} tabIndex={-1} id="freight-quote-title" className="text-sm font-semibold outline-none">
           Request freight quotes for the group
         </h4>
         <span className="flex flex-wrap gap-1.5">
