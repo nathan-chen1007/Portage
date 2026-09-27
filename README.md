@@ -24,6 +24,28 @@ The information to export exists, but it's spread across dozens of government si
 5. **Finds a buyer and writes to them.** Real importers and distributors (checked, with their public pages), a drafted first email you edit and approve, and a **voice note in the buyer's language** generated with ElevenLabs.
 6. **Ship together (preview).** One small producer can't fill a container; six can. Portage shows other Canadian producers heading to the same market, drafts one freight quote request for the whole group, and lists certified (CIFFA-member) freight forwarders that offer shared-container service. Portage is the matchmaker; licensed forwarders do the shipping.
 
+## Screenshots
+
+Demo profile: a small honey producer in Falher, Alberta (a sample business made up for the demo).
+
+**Markets ranked for honey, with sources.** Japan comes first; the US drops down the list and Mexico is closed.
+![Honey market ranking](docs/screenshots/01-ranking-honey-japan.png)
+
+**Paperwork, pre-filled.** The CPTPP certification of origin that takes Canadian honey from 25.5% to 0% in Japan.
+![CPTPP certification of origin](docs/screenshots/02-paperwork-cptpp.png)
+
+**Government help, with honest eligibility.**
+![Government help](docs/screenshots/03-government-help.png)
+
+**A first email to a real buyer, plus a voice note in Japanese.**
+![Buyer email and voice note](docs/screenshots/04-buyer-email.png)
+
+**Ship together (preview).** A sample group of Canadian producers heading to Japan, one freight quote request for all of them.
+![Ship together](docs/screenshots/05-ship-together.png)
+
+**Icewine.** The UK ranks first; the US is marked closed, banned from September 29, 2026.
+![Icewine ranking with the US closed](docs/screenshots/06-icewine-us-banned.png)
+
 ## Honest about what it knows
 
 Every requirement is labelled:
