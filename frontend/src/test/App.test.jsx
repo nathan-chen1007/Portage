@@ -102,6 +102,25 @@ describe("App", () => {
     });
   });
 
+  it("shows government programs in their own tab, not in the overview", async () => {
+    const programs = {
+      country_code: "GB", country: "United Kingdom", category: "honey", agri_food: true, as_of: "2026-09-26",
+      label: "May qualify: confirm with the program", note: "Portage never guarantees eligibility.",
+      programs: [{ id: "tcs", name: "Trade Commissioner Service in United Kingdom", what: "Advice and introductions.", status: "may_qualify",
+        status_label: "May qualify", reason: "Works with Canadian exporters.", note: "", url: "https://www.tradecommissioner.gc.ca/",
+        sources: ["https://www.tradecommissioner.gc.ca/"], as_of: "2026-09-26" }],
+    };
+    vi.stubGlobal("fetch", backend({ "/api/programs": programs }));
+    render(<App />);
+    await openHoney();
+    expect(screen.queryByTestId("programs-panel")).not.toBeInTheDocument();
+    const tabs = screen.getAllByRole("tab").map((t) => t.textContent);
+    expect(tabs).toEqual(["Overview", "Paperwork", "Government help", "Partners & outreach", "Ship together"]);
+    await userEvent.click(screen.getByRole("tab", { name: "Government help" }));
+    expect(await screen.findByRole("heading", { name: "Help you may qualify for" })).toBeInTheDocument();
+    expect(screen.getByText("Trade Commissioner Service in United Kingdom")).toBeInTheDocument();
+  });
+
   it("lets you join a pooled shipment in the Ship together preview", async () => {
     vi.stubGlobal("fetch", backend());
     render(<App />);

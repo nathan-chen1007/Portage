@@ -30,6 +30,7 @@ import {
 const TABS = [
   { key: "why", label: "Overview" },
   { key: "docs", label: "Paperwork" },
+  { key: "help", label: "Government help" },
   { key: "partners", label: "Partners & outreach" },
   { key: "together", label: "Ship together" },
 ];
@@ -110,7 +111,7 @@ export function MarketPanel({ market, profile, kind, weights, openFactor, onOpen
           </div>
           <div className="mt-5">
             {tab === "why" && (
-              <Overview market={market} kind={kind} category={profile?.category} weights={weights} openFactor={openFactor} onOpenFactor={onOpenFactor} onExploreFactor={onExploreFactor} />
+              <Overview market={market} kind={kind} weights={weights} openFactor={openFactor} onOpenFactor={onOpenFactor} onExploreFactor={onExploreFactor} />
             )}
             {anyProduct && (
               <p className="mt-4 text-xs text-neutral-500">
@@ -119,6 +120,7 @@ export function MarketPanel({ market, profile, kind, weights, openFactor, onOpen
               </p>
             )}
             {tab === "docs" && <DocumentsPanel profile={profile} countryCode={e.country_code} />}
+            {tab === "help" && <ProgramsPanel countryCode={e.country_code} category={profile?.category} />}
             {tab === "partners" && <OutreachPanel profile={profile} market={market} />}
             {tab === "together" && <ShipTogether market={market} kind={kind} profile={profile} />}
           </div>
@@ -128,7 +130,7 @@ export function MarketPanel({ market, profile, kind, weights, openFactor, onOpen
   );
 }
 
-function Overview({ market, kind, category, weights, openFactor, onOpenFactor, onExploreFactor }) {
+function Overview({ market, kind, weights, openFactor, onOpenFactor, onExploreFactor }) {
   // The plain answer first; the six-factor breakdown sits behind "See how the score is calculated".
   const [showCalc, setShowCalc] = useState(Boolean(openFactor));
   useEffect(() => {
@@ -159,8 +161,6 @@ function Overview({ market, kind, category, weights, openFactor, onOpenFactor, o
   return (
     <div className="space-y-4">
       <PlainRows market={market} kind={kind} />
-
-      <ProgramsPanel countryCode={market.entry.country_code} category={category} />
 
       {notes.length > 0 && !showCalc && (
         <div className="grid gap-3 sm:grid-cols-2">
