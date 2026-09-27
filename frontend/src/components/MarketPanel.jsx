@@ -48,7 +48,7 @@ export function MarketPanel({ market, markets = [], profile, kind, weights, open
   useEffect(() => setTab("why"), [market.country_code]);
 
   return (
-    <section className="slide-in" aria-labelledby="market-title">
+    <section className="slide-in" aria-labelledby="market-title" style={blocked || unscored ? undefined : themeVars(marketTone(market, markets))}>
       <header className="flex flex-wrap items-start justify-between gap-4">
         <div className="min-w-0">
           <h2 id="market-title" className="flex items-center gap-2.5 text-2xl font-semibold tracking-tight">
@@ -291,13 +291,24 @@ function PlainRows({ market, kind }) {
 }
 
 /** One big number (Overall, or Ease when there's no opportunity data) with the parts in small text. */
+/** The market's headline score colour, against the same product's other markets on the same measure. */
+function marketTone(market, markets) {
+  const hasOverall = market.overall != null && market.opportunity != null;
+  const pick = (m) => (hasOverall ? m.overall : ease(m));
+  const [lo, hi] = scoreBounds(markets?.length ? markets : [market], pick);
+  return scoreTone(pick(market), lo, hi);
+}
+
+/** Re-themes everything in the panel that uses the brand colour (tabs, the why box, links) to the score's colour. */
+function themeVars(tone) {
+  return { "--color-brand": tone.color, "--color-brand-600": tone.strong, "--color-brand-50": tone.background, "--color-brand-100": tone.soft };
+}
+
 function HeadlineScore({ market, markets }) {
   const ez = ease(market);
   const hasOverall = market.overall != null && market.opportunity != null;
   const main = hasOverall ? market.overall : ez;
-  // Coloured against the same product's other markets on the same measure (the list does the same).
-  const [lo, hi] = scoreBounds(markets.length ? markets : [market], (m) => (hasOverall ? m.overall : ease(m)));
-  const tone = scoreTone(main, lo, hi);
+  const tone = marketTone(market, markets);
   return (
     <div className="shrink-0 text-right" title={hasOverall ? "Opportunity and ease combined. Higher is better." : "How clear the path in is. Higher is better."}>
       <div className="text-4xl font-semibold leading-none tabular-nums tracking-tight" style={{ color: tone.color }}>

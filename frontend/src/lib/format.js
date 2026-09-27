@@ -208,14 +208,17 @@ export function agreementLine(entry) {
 export function scoreTone(v, lo = 25, hi = 85) {
   // Relative to this product's own range: its lowest score is the reddest, its highest the greenest.
   const x = hi > lo ? Math.max(0, Math.min(1, ((v ?? 0) - lo) / (hi - lo))) : 1;
-  const hue = Math.round(4 + x * 138); // 4 = soft red, ~45 = amber, 142 = green
+  const hue = Math.round(14 + x * 118); // 14 = muted brick red, ~45 = amber, 132 = sage green
   return {
-    color: `hsl(${hue} 58% 36%)`,
-    background: `hsl(${hue} 78% 93%)`,
-    ring: `hsl(${hue} 62% 74%)`,
-    glow: `hsl(${hue} 60% 45% / 0.35)`,
-    edge: `hsl(${hue} 55% 55%)`,
-    inner: `hsl(${hue} 72% 60% / 0.5)`,
+    hue,
+    color: `hsl(${hue} 44% 37%)`,
+    strong: `hsl(${hue} 46% 30%)`,
+    background: `hsl(${hue} 50% 95%)`,
+    soft: `hsl(${hue} 45% 90%)`,
+    ring: `hsl(${hue} 38% 78%)`,
+    glow: `hsl(${hue} 40% 45% / 0.3)`,
+    edge: `hsl(${hue} 38% 60%)`,
+    inner: `hsl(${hue} 50% 62% / 0.42)`,
   };
 }
 
