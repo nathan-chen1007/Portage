@@ -4,6 +4,8 @@
 
 Built in 24 hours at **AF Hacks: Growing Canada** (Waterloo, September 26–27, 2026).
 
+**Demo video:** [watch on YouTube](https://youtu.be/y9kkX-867dw)
+
 ---
 
 ## Why Canada needs this
