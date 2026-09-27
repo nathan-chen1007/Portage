@@ -254,9 +254,11 @@ function Home({ categories, description, setDescription, onAnalyze, onPickCatego
         <div className="grid-bg pointer-events-none absolute inset-0" aria-hidden />
         <div className="relative mx-auto grid max-w-6xl items-center gap-12 px-4 pb-20 pt-16 sm:px-6 sm:pt-24 lg:grid-cols-[1.2fr_0.8fr]">
           <div>
-            <h1 className="text-4xl font-semibold leading-[1.08] tracking-tight sm:text-[3.5rem]">Find the right export market for your business.</h1>
+            <h1 className="text-4xl font-semibold leading-[1.08] tracking-tight sm:text-[3.5rem]">
+              Find the right export market for your <span className="text-brand">Canadian</span> business.
+            </h1>
             <p className="mt-5 max-w-xl text-lg leading-relaxed text-neutral-600">
-              Describe what you sell. Portage ranks export markets, drafts the paperwork, and connects you with {CA("Canadian")} businesses shipping the same way.
+              Describe what you sell. Portage ranks export markets, drafts the paperwork, and connects you with Canadian businesses shipping the same way.
             </p>
 
             <form
