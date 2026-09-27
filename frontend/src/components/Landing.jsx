@@ -258,7 +258,7 @@ function Home({ categories, description, setDescription, onAnalyze, onPickCatego
               Find the right export market for your <span className="text-brand">Canadian</span> business.
             </h1>
             <p className="mt-5 max-w-xl text-lg leading-relaxed text-neutral-600">
-              Describe what you sell. Portage ranks export markets, drafts the paperwork, and connects you with Canadian businesses shipping the same way.
+              Describe what you sell. Portage ranks export markets, drafts the paperwork, and connects you with other Canadian businesses shipping the same way to reduce costs.
             </p>
 
             <form
