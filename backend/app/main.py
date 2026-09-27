@@ -56,6 +56,8 @@ from app.explore.lookup.schemas import AnalyzeWithLookup  # noqa: E402
 app.include_router(explore_router)
 from app.explore.more_markets import router as more_markets_router  # noqa: E402
 app.include_router(more_markets_router)
+from app.programs import router as programs_router  # noqa: E402
+app.include_router(programs_router)
 
 
 def _category(category_id: str) -> Category:

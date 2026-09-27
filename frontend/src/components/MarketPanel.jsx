@@ -4,6 +4,7 @@ import { OutreachPanel } from "./OutreachPanel.jsx";
 import { ShipTogether } from "./ShipTogether.jsx";
 import { ConfidenceBadge } from "./Confidence.jsx";
 import { UNITY_RED, sampleCohort } from "../lib/together.js";
+import { ProgramsPanel } from "./ProgramsPanel.jsx";
 import { Badge, CountryMark, ExternalLink, Icon, Meter, Segmented } from "./ui.jsx";
 import {
   COMPONENTS,
@@ -108,7 +109,7 @@ export function MarketPanel({ market, profile, kind, weights, openFactor, onOpen
           </div>
           <div className="mt-5">
             {tab === "why" && (
-              <Overview market={market} kind={kind} weights={weights} openFactor={openFactor} onOpenFactor={onOpenFactor} onExploreFactor={onExploreFactor} />
+              <Overview market={market} kind={kind} category={profile?.category} weights={weights} openFactor={openFactor} onOpenFactor={onOpenFactor} onExploreFactor={onExploreFactor} />
             )}
             {anyProduct && (
               <p className="mt-4 text-xs text-neutral-500">
@@ -126,7 +127,7 @@ export function MarketPanel({ market, profile, kind, weights, openFactor, onOpen
   );
 }
 
-function Overview({ market, kind, weights, openFactor, onOpenFactor, onExploreFactor }) {
+function Overview({ market, kind, category, weights, openFactor, onOpenFactor, onExploreFactor }) {
   // The plain answer first; the six-factor breakdown sits behind "See how the score is calculated".
   const [showCalc, setShowCalc] = useState(Boolean(openFactor));
   useEffect(() => {
@@ -157,6 +158,8 @@ function Overview({ market, kind, weights, openFactor, onOpenFactor, onExploreFa
   return (
     <div className="space-y-4">
       <PlainRows market={market} kind={kind} />
+
+      <ProgramsPanel countryCode={market.entry.country_code} category={category} />
 
       {notes.length > 0 && !showCalc && (
         <div className="grid gap-3 sm:grid-cols-2">
